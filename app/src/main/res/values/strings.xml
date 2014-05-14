@@ -2,8 +2,10 @@
 <resources>
 
     <string name="app_name">1 2 Quit</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Instellingen</string>
     <string name="title_activity_setup_brand_amount">Rook gewoontes</string>
+    <string name="smokeAmount">Hoeveel rookt u?</string>
+    <string name="sigaretten">sigaretten</string>
+    <string name="shag">shag</string>
 
 </resources>

@@ -7,5 +7,8 @@
     <string name="smokeAmount">Hoeveel rookt u?</string>
     <string name="sigaretten">sigaretten</string>
     <string name="shag">shag</string>
+    <string name="setupBrand">Merk</string>
+    <string name="setupDayAmount">Aantal per dag</string>
+    <string name="setupPackAmount">Aantal per pakje</string>
 
 </resources>

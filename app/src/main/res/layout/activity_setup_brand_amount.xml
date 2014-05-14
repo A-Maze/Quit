@@ -48,11 +48,11 @@ android:id="@+id/radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="@string/setupBrand"
         android:id="@+id/textView2"
         android:layout_alignBottom="@+id/spinner"
-        android:layout_alignLeft="@+id/radioButton2"
-        android:layout_alignStart="@+id/radioButton2" />
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -60,14 +60,15 @@ android:id="@+id/radioButton"
         android:id="@+id/spinner"
         android:layout_marginTop="29dp"
         android:layout_below="@+id/radioButton"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_toRightOf="@+id/textView4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="@string/setupDayAmount"
         android:id="@+id/textView3"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/radioButton2"
@@ -80,16 +81,16 @@ android:id="@+id/radioButton"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_marginLeft="30dp"
         android:layout_alignRight="@+id/radioButton"
-        android:layout_alignEnd="@+id/radioButton" />
+        android:layout_alignEnd="@+id/radioButton"
+        android:layout_alignLeft="@+id/radioButton"
+        android:layout_alignStart="@+id/radioButton" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
+        android:text="@string/setupPackAmount"
         android:id="@+id/textView4"
         android:layout_marginTop="38dp"
         android:layout_below="@+id/textView3"
@@ -105,8 +106,8 @@ android:id="@+id/radioButton"
         android:layout_alignBottom="@+id/textView4"
         android:layout_alignRight="@+id/editText"
         android:layout_alignEnd="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_alignLeft="@+id/radioButton"
+        android:layout_alignStart="@+id/radioButton" />
 
 
 </RelativeLayout>

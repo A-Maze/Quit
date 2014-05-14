@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.amaze.quit.app.setupBrandAmount"
+            android:name=".SetupBrandAmount"
             android:label="@string/title_activity_setup_brand_amount" >
         </activity>
     </application>

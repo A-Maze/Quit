@@ -3,7 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.amaze.quit.app.MainActivity">
+    tools:context="com.amaze.quit.app.MainActivity"
+    android:weightSum="1">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Omdat dit de main activity is kan je aan de knop een activity verbinden zodat je daar bij kan komen om hem te testen in MainActivity.java"
+        android:id="@+id/textView"
+        android:layout_weight="0.34" />
+
+    <Button
+        android:layout_width="263dp"
+        android:layout_height="wrap_content"
+        android:text="Start activity"
+        android:id="@+id/buttonActiviteit"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:onClick="startThatBitch"/>
 </LinearLayout>

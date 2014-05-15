@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -12,26 +13,22 @@ import android.widget.DatePicker;
 public class SetupQuitDate extends ActionBarActivity {
 
     /* de next button op het quitdate scherm */
-    Button nextButton;
+    private Button nextButton;
     /* de datepicker op het quitdate scherm */
-    DatePicker quitDatePicker;
+    private DatePicker quitDatePicker;
 
     // de stopdatum variabelen
     public int quitDay;
     public int quitMonth;
     public int quitYear;
-
+    private Intent SetupBrandAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_quit_datee);
     }
 
-    public void runSetupBrand() {
-        quitDay = quitDatePicker.getDayOfMonth();
-        quitMonth = quitDatePicker.getMonth();
-        quitYear = quitDatePicker.getYear();
-
+    public void runSetupBrand(View view) {
         Intent intent = new Intent(this, SetupBrandAmount.class);
         startActivity(intent);
     }

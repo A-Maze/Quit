@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    style="@style/AppTheme">
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/tvStopDatum"
+        android:gravity="center"
+        android:paddingTop="50dp"
+        android:textSize="40sp"
+        />
+
+    <DatePicker
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dpStopDatum"
+        android:calendarViewShown="false"
+        android:paddingTop="70dp"
+
+        />
+    <Button
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/bStopDateNext"
+        android:text=""
+        android:layout_margin="50dp"
+        />
+
+</LinearLayout>

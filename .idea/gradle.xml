@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="E:\Work\Android\Apps\Quit" />
-            <option value="E:\Work\Android\Apps\Quit\app" />
+            <option value="C:\Users\Rik\AndroidStudioProjects\Quit" />
+            <option value="C:\Users\Rik\AndroidStudioProjects\Quit\app" />
           </set>
         </option>
       </GradleProjectSettings>

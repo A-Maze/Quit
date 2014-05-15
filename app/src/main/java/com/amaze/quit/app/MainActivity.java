@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 
-    String classes[] = {"SetupBrandAmount","SetupQuitDate", "example2", "example3"};
+    String classes[] = {"SetupBrandAmount","SetupQuitDate", "HealthProgress", "example3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

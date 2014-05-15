@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.amaze.quit.app.MainActivity">
 
-    <item android:id="@+id/smokeBehaviours"
+    <item android:id="@+id/iSmokeBehaviours"
         android:title="@string/title_activity_setup_brand_amount"
+        android:orderInCategory="98" />
+
+    <item android:id="@+id/iQuitDate"
+        android:title="@string/quitDateTitle"
         android:orderInCategory="99" />
 
     <item android:id="@+id/action_settings"

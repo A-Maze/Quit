@@ -20,7 +20,29 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBar_gezondheid_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar_gezondheid_2"
+        android:layout_gravity="center_horizontal" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar_gezondheid_3"
+        android:layout_gravity="center_horizontal" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar_gezondheid_4"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

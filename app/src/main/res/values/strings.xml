@@ -15,8 +15,8 @@
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
-    //quit date scherm        <
-    string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm
+    <string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     //health progress scherm

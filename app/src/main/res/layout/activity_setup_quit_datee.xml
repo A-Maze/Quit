@@ -35,6 +35,7 @@
         android:id="@+id/bStopDateNext"
         android:text="@string/quitDateNext"
         android:layout_margin="50dp"
+        android:onClick="runSetupBrand"
         />
 
 </LinearLayout>

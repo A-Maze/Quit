@@ -1,10 +1,10 @@
 package com.amaze.quit.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 
@@ -23,23 +23,17 @@ public class SetupQuitDate extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_quit_datee);
+    }
 
-        nextButton = (Button) findViewById(R.id.bStopDateNext);
-        quitDatePicker = (DatePicker) findViewById(R.id.dpStopDate);
+    public void runSetupBrand() {
+        quitDay = quitDatePicker.getDayOfMonth();
+        quitMonth = quitDatePicker.getMonth();
+        quitYear = quitDatePicker.getYear();
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // wat te doen als de Next Button geklikt is.
-                quitDay = quitDatePicker.getDayOfMonth();
-                quitMonth = quitDatePicker.getMonth();
-                quitYear = quitDatePicker.getYear();
-            }
-        });
-
+        Intent intent = new Intent(this, SetupBrandAmount.class);
+        startActivity(intent);
     }
 
 

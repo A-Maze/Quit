@@ -22,7 +22,7 @@
     <DatePicker
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dpStopDatum"
+        android:id="@+id/dpStopDate"
         android:calendarViewShown="false"
         android:paddingTop="70dp"
 

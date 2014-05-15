@@ -1,24 +1,32 @@
 package com.amaze.quit.app;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 
 public class SetupBrandAmount extends ActionBarActivity {
+
+    private RadioButton rbSigaretten;
+    private RadioButton rbShag;
+    private EditText etDayAmount;
+    private EditText etPackAmount;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_brand_amount);
+
+        rbSigaretten = (RadioButton) findViewById(R.id.rbSigaretten);
+        rbShag = (RadioButton) findViewById(R.id.rbShag);
+        etDayAmount = (EditText) findViewById(R.id.etDayAmount);
+        etPackAmount = (EditText) findViewById(R.id.etPackAmount);
     }
 
 

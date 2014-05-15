@@ -15,11 +15,17 @@
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
-    //quit date scherm        <string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm        <
+    string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     <string name="title_activity_health_progress">HealthProgress</string>
     <string name="hello_world">Hello world!</string>
+
+    //Vooruitgang scherm
     <string name="title_activity_progress">Vooruitgang</string>
+    <string name="sparedMoney">€0,00</string>
+    <string name="dayProgress">0 Dagen</string>
+    <string name="sparedDays">0 dagen extra te leven</string>
 
 </resources>

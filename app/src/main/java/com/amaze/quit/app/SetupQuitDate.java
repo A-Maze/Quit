@@ -12,8 +12,7 @@ import android.widget.DatePicker;
 
 public class SetupQuitDate extends ActionBarActivity {
 
-    /* de next button op het quitdate scherm */
-    private Button nextButton;
+
     /* de datepicker op het quitdate scherm */
     private DatePicker quitDatePicker;
 

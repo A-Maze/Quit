@@ -122,7 +122,9 @@ android:id="@+id/rbShag"
         android:layout_alignRight="@+id/etPackAmount"
         android:layout_alignEnd="@+id/etPackAmount"
         android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_alignStart="@+id/textView4"
+        android:onClick="checkForInput"/>
+
 
 
 </RelativeLayout>

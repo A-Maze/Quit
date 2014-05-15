@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amaze.quit.app" >
+
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme"
-        android:debuggable="true">
+        android:theme="@style/AppBaseTheme" >
         <activity
             android:name="com.amaze.quit.app.MainActivity"
             android:label="@string/app_name" >
@@ -23,6 +24,10 @@
         <activity
             android:name="com.amaze.quit.app.SetupQuitDate"
             android:label="@string/title_activity_setup_quit_date" >
+        </activity>
+        <activity
+            android:name="com.amaze.quit.app.HealthProgress"
+            android:label="@string/title_activity_health_progress" >
         </activity>
     </application>
 

@@ -25,7 +25,7 @@ public class SetupQuitDate extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup_quit_date);
+        setContentView(R.layout.activity_setup_quit_datee);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,21 +1,27 @@
 package com.amaze.quit.app;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.ListView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ListActivity {
+
+    String classes[] = {"SetupBrandAmount","SetupQuitDate", "example2", "example3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+       // setContentView(R.layout.activity_main);
+        setListAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,classes));
     }
 
 
@@ -48,7 +54,20 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        String classNaam = classes[position];
+        Class ourClass = null;
+        try {
+            ourClass = Class.forName("com.amaze.quit.app." + classNaam);
+            Intent ourIntent = new Intent(this,ourClass);
+            startActivity(ourIntent);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
+
+    }
 
 
 

@@ -10,9 +10,15 @@
     <string name="setupBrand">Merk</string>
     <string name="setupDayAmount">Aantal per dag</string>
     <string name="setupPackAmount">Aantal per pakje</string>
+
     <string-array name="brand_array">
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
+    //quit date scherm
+    <string name="quitDateTitle">Stop Datum</string>
+    <string name="quitDateNext">Volgende</string>
+    <string name="title_activity_setup_quit_date">SetupQuitDate</string>
+
 
 </resources>

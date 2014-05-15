@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
+        android:text="@string/quitDateTitle"
         android:id="@+id/tvStopDatum"
         android:gravity="center"
         android:paddingTop="50dp"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/bStopDateNext"
-        android:text=""
+        android:text="@string/quitDateNext"
         android:layout_margin="50dp"
         />
 

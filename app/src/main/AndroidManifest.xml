@@ -17,14 +17,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SetupBrandAmount"
+            android:name="com.amaze.quit.app.SetupBrandAmount"
             android:label="@string/title_activity_setup_brand_amount" >
         </activity>
         <activity
-            android:name=".SetupQuitDate"
-            android:label="@string/app_name" >
+            android:name="com.amaze.quit.app.SetupQuitDate"
+            android:label="@string/title_activity_setup_quit_date" >
         </activity>
     </application>
-
 
 </manifest>

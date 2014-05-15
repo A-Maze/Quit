@@ -1,12 +1,19 @@
 package com.amaze.quit.app;
 
+import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
-public class setupBrandAmount extends ActionBarActivity {
+public class SetupBrandAmount extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +32,19 @@ public class setupBrandAmount extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        // Handle item selection
+        switch (item.getItemId()) {
+            //menu item van rook gewoontes
+            case R.id.smokeBehaviours:
+                startSmokingBehaviours();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    //Starts the SetupBrandAmount activity.
+    public void startSmokingBehaviours() {
+        Intent intent = new Intent(this, SetupBrandAmount.class);
+        startActivity(intent);
+    }
 }

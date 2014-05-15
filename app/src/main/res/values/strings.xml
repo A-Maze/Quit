@@ -15,10 +15,11 @@
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
-    //quit date scherm    <string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm        <string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     <string name="title_activity_health_progress">HealthProgress</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_progress">Vooruitgang</string>
 
 </resources>

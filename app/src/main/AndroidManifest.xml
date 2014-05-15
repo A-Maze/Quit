@@ -29,6 +29,10 @@
             android:name="com.amaze.quit.app.HealthProgress"
             android:label="@string/title_activity_health_progress" >
         </activity>
+        <activity
+            android:name="com.amaze.quit.app.Progress"
+            android:label="@string/title_activity_progress" >
+        </activity>
     </application>
 
 </manifest>

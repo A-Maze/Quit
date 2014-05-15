@@ -36,15 +36,17 @@ public class MainActivity extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.smokeBehaviours:
-                startSmokingBehaviours();
+            case R.id.iSmokeBehaviours:
+                startAnActivity(SetupBrandAmount.class);
+            case R.id.iQuitDate:
+                startAnActivity(SetupQuitDate.class);
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void startSmokingBehaviours() {
-        Intent intent = new Intent(this, SetupBrandAmount.class);
+    public void startAnActivity(Class activiteit) {
+        Intent intent = new Intent(this, activiteit);
         startActivity(intent);
     }
 

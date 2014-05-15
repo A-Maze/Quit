@@ -53,14 +53,20 @@ public class SetupQuitDate extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.iSmokeBehaviours:
+                startAnActivity(SetupBrandAmount.class);
+            case R.id.iQuitDate:
+                startAnActivity(SetupQuitDate.class);
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    public void startAnActivity(Class activiteit) {
+        Intent intent = new Intent(this, activiteit);
+        startActivity(intent);
     }
 
 }

@@ -90,17 +90,17 @@ public class SetupBrandAmount extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            //menu item van rook gewoontes
-            case R.id.smokeBehaviours:
-                startSmokingBehaviours();
+            case R.id.iSmokeBehaviours:
+                startAnActivity(SetupBrandAmount.class);
+            case R.id.iQuitDate:
+                startAnActivity(SetupQuitDate.class);
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //Starts the SetupBrandAmount activity.
-    public void startSmokingBehaviours() {
-        Intent intent = new Intent(this, SetupBrandAmount.class);
+    public void startAnActivity(Class activiteit) {
+        Intent intent = new Intent(this, activiteit);
         startActivity(intent);
     }
 }

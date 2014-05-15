@@ -21,14 +21,24 @@ public class SetupQuitDate extends ActionBarActivity {
     public int quitDay;
     public int quitMonth;
     public int quitYear;
-    private Intent SetupBrandAmount;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_quit_datee);
+        quitDatePicker = (DatePicker) findViewById(R.id.dpStopDate);
+    }
+
+    private void getTheDate() {
+        quitDay = quitDatePicker.getDayOfMonth();
+        quitMonth = quitDatePicker.getMonth();
+        quitYear = quitDatePicker.getYear();
     }
 
     public void runSetupBrand(View view) {
+        getTheDate();
+
         Intent intent = new Intent(this, SetupBrandAmount.class);
         startActivity(intent);
     }

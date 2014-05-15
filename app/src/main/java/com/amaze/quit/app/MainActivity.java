@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void runAnyActivity(View view) {
-        Intent intent = new Intent(this, SetupBrandAmount.class);
+        Intent intent = new Intent(this, SetupQuitDate.class);
         startActivity(intent);
     }
 

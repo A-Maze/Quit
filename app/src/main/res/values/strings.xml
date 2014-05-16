@@ -21,6 +21,15 @@
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     //health progress scherm
     <string name="title_activity_health_progress">Gezondheid</string>
+    <string name="title_activity_health_progressBar1">Niveaus van CO (koolmonoxide) en O2 (zuurstof) zijn weer normaal</string>
+    <string name="title_activity_health_progressBar2">Risico op plotse hartdood verlaagd</string>
+    <string name="title_activity_health_progressBar3">Smaak- en geurzin teruggekregen</string>
+    <string name="title_activity_health_progressBar4">Normalisatie van ademhaling</string>
+    <string name="title_activity_health_progressBar5">Geen fysieke afhankelijkheid van nicotine meer</string>
+    <string name="title_activity_health_progressBar6">Verbeterde bloedsomloop en huidhydratatie en verdwijnen van vroegtijdige rimpels</string>
+    <string name="title_activity_health_progressBar7">Fysieke conditie verbeterd</string>
+    <string name="title_activity_health_progressBar8">Risico op dood door hartziekten met helft verminderd</string>
+    <string name="title_activity_health_progressBar9">Risico om longkanker te ontwikkelen even hoog als een niet-roker</string>
 
     <string name="hello_world">Hello world!</string>
 

@@ -3,39 +3,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     style="@style/AppTheme">
 
-
-
-    <TextView
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/quitDateTitle"
-        android:id="@+id/tvStopDatum"
-        android:gravity="center"
-        android:paddingTop="50dp"
-        android:textSize="40sp"
-        />
-
-    <DatePicker
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dpStopDate"
-        android:calendarViewShown="false"
-        android:paddingTop="70dp"
-
-        />
-    <Button
-
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/bStopDateNext"
-        android:text="@string/quitDateNext"
-        android:layout_margin="50dp"
-        android:onClick="runSetupBrand"
-        />
+        android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/quitDateTitle"
+                android:id="@+id/tvStopDatum"
+                android:gravity="center"
+                android:paddingTop="50dp"
+                android:textSize="40sp"
+                />
+            <DatePicker
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dpStopDate"
+                android:calendarViewShown="false"
+                android:paddingTop="70dp"
+                />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/bStopDateNext"
+                android:text="@string/quitDateNext"
+                android:layout_margin="50dp"
+                android:onClick="runSetupBrand"
+                />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -2,13 +2,11 @@ package com.amaze.quit.app;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -58,7 +56,7 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         String classNaam = classes[position];
-        Class ourClass = null;
+        Class ourClass;
         try {
             ourClass = Class.forName("com.amaze.quit.app." + classNaam);
             Intent ourIntent = new Intent(this,ourClass);
@@ -69,7 +67,4 @@ public class MainActivity extends ListActivity {
 
 
     }
-
-
-
 }

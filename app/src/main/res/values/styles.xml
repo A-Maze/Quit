@@ -14,4 +14,22 @@
 
     <style name="AppTheme"></style>
 
+    <style name="GreenTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/GreenActionBar</item>
+    </style>
+
+    <style name="BlueTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/BlueActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="GreenActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#7ac142</item>
+    </style>
+
+    <style name="BlueActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#55acee</item>
+    </style>
+
+
 </resources>

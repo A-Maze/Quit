@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.amaze.quit.app" >
-
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
     <application
         android:allowBackup="true"
         android:debuggable="true"
@@ -26,10 +28,12 @@
             android:label="@string/title_activity_setup_quit_date" >
         </activity>
         <activity
+            android:theme="@style/GreenTheme"
             android:name="com.amaze.quit.app.HealthProgress"
             android:label="@string/title_activity_health_progress" >
         </activity>
         <activity
+            android:theme="@style/BlueTheme"
             android:name="com.amaze.quit.app.Progress"
             android:label="@string/title_activity_progress" >
         </activity>

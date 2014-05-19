@@ -36,7 +36,8 @@
         android:text="@string/title_activity_health_progressBar1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:textAlignment="center"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

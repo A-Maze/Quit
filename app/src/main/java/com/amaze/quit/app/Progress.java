@@ -28,23 +28,34 @@ public class Progress extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //gets the recources
-        Resources res = getResources();
 
-        Activity homeActivity = getActivity();
-
-        //styles the actionbar
-        ActionBar bar = homeActivity.getActionBar();
-        ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
-        bar.setBackgroundDrawable(color);
-
-        //sets the title
-        CharSequence title = res.getString(R.string.title_activity_health_progress);
-        homeActivity.setTitle(title);
 
         View v = inflater.inflate(R.layout.activity_progress, container, false);
         return v;
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            //gets the recources
+            Resources res = getResources();
+
+            Activity homeActivity = getActivity();
+
+            //styles the actionbar
+            ActionBar bar = homeActivity.getActionBar();
+            ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
+            bar.setBackgroundDrawable(color);
+            //sets the title
+            CharSequence title = res.getString(R.string.title_activity_progress);
+            homeActivity.setTitle(title);
+        }
+
+    }
+
+
+
 
 
 

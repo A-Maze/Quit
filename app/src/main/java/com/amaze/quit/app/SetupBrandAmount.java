@@ -1,18 +1,18 @@
 package com.amaze.quit.app;
 
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-public class SetupBrandAmount extends Fragment {
+
+public class SetupBrandAmount extends ActionBarActivity {
 
     private RadioButton rbSigaretten;
     private RadioButton rbShag;
@@ -22,26 +22,16 @@ public class SetupBrandAmount extends Fragment {
     private Integer dayAmount;
     private Integer packAmount;
 
-    public static final SetupBrandAmount newInstance()
-    {
-        SetupBrandAmount f = new SetupBrandAmount();
-        Bundle bdl = new Bundle(1);
-        f.setArguments(bdl);
-        return f;
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setup_brand_amount);
 
-        rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
-        rbShag = (RadioButton) v.findViewById(R.id.rbShag);
-        etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
-        etPackAmount = (EditText) v.findViewById(R.id.etPackAmount);
-
-        return v;
-
-
+        rbSigaretten = (RadioButton) findViewById(R.id.rbSigaretten);
+        rbShag = (RadioButton) findViewById(R.id.rbShag);
+        etDayAmount = (EditText) findViewById(R.id.etDayAmount);
+        etPackAmount = (EditText) findViewById(R.id.etPackAmount);
     }
 
     public void checkForInput(View view) {
@@ -63,7 +53,7 @@ public class SetupBrandAmount extends Fragment {
 
 
         if (dayAmount == null || packAmount == null) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Hoer");
             alertDialogBuilder
                     .setMessage("Vul een waarde in Bitch!")
@@ -76,17 +66,41 @@ public class SetupBrandAmount extends Fragment {
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         } else {
-           // runChooseProduct();
+            runChooseProduct();
         }
 
     }
 
     // naar choose product. de activity dus nog even veranderen als die bestaat.
     private void runChooseProduct() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.setup_brand_amount, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.iSmokeBehaviours:
+                startAnActivity(SetupBrandAmount.class);
+            case R.id.iQuitDate:
+                startAnActivity(SetupQuitDate.class);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void startAnActivity(Class activiteit) {
+        Intent intent = new Intent(this, activiteit);
+        startActivity(intent);
+    }
 }

@@ -38,6 +38,12 @@
             android:name="com.amaze.quit.app.Setup"
             android:label="@string/title_activity_setup" >
         </activity>
+        <activity
+            android:theme="@style/BlueTheme"
+            android:name="com.amaze.quit.app.ChooseProduct"
+            android:label="@string/title_activity_choose_product"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

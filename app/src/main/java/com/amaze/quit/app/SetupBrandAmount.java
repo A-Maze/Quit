@@ -71,16 +71,15 @@ public class SetupBrandAmount extends ActionBarActivity {
 
     }
 
-    // naar choose product. de activity dus nog even veranderen als die bestaat.
+    // Activity voor je product te kiezen waarvoor je wilt sparen
     private void runChooseProduct() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ChooseProduct.class);
         startActivity(intent);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.setup_brand_amount, menu);
         return true;

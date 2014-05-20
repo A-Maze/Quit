@@ -15,12 +15,10 @@
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
-    //quit date scherm
-    <string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm    <string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
-    //health progress scherm
-    <string name="title_activity_health_progress">Gezondheid</string>
+    //health progress scherm    <string name="title_activity_health_progress">Gezondheid</string>
     <string name="title_activity_health_progressBar1">Niveaus van CO (koolmonoxide) en O2 (zuurstof</string>
     <string name="title_activity_health_progressBar2">Risico op plotse hartdood</string>
     <string name="title_activity_health_progressBar3">Smaak- en geurzin teruggekregen</string>
@@ -30,13 +28,16 @@
     <string name="title_activity_health_progressBar7">Fysieke conditie</string>
     <string name="title_activity_health_progressBar8">Risico op dood door hartziekten</string>
     <string name="title_activity_health_progressBar9">Risico om longkanker te ontwikkelen</string>
-
     <string name="hello_world">Hello world!</string>
-
-    //Vooruitgang scherm
-    <string name="title_activity_progress">Vooruitgang</string>
+    //Vooruitgang scherm    <string name="title_activity_progress">Vooruitgang</string>
     <string name="sparedMoney">€0,00</string>
     <string name="dayProgress">0 Dagen</string>
     <string name="sparedDays">0 dagen extra te leven</string>
+    <string name="title_activity_choose_product">ChooseProduct</string>
+    
+    // ChooseProduct
+    <string name="title_activity_choose_product_product">Product</string>
+    <string name="title_activity_choose_product_product_hint">Product naam...</string>
+    <string name="title_activity_choose_product_product_button_search">Zoek</string>
 
 </resources>

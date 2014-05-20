@@ -9,6 +9,12 @@ import android.view.MenuItem;
 
 public class HealthProgress extends ActionBarActivity {
 
+    protected void drawProgress() {
+
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,5 +47,6 @@ public class HealthProgress extends ActionBarActivity {
         Intent intent = new Intent(this, activiteit);
         startActivity(intent);
     }
+
 
 }

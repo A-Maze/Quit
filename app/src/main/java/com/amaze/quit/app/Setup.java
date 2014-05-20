@@ -30,8 +30,9 @@ public class Setup extends FragmentActivity {
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 
-        fList.add(SetupBrandAmount.newInstance());
         fList.add(SetupQuitDate.newInstance());
+        fList.add(SetupBrandAmount.newInstance());
+
 
         return fList;
     }

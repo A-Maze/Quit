@@ -39,4 +39,15 @@
     <string name="dayProgress">0 Dagen</string>
     <string name="sparedDays">0 dagen extra te leven</string>
 
+    //Setup
+    <string name="title_activity_setup">Instellingen</string>
+
+    // ChooseProduct
+    <string name="title_activity_choose_product">ChooseProduct</string>
+    <string name="title_activity_choose_product_title_product">Product</string>
+    <string name="title_activity_choose_product_product_bol">Zoek een product uit de bol.com catalogus</string>
+    <string name="title_activity_choose_product_product_hint">Product naam...</string>
+    <string name="title_activity_choose_product_product_button_search">Zoek</string>
+    <string name="title_activity_choose_product_product">Kies een product</string>
+
 </resources>

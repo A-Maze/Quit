@@ -6,15 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 
-public class SetupBrandAmount extends Fragment {
+
+public class SetupBrandAmount extends Fragment  {
 
     private RadioButton rbSigaretten;
     private RadioButton rbShag;
@@ -23,6 +22,7 @@ public class SetupBrandAmount extends Fragment {
 
     private Integer dayAmount;
     private Integer packAmount;
+
 
     public static final SetupBrandAmount newInstance()
     {
@@ -66,11 +66,11 @@ public class SetupBrandAmount extends Fragment {
 
         if (dayAmount == null || packAmount == null) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("Hoer");
+            alertDialogBuilder.setTitle("foutje");
             alertDialogBuilder
-                    .setMessage("Vul een waarde in Bitch!")
+                    .setMessage("Vul een waarde in!")
                     .setCancelable(false)
-                    .setPositiveButton("Okee slet", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }
@@ -79,6 +79,9 @@ public class SetupBrandAmount extends Fragment {
             alertDialog.show();
         } else {
             //runChooseProduct();
+            /* creating the user */
+
+
         }
 
     }

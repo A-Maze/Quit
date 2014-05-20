@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Setup extends FragmentActivity {
+
     MyPageAdapter pageAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,11 @@ public class Setup extends FragmentActivity {
         public int getCount() {
             return this.fragments.size();
         }
+    }
+
+    public void createUser() {
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.addUser(new User(1,1,20));
     }
 
 }

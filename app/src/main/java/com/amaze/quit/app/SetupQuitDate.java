@@ -1,6 +1,5 @@
 package com.amaze.quit.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ public class SetupQuitDate extends Fragment {
 
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
 
+
         return v;
 
 
@@ -43,16 +43,11 @@ public class SetupQuitDate extends Fragment {
 
     private void getTheDate() {
         quitDay = quitDatePicker.getDayOfMonth();
-        quitMonth = quitDatePicker.getMonth();
+        quitMonth = quitDatePicker.getMonth() + 1;
         quitYear = quitDatePicker.getYear();
+
     }
 
-    public void runSetupBrand(View view) {
-        getTheDate();
-
-        Intent intent = new Intent(getActivity(), SetupBrandAmount.class);
-        startActivity(intent);
-    }
 
 
 

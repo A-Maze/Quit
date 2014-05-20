@@ -33,7 +33,8 @@ public class HealthProgress extends Fragment {
 
         //styles the actionbar
         ActionBar bar = homeActivity.getActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable("#7ac142"));
+        ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
+        bar.setBackgroundDrawable(color);
 
         //sets the title
         CharSequence title = res.getString(R.string.title_activity_health_progress);

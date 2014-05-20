@@ -2,15 +2,16 @@ package com.amaze.quit.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 
-public class SetupQuitDate extends ActionBarActivity {
+
+
+public class SetupQuitDate extends Fragment {
 
 
     /* de datepicker op het quitdate scherm */
@@ -21,12 +22,23 @@ public class SetupQuitDate extends ActionBarActivity {
     public int quitMonth;
     public int quitYear;
 
+    public static final SetupQuitDate newInstance()
+    {
+        SetupQuitDate f = new SetupQuitDate();
+        Bundle bdl = new Bundle(1);
+        f.setArguments(bdl);
+        return f;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup_quit_datee);
-        quitDatePicker = (DatePicker) findViewById(R.id.dpStopDate);
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
+
+        quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
+
+        return v;
+
+
     }
 
     private void getTheDate() {
@@ -38,35 +50,11 @@ public class SetupQuitDate extends ActionBarActivity {
     public void runSetupBrand(View view) {
         getTheDate();
 
-        Intent intent = new Intent(this, SetupBrandAmount.class);
+        Intent intent = new Intent(getActivity(), SetupBrandAmount.class);
         startActivity(intent);
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.setup_quit_date, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.iSmokeBehaviours:
-                startAnActivity(SetupBrandAmount.class);
-            case R.id.iQuitDate:
-                startAnActivity(SetupQuitDate.class);
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void startAnActivity(Class activiteit) {
-        Intent intent = new Intent(this, activiteit);
-        startActivity(intent);
-    }
 
 }

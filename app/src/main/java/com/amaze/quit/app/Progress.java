@@ -48,7 +48,7 @@ public class Progress extends Fragment {
             ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
             bar.setBackgroundDrawable(color);
             //sets the title
-            CharSequence title = res.getString(R.string.title_activity_health_progress);
+            CharSequence title = res.getString(R.string.title_activity_progress);
             homeActivity.setTitle(title);
         }
 

@@ -21,6 +21,7 @@
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     //health progress scherm    
     <string name="title_activity_health_progress">Gezondheid</string>
+    <string name="title_activity_health_progress_algemeen">Gezondheid algemeen</string>
     <string name="title_activity_health_progressBar1">Niveaus van CO (koolmonoxide) en O2 (zuurstof</string>
     <string name="title_activity_health_progressBar2">Risico op plotse hartdood</string>
     <string name="title_activity_health_progressBar3">Smaak- en geurzin teruggekregen</string>

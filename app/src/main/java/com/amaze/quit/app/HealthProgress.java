@@ -10,10 +10,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 
 public class HealthProgress extends Fragment {
 
+
+    protected void drawProgress() {
+        ProgressBar totaalGezondheidBar = (ProgressBar) getActivity().findViewById(R.id.progressBar_algemeenGezondheid);
+
+        totaalGezondheidBar.setProgress(66);
+    }
 
     public static final HealthProgress newInstance()
     {
@@ -30,6 +37,7 @@ public class HealthProgress extends Fragment {
         Activity homeActivity = getActivity();
 
         return v;
+
     }
 
     @Override
@@ -48,15 +56,13 @@ public class HealthProgress extends Fragment {
             //sets the title
             CharSequence title = res.getString(R.string.title_activity_health_progress);
             homeActivity.setTitle(title);
+
+            //teken de voortgang
+            drawProgress();
         }
 
     }
 
-
-    protected void drawProgress() {
-
-
-    }
 
 
 

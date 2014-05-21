@@ -17,7 +17,7 @@
         android:text="@string/title_activity_health_progress"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="30dp"/>
+        android:textSize="40dp"/>
 
     <TextView
         android:layout_width="wrap_content"

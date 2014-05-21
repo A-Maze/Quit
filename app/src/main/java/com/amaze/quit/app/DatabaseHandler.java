@@ -291,7 +291,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    /* Updating single User */
+    /* Updating single Userr */
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

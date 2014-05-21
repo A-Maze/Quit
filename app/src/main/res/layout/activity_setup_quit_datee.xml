@@ -29,15 +29,6 @@
                 android:calendarViewShown="false"
                 android:paddingTop="70dp"
                 />
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/bStopDateNext"
-                android:text="@string/quitDateNext"
-                android:layout_margin="50dp"
-                android:onClick="runSetupBrand"
-                />
         </LinearLayout>
     </ScrollView>
 

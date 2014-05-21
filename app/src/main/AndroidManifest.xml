@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name="com.amaze.quit.app.Setup"
-            android:label="@string/title_activity_setup" >
+            android:label="@string/title_activity_setup"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.amaze.quit.app.ChooseProduct"
@@ -34,7 +35,8 @@
         </activity>
         <activity
             android:name="com.amaze.quit.app.Home"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

@@ -18,7 +18,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "QuitSmokeDatabase";
 
-    // User table names
+    //  table names
     private static final String TABLE_USER = "users";
     private static final String TABLE_SIGARETTEN = "sigaretten";
     private static final String TABLE_CHALLENGES = "challenges";
@@ -34,7 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     // Sigaretten Table Columns names
-    private static final String SIGARETTEN_UID = "uID";
+    private static final String SIGARETTEN_SID = "sID";
     private static final String SIGARETTEN_MERK = "merk";
     private static final String SIGARETTEN_AANTAL = "aantal";
     private static final String SIGARETTEN_TEER = "teer";
@@ -50,7 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // User_challenges Table Columns names
     private static final String USER_CHALLENGES_UID = "uID";
     private static final String USER_CHALLENGES_CID = "cID";
-    private static final String USER_CHALLENGES_ucID = "ucID";
+    private static final String USER_CHALLENGES_UCID = "ucID";
 
 
     // Levels Table Columns names
@@ -87,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Sigaretten table */
         String CREATE_SIGARETTEN_TABLE = "CREATE TABLE "
                 + TABLE_SIGARETTEN + "("
-                + SIGARETTEN_UID + " INTEGER PRIMARY KEY,"
+                + SIGARETTEN_SID + " INTEGER PRIMARY KEY,"
                 + SIGARETTEN_MERK + " TEXT,"
                 + SIGARETTEN_AANTAL + " INTEGER,"
                 + SIGARETTEN_TEER + " REAL"
@@ -108,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* User_challenge table */
         String CREATE_USER_CHALLENGE_TABLE = "CREATE TABLE "
                 + TABLE_USER_CHALLANGE + "("
-                + USER_CHALLENGES_ucID + " INTEGER PRIMARY KEY,"
+                + USER_CHALLENGES_UCID + " INTEGER PRIMARY KEY,"
                 + USER_CHALLENGES_UID + " INTEGER,"
                 + USER_CHALLENGES_CID + " INTEGER,"
                 + ")";
@@ -147,28 +147,153 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* Adding new User*/
     public void addUser(User user) {}
 
-   /* Getting single User*/
+    /* Getting single User*/
     public User getUser(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_USER, new String[] { USER_UID,
-                        USER_SID, USER_PERDAG, USER_LEVEL }, USER_UID + "=?",
+        assert db != null;
+        Cursor cursor = db.query(TABLE_USER, new String[] {
+                        USER_UID,
+                        USER_SID,
+                        USER_PERDAG,
+                        USER_LEVEL }, USER_UID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         User user = new User(Integer.parseInt(cursor.getString(0)),
-                             Integer.parseInt(cursor.getString(1)),
-                             Integer.parseInt(cursor.getString(2)),
-                             Integer.parseInt(cursor.getString(3)));
+                Integer.parseInt(cursor.getString(1)),
+                Integer.parseInt(cursor.getString(2)),
+                Integer.parseInt(cursor.getString(3)));
         /* return contact */
         return user;
     }
 
+   /* Getting single User*/
+    public Sigaretten getSigaret(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_SIGARETTEN, new String[] {
+                        SIGARETTEN_SID ,
+                        SIGARETTEN_MERK,
+                        SIGARETTEN_AANTAL,
+                        SIGARETTEN_TEER,
+                        SIGARETTEN_NICOTINE,
+                        SIGARETTEN_PRIJS}, SIGARETTEN_SID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Sigaretten sigaret = new Sigaretten(
+                Integer.parseInt(cursor.getString(0)),
+                Float.parseFloat(cursor.getString(5)),
+                cursor.getString(2),
+                Integer.parseInt(cursor.getString(3)),
+                Float.parseFloat(cursor.getString(4)),
+                Float.parseFloat(cursor.getString(5)));
+        /* return sigaret */
+        return sigaret;
+    }
+
+
+
+    /* Getting single challenge*/
+    public Challenges getChallenge(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_CHALLENGES, new String[] {
+                        CHALLENGES_CID,
+                        CHALLENGES_TITEL,
+                        CHALLENGES_BESCHRIJVING }, CHALLENGES_CID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Challenges challenge = new Challenges(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2));
+        /* return challenge */
+        return challenge;
+    }
+
+    /* Getting single userChallenge*/
+    public User_Challenge getUserChallenge(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_USER_CHALLANGE, new String[] {
+                        USER_CHALLENGES_UCID,
+                        USER_CHALLENGES_UID,
+                        USER_CHALLENGES_CID
+                         }, USER_CHALLENGES_UCID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        User_Challenge user_challenge = new User_Challenge(
+                Integer.parseInt(cursor.getString(0)),
+                Integer.parseInt(cursor.getString(1)),
+                Integer.parseInt(cursor.getString(2)));
+        /* return contact */
+        return user_challenge;
+    }
+
+    /* Getting single User*/
+    public Gezondheid getGezondheid(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_GEZONDHEID, new String[] {
+                        GEZONDHEID_UID,
+                        GEZONDHEID_TEER,
+                        GEZONDHEID_NICOTINE,
+                        GEZONDHEID_CO2,
+                        GEZONDHEID_LANGERTELEVEN}, GEZONDHEID_UID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Gezondheid gezondheid = new Gezondheid(
+                Integer.parseInt(cursor.getString(0)),
+                Float.parseFloat(cursor.getString(1)),
+                Float.parseFloat(cursor.getString(2)),
+                Float.parseFloat(cursor.getString(3)),
+                Float.parseFloat(cursor.getString(4)));
+        /* return contact */
+        return gezondheid;
+    }
+
+    /* Getting single Level*/
+    public Levels getLevel(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_LEVELS, new String[] {
+                        LEVEL_LID,
+                        LEVEL_TITEL,
+                        LEVEL_BESCHRIJVING}, LEVEL_LID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Levels level = new Levels(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2));
+
+        /* return contact */
+        return level;
+    }
+
+
+
+
     /* Updating single User */
     public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(USER_SID, user.getsID());
         values.put(USER_PERDAG, user.getPerDag());

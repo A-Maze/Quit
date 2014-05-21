@@ -46,6 +46,8 @@ public class SetupBrandAmount extends Fragment  {
 
     }
 
+    /*
+    OUDE CODE MAAR MISCHIEN NOG NODIG
     public void checkForInput(View view) {
         // wat te doen als de next button is geklikt.
 
@@ -77,20 +79,10 @@ public class SetupBrandAmount extends Fragment  {
                     });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        } else {
-            //runChooseProduct();
-            /* creating the user */
-
-
         }
 
-    }
+    }*/
 
-    // naar choose product. de activity dus nog even veranderen als die bestaat.
-    private void runChooseProduct() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        startActivity(intent);
-    }
 
 
 

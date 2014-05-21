@@ -30,8 +30,10 @@ public class Home extends FragmentActivity {
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 
+        fList.add(Achievements.newInstance());
         fList.add(Progress.newInstance());
         fList.add(HealthProgress.newInstance());
+
 
 
         return fList;

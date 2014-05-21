@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.viewpagerindicator.LinePageIndicator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,15 @@ public class Setup extends FragmentActivity {
 
         ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
+
+        //Bind the title indicator to the adapter
+        LinePageIndicator lineIndicator = (LinePageIndicator)findViewById(R.id.indicator);
+        final float density = getResources().getDisplayMetrics().density;
+        lineIndicator.setViewPager(pager);
+        lineIndicator.setSelectedColor(getResources().getColor(R.color.blue));
+        lineIndicator.setUnselectedColor(0xFF888888);
+        lineIndicator.setStrokeWidth(4 * density);
+        lineIndicator.setLineWidth(30 * density);
 
     }
 

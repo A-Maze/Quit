@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import com.viewpagerindicator.LinePageIndicator;
 
 
 public class Achievements extends Fragment {
@@ -47,6 +47,10 @@ public class Achievements extends Fragment {
             //sets the title
             CharSequence title = res.getString(R.string.title_fragment_achievements);
             homeActivity.setTitle(title);
+            //sets viewpageindicator color
+            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
+            lineIndicator.setSelectedColor(res.getColor(R.color.orange));
+
         }
 
     }

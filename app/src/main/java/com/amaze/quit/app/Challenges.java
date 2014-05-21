@@ -3,14 +3,14 @@ package com.amaze.quit.app;
 /**
  * Created by Rik on 21-5-2014.
  */
-public class challenges {
+public class Challenges {
 
     //private variables
     int cID;
     String titel;
     String beschrijving;
 
-    public challenges(int cID, String titel, String beschrijving) {
+    public Challenges(int cID, String titel, String beschrijving) {
         this.cID = cID;
         this.titel = titel;
         this.beschrijving = beschrijving;

@@ -33,7 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_LEVEL = "level";
 
 
-    // Sigaretten Table Columns names
+    // Sigaretten Table Columns namesss
     private static final String SIGARETTEN_SID = "sID";
     private static final String SIGARETTEN_MERK = "merk";
     private static final String SIGARETTEN_AANTAL = "aantal";
@@ -304,6 +304,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(user.getuID()) });
     }
 
-    // Deleting single User
-    public void deleteUser(User user) {}
+
+
 }

@@ -4,7 +4,7 @@ package com.amaze.quit.app;
  * Created by Rik on 20-5-2014.
  */
 public class User {
-
+// user table
 
     //private variables
     int uID;

@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
@@ -36,11 +38,15 @@ public class SetupBrandAmount extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
 
+        //The complete button. This button should be moved to the final setup fragment which is this one at the moment.
+        Button complete = (Button) v.findViewById(R.id.bSetupComplete);
+        //sets the onclicklistener for the complete button
+        complete.setOnClickListener(attachButton);
+
         rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
         rbShag = (RadioButton) v.findViewById(R.id.rbShag);
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
         etPackAmount = (EditText) v.findViewById(R.id.etPackAmount);
-
         return v;
 
 
@@ -82,6 +88,18 @@ public class SetupBrandAmount extends Fragment  {
         }
 
     }*/
+
+    //The onClickListener for the complete button
+    private OnClickListener attachButton = new OnClickListener(){
+        public void onClick(View v){
+            Intent myIntent = new Intent(getActivity(), Home.class);
+            //this makes sure the activity resumes rather than creating a new one.
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+            startActivity(myIntent);
+            getActivity().finish();
+        }
+    };
 
 
 

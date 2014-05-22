@@ -28,7 +28,6 @@ repositories {
 dependencies {
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'com.android.support:appcompat-v7:+'
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:19.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
 }

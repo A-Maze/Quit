@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.LinePageIndicator;
+
 
 public class Progress extends Fragment {
 
@@ -24,6 +26,8 @@ public class Progress extends Fragment {
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
         return f;
+
+
     }
 
     @Override
@@ -50,6 +54,9 @@ public class Progress extends Fragment {
             //sets the title
             CharSequence title = res.getString(R.string.title_activity_progress);
             homeActivity.setTitle(title);
+            //sets viewpageindicator color
+            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
+            lineIndicator.setSelectedColor(res.getColor(R.color.blue));
         }
 
     }

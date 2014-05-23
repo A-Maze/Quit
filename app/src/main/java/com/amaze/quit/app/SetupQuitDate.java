@@ -27,6 +27,8 @@ public class SetupQuitDate extends Fragment {
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
         return f;
+
+
     }
 
     @Override

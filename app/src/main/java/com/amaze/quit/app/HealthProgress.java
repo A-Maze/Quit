@@ -10,10 +10,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
+import com.viewpagerindicator.LinePageIndicator;
 
 
 public class HealthProgress extends Fragment {
 
+
+    protected void drawProgress() {
+        ProgressBar totaalGezondheidBar = (ProgressBar) getActivity().findViewById(R.id.progressBar_algemeenGezondheid);
+
+        totaalGezondheidBar.setProgress(66);
+    }
 
     public static final HealthProgress newInstance()
     {
@@ -30,6 +39,7 @@ public class HealthProgress extends Fragment {
         Activity homeActivity = getActivity();
 
         return v;
+
     }
 
     @Override
@@ -48,15 +58,16 @@ public class HealthProgress extends Fragment {
             //sets the title
             CharSequence title = res.getString(R.string.title_activity_health_progress);
             homeActivity.setTitle(title);
+            //sets viewpageindicator color
+            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
+            lineIndicator.setSelectedColor(res.getColor(R.color.green));
+
+            //teken de voortgang
+            drawProgress();
         }
 
     }
 
-
-    protected void drawProgress() {
-
-
-    }
 
 
 

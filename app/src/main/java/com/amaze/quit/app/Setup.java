@@ -1,12 +1,18 @@
 package com.amaze.quit.app;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+import com.viewpagerindicator.LinePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +20,7 @@ import java.util.List;
 public class Setup extends FragmentActivity {
 
     MyPageAdapter pageAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +32,16 @@ public class Setup extends FragmentActivity {
 
         ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
+
+        //Bind the title indicator to the adapter
+        LinePageIndicator lineIndicator = (LinePageIndicator)findViewById(R.id.indicator);
+        final float density = getResources().getDisplayMetrics().density;
+        lineIndicator.setViewPager(pager);
+        lineIndicator.setSelectedColor(getResources().getColor(R.color.blue));
+        lineIndicator.setUnselectedColor(0xFF888888);
+        lineIndicator.setStrokeWidth(4 * density);
+        lineIndicator.setLineWidth(30 * density);
+
 
     }
 
@@ -60,5 +77,8 @@ public class Setup extends FragmentActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         db.addUser(new User(1,1,20));
     }
+
+
+
 
 }

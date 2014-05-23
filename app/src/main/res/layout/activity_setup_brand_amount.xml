@@ -9,11 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/smokeAmount"
         android:layout_width="wrap_content"
-        android:textSize="30dp"
+        android:textSize="40dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/radioGroup"
         android:layout_centerHorizontal="true" />
 
 
@@ -30,21 +30,22 @@
         android:text="@string/sigaretten"
         android:id="@+id/rbSigaretten"
         android:layout_gravity="right"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="45dp"
+        android:checked="false"
+        android:layout_marginLeft="28dp"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:checked="false" />
+        android:layout_alignStart="@+id/textView" />
 
     <RadioButton
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:text="@string/shag"
 android:id="@+id/rbShag"
-        android:layout_alignTop="@+id/rbSigaretten"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_above="@+id/textView2"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_marginLeft="51dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,10 +53,10 @@ android:id="@+id/rbShag"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/setupBrand"
         android:id="@+id/textView2"
+        android:layout_marginTop="75dp"
         android:layout_below="@+id/rbSigaretten"
         android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="76dp" />
+        android:layout_alignStart="@+id/textView3" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -113,18 +114,13 @@ android:id="@+id/rbShag"
         android:layout_alignEnd="@+id/etDayAmount" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Volgende"
-        android:id="@+id/bNext"
+        android:text="@string/setup_complete"
+        android:id="@+id/bSetupComplete"
+        android:layout_marginTop="34dp"
         android:layout_below="@+id/textView4"
-        android:layout_marginTop="37dp"
-        android:layout_alignRight="@+id/etPackAmount"
-        android:layout_alignEnd="@+id/etPackAmount"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:onClick="checkForInput"/>
-
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

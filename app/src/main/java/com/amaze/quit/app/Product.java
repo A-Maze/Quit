@@ -45,7 +45,7 @@ public class Product extends Fragment {
             ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
             bar.setBackgroundDrawable(color);
             //sets the title
-            CharSequence title = res.getString(R.string.title_fragment_achievements);
+            CharSequence title = res.getString(R.string.title_activity_product);
             homeActivity.setTitle(title);
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);

@@ -17,8 +17,8 @@ import com.viewpagerindicator.LinePageIndicator;
 public class Product extends Fragment {
 
 
-    public static final Achievements newInstance() {
-        Achievements f = new Achievements();
+    public static final Product newInstance() {
+        Product f = new Product();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
         return f;

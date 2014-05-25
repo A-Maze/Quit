@@ -41,7 +41,7 @@ public class Home extends FragmentActivity {
         lineIndicator.setLineWidth(30 * density);
 
         //makes sure the middle fragment is shown when the activity gets first created. This is in this case the 2nd item
-        pager.setCurrentItem(1, false);
+        pager.setCurrentItem(2, false);
 
      };
 
@@ -51,6 +51,7 @@ public class Home extends FragmentActivity {
 
         fList.add(Achievements.newInstance());
         fList.add(Progress.newInstance());
+        fList.add(Product.newInstance());
         fList.add(HealthProgress.newInstance());
 
 

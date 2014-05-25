@@ -2,39 +2,32 @@ package com.amaze.quit.app;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.viewpagerindicator.LinePageIndicator;
 
 
-public class Progress extends Fragment {
+public class Product extends Fragment {
 
 
-    public static final Progress newInstance()
-    {
-        Progress f = new Progress();
+    public static final Product newInstance() {
+        Product f = new Product();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
         return f;
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        View v = inflater.inflate(R.layout.activity_progress, container, false);
+        View v = inflater.inflate(R.layout.fragment_product, container, false);
         return v;
     }
 
@@ -49,22 +42,16 @@ public class Progress extends Fragment {
 
             //styles the actionbar
             ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(R.color.red));
+            ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
             bar.setBackgroundDrawable(color);
             //sets the title
-            CharSequence title = res.getString(R.string.title_activity_progress);
+            CharSequence title = res.getString(R.string.title_activity_product);
             homeActivity.setTitle(title);
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(R.color.red));
+            lineIndicator.setSelectedColor(res.getColor(R.color.blue));
+
         }
 
     }
-
-
-
-
-
-
-
 }

@@ -91,8 +91,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_SIGARETTEN_TABLE = "CREATE TABLE "
                 + TABLE_SIGARETTEN + "("
                 + SIGARETTEN_SID + " INTEGER PRIMARY KEY,"
-                + SIGARETTEN_MERK + " TEXT,"
                 + SIGARETTEN_AANTAL + " INTEGER,"
+                + SIGARETTEN_MERK + " TEXT,"
                 + SIGARETTEN_TEER + " REAL,"
                 + SIGARETTEN_NICOTINE + " REAL,"
                 + SIGARETTEN_PRIJS + " REAL"
@@ -172,8 +172,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SIGARETTEN_SID, sigaret.getsID());
-        values.put(SIGARETTEN_MERK, sigaret.getMerk());
         values.put(SIGARETTEN_AANTAL, sigaret.getAantal());
+        values.put(SIGARETTEN_MERK, sigaret.getMerk());
         values.put(SIGARETTEN_TEER, sigaret.getTeer());
         values.put(SIGARETTEN_NICOTINE, sigaret.getNicotine());
         values.put(SIGARETTEN_PRIJS, sigaret.getPrijs());
@@ -224,10 +224,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         assert db != null;
         Cursor cursor = db.query(TABLE_SIGARETTEN, new String[] {
                         SIGARETTEN_SID ,
+                        SIGARETTEN_NICOTINE,
                         SIGARETTEN_MERK,
                         SIGARETTEN_AANTAL,
                         SIGARETTEN_TEER,
-                        SIGARETTEN_NICOTINE,
                         SIGARETTEN_PRIJS}, SIGARETTEN_SID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
@@ -235,7 +235,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Sigaretten sigaret = new Sigaretten(
                 Integer.parseInt(cursor.getString(0)),
-                Float.parseFloat(cursor.getString(5)),
+                Float.parseFloat(cursor.getString(1)),
                 cursor.getString(2),
                 Integer.parseInt(cursor.getString(3)),
                 Float.parseFloat(cursor.getString(4)),

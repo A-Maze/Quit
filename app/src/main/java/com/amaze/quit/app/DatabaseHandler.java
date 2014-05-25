@@ -268,7 +268,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /* Getting single userChallenge*/
-    public User_challenge getUserChallenge(int id) {
+    public User_Challenge getUserChallenge(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
@@ -281,7 +281,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        User_challenge user_challenge = new User_challenge(
+        User_Challenge user_challenge = new User_Challenge(
                 Integer.parseInt(cursor.getString(0)),
                 Integer.parseInt(cursor.getString(1)),
                 Integer.parseInt(cursor.getString(2)));

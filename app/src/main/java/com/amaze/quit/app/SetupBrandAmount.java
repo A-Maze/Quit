@@ -1,18 +1,17 @@
 package com.amaze.quit.app;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-
+import android.widget.Spinner;
 
 
 public class SetupBrandAmount extends Fragment  {
@@ -21,10 +20,11 @@ public class SetupBrandAmount extends Fragment  {
     private RadioButton rbShag;
     private EditText etDayAmount;
     private EditText etPackAmount;
-
+    private Spinner sBrand;
+    private String[] sigaretten;
     private Integer dayAmount;
     private Integer packAmount;
-
+    private DatabaseHandler db = new DatabaseHandler(getActivity());
 
     public static final SetupBrandAmount newInstance()
     {
@@ -43,12 +43,28 @@ public class SetupBrandAmount extends Fragment  {
         //sets the onclicklistener for the complete button
         complete.setOnClickListener(attachButton);
 
+
         rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
         rbShag = (RadioButton) v.findViewById(R.id.rbShag);
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
         etPackAmount = (EditText) v.findViewById(R.id.etPackAmount);
+        sBrand = (Spinner) v.findViewById(R.id.sBrand);
+
+        fillSpinner();
+
+
         return v;
 
+
+    }
+
+    private void fillSpinner() {
+        sigaretten = new String[]{
+                db.getSigaret(1).getMerk()
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigaretten);
+        sBrand.setAdapter(adapter);
 
     }
 

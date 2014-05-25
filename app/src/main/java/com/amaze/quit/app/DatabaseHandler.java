@@ -1,10 +1,10 @@
 package com.amaze.quit.app;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+        import android.content.ContentValues;
+        import android.content.Context;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by Rik on 20-5-2014.
@@ -169,7 +169,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return user;
     }
 
-   /* Getting single User*/
+    /* Getting single User*/
     public Sigaretten getSigaret(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -220,7 +220,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     /* Getting single userChallenge*/
-    public User_Challenge getUserChallenge(int id) {
+    public User_challenge getUserChallenge(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
@@ -228,12 +228,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_CHALLENGES_UCID,
                         USER_CHALLENGES_UID,
                         USER_CHALLENGES_CID
-                         }, USER_CHALLENGES_UCID + "=?",
+                }, USER_CHALLENGES_UCID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        User_Challenge user_challenge = new User_Challenge(
+        User_challenge user_challenge = new User_challenge(
                 Integer.parseInt(cursor.getString(0)),
                 Integer.parseInt(cursor.getString(1)),
                 Integer.parseInt(cursor.getString(2)));

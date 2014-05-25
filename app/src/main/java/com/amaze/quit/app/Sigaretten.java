@@ -12,6 +12,7 @@ public class Sigaretten {
     float nicotine;
     float prijs;
 
+    Sigaretten camel_klein = new Sigaretten(1,2,"Camel klein",19,2,5.95f);
 
 
     public Sigaretten( int sID, float nicotine, String merk, int aantal, float teer, float prijs) {

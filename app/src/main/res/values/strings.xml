@@ -44,10 +44,15 @@
     <string name="title_activity_choose_product_product_button_search">Zoek</string>
     <string name="title_activity_choose_product_product">Kies een product</string>
     //Home        <string name="title_activity_home">Home</string>
-    //Achievements        <string name="title_fragment_achievements">Achievements</string>
+    //Achievements
+    <string name="title_fragment_achievements">Achievements</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_product">Product</string>
+    <string name="achievement_first_steps">Eerste stapjes</string>
+    <string name="achievement_first_steps_content">Doorbreng een dag zonder te roken.</string>
+    <string name="achievement_deep_breath">Even diep ademhalen</string>
+    <string name="achievement_deep_breath_content">Verbeter de gezondheid van je longen met 10%.</string>
 
 </resources>

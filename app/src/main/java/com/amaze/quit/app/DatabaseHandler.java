@@ -11,6 +11,8 @@ package com.amaze.quit.app;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
+    private Sigaretten sigaret;
+
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -63,14 +65,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String GEZONDHEID_UID = "uID";
     private static final String GEZONDHEID_TEER = "sID";
     private static final String GEZONDHEID_NICOTINE = "per_dag";
-    private static final String GEZONDHEID_LANGERTELEVEN = "level";
-    private static final String GEZONDHEID_CO2 = "level";
+    private static final String GEZONDHEID_LANGERTELEVEN = "langer_te_leven";
+    private static final String GEZONDHEID_CO2 = "co2";
 
 
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     /* creating Tables */
     @Override
@@ -90,8 +93,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + SIGARETTEN_SID + " INTEGER PRIMARY KEY,"
                 + SIGARETTEN_MERK + " TEXT,"
                 + SIGARETTEN_AANTAL + " INTEGER,"
-                + SIGARETTEN_TEER + " REAL"
-                + SIGARETTEN_NICOTINE + " REAL"
+                + SIGARETTEN_TEER + " REAL,"
+                + SIGARETTEN_NICOTINE + " REAL,"
                 + SIGARETTEN_PRIJS + " REAL"
                 + ")";
         db.execSQL(CREATE_SIGARETTEN_TABLE);
@@ -101,7 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_CHALLENGES + "("
                 + CHALLENGES_CID + " INTEGER PRIMARY KEY,"
                 + CHALLENGES_TITEL + " TEXT,"
-                + CHALLENGES_BESCHRIJVING + " TEXT,"
+                + CHALLENGES_BESCHRIJVING + " TEXT"
                 + ")";
         db.execSQL(CREATE_CHALLANGES_TABLE);
 
@@ -110,7 +113,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_USER_CHALLANGE + "("
                 + USER_CHALLENGES_UCID + " INTEGER PRIMARY KEY,"
                 + USER_CHALLENGES_UID + " INTEGER,"
-                + USER_CHALLENGES_CID + " INTEGER,"
+                + USER_CHALLENGES_CID + " INTEGER"
                 + ")";
         db.execSQL(CREATE_USER_CHALLENGE_TABLE);
 
@@ -119,7 +122,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_LEVELS + "("
                 + LEVEL_LID + " INTEGER PRIMARY KEY,"
                 + LEVEL_TITEL + " TEXT,"
-                + LEVEL_BESCHRIJVING + " TEXT,"
+                + LEVEL_BESCHRIJVING + " TEXT"
                 + ")";
         db.execSQL(CREATE_LEVELS_TABLE);
 
@@ -128,24 +131,69 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_GEZONDHEID + "("
                 + GEZONDHEID_UID + " INTEGER PRIMARY KEY,"
                 + GEZONDHEID_TEER + " REAL,"
-                + GEZONDHEID_NICOTINE + " REAL"
-                + GEZONDHEID_CO2 + " REAL"
+                + GEZONDHEID_NICOTINE + " REAL,"
+                + GEZONDHEID_CO2 + " REAL,"
                 + GEZONDHEID_LANGERTELEVEN + " REAL"
                 + ")";
         db.execSQL(CREATE_GEZONDHEID_TABLE);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i2) {
         /*Drop older table if existed*/
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CHALLENGES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GEZONDHEID);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LEVELS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SIGARETTEN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_CHALLANGE);
         /* Create tables again*/
         onCreate(db);
     }
 
     /* Adding new User*/
-    public void addUser(User user) {}
+    public void addUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USER_UID, user.getuID()); // user id
+        values.put(USER_SID, user.getsID()); // user sigaretten id
+        values.put(USER_PERDAG, user.getPerDag()); // hoeveel die smoked per dag
+        values.put(USER_LEVEL, user.getLevel()); // level van user. bij nieuwe user gewoon 1.
+
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_USER, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public void addSigarette(Sigaretten sigaret) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SIGARETTEN_SID, sigaret.getsID());
+        values.put(SIGARETTEN_MERK, sigaret.getMerk());
+        values.put(SIGARETTEN_AANTAL, sigaret.getAantal());
+        values.put(SIGARETTEN_TEER, sigaret.getTeer());
+        values.put(SIGARETTEN_NICOTINE, sigaret.getNicotine());
+        values.put(SIGARETTEN_PRIJS, sigaret.getPrijs());
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_SIGARETTEN, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* Getting single User*/
     public User getUser(int id) {

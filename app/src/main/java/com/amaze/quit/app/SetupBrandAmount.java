@@ -20,11 +20,11 @@ public class SetupBrandAmount extends Fragment  {
     private RadioButton rbShag;
     private EditText etDayAmount;
     private EditText etPackAmount;
-    private Spinner sBrand;
-    private String[] sigaretten;
+    Spinner sBrand;
+    String[] sigaretten;
     private Integer dayAmount;
     private Integer packAmount;
-    private DatabaseHandler db = new DatabaseHandler(getActivity());
+
 
     public static final SetupBrandAmount newInstance()
     {
@@ -50,7 +50,15 @@ public class SetupBrandAmount extends Fragment  {
         etPackAmount = (EditText) v.findViewById(R.id.etPackAmount);
         sBrand = (Spinner) v.findViewById(R.id.sBrand);
 
-        fillSpinner();
+
+
+        sigaretten = new String[] {
+             "test 1"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigaretten);
+        sBrand.setAdapter(adapter);
+
 
 
         return v;
@@ -58,15 +66,7 @@ public class SetupBrandAmount extends Fragment  {
 
     }
 
-    private void fillSpinner() {
-        sigaretten = new String[]{
-                db.getSigaret(1).getMerk()
-        };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigaretten);
-        sBrand.setAdapter(adapter);
-
-    }
 
     /*
     OUDE CODE MAAR MISCHIEN NOG NODIG
@@ -109,9 +109,14 @@ public class SetupBrandAmount extends Fragment  {
     private OnClickListener attachButton = new OnClickListener(){
         public void onClick(View v){
             Intent myIntent = new Intent(getActivity(), Home.class);
+            DatabaseHandler db = new DatabaseHandler(getActivity());
             //this makes sure the activity resumes rather than creating a new one.
             myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
+            try {
+                db.addSigarette(new Sigaretten(1, 1, "test", 1, 1, 1f));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             startActivity(myIntent);
             getActivity().finish();
         }

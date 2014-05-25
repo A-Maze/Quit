@@ -1,16 +1,12 @@
 package com.amaze.quit.app;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
 import com.viewpagerindicator.LinePageIndicator;
 
@@ -43,6 +39,8 @@ public class Setup extends FragmentActivity {
         lineIndicator.setLineWidth(30 * density);
 
 
+
+
     }
 
     private List<Fragment> getFragments(){
@@ -73,10 +71,7 @@ public class Setup extends FragmentActivity {
         }
     }
 
-    public void createUser() {
-        DatabaseHandler db = new DatabaseHandler(this);
-        db.addUser(new User(1,1,20));
-    }
+
 
 
 

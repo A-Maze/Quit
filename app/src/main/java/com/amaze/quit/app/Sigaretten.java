@@ -7,22 +7,22 @@ public class Sigaretten {
     //private variables
     int sID;
     String merk;
-    int Aantal;
+    int aantal;
     float teer;
     float nicotine;
     float prijs;
 
-    Sigaretten camel_klein = new Sigaretten(1,2,"Camel klein",19,2,5.95f);
+
+
 
 
     public Sigaretten( int sID, float nicotine, String merk, int aantal, float teer, float prijs) {
         this.nicotine = nicotine;
         this.sID = sID;
         this.merk = merk;
-        Aantal = aantal;
+        this.aantal = aantal;
         this.teer = teer;
         this.prijs = prijs;
-
     }
 
     public float getPrijs() {
@@ -50,11 +50,11 @@ public class Sigaretten {
     }
 
     public int getAantal() {
-        return Aantal;
+        return aantal;
     }
 
     public void setAantal(int aantal) {
-        Aantal = aantal;
+        aantal = aantal;
     }
 
     public float getTeer() {

@@ -53,13 +53,39 @@
         android:text="@string/title_activity_health_progressBar1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="17dp"
         android:textAlignment="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent1"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer1"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer1"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_1"
         android:layout_gravity="center_horizontal" />
 
@@ -71,10 +97,35 @@
         android:text="@string/title_activity_health_progressBar2"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent2"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer2"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer2"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_2"
         android:layout_gravity="center_horizontal" />
 
@@ -86,10 +137,35 @@
         android:text="@string/title_activity_health_progressBar3"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent3"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer3"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer3"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_3"
         android:layout_gravity="center_horizontal" />
 
@@ -101,10 +177,35 @@
         android:text="@string/title_activity_health_progressBar4"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent4"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer4"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer4"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_4"
         android:layout_gravity="center_horizontal" />
 
@@ -116,10 +217,35 @@
         android:text="@string/title_activity_health_progressBar5"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent5"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer5"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer5"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_5"
         android:layout_gravity="center_horizontal" />
 
@@ -130,11 +256,37 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/title_activity_health_progressBar6"
         android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent6"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent6"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer6"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer6"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_6"
         android:layout_gravity="center_horizontal" />
 
@@ -146,10 +298,35 @@
         android:text="@string/title_activity_health_progressBar7"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent7"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent7"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer7"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer7"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_7"
         android:layout_gravity="center_horizontal" />
 
@@ -161,10 +338,35 @@
         android:text="@string/title_activity_health_progressBar8"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent8"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent8"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer8"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer8"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_8"
         android:layout_gravity="center_horizontal" />
 
@@ -176,10 +378,35 @@
         android:text="@string/title_activity_health_progressBar9"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_procent9"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_procent9"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/health_timer9"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:id="@+id/health_timer9"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_height="20dp"
         android:id="@+id/progressBar_gezondheid_9"
         android:layout_gravity="center_horizontal" />
 

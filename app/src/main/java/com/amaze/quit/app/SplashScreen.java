@@ -28,7 +28,6 @@ public class SplashScreen extends Activity {
                 finally {
                     firstTime();
                     finish();
-
                 }
             }
         };

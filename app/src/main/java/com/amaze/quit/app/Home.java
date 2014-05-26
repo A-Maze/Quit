@@ -31,7 +31,7 @@ public class Home extends FragmentActivity  {
     int preferedFragment;
     private String[] mNavTitles;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private static ListView mDrawerList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,10 +74,10 @@ public class Home extends FragmentActivity  {
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 
-        fList.add(Achievements.newInstance());
-        fList.add(Progress.newInstance());
-        fList.add(Product.newInstance());
-        fList.add(HealthProgress.newInstance());
+        fList.add(Achievements.newInstance(0));
+        fList.add(Progress.newInstance(1));
+        fList.add(Product.newInstance(2));
+        fList.add(HealthProgress.newInstance(3));
 
 
 
@@ -145,6 +145,7 @@ public class Home extends FragmentActivity  {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mNavTitles));
         // Set the list's click listener
+        mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id){
@@ -152,6 +153,10 @@ public class Home extends FragmentActivity  {
                 mDrawerLayout.closeDrawers();
             }
         });
+    }
+
+    public static void setSelectedNav(int position){
+        mDrawerList.setItemChecked(position,true);
     }
 
 

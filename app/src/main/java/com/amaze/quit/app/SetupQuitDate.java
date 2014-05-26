@@ -17,9 +17,9 @@ public class SetupQuitDate extends Fragment {
     private DatePicker quitDatePicker;
 
     // de stopdatum variabelen
-    public int quitDay;
-    public int quitMonth;
-    public int quitYear;
+    public static int quitDay;
+    public static int quitMonth;
+    public static int quitYear;
 
     public static final SetupQuitDate newInstance()
     {
@@ -36,17 +36,39 @@ public class SetupQuitDate extends Fragment {
         View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
 
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
+        quitDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getTheDay();
+                getTheMonth();
+                getTheYear();
+            }
+        });
 
 
         return v;
 
 
+
     }
 
-    private void getTheDate() {
-        quitDay = quitDatePicker.getDayOfMonth();
-        quitMonth = quitDatePicker.getMonth() + 1;
-        quitYear = quitDatePicker.getYear();
+
+
+    public void getTheDay() {
+        quitDay =  quitDatePicker.getDayOfMonth();
+
+    }
+    public void getTheMonth() {
+
+        quitMonth =  quitDatePicker.getMonth();
+
+
+
+    }
+    public void getTheYear() {
+
+        quitYear =  quitDatePicker.getYear();
+
 
     }
 

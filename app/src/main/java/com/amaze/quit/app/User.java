@@ -12,13 +12,17 @@ public class User {
     int perDag;
     // int productID
     int level;
+    int quitDay;
+    int quitMonth;
+    int quitYear;
 
     // constructor
-    public User(int uID, int sID, int perDag){
-        this.uID = uID;
+    public User(int uID, int sID, int perDag, int quitDay, int quitMonth , int quitYear){
+
         this.sID = sID;
         this.perDag = perDag;
         this.level = 1;
+        this.quitDay = quitDay;
     }
 
     // Empty constructor

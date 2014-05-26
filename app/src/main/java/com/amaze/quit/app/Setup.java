@@ -49,6 +49,7 @@ public class Setup extends FragmentActivity {
 
         fList.add(SetupQuitDate.newInstance());
         fList.add(SetupBrandAmount.newInstance());
+        fList.add(SetupChooseProduct.newInstance());
 
 
         return fList;

@@ -5,14 +5,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-
+import android.widget.Spinner;
 
 
 public class SetupBrandAmount extends Fragment  {
@@ -20,11 +23,13 @@ public class SetupBrandAmount extends Fragment  {
     private RadioButton rbSigaretten;
     private RadioButton rbShag;
     private EditText etDayAmount;
-    private EditText etPackAmount;
 
+    Spinner sBrand;
+    String[] sigarettenList;
+    Sigaretten[] sigaretten;
     private Integer dayAmount;
-    private Integer packAmount;
 
+    private int selectedSigaretPos;
 
     public static final SetupBrandAmount newInstance()
     {
@@ -42,15 +47,40 @@ public class SetupBrandAmount extends Fragment  {
         Button complete = (Button) v.findViewById(R.id.bSetupComplete);
         //sets the onclicklistener for the complete button
         complete.setOnClickListener(attachButton);
-
-        rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
-        rbShag = (RadioButton) v.findViewById(R.id.rbShag);
+        getSigaretten();
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
-        etPackAmount = (EditText) v.findViewById(R.id.etPackAmount);
+
+        sBrand = (Spinner) v.findViewById(R.id.sBrand);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigarettenList);
+        sBrand.setAdapter(adapter);
+       sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                selectedSigaretPos = pos;
+               Log.d("insert :" , "" + selectedSigaretPos);
+           }
+            public void onNothingSelected(AdapterView<?> parent) {
+           }
+        });
+
         return v;
 
 
     }
+
+    private void getSigaretten() {
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+        db.addSigarette(new Sigaretten(1,2f,"test sigaret",19,4,5f));
+
+        sigarettenList = new String[] {
+                db.getSigaret(1).getMerk()
+        };
+
+        sigaretten = new Sigaretten[] {
+                db.getSigaret(1)
+        };
+
+    }
+
 
     /*
     OUDE CODE MAAR MISCHIEN NOG NODIG
@@ -93,11 +123,38 @@ public class SetupBrandAmount extends Fragment  {
     private OnClickListener attachButton = new OnClickListener(){
         public void onClick(View v){
             Intent myIntent = new Intent(getActivity(), Home.class);
-            //this makes sure the activity resumes rather than creating a new one.
-            myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            DatabaseHandler db = new DatabaseHandler(getActivity());
 
-            startActivity(myIntent);
-            getActivity().finish();
+            if(etDayAmount.getText().toString().matches("")) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                alertDialogBuilder.setTitle("foutje");
+                alertDialogBuilder
+                        .setMessage("Vul een waarde in!")
+                        .setCancelable(false)
+                        .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+
+            else{
+
+                dayAmount = Integer.parseInt(etDayAmount.getText().toString());
+                try {
+
+                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //this makes sure the activity resumes rather than creating a new one.
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(myIntent);
+                getActivity().finish();
+            }
+
         }
     };
 

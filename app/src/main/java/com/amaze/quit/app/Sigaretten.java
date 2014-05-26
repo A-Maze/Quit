@@ -7,10 +7,12 @@ public class Sigaretten {
     //private variables
     int sID;
     String merk;
-    int Aantal;
+    int aantal;
     float teer;
     float nicotine;
     float prijs;
+
+
 
 
 
@@ -18,10 +20,9 @@ public class Sigaretten {
         this.nicotine = nicotine;
         this.sID = sID;
         this.merk = merk;
-        Aantal = aantal;
+        this.aantal = aantal;
         this.teer = teer;
         this.prijs = prijs;
-
     }
 
     public float getPrijs() {
@@ -49,11 +50,11 @@ public class Sigaretten {
     }
 
     public int getAantal() {
-        return Aantal;
+        return aantal;
     }
 
     public void setAantal(int aantal) {
-        Aantal = aantal;
+        aantal = aantal;
     }
 
     public float getTeer() {

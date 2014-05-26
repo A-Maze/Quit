@@ -8,15 +8,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.viewpagerindicator.LinePageIndicator;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends FragmentActivity {
+public class Home extends FragmentActivity  {
     MyPageAdapter pageAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -43,10 +43,20 @@ public class SetupQuitDate extends Fragment {
 
     }
 
-    private void getTheDate() {
-        quitDay = quitDatePicker.getDayOfMonth();
-        quitMonth = quitDatePicker.getMonth() + 1;
-        quitYear = quitDatePicker.getYear();
+    public int getTheDay() {
+        return quitDatePicker.getDayOfMonth();
+
+
+    }
+    public int getTheMonth() {
+
+        return quitDatePicker.getMonth() + 1;
+
+
+    }
+    public int getTheYear() {
+
+        return quitDatePicker.getYear();
 
     }
 

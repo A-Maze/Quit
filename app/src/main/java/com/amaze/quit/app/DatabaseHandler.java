@@ -81,7 +81,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         /* User table */
         String CREATE_USER_TABLE = "CREATE TABLE "
                 + TABLE_USER + "("
-                + USER_UID + " INTEGER PRIMARY KEY,"
+                + USER_UID + " INTEGER AUTOINCREMENT PRIMARY KEY ,"
                 + USER_SID + " INTEGER,"
                 + USER_PERDAG + " INTEGER,"
                 + USER_LEVEL + " INTEGER" + ")";

@@ -111,18 +111,11 @@ public class Home extends FragmentActivity  {
         final CharSequence[] items = {"Achievements", "Vooruitgang", "Product", "Gezondheid"};
         final int[] numbers = {0,1,2,3};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("kies uw gewenste startscherm");
         alertDialogBuilder
-                .setSingleChoiceItems(items,1,new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogInterface, int item) {
-                        setPreferedFragment(numbers[item]);
-                    }
-                })
-                .setMessage("Vul een waarde in!")
-                .setCancelable(false)
-                .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                .setTitle("kies uw gewenste startscherm")
+                .setItems(items, new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int which){
+                        setPreferedFragment(numbers[which]);
                     }
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();

@@ -144,6 +144,7 @@ public class SetupBrandAmount extends Fragment  {
 
                 dayAmount = Integer.parseInt(etDayAmount.getText().toString());
                 try {
+
                     db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount));
                 } catch (Exception e) {
                     e.printStackTrace();

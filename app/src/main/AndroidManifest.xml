@@ -34,7 +34,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".SetupChooseProduct"
+            android:name="com.amaze.quit.app.SetupChooseProduct"
             android:label="@string/title_activity_choose_product"
             android:screenOrientation="portrait"
             android:theme="@style/BlueTheme" >
@@ -44,7 +44,6 @@
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" >
         </activity>
-
     </application>
 
 </manifest>

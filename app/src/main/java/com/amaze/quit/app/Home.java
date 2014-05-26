@@ -1,7 +1,10 @@
 package com.amaze.quit.app;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends FragmentActivity  {
+    ViewPager pager;
+    public static final String PREFS_NAME = "QuitPrefs";
     MyPageAdapter pageAdapter;
+    SharedPreferences settings = null;
+    int preferedFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -26,7 +34,7 @@ public class Home extends FragmentActivity  {
 
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
         //bind the adapter to the viewpager
-        ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
+        pager = (ViewPager)findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
 
         //Bind the title indicator to the adapter
@@ -39,9 +47,15 @@ public class Home extends FragmentActivity  {
         lineIndicator.setLineWidth(30 * density);
 
         //makes sure the middle fragment is shown when the activity gets first created. This is in this case the 2nd item
-        pager.setCurrentItem(2, false);
+        settings = getSharedPreferences(PREFS_NAME, 0);
+        preferedFragment = settings.getInt("pref_frag", 2);
+        pager.setCurrentItem(preferedFragment);
 
      };
+
+    public void setPreferedFragment(int i){
+        settings.edit().putInt("pref_frag",i).commit();
+    }
 
     //gets the 3 fragments
     private List<Fragment> getFragments(){
@@ -79,6 +93,8 @@ public class Home extends FragmentActivity  {
             case R.id.developer_settings:
                 launchActivity(MainActivity.class);
                 return true;
+            case R.id.setPreferedFragment:
+                setFragment();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -89,6 +105,28 @@ public class Home extends FragmentActivity  {
     private void launchActivity(Class activity){
         Intent intent = new Intent(this,activity);
         startActivity(intent);
+    }
+
+    private void setFragment(){
+        final CharSequence[] items = {"Achievements", "Vooruitgang", "Product", "Gezondheid"};
+        final int[] numbers = {0,1,2,3};
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("kies uw gewenste startscherm");
+        alertDialogBuilder
+                .setSingleChoiceItems(items,1,new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogInterface, int item) {
+                        setPreferedFragment(numbers[item]);
+                    }
+                })
+                .setMessage("Vul een waarde in!")
+                .setCancelable(false)
+                .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 

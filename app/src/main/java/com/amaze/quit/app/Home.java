@@ -14,7 +14,7 @@ import com.viewpagerindicator.LinePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends FragmentActivity {
+public class Home extends FragmentActivity  {
     MyPageAdapter pageAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {

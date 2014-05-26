@@ -1,5 +1,7 @@
 package com.amaze.quit.app;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -80,58 +82,43 @@ public class SetupBrandAmount extends Fragment  {
     }
 
 
-    /*
-    OUDE CODE MAAR MISCHIEN NOG NODIG
-    public void checkForInput(View view) {
-        // wat te doen als de next button is geklikt.
 
-        // variabelen vastzetten
-        try {
-            dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            dayAmount = null;
-        }
-        try {
-            packAmount = Integer.parseInt(etPackAmount.getText().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            packAmount = null;
-        }
-
-
-        if (dayAmount == null || packAmount == null) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("foutje");
-            alertDialogBuilder
-                    .setMessage("Vul een waarde in!")
-                    .setCancelable(false)
-                    .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-
-    }*/
 
     //The onClickListener for the complete button
     private OnClickListener attachButton = new OnClickListener(){
         public void onClick(View v){
             Intent myIntent = new Intent(getActivity(), Home.class);
             DatabaseHandler db = new DatabaseHandler(getActivity());
-            dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-            //this makes sure the activity resumes rather than creating a new one.
-            myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            try {
-            db.addUser(new User(1,sigaretten[selectedSigaretPos].getsID(),dayAmount));
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            if(etDayAmount.getText().toString().matches("")) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                alertDialogBuilder.setTitle("foutje");
+                alertDialogBuilder
+                        .setMessage("Vul een waarde in!")
+                        .setCancelable(false)
+                        .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
-            startActivity(myIntent);
-            getActivity().finish();
+
+            else{
+
+                dayAmount = Integer.parseInt(etDayAmount.getText().toString());
+                try {
+                    db.addUser(new User(1,sigaretten[selectedSigaretPos].getsID(), dayAmount,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //this makes sure the activity resumes rather than creating a new one.
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(myIntent);
+                getActivity().finish();
+            }
+
         }
     };
 

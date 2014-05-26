@@ -17,7 +17,7 @@ public class User {
     int quitYear;
 
     // constructor
-    public User( int sID, int perDag, int quitDay, int quitMonth , int quitYear){
+    public User(int uID, int sID, int perDag, int quitDay, int quitMonth , int quitYear){
 
         this.sID = sID;
         this.perDag = perDag;

@@ -17,6 +17,12 @@
         <item>Chesterfield</item>
         <item>Camel</item>
     </string-array>
+    <string-array name="nav_array">
+        <item>Achievements</item>
+        <item>Vooruitgang</item>
+        <item>Product</item>
+        <item>Gezondheid</item>
+    </string-array>
     //quit date scherm            <string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>

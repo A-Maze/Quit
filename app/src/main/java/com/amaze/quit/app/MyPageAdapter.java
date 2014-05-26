@@ -3,6 +3,11 @@ package com.amaze.quit.app;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -33,6 +38,8 @@ public class MyPageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return MyPageAdapter.CONTENT[position % CONTENT.length];
     }
+
+
 
 
 

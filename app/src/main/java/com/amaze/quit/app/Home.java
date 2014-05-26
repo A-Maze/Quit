@@ -10,8 +10,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.viewpagerindicator.LinePageIndicator;
 
@@ -24,6 +29,9 @@ public class Home extends FragmentActivity  {
     MyPageAdapter pageAdapter;
     SharedPreferences settings = null;
     int preferedFragment;
+    private String[] mNavTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,13 +60,17 @@ public class Home extends FragmentActivity  {
         preferedFragment = settings.getInt("pref_frag", 2);
         pager.setCurrentItem(preferedFragment);
 
-     };
+        //initialises the navigation drawer
+        navDrawer();
+
+
+    };
 
     public void setPreferedFragment(int i){
         settings.edit().putInt("pref_frag",i).commit();
     }
 
-    //gets the 3 fragments
+    //gets the 4 fragments
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 
@@ -122,6 +134,24 @@ public class Home extends FragmentActivity  {
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private void navDrawer(){
+        mNavTitles = getResources().getStringArray(R.array.nav_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.drawer_list_item, mNavTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id){
+                pager.setCurrentItem(position);
+                mDrawerLayout.closeDrawers();
+            }
+        });
     }
 
 

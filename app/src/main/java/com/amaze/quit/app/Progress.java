@@ -73,7 +73,9 @@ public class Progress extends Fragment {
 
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
-        dayProgress.setText(days + " Dagen");
+        if(dayProgress != null) {
+            dayProgress.setText(days + " Dagen");
+        }
      }
     }
 

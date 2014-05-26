@@ -54,5 +54,21 @@
     <string name="achievement_first_steps_content">Doorbreng een dag zonder te roken.</string>
     <string name="achievement_deep_breath">Even diep ademhalen</string>
     <string name="achievement_deep_breath_content">Verbeter de gezondheid van je longen met 10%.</string>
+    <string name="achievement_kaching">Ka-ching!</string>
+    <string name="achievement_kaching_content">Bespaar 20 euro door niet te roken.</string>
+    <string name="achievement_money">Geld op de bank</string>
+    <string name="achievement_money_content">Bespaar 100 euro door niet te roken.</string>
+    <string name="achievement_extra_life">Extra leven</string>
+    <string name="achievement_extra_life_content">Verdien 10 dagen extra te leven.</string>
+    <string name="achievement_invincible">Onsterfelijk</string>
+    <string name="achievement_invincible_content">Verdien 50 dagen extra te leven.</string>
+    <string name="achievement_buy_product">Voor wat hoort wat</string>
+    <string name="achievement_buy_product_content">Koop een product ter waarde van €50.</string>
+    <string name="achievement_worth_it">Dat was het waar</string>
+    <string name="achievement_worth_it_content">Koop een product ter waarde van €200.</string>
+    <string name="achievement_one_down">Dat is één</string>
+    <string name="achievement_one_down_content">Bespaar 1 pakje sigaretten/sjek</string>
+    <string name="achievement_easy">Is dit nou zo moeilijk?</string>
+    <string name="achievement_easy_content">Rook 10 sigaretten niet.</string>
 
 </resources>

@@ -43,11 +43,13 @@ public class Setup extends FragmentActivity {
 
     }
 
+
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 
         fList.add(SetupQuitDate.newInstance());
         fList.add(SetupBrandAmount.newInstance());
+        fList.add(SetupChooseProduct.newInstance());
 
 
         return fList;

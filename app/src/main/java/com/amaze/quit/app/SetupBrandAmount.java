@@ -82,7 +82,42 @@ public class SetupBrandAmount extends Fragment  {
     }
 
 
+    /*
+    OUDE CODE MAAR MISCHIEN NOG NODIG
+    public void checkForInput(View view) {
+        // wat te doen als de next button is geklikt.
 
+        // variabelen vastzetten
+        try {
+            dayAmount = Integer.parseInt(etDayAmount.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            dayAmount = null;
+        }
+        try {
+            packAmount = Integer.parseInt(etPackAmount.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            packAmount = null;
+        }
+
+
+        if (dayAmount == null || packAmount == null) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setTitle("foutje");
+            alertDialogBuilder
+                    .setMessage("Vul een waarde in!")
+                    .setCancelable(false)
+                    .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+
+    }*/
 
     //The onClickListener for the complete button
     private OnClickListener attachButton = new OnClickListener(){
@@ -109,7 +144,7 @@ public class SetupBrandAmount extends Fragment  {
 
                 dayAmount = Integer.parseInt(etDayAmount.getText().toString());
                 try {
-                    db.addUser(new User(1,sigaretten[selectedSigaretPos].getsID(), dayAmount,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

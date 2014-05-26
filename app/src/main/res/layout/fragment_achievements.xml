@@ -139,6 +139,38 @@
                 android:id="@+id/textView3"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/achievement_one_down"
+                android:id="@+id/textView2"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="40dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/achievement_one_down_content"
+                android:id="@+id/textView3"
+                android:paddingTop="2dp"
+                android:paddingLeft="40dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/achievement_easy"
+                android:id="@+id/textView2"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="40dp"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/achievement_easy_content"
+                android:id="@+id/textView3"
+                android:paddingTop="2dp"
+                android:paddingLeft="40dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

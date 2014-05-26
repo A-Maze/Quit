@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -108,13 +109,14 @@ public class Home extends FragmentActivity  {
     }
 
     private void setFragment(){
-        final CharSequence[] items = {"Achievements", "Vooruitgang", "Product", "Gezondheid"};
+        Resources resources = getResources();
+        final CharSequence[] items = {resources.getString(R.string.title_fragment_achievements), resources.getString(R.string.title_activity_progress), resources.getString(R.string.title_activity_product), resources.getString(R.string.title_activity_health_progress)};
         final int[] numbers = {0,1,2,3};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setTitle("kies uw gewenste startscherm")
-                .setItems(items, new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
+                .setItems(items, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
                         setPreferedFragment(numbers[which]);
                     }
                 });

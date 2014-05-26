@@ -16,19 +16,44 @@ public class User {
     int quitMonth;
     int quitYear;
 
-    // constructor
-    public User(int uID, int sID, int perDag, int quitDay, int quitMonth , int quitYear){
+    public int getQuitDay() {
+        return quitDay;
+    }
 
-        this.sID = sID;
-        this.perDag = perDag;
-        this.level = 1;
+    public void setQuitDay(int quitDay) {
         this.quitDay = quitDay;
     }
 
-    // Empty constructor
-    public User(int uID, int sID, int perDag, int level){
+    public int getQuitMonth() {
+        return quitMonth;
+    }
 
-   }
+    public void setQuitMonth(int quitMonth) {
+        this.quitMonth = quitMonth;
+    }
+
+    public int getQuitYear() {
+        return quitYear;
+    }
+
+    public void setQuitYear(int quitYear) {
+        this.quitYear = quitYear;
+    }
+
+
+
+    // constructor
+    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay){
+        this.uID = uID;
+        this.sID = sID;
+        this.perDag = perDag;
+        this.level = level;
+        this.quitDay = quitDay;
+        this.quitMonth = quitMonth;
+        this.quitYear = quitYear;
+    }
+
+
 
 
     // get userID

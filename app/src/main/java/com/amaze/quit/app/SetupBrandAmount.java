@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,7 +55,7 @@ public class SetupBrandAmount extends Fragment  {
        sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
-               Log.d("insert :" , "" + selectedSigaretPos);
+
            }
             public void onNothingSelected(AdapterView<?> parent) {
            }
@@ -144,9 +143,10 @@ public class SetupBrandAmount extends Fragment  {
 
                 dayAmount = Integer.parseInt(etDayAmount.getText().toString());
                 try {
-                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+
                 } catch (Exception e) {
-                    db.updateUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                    db.updateUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
                     e.printStackTrace();
                 }
                 //this makes sure the activity resumes rather than creating a new one.

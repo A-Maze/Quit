@@ -36,12 +36,12 @@ public class SetupQuitDate extends Fragment {
         View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
 
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
-        quitDatePicker.setOnClickListener(new View.OnClickListener() {
+        quitDatePicker.init(4,1,4,new DatePicker.OnDateChangedListener() {
             @Override
-            public void onClick(View view) {
-                getTheDay();
-                getTheMonth();
-                getTheYear();
+            public void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
+                quitYear = i3;
+                quitMonth = i2;
+                quitDay = i;
             }
         });
 

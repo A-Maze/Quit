@@ -33,7 +33,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_SID = "sID";
     private static final String USER_PERDAG = "per_dag";
     private static final String USER_LEVEL = "level";
-
+    private static final String USER_QUIT_YEAR = "quit_year";
+    private static final String USER_QUIT_MONTH = "quit_month";
+    private static final String USER_QUIT_DAY = "quit_day";
 
     // Sigaretten Table Columns namesss
     private static final String SIGARETTEN_SID = "sID";
@@ -84,7 +86,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + USER_UID + " INTEGER PRIMARY KEY ,"
                 + USER_SID + " INTEGER,"
                 + USER_PERDAG + " INTEGER,"
-                + USER_LEVEL + " INTEGER" + ")";
+                + USER_LEVEL + " INTEGER,"
+                + USER_QUIT_YEAR + " INTEGER,"
+                + USER_QUIT_MONTH + " INTEGER,"
+                + USER_QUIT_DAY + " INTEGER"
+                + ")";
         db.execSQL(CREATE_USER_TABLE);
 
           /* Sigaretten table */
@@ -161,6 +167,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_SID, user.getsID()); // user sigaretten id
         values.put(USER_PERDAG, user.getPerDag()); // hoeveel die smoked per dag
         values.put(USER_LEVEL, user.getLevel()); // level van user. bij nieuwe user gewoon 1.
+        values.put(USER_QUIT_YEAR, user.getQuitYear());
+        values.put(USER_QUIT_MONTH, user.getQuitMonth());
+        values.put(USER_QUIT_DAY, user.getQuitDay());
 
         // Inserting Row
         assert db != null;
@@ -204,15 +213,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_UID,
                         USER_SID,
                         USER_PERDAG,
-                        USER_LEVEL }, USER_UID + "=?",
+                        USER_LEVEL,
+                        USER_QUIT_YEAR,
+                        USER_QUIT_MONTH,
+                        USER_QUIT_DAY}, USER_UID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        User user = new User(Integer.parseInt(cursor.getString(0)),
+        User user = new User(
+                Integer.parseInt(cursor.getString(0)),
                 Integer.parseInt(cursor.getString(1)),
                 Integer.parseInt(cursor.getString(2)),
-                Integer.parseInt(cursor.getString(3)));
+                Integer.parseInt(cursor.getString(3)),
+                Integer.parseInt(cursor.getString(4)),
+                Integer.parseInt(cursor.getString(5)),
+                Integer.parseInt(cursor.getString(6)));
         /* return contact */
         return user;
     }

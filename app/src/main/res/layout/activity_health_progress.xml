@@ -66,6 +66,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent1"/>
@@ -77,6 +78,7 @@
         android:text="@string/health_timer1"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -94,6 +96,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar2"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -106,6 +110,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent2"/>
@@ -117,6 +122,7 @@
         android:text="@string/health_timer2"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -134,6 +140,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar3"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -146,6 +154,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent3"/>
@@ -157,6 +166,7 @@
         android:text="@string/health_timer3"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -174,6 +184,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar4"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -186,6 +198,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent4"/>
@@ -197,6 +210,7 @@
         android:text="@string/health_timer4"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -214,6 +228,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar5"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -226,6 +242,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent5"/>
@@ -237,6 +254,7 @@
         android:text="@string/health_timer5"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -254,9 +272,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar6"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
         android:textSize="17dp"/>
 
     <TextView
@@ -267,6 +286,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent6"/>
@@ -278,6 +298,7 @@
         android:text="@string/health_timer6"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -295,6 +316,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar7"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -307,6 +330,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent7"/>
@@ -318,6 +342,7 @@
         android:text="@string/health_timer7"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -335,6 +360,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar8"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -347,6 +374,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent8"/>
@@ -358,6 +386,7 @@
         android:text="@string/health_timer8"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
@@ -375,6 +404,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/title_activity_health_progressBar9"
         android:layout_gravity="center_horizontal"
         android:textSize="17dp"/>
@@ -387,6 +418,7 @@
         android:layout_gravity="left"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"
         android:id="@+id/health_procent9"/>
@@ -398,6 +430,7 @@
         android:text="@string/health_timer9"
         android:layout_gravity="right"
         android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="15dp"
         android:textAlignment="center"

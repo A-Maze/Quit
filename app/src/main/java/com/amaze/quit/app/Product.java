@@ -15,12 +15,13 @@ import com.viewpagerindicator.LinePageIndicator;
 
 
 public class Product extends Fragment {
+    static int position;
 
-
-    public static final Product newInstance() {
+    public static final Product newInstance(int i) {
         Product f = new Product();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
+        position = i;
         return f;
     }
 
@@ -50,6 +51,9 @@ public class Product extends Fragment {
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
             lineIndicator.setSelectedColor(res.getColor(R.color.blue));
+            //helps the nav bar realise what is up
+            Home.setSelectedNav(position);
+
 
         }
 

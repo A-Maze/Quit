@@ -10,17 +10,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.viewpagerindicator.LinePageIndicator;
 
 
 public class Achievements extends Fragment {
+    static int position;
 
-
-    public static final Achievements newInstance() {
+    public static final Achievements newInstance(int i) {
         Achievements f = new Achievements();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
+        position = i;
         return f;
     }
 
@@ -50,6 +52,9 @@ public class Achievements extends Fragment {
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
             lineIndicator.setSelectedColor(res.getColor(R.color.orange));
+            //helps the nav bar realise what is up
+            Home.setSelectedNav(position);
+
 
         }
 

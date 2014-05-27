@@ -24,7 +24,7 @@ import java.util.GregorianCalendar;
 
 
 public class HealthProgress extends Fragment {
-
+    static int position;
     private static final int UpdateProgress = 0;
 
     Handler handler;
@@ -184,11 +184,12 @@ public class HealthProgress extends Fragment {
         return (int) tijd;
     }
 
-    public static final HealthProgress newInstance()
+    public static final HealthProgress newInstance(int i)
     {
         HealthProgress f = new HealthProgress();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
+        position = i;
         return f;
     }
 
@@ -262,6 +263,8 @@ public class HealthProgress extends Fragment {
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
             lineIndicator.setSelectedColor(res.getColor(R.color.green));
+            //helps the nav bar realise what is up
+            Home.setSelectedNav(position);
 
 
         }

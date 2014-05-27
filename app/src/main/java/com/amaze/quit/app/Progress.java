@@ -62,7 +62,11 @@ public class Progress extends Fragment {
 
     private void updateVooruitgang() {
         TextView dayProgress;
+        TextView moneyInTheBank;
+        TextView extraDagen;
+        extraDagen = (TextView) getActivity().findViewById(R.id.tvSparedDays);
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDayProgress);
+        moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvSparedMoney);
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
         Calendar quitDate = Calendar.getInstance();
@@ -74,6 +78,18 @@ public class Progress extends Fragment {
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         dayProgress.setText(days + " Dagen");
+        float bespaardeMoneys =  (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
+        bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
+        bespaardeMoneys = bespaardeMoneys /100;
+        moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
+
+        float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
+
+        extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
+
+
+
+
      }
     }
 

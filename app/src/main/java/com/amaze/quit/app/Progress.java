@@ -78,16 +78,22 @@ public class Progress extends Fragment {
 
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
-        dayProgress.setText(days + " Dagen");
+        //fixed the nullpointer exception but this needs to be fixed properly
+        if(dayProgress != null) {
+            dayProgress.setText(days + " Dagen");
+        }
         float bespaardeMoneys =  (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
         bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
         bespaardeMoneys = bespaardeMoneys /100;
-        moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
-
+        //fixed the nullpointer exception but this needs to be fixed properly
+        if(moneyInTheBank != null) {
+            moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
+        }
         float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
-
-        extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
-
+        //fixed the nullpointer exception but this needs to be fixed properly
+        if(extraDagen != null) {
+            extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
+        }
 
 
 

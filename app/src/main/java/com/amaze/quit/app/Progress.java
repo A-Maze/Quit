@@ -17,14 +17,15 @@ import java.util.Calendar;
 
 
 public class Progress extends Fragment {
+    static int position;
 
 
-
-    public static final Progress newInstance()
+    public static final Progress newInstance(int i)
     {
         Progress f = new Progress();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
+        position = i;
         return f;
 
 
@@ -54,7 +55,7 @@ public class Progress extends Fragment {
             //sets viewpageindicator color
             LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
             lineIndicator.setSelectedColor(res.getColor(R.color.red));
-
+            Home.setSelectedNav(position);
             updateVooruitgang();
         }
 

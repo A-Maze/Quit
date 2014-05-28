@@ -73,7 +73,6 @@ public class Home extends FragmentActivity  {
     //gets the 4 fragments
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
-
         fList.add(Achievements.newInstance(0));
         fList.add(Progress.newInstance(1));
         fList.add(Product.newInstance(2));

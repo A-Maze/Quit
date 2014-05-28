@@ -6,7 +6,6 @@ package com.amaze.quit.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 
@@ -71,5 +70,32 @@ public class SplashScreen extends Activity {
         }
 
         return checkDB != null;
+    }
+
+    private void fillDataBase() {
+        DatabaseHandler db = new DatabaseHandler(this);
+        //Sigaretten
+
+        //Achievements.
+        Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
+        c1 = new Challenges("Eerste stapje","Doorbreng een dag zonder te roken");
+        c2 = new Challenges("Even diep ademhalen","Verbeter de gezondheid van je longen met 10%");
+        c3 = new Challenges("Ka-ching!","Bespaar 20 euro door niet te roken.");
+        c4 = new Challenges("Geld op de bank","Bespaar 100 euro door niet te roken.");
+        c5 = new Challenges("Extra leven","Verdien 10 dagen extra te leven.");
+        c6 = new Challenges("Onsterfelijk","Verdien 50 dagen extra te leven.");
+        c7 = new Challenges("Voor wat hoort wat", "Koop een product ter waarde van €50.");
+        c8 = new Challenges("Dat was het waard","Koop een product ter waarde van €200.");
+        c9 = new Challenges("Dat is één","Bespaar 1 pakje sigaretten/shag");
+        c10 = new Challenges("Is dit nou zo moeilijk?","Rook 10 sigaretten niet.");
+
+        int aantalChallanges = 10;
+
+        Challenges[] challengesArray = new Challenges[]{c1,c2,c3,c4,c5,c6,c7,c8,c9,c10};
+        for (int i = 0; i < aantalChallanges; i++) {
+            db.addChallenge(challengesArray[i]);
+        }
+
+
     }
 }

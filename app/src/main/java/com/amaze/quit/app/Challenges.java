@@ -10,8 +10,8 @@ public class Challenges {
     String titel;
     String beschrijving;
 
-    public Challenges(int cID, String titel, String beschrijving) {
-        this.cID = cID;
+    public Challenges( String titel, String beschrijving) {
+
         this.titel = titel;
         this.beschrijving = beschrijving;
     }

@@ -83,7 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         /* User table */
         String CREATE_USER_TABLE = "CREATE TABLE "
                 + TABLE_USER + "("
-                + USER_UID + " INTEGER PRIMARY KEY ,"
+                + USER_UID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + USER_SID + " INTEGER,"
                 + USER_PERDAG + " INTEGER,"
                 + USER_LEVEL + " INTEGER,"
@@ -96,7 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Sigaretten table */
         String CREATE_SIGARETTEN_TABLE = "CREATE TABLE "
                 + TABLE_SIGARETTEN + "("
-                + SIGARETTEN_SID + " INTEGER PRIMARY KEY,"
+                + SIGARETTEN_SID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + SIGARETTEN_AANTAL + " INTEGER,"
                 + SIGARETTEN_MERK + " TEXT,"
                 + SIGARETTEN_TEER + " REAL,"
@@ -108,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Challenges table */
         String CREATE_CHALLANGES_TABLE = "CREATE TABLE "
                 + TABLE_CHALLENGES + "("
-                + CHALLENGES_CID + " INTEGER PRIMARY KEY,"
+                + CHALLENGES_CID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CHALLENGES_TITEL + " TEXT,"
                 + CHALLENGES_BESCHRIJVING + " TEXT"
                 + ")";
@@ -117,7 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* User_challenge table */
         String CREATE_USER_CHALLENGE_TABLE = "CREATE TABLE "
                 + TABLE_USER_CHALLANGE + "("
-                + USER_CHALLENGES_UCID + " INTEGER PRIMARY KEY,"
+                + USER_CHALLENGES_UCID + " INTEGER PRIMARY KEY ,"
                 + USER_CHALLENGES_UID + " INTEGER,"
                 + USER_CHALLENGES_CID + " INTEGER"
                 + ")";
@@ -126,7 +126,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Levels table */
         String CREATE_LEVELS_TABLE = "CREATE TABLE "
                 + TABLE_LEVELS + "("
-                + LEVEL_LID + " INTEGER PRIMARY KEY,"
+                + LEVEL_LID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + LEVEL_TITEL + " TEXT,"
                 + LEVEL_BESCHRIJVING + " TEXT"
                 + ")";
@@ -135,7 +135,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Gezondheid table */
         String CREATE_GEZONDHEID_TABLE = "CREATE TABLE "
                 + TABLE_GEZONDHEID + "("
-                + GEZONDHEID_UID + " INTEGER PRIMARY KEY,"
+                + GEZONDHEID_UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + GEZONDHEID_TEER + " REAL,"
                 + GEZONDHEID_NICOTINE + " REAL,"
                 + GEZONDHEID_CO2 + " REAL,"
@@ -163,7 +163,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(USER_UID, user.getuID()); // user id
+       // values.put(USER_UID, user.getuID()); // user id
         values.put(USER_SID, user.getsID()); // user sigaretten id
         values.put(USER_PERDAG, user.getPerDag()); // hoeveel die smoked per dag
         values.put(USER_LEVEL, user.getLevel()); // level van user. bij nieuwe user gewoon 1.
@@ -180,7 +180,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addSigarette(Sigaretten sigaret) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(SIGARETTEN_SID, sigaret.getsID());
+       // values.put(SIGARETTEN_SID, sigaret.getsID());
         values.put(SIGARETTEN_AANTAL, sigaret.getAantal());
         values.put(SIGARETTEN_MERK, sigaret.getMerk());
         values.put(SIGARETTEN_TEER, sigaret.getTeer());
@@ -192,6 +192,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    public void addChallenge(Challenges challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(CHALLENGES_TITEL, challenge.getTitel());
+        values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
+
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_CHALLENGES, null, values);
+        db.close(); // Closing database connection
+    }
 
 
 

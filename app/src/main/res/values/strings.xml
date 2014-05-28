@@ -95,5 +95,6 @@
     <string name="achievement_easy_content">Rook 10 sigaretten niet.</string>
     <string name="title_activity_set_prefered_fragment">SetPreferedFragment</string>
     <string name="hello_world">Hello world!</string>
+    <string name="level">level</string>
 
 </resources>

@@ -61,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String LEVEL_LID = "lID";
     private static final String LEVEL_TITEL = "titel";
     private static final String LEVEL_BESCHRIJVING = "beschrijving";
-
+    private static final String LEVEL_MINDAYS = "min_days";
 
     // Gezondheid Table Columns names
     private static final String GEZONDHEID_UID = "uID";
@@ -128,7 +128,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_LEVELS + "("
                 + LEVEL_LID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + LEVEL_TITEL + " TEXT,"
-                + LEVEL_BESCHRIJVING + " TEXT"
+                + LEVEL_BESCHRIJVING + " TEXT,"
+                + LEVEL_MINDAYS + " INTEGER"
                 + ")";
         db.execSQL(CREATE_LEVELS_TABLE);
 
@@ -288,7 +289,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         Challenges challenge = new Challenges(
-                Integer.parseInt(cursor.getString(0)),
+
                 cursor.getString(1),
                 cursor.getString(2));
         /* return challenge */
@@ -350,7 +351,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_LEVELS, new String[] {
                         LEVEL_LID,
                         LEVEL_TITEL,
-                        LEVEL_BESCHRIJVING}, LEVEL_LID + "=?",
+                        LEVEL_BESCHRIJVING,
+                        LEVEL_MINDAYS}, LEVEL_LID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -358,7 +360,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Levels level = new Levels(
                 Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1),
-                cursor.getString(2));
+                cursor.getString(2),
+                Integer.parseInt(cursor.getString(3)));
 
         /* return contact */
         return level;

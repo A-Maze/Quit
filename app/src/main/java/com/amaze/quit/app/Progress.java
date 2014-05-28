@@ -70,9 +70,11 @@ public class Progress extends Fragment {
         TextView dayProgress;
         TextView moneyInTheBank;
         TextView extraDagen;
+        TextView level;
         extraDagen = (TextView) getActivity().findViewById(R.id.tvSparedDays);
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDayProgress);
         moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvSparedMoney);
+        level = (TextView) getActivity().findViewById(R.id.tvLevel);
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
         Calendar quitDate = Calendar.getInstance();
@@ -94,6 +96,7 @@ public class Progress extends Fragment {
             moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
             float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
+            level.setText("Level " +   db.getUser(1).getLevel());
         }
         catch(NullPointerException e){
             return;

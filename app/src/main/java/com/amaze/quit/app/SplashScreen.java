@@ -93,7 +93,7 @@ public class SplashScreen extends Activity {
 
         Challenges[] challengesArray = new Challenges[]{c1,c2,c3,c4,c5,c6,c7,c8,c9,c10};
         for (int i = 0; i < aantalChallanges; i++) {
-            db.addChallenge(challengesArray[i]);
+            db.addChallenge(challengesArray[i]); 
         }
 
 

@@ -10,11 +10,22 @@ public class Levels {
     String titel;
     String beschrijving;
 
+    public int getMinDays() {
+        return minDays;
+    }
 
-    public Levels(int lID, String titel, String beschrijving) {
+    public void setMinDays(int minDays) {
+        this.minDays = minDays;
+    }
+
+    int minDays;
+
+
+    public Levels(int lID, String titel, String beschrijving, int minDays) {
         this.lID = lID;
         this.titel = titel;
         this.beschrijving = beschrijving;
+        this.minDays = minDays;
     }
 
     public int getlID() {

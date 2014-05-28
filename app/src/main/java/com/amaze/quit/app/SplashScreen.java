@@ -42,13 +42,11 @@ public class SplashScreen extends Activity {
         Intent startMainActivity;
 
         // if it is the first time opening the app load Setup
-        if(settings.getBoolean("first_time",true) || isDatabaseThere()){
+        if(settings.getBoolean("first_time",true) || !isDatabaseThere()){
             startMainActivity = new Intent(getApplicationContext(),Setup.class);
             settings.edit().putBoolean("first_time",false).commit();
         }
         else{
-
-
             //else load the main activity
             startMainActivity = new Intent(getApplicationContext(),Home.class);
         }
@@ -57,19 +55,17 @@ public class SplashScreen extends Activity {
 
     //makes sure the user filled in setup
     private boolean isDatabaseThere() {
-        DatabaseHandler checkDB = null;
+        DatabaseHandler checkDB = new DatabaseHandler(this);
 
         try {
-            checkDB = new DatabaseHandler(this);
+            checkDB.getUser(1);
+
         } catch (SQLiteException e) {
-
+            return false;
         }
+    return true;
 
-        if (checkDB != null) {
-            checkDB.close();
-        }
 
-        return checkDB != null;
     }
 
     private void fillDataBase() {

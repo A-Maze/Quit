@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_first_steps"
-                android:id="@+id/textView2"
+                android:id="@+id/tvAchievement_first_steps"
                 android:layout_marginTop="34dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_first_steps_content"
-                android:id="@+id/textView3"
+                android:id="@+id/tvAchievement_first_steps_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_deep_breath"
-                android:id="@+id/textView4"
+                android:id="@+id/tvAchievement_deep_breath"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -58,17 +58,17 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_deep_breath_content"
-                android:id="@+id/textView5"
+                android:id="@+id/tvAchievement_deep_breath_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_green""/>
+                android:drawableRight="@drawable/check_mark_green"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_kaching"
-                android:id="@+id/textView6"
+                android:id="@+id/tvAchievement_kaching"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_kaching_content"
-                android:id="@+id/textView7"
+                android:id="@+id/tvAchievement_kaching_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_money"
-                android:id="@+id/textView8"
+                android:id="@+id/tvAchievement_money"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_money_content"
-                android:id="@+id/textView9"
+                android:id="@+id/tvAchievement_money_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_extra_life"
-                android:id="@+id/textView10"
+                android:id="@+id/tvAchievement_extra_life"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_extra_life_content"
-                android:id="@+id/textView11"
+                android:id="@+id/tvAchievement_extra_life_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_invincible"
-                android:id="@+id/textViev11"
+                android:id="@+id/tvAchievement_invincible"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_invincible_content"
-                android:id="@+id/textView12"
+                android:id="@+id/tvAchievement_invincible_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_buy_product"
-                android:id="@+id/textView13"
+                android:id="@+id/tvAchievement_buy_product"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -140,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_buy_product_content"
-                android:id="@+id/textView14"
+                android:id="@+id/tvAchievement_buy_product_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -148,7 +148,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_one_down"
-                android:id="@+id/textView15"
+                android:id="@+id/tvAchievement_one_down"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_one_down_content"
-                android:id="@+id/textView16"
+                android:id="@+id/tvAchievement_one_down_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -164,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/achievement_easy"
-                android:id="@+id/textView17"
+                android:id="@+id/tvAchievement_easy"
                 android:layout_marginTop="10dp"
                 android:paddingLeft="40dp"/>
             <TextView
@@ -172,7 +172,7 @@
                 android:layout_width="match_parent"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/achievement_easy_content"
-                android:id="@+id/textView18"
+                android:id="@+id/tvAchievement_easy_content"
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"/>
         </LinearLayout>

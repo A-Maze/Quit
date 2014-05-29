@@ -128,10 +128,13 @@ public class HealthProgress extends Fragment {
         double progress;
         double max;
         double current;
+        DatabaseHandler db = new DatabaseHandler(getActivity());
 
-        Calendar stopDate = DateUtils.calendarFor(2014, 4, 23); // TODO haal op uit database
+        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay()); // TODO haal op uit database
         long stoppedMinutes = DateUtils.GetMinutesSince(stopDate);
 
+        //sluit de database weer af
+        db.close();
 
         switch (id) {
             case 1: current = stoppedMinutes; max = 1*24*60; break; // max in dagen
@@ -156,25 +159,27 @@ public class HealthProgress extends Fragment {
 
     protected int getRemainingTime(int id) {
         long tijd = 0;
-        double max;
-        Calendar today = Calendar.getInstance();
-        Calendar stopDate = DateUtils.calendarFor(2014, 4, 23); // TODO haal op uit database
-        //long stoppedMinutes = DateUtils.GetMinutesSince(stopDate);
-        Calendar maxDate;
+        DatabaseHandler db = new DatabaseHandler(getActivity());
 
+        Calendar today = Calendar.getInstance();
+        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
+        Calendar maxDate = stopDate;
+
+        //sluit de database weer
+        db.close();
 
         switch (id) {
-            case 1: maxDate = DateUtils.calendarFor(2014, 4, 24); break; // STOPDATUM + HOEVEEL DAGEN HET DUURT
-            case 2: maxDate = DateUtils.calendarFor(2015, 4, 23); break;
-            case 3: maxDate = DateUtils.calendarFor(2014, 4, 25); break;
-            case 4: maxDate = DateUtils.calendarFor(2014, 4, 27); break;
-            case 5: maxDate = DateUtils.calendarFor(2014, 4, 25); break;
-            case 6: maxDate = DateUtils.calendarFor(2014, 6, 2); break;
-            case 7: maxDate = DateUtils.calendarFor(2014, 5, 6); break;
-            case 8: maxDate = DateUtils.calendarFor(2017, 4, 23); break;
-            case 9: maxDate = DateUtils.calendarFor(2024, 4, 23); break;
+            case 1: maxDate.add(Calendar.DAY_OF_MONTH, 1); break; // STOPDATUM + HOEVEEL DAGEN HET DUURT
+            case 2: maxDate.add(Calendar.YEAR, 1); break;
+            case 3: maxDate.add(Calendar.DAY_OF_MONTH, 2); break;
+            case 4: maxDate.add(Calendar.DAY_OF_MONTH, 4); break;
+            case 5: maxDate.add(Calendar.DAY_OF_MONTH, 2); break;
+            case 6: maxDate.add(Calendar.DAY_OF_MONTH, 40); break;
+            case 7: maxDate.add(Calendar.DAY_OF_MONTH, 14); break;
+            case 8: maxDate.add(Calendar.YEAR, 3); break;
+            case 9: maxDate.add(Calendar.YEAR, 10); break;
 
-            default: maxDate = DateUtils.calendarFor(2014, 4, 25); break;
+            default: ; break;
 
         }
         tijd = DateUtils.GetMinutesBetween(today, maxDate);
@@ -205,14 +210,18 @@ public class HealthProgress extends Fragment {
 
                 if (msg.what==UpdateProgress) {
 
-                    // TODO make better check to see if this is the right home activity
-                    Activity a = getActivity();
+                    // TODO make better check to see if this is the right home activity, check if nullpointerexception on closing the app is gone
+                    if(getActivity() != null) {
+                        Activity a = getActivity();
 
-                    TextView t1 = (TextView) a.findViewById(R.id.health_procent1);
+                        TextView t1 = (TextView) a.findViewById(R.id.health_procent1);
 
-                    if (t1!=null) {
-                        drawProgress();
+                        if (t1!=null) {
+                            drawProgress();
+                        }
                     }
+
+
 
                 }
 

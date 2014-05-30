@@ -3,8 +3,10 @@ package com.amaze.quit.app;
         import android.content.ContentValues;
         import android.content.Context;
         import android.database.Cursor;
+        import android.database.DatabaseUtils;
         import android.database.sqlite.SQLiteDatabase;
         import android.database.sqlite.SQLiteOpenHelper;
+        import android.util.Log;
 
 /**
  * Created by Rik on 20-5-2014.
@@ -49,6 +51,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CHALLENGES_CID = "cID";
     private static final String CHALLENGES_TITEL = "Titel";
     private static final String CHALLENGES_BESCHRIJVING = "beschrijving";
+    private static final String CHALLENGES_BEHAALD = "behaald";
 
 
     // User_challenges Table Columns names
@@ -110,7 +113,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + TABLE_CHALLENGES + "("
                 + CHALLENGES_CID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CHALLENGES_TITEL + " TEXT,"
-                + CHALLENGES_BESCHRIJVING + " TEXT"
+                + CHALLENGES_BESCHRIJVING + " TEXT,"
+                + CHALLENGES_BEHAALD + " INTEGER"
                 + ")";
         db.execSQL(CREATE_CHALLANGES_TABLE);
 
@@ -199,6 +203,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
+        values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
 
         // Inserting Row
         assert db != null;
@@ -243,7 +248,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(5)),
                 Integer.parseInt(cursor.getString(6)));
         /* return contact */
+        cursor.close();
         return user;
+
     }
 
     /* Getting single User*/
@@ -270,6 +277,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Float.parseFloat(cursor.getString(4)),
                 Float.parseFloat(cursor.getString(5)));
         /* return sigaret */
+        cursor.close();
         return sigaret;
     }
 
@@ -283,16 +291,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_CHALLENGES, new String[] {
                         CHALLENGES_CID,
                         CHALLENGES_TITEL,
-                        CHALLENGES_BESCHRIJVING }, CHALLENGES_CID + "=?",
+                        CHALLENGES_BESCHRIJVING,
+                        CHALLENGES_BEHAALD}, CHALLENGES_CID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         Challenges challenge = new Challenges(
-
+                cursor.getInt(0),
                 cursor.getString(1),
-                cursor.getString(2));
+                cursor.getString(2),
+                cursor.getInt(3));
         /* return challenge */
+        cursor.close();
         return challenge;
     }
 
@@ -315,6 +326,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(1)),
                 Integer.parseInt(cursor.getString(2)));
         /* return contact */
+        cursor.close();
         return user_challenge;
     }
 
@@ -340,6 +352,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Float.parseFloat(cursor.getString(3)),
                 Float.parseFloat(cursor.getString(4)));
         /* return contact */
+        cursor.close();
         return gezondheid;
     }
 
@@ -364,6 +377,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(3)));
 
         /* return contact */
+        cursor.close();
         return level;
     }
 
@@ -382,6 +396,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_USER, values, USER_UID + " = ?",
                 new String[] { String.valueOf(user.getuID()) });
     }
+
+    public int updateChallenge (Challenges challenge) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        Log.d("id",String.valueOf(challenge.getcID()));
+        Log.d("id",String.valueOf(challenge.getBeschrijving()));
+        Log.d("id",String.valueOf(challenge.getBehaald()));
+        values.put(CHALLENGES_TITEL, challenge.getTitel());
+        values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
+        values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+
+         /* updating row */
+        return db.update(TABLE_CHALLENGES, values, CHALLENGES_CID + " = ?",
+                new String[] { String.valueOf(challenge.getcID()) });
+    }
+
+    public int getChallengesAmount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_CHALLENGES);
+        return numRows;
+    }
+
+
+
 
 
 

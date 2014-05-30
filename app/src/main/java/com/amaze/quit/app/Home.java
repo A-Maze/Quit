@@ -63,6 +63,10 @@ public class Home extends FragmentActivity  {
         //initialises the navigation drawer
         navDrawer();
 
+        //makes sure all the stats are updated
+        UpdateStats updater = new UpdateStats(this);
+        updater.updateAchievements();
+
 
     };
 
@@ -157,6 +161,7 @@ public class Home extends FragmentActivity  {
     public static void setSelectedNav(int position){
         mDrawerList.setItemChecked(position,true);
     }
+
 
 
 

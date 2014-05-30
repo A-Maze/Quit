@@ -18,8 +18,7 @@ import java.util.Calendar;
 
 public class Progress extends Fragment {
     static int position;
-
-
+    private UserVisibilityEvent uservisibilityevent;
     public static final Progress newInstance(int i)
     {
         Progress f = new Progress();
@@ -42,20 +41,8 @@ public class Progress extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //gets the recources
-            Resources res = getResources();
-            Activity homeActivity = getActivity();
-            //styles the actionbar
-            ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(R.color.red));
-            bar.setBackgroundDrawable(color);
-            //sets the title
-            CharSequence title = res.getString(R.string.title_activity_progress);
-            homeActivity.setTitle(title);
-            //sets viewpageindicator color
-            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(R.color.red));
-            Home.setSelectedNav(position);
+            //implements the main method what every fragment should do when it's visible
+            uservisibilityevent.viewIsVisible(getActivity(),position,"red","title_activity_progress");
             updateVooruitgang();
         }
 

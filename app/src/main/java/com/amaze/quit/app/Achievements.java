@@ -21,6 +21,7 @@ import com.viewpagerindicator.LinePageIndicator;
 
 public class Achievements extends Fragment {
     static int position;
+    private UserVisibilityEvent uservisibilityevent;
 
     public static final Achievements newInstance(int i) {
         Achievements f = new Achievements();
@@ -46,21 +47,8 @@ public class Achievements extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //gets the recources
-            Resources res = getResources();
-
-            Activity homeActivity = getActivity();
-
-            //styles the actionbar
-            ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(R.color.orange));
-            bar.setBackgroundDrawable(color);
-            //sets the title
-            CharSequence title = res.getString(R.string.title_fragment_achievements);
-            homeActivity.setTitle(title);
-            //sets viewpageindicator color
-            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(R.color.orange));
+            //implements the main method what every fragment should do when it's visible
+            uservisibilityevent.viewIsVisible(getActivity(),position,"orange","title_fragment_achievements");
             //helps the nav bar realise what is up
             Home.setSelectedNav(position);
 

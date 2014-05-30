@@ -16,6 +16,7 @@ import com.viewpagerindicator.LinePageIndicator;
 
 public class Product extends Fragment {
     static int position;
+    private UserVisibilityEvent uservisibilityevent;
 
     public static final Product newInstance(int i) {
         Product f = new Product();
@@ -36,23 +37,8 @@ public class Product extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //gets the recources
-            Resources res = getResources();
-
-            Activity homeActivity = getActivity();
-
-            //styles the actionbar
-            ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(R.color.blue));
-            bar.setBackgroundDrawable(color);
-            //sets the title
-            CharSequence title = res.getString(R.string.title_activity_product);
-            homeActivity.setTitle(title);
-            //sets viewpageindicator color
-            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(R.color.blue));
-            //helps the nav bar realise what is up
-            Home.setSelectedNav(position);
+            //implements the main method what every fragment should do when it's visible
+            uservisibilityevent.viewIsVisible(getActivity(),position,"blue","title_activity_product");
 
 
         }

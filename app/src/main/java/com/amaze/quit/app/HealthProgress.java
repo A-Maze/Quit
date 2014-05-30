@@ -26,6 +26,7 @@ import java.util.GregorianCalendar;
 public class HealthProgress extends Fragment {
     static int position;
     private static final int UpdateProgress = 0;
+    private UserVisibilityEvent uservisibilityevent;
 
     Handler handler;
 
@@ -256,24 +257,8 @@ public class HealthProgress extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            //gets the recources
-
-            Resources res = getResources();
-
-            Activity homeActivity = getActivity();
-
-            //styles the actionbar
-            ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(R.color.green));
-            bar.setBackgroundDrawable(color);
-            //sets the title
-            CharSequence title = res.getString(R.string.title_activity_health_progress);
-            homeActivity.setTitle(title);
-            //sets viewpageindicator color
-            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(R.color.green));
-            //helps the nav bar realise what is up
-            Home.setSelectedNav(position);
+            //implements the main method what every fragment should do when it's visible
+            uservisibilityevent.viewIsVisible(getActivity(),position,"green","title_activity_health_progress");
 
 
         }

@@ -24,28 +24,29 @@ public class UpdateStats {
 
     // checks how many days the user has quit
     public void updateQuit(){
+            DatabaseHandler db = new DatabaseHandler(theContext);
+            Calendar quitDate = Calendar.getInstance();
+            quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
 
-        DatabaseHandler db = new DatabaseHandler(theContext);
-        Calendar quitDate = Calendar.getInstance();
-        quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
-
-        Calendar vandaag = Calendar.getInstance();
+            Calendar vandaag = Calendar.getInstance();
 
 
-        long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
-        long days = diff / (24 * 60 * 60 * 1000);
-        daysQuit = days;
+            long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
+            long days = diff / (24 * 60 * 60 * 1000);
+            daysQuit = days;
 
-        bespaardeMoneys = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
-        bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
-        bespaardeMoneys = bespaardeMoneys / 100;
+            bespaardeMoneys = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
+            bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
+            bespaardeMoneys = bespaardeMoneys / 100;
 
-        extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
+            extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
 
-        bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
-        gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
+            bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
+            gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
 
-        db.close();
+            db.close();
+
+
     }
 
     //gives back the days quit
@@ -58,6 +59,7 @@ public class UpdateStats {
     }
 
     public void updateAchievements(){
+
         updateQuit();
 
         if(daysQuit >= 1){
@@ -89,6 +91,7 @@ public class UpdateStats {
     }
 
     private void updateChallengeDB(int id){
+
         Challenges challenge;
         DatabaseHandler db = new DatabaseHandler(theContext);
         challenge = db.getChallenge(id);

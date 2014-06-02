@@ -97,4 +97,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="level">level</string>
 
+    // Product choose
+    <string name="product_result">Geen resultaat</string>
+
 </resources>

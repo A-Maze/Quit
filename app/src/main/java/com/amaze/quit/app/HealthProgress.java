@@ -35,6 +35,8 @@ public class HealthProgress extends Fragment {
         Activity a = getActivity();
         Date today = new Date();
 
+
+
         //teken de progress van elke individuele bar + procenten
 
         int p1 = getProgress(1);
@@ -131,14 +133,14 @@ public class HealthProgress extends Fragment {
         double current;
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
-        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay()); // TODO haal op uit database
+        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay(), db.getUser(1).getQuitHour(), db.getUser(1).getQuitMinute());
         long stoppedMinutes = DateUtils.GetMinutesSince(stopDate);
 
-        //sluit de database weer af
+        //close the database
         db.close();
 
         switch (id) {
-            case 1: current = stoppedMinutes; max = 1*24*60; break; // max in dagen
+            case 1: current = stoppedMinutes; max = 1*24*60; break; // max in days
             case 2: current = stoppedMinutes; max = 365*24*60; break;
             case 3: current = stoppedMinutes; max = 2*24*60; break;
             case 4: current = stoppedMinutes; max = 4*24*60; break;
@@ -163,10 +165,10 @@ public class HealthProgress extends Fragment {
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
         Calendar today = Calendar.getInstance();
-        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
+        Calendar stopDate = DateUtils.calendarFor(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay(), db.getUser(1).getQuitHour(), db.getUser(1).getQuitMinute());
         Calendar maxDate = stopDate;
 
-        //sluit de database weer
+        //close the database
         db.close();
 
         switch (id) {
@@ -232,6 +234,7 @@ public class HealthProgress extends Fragment {
 
         Thread updateProcess = new Thread(){
             public void run(){
+                //TODO IS ER EEN NETTERE MANIER OM DE TIMER OPNIEUW OP TE STARTEN?
                 while (1==1) {
                     try {
                         sleep(1000);

@@ -12,9 +12,27 @@ public class User {
     int perDag;
     // int productID
     int level;
+    int quitMinute;
+    int quitHour;
     int quitDay;
     int quitMonth;
     int quitYear;
+
+    public int getQuitMinute() {
+        return quitMinute;
+    }
+
+    public void setQuitMinute(int quitMinute) {
+        this.quitMinute = quitMinute;
+    }
+
+    public int getQuitHour() {
+        return quitHour;
+    }
+
+    public void setQuitHour(int quitHour) {
+        this.quitHour = quitHour;
+    }
 
     public int getQuitDay() {
         return quitDay;
@@ -43,11 +61,13 @@ public class User {
 
 
     // constructor
-    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay){
+    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute){
         this.uID = uID;
         this.sID = sID;
         this.perDag = perDag;
         this.level = level;
+        this.quitMinute = quitMinute;
+        this.quitHour = quitHour;
         this.quitDay = quitDay;
         this.quitMonth = quitMonth;
         this.quitYear = quitYear;

@@ -13,8 +13,8 @@ public class SetupQuitDate extends Fragment {
 
 
     /* de datepicker op het quitdate scherm */
-        private DatePicker quitDatePicker;
-        private TimePicker quitTimePicker;
+        private static DatePicker quitDatePicker;
+        private static TimePicker quitTimePicker;
 
         // de stopdatum variabelen
         public static int quitMinute;
@@ -56,6 +56,7 @@ public class SetupQuitDate extends Fragment {
             }
 
         });
+        quitTimePicker.setIs24HourView(true);
 
 
 
@@ -66,27 +67,28 @@ public class SetupQuitDate extends Fragment {
     }
 
 
-    public void getTheMinute() {
+    public static int getTheMinute() {
         quitMinute = quitTimePicker.getCurrentMinute();
-
+        return quitMinute;
     }
-    public void getTheHour() {
+    public static int getTheHour() {
         quitHour = quitTimePicker.getCurrentHour();
-
+        return quitHour;
     }
-    public void getTheDay() {
+    public static int getTheDay() {
         quitDay = quitDatePicker.getDayOfMonth();
-
+        return quitDay;
     }
-    public void getTheMonth() {
+    public static int getTheMonth() {
 
         quitMonth = quitDatePicker.getMonth();
+        return quitMonth;
 
     }
-    public void getTheYear() {
+    public static int getTheYear() {
 
         quitYear = quitDatePicker.getYear();
-
+        return quitYear;
     }
 
 

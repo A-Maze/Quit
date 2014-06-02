@@ -44,4 +44,6 @@ public class Product extends Fragment {
         }
 
     }
+
+
 }

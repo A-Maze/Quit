@@ -16,28 +16,28 @@ public class UserVisibilityEvent {
     //method that takes care of everything that needs to be done when the fragment becomes visible
     //takes context(getActivity()), the position of the fragment, the color it's actionbar should be and the link to it's title.
     public static void viewIsVisible(Context context, int position,String colorName, String name){
-            //gets the recources
-            Resources res = context.getResources();
 
-            Activity homeActivity = (Activity) context;
+                //gets the recources
+                Resources res = context.getResources();
 
-            //finds the color
-            int colorResource = res.getIdentifier(colorName,"color",context.getPackageName());
-            //styles the actionbar
-            ActionBar bar = homeActivity.getActionBar();
-            ColorDrawable color = new ColorDrawable(res.getColor(colorResource));
-            bar.setBackgroundDrawable(color);
-            //sets the title
-            int titleResource = res.getIdentifier(name, "string", context.getPackageName());
-            CharSequence title = res.getString(titleResource);
-            homeActivity.setTitle(title);
-            //sets viewpageindicator color
-            LinePageIndicator lineIndicator = (LinePageIndicator)homeActivity.findViewById(R.id.indicator);
-            lineIndicator.setSelectedColor(res.getColor(colorResource));
-            //helps the nav bar realise what is up
-            Home.setSelectedNav(position);
+                Activity homeActivity = (Activity) context;
 
+                //finds the color
+                int colorResource = res.getIdentifier(colorName, "color", context.getPackageName());
+                //styles the actionbar
+                ActionBar bar = homeActivity.getActionBar();
+                ColorDrawable color = new ColorDrawable(res.getColor(colorResource));
+                bar.setBackgroundDrawable(color);
+                //sets the title
+                int titleResource = res.getIdentifier(name, "string", context.getPackageName());
+                CharSequence title = res.getString(titleResource);
+                homeActivity.setTitle(title);
+                //sets viewpageindicator color
+                LinePageIndicator lineIndicator = (LinePageIndicator) homeActivity.findViewById(R.id.indicator);
+                lineIndicator.setSelectedColor(res.getColor(colorResource));
+                //helps the nav bar realise what is up
+                Home.setSelectedNav(position);
 
-        }
+    }
 
 }

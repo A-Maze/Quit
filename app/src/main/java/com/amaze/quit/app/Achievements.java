@@ -66,7 +66,8 @@ public class Achievements extends Fragment {
                 int titleID = getResources().getIdentifier("tvC" + i,"id",getActivity().getPackageName());
                 int contextID = getResources().getIdentifier("tvCC" + i,"id",getActivity().getPackageName());
                 TextView achievementContext = (TextView) getActivity().findViewById(contextID);
-                achievementContext.setCompoundDrawablesWithIntrinsicBounds(null,null,checkmark,null);
+                Drawable drawables[] = achievementContext.getCompoundDrawables();
+                achievementContext.setCompoundDrawablesWithIntrinsicBounds(drawables[0],null,checkmark,null);
                 TextView achievementTitle = (TextView) getActivity().findViewById(titleID);
                 achievementTitle.setTextColor(getResources().getColor(R.color.green));
             }

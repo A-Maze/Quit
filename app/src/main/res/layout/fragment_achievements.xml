@@ -34,7 +34,8 @@
                 android:text="@string/achievement_first_steps"
                 android:id="@+id/tvC1"
                 android:layout_marginTop="34dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -44,7 +45,10 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/first_steps_achievement"
+                android:drawablePadding="10dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -62,7 +66,10 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/take_a_deep_breath_achievement"
+                android:drawablePadding="10dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -80,7 +87,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/kaching_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -98,7 +107,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/money_in_the_bank_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -106,7 +117,8 @@
                 android:text="@string/achievement_extra_life"
                 android:id="@+id/tvC5"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -116,7 +128,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/extra_life_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -124,7 +138,8 @@
                 android:text="@string/achievement_invincible"
                 android:id="@+id/tvC6"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -134,7 +149,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/invincible_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -142,7 +159,8 @@
                 android:text="@string/achievement_buy_product"
                 android:id="@+id/tvC7"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -152,7 +170,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/return_on_investment_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -160,7 +180,8 @@
                 android:text="@string/achievement_worth_it"
                 android:id="@+id/tvC8"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -170,7 +191,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/worth_it_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -178,7 +201,8 @@
                 android:text="@string/achievement_one_down"
                 android:id="@+id/tvC9"
                 android:layout_marginTop="10dp"
-                android:paddingLeft="40dp"/>
+                android:paddingLeft="40dp"
+                />
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -188,7 +212,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/one_down_achievement"
+                android:drawablePadding="10dp"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -206,7 +232,9 @@
                 android:paddingTop="2dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:drawableRight="@drawable/check_mark_grey"/>
+                android:drawableRight="@drawable/check_mark_grey"
+                android:drawableLeft="@drawable/not_hard_achievement"
+                android:drawablePadding="10dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

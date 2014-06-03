@@ -67,7 +67,7 @@
     <string name="title_activity_choose_product_product_bol">Zoek een product uit de bol.com catalogus</string>
     <string name="title_activity_choose_product_product_hint">Product naam...</string>
     <string name="title_activity_choose_product_product_button_search">Zoek</string>
-    <string name="title_activity_choose_product_product">Kies een product</string>
+    <string name="title_activity_choose_product_product">Zoek een product</string>
     //Home            <string name="title_activity_home">Home</string>
     //Achievements    <string name="title_fragment_achievements">Achievements</string>
     <string name="title_activity_splash_screen">SplashScreen</string>

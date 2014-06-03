@@ -6,20 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-
-
+import android.widget.TimePicker;
 
 
 public class SetupQuitDate extends Fragment {
 
 
     /* de datepicker op het quitdate scherm */
-    private DatePicker quitDatePicker;
+        private static DatePicker quitDatePicker;
+        private static TimePicker quitTimePicker;
 
-    // de stopdatum variabelen
-    public static int quitDay;
-    public static int quitMonth;
-    public static int quitYear;
+        // de stopdatum variabelen
+        public static int quitMinute;
+        public static int quitHour;
+        public static int quitDay;
+        public static int quitMonth;
+        public static int quitYear;
 
     public static final SetupQuitDate newInstance()
     {
@@ -39,11 +41,23 @@ public class SetupQuitDate extends Fragment {
         quitDatePicker.init(4,1,4,new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
-                quitYear = i3;
+                quitYear = i;
                 quitMonth = i2;
-                quitDay = i;
+                quitDay = i3;
             }
         });
+
+        quitTimePicker = (TimePicker) v.findViewById(R.id.tpStopTime);
+        quitTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker timePicker, int i, int i2) {
+                quitHour = i;
+                quitMinute = i2;
+            }
+
+        });
+        quitTimePicker.setIs24HourView(true);
+
 
 
         return v;
@@ -53,23 +67,28 @@ public class SetupQuitDate extends Fragment {
     }
 
 
+    public static int getTheMinute() {
+        quitMinute = quitTimePicker.getCurrentMinute();
+        return quitMinute;
+    }
+    public static int getTheHour() {
+        quitHour = quitTimePicker.getCurrentHour();
+        return quitHour;
+    }
+    public static int getTheDay() {
+        quitDay = quitDatePicker.getDayOfMonth();
+        return quitDay;
+    }
+    public static int getTheMonth() {
 
-    public void getTheDay() {
-        quitDay =  quitDatePicker.getDayOfMonth();
+        quitMonth = quitDatePicker.getMonth();
+        return quitMonth;
 
     }
-    public void getTheMonth() {
+    public static int getTheYear() {
 
-        quitMonth =  quitDatePicker.getMonth();
-
-
-
-    }
-    public void getTheYear() {
-
-        quitYear =  quitDatePicker.getYear();
-
-
+        quitYear = quitDatePicker.getYear();
+        return quitYear;
     }
 
 

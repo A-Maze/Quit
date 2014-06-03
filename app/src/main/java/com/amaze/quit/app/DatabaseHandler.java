@@ -38,6 +38,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_QUIT_YEAR = "quit_year";
     private static final String USER_QUIT_MONTH = "quit_month";
     private static final String USER_QUIT_DAY = "quit_day";
+    private static final String USER_QUIT_HOUR = "quit_hour";
+    private static final String USER_QUIT_MINUTE = "quit_minute";
 
     // Sigaretten Table Columns namesss
     private static final String SIGARETTEN_SID = "sID";
@@ -92,7 +94,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + USER_LEVEL + " INTEGER,"
                 + USER_QUIT_YEAR + " INTEGER,"
                 + USER_QUIT_MONTH + " INTEGER,"
-                + USER_QUIT_DAY + " INTEGER"
+                + USER_QUIT_DAY + " INTEGER,"
+                + USER_QUIT_HOUR + " INTEGER,"
+                + USER_QUIT_MINUTE + " INTEGER"
                 + ")";
         db.execSQL(CREATE_USER_TABLE);
 
@@ -175,6 +179,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_YEAR, user.getQuitYear());
         values.put(USER_QUIT_MONTH, user.getQuitMonth());
         values.put(USER_QUIT_DAY, user.getQuitDay());
+        values.put(USER_QUIT_HOUR, user.getQuitHour());
+        values.put(USER_QUIT_MINUTE, user.getQuitMinute());
 
         // Inserting Row
         assert db != null;
@@ -248,7 +254,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_LEVEL,
                         USER_QUIT_YEAR,
                         USER_QUIT_MONTH,
-                        USER_QUIT_DAY}, USER_UID + "=?",
+                        USER_QUIT_DAY,
+                        USER_QUIT_HOUR,
+                        USER_QUIT_MINUTE}, USER_UID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -260,7 +268,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(3)),
                 Integer.parseInt(cursor.getString(4)),
                 Integer.parseInt(cursor.getString(5)),
-                Integer.parseInt(cursor.getString(6)));
+                Integer.parseInt(cursor.getString(6)),
+                Integer.parseInt(cursor.getString(7)),
+                Integer.parseInt(cursor.getString(8)) );
         /* return contact */
         cursor.close();
         return user;

@@ -27,8 +27,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/dpStopDate"
                 android:calendarViewShown="false"
-                android:paddingTop="70dp"
+                android:paddingTop="20dp"
                 />
+            <TimePicker
+                android:id="@+id/tpStopTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

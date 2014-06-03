@@ -14,6 +14,7 @@ import java.util.Calendar;
 public class Progress extends Fragment {
     static int position;
     private UserVisibilityEvent uservisibilityevent;
+    private UpdateStats updatestats = new UpdateStats(getActivity());
     public static final Progress newInstance(int i)
     {
         Progress f = new Progress();
@@ -57,25 +58,17 @@ public class Progress extends Fragment {
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDayProgress);
         moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvSparedMoney);
         level = (TextView) getActivity().findViewById(R.id.tvLevel);
-        DatabaseHandler db = new DatabaseHandler(getActivity());
-
-        Calendar quitDate = Calendar.getInstance();
-        quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
-
-        Calendar vandaag = Calendar.getInstance();
-
-
-        long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
-        long days = diff / (24 * 60 * 60 * 1000);
+        long days = updatestats.getDaysQuit();
         //catches the nullpointerexception
         try {
             dayProgress.setText(days + " Dagen");
 
-            float bespaardeMoneys = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
+            float bespaardeMoneys = updatestats.getSavedMoney();
             bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
             bespaardeMoneys = bespaardeMoneys / 100;
 
             moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
+            DatabaseHandler db = new DatabaseHandler(getActivity());
             float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
             level.setText("Level " +   db.getUser(1).getLevel());

@@ -143,10 +143,10 @@ public class SetupBrandAmount extends Fragment  {
 
                 dayAmount = Integer.parseInt(etDayAmount.getText().toString());
                 try {
-                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute));
 
                 } catch (Exception e) {
-                    db.updateUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1,SetupQuitDate.quitDay,SetupQuitDate.quitMonth,SetupQuitDate.quitYear));
+                    db.updateUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute));
                     e.printStackTrace();
                 }
                 //this makes sure the activity resumes rather than creating a new one.

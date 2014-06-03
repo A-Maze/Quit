@@ -10,14 +10,13 @@ public final class DateUtils {
     private DateUtils() {
     }
 
-    public static Calendar calendarFor(int year, int month, int day) {
+    public static Calendar calendarFor(int year, int month, int day, int hour, int minute) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set(Calendar.HOUR_OF_DAY,1); // TODO param maken
-        cal.set(Calendar.MINUTE,1); // TODO param maken
-        cal.set(Calendar.SECOND,1); // TODO param maken
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
         return cal;
     }
 

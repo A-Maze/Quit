@@ -35,16 +35,11 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/svBolResult"
+    <ListView
+        android:id="@+id/lvResult"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/llResult"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </LinearLayout>
-    </ScrollView>
+    </ListView>
 
 </LinearLayout>

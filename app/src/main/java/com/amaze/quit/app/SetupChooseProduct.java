@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -33,9 +37,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.DoubleBuffer;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SetupChooseProduct extends Fragment {
 
@@ -43,7 +53,7 @@ public class SetupChooseProduct extends Fragment {
 
     EditText etSearch;
     public String searchQuery;
-
+    ArrayAdapter<String> adapter;
 
     public static final SetupChooseProduct newInstance() {
         SetupChooseProduct f = new SetupChooseProduct();
@@ -66,14 +76,14 @@ public class SetupChooseProduct extends Fragment {
     }
 
 
-    private View.OnClickListener searchProduct = new View.OnClickListener(){
+    protected View.OnClickListener searchProduct = new View.OnClickListener(){
         public void onClick(View v){
 
 
-            LinearLayout ll = (LinearLayout) getActivity().findViewById(R.id.llResult);
+            ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
-            if((ll).getChildCount() > 0)
-                (ll).removeAllViews();
+            if((lv).getChildCount() > 0)
+                lv.setAdapter(null);
 
             searchQuery = etSearch.getText().toString();
 
@@ -88,24 +98,58 @@ public class SetupChooseProduct extends Fragment {
                 String total = jsonn.toString(1);
                 //Log.d(TAG, "result: " + total);
 
-                JSONObject sum = new JSONObject();
 
                 JSONArray products = jsonn.getJSONArray("products");
                 int rows = products.length();
 
 
+                ArrayList<String> titles = new ArrayList<String>();
+                ArrayList<Double> prices = new ArrayList<Double>();
+                ArrayList<String> imagesURL = new ArrayList<String>();
 
 
+                JSONObject product = new JSONObject();
                 for (int i = 0; i < rows; i++) {
-                    sum = (JSONObject) jsonn.getJSONArray("products").get(i);
-                    String end = sum.getString("title");
+                    product = (JSONObject) jsonn.getJSONArray("products").get(i);
 
-                    TextView tvResults = new TextView(getActivity());
-                    tvResults.setText(end);
-                    tvResults.setId(i);
+                    String title = product.getString("title");
 
-                    ll.addView(tvResults);
+                    JSONObject offerData = (JSONObject) product.get("offerData");
+                    JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
+                    String priceString = offers.getString("price");
+
+                    Double price = Double.parseDouble(priceString);
+
+                    JSONObject imagess = (JSONObject) product.getJSONArray("images").get(1);
+                    String image = imagess.getString("url");
+
+                    titles.add(title);
+                    prices.add(price);
+                    imagesURL.add(image);
+
+                    //titles.add(title);
+
+                    //TextView tvResults = new TextView(getActivity());
+                    //tvResults.setText(title);
+                    //tvResults.setId(i);
+
+                    //lv.addView(tvResults);
                 }
+
+                //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titles, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
+
+                String[] title = titles.toArray(new String[titles.size()]);
+                Double[] price = prices.toArray(new Double[prices.size()]);
+                String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
+
+
+                CustomList adapter = new
+                        CustomList(getActivity(), title, price, imageURL);
+                ListView list=(ListView) getActivity().findViewById(R.id.lvResult);
+                list.setAdapter(adapter);
+
+
+
 
                 Log.d(TAG, " " + rows);
 

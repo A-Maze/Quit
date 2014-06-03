@@ -1,41 +1,30 @@
 package com.amaze.quit.app;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.ListView;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.ArrayList;
 
 public class SetupChooseProduct extends Fragment {
 
@@ -43,7 +32,7 @@ public class SetupChooseProduct extends Fragment {
 
     EditText etSearch;
     public String searchQuery;
-
+    ArrayAdapter<String> adapter;
 
     public static final SetupChooseProduct newInstance() {
         SetupChooseProduct f = new SetupChooseProduct();
@@ -66,14 +55,14 @@ public class SetupChooseProduct extends Fragment {
     }
 
 
-    private View.OnClickListener searchProduct = new View.OnClickListener(){
+    protected View.OnClickListener searchProduct = new View.OnClickListener(){
         public void onClick(View v){
 
 
-            LinearLayout ll = (LinearLayout) getActivity().findViewById(R.id.llResult);
+            ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
-            if((ll).getChildCount() > 0)
-                (ll).removeAllViews();
+            if((lv).getChildCount() > 0)
+                lv.setAdapter(null);
 
             searchQuery = etSearch.getText().toString();
 
@@ -88,24 +77,58 @@ public class SetupChooseProduct extends Fragment {
                 String total = jsonn.toString(1);
                 //Log.d(TAG, "result: " + total);
 
-                JSONObject sum = new JSONObject();
 
                 JSONArray products = jsonn.getJSONArray("products");
                 int rows = products.length();
 
 
+                ArrayList<String> titles = new ArrayList<String>();
+                ArrayList<Double> prices = new ArrayList<Double>();
+                ArrayList<String> imagesURL = new ArrayList<String>();
 
 
+                JSONObject product = new JSONObject();
                 for (int i = 0; i < rows; i++) {
-                    sum = (JSONObject) jsonn.getJSONArray("products").get(i);
-                    String end = sum.getString("title");
+                    product = (JSONObject) jsonn.getJSONArray("products").get(i);
 
-                    TextView tvResults = new TextView(getActivity());
-                    tvResults.setText(end);
-                    tvResults.setId(i);
+                    String title = product.getString("title");
 
-                    ll.addView(tvResults);
+                    JSONObject offerData = (JSONObject) product.get("offerData");
+                    JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
+                    String priceString = offers.getString("price");
+
+                    Double price = Double.parseDouble(priceString);
+
+                    JSONObject imagess = (JSONObject) product.getJSONArray("images").get(1);
+                    String image = imagess.getString("url");
+
+                    titles.add(title);
+                    prices.add(price);
+                    imagesURL.add(image);
+
+                    //titles.add(title);
+
+                    //TextView tvResults = new TextView(getActivity());
+                    //tvResults.setText(title);
+                    //tvResults.setId(i);
+
+                    //lv.addView(tvResults);
                 }
+
+                //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titles, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
+
+                String[] title = titles.toArray(new String[titles.size()]);
+                Double[] price = prices.toArray(new Double[prices.size()]);
+                String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
+
+
+                CustomList adapter = new
+                        CustomList(getActivity(), title, price, imageURL);
+                ListView list=(ListView) getActivity().findViewById(R.id.lvResult);
+                list.setAdapter(adapter);
+
+
+
 
                 Log.d(TAG, " " + rows);
 

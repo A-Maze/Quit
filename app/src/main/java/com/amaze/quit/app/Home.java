@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -32,6 +33,7 @@ public class Home extends FragmentActivity  {
     private String[] mNavTitles;
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,12 @@ public class Home extends FragmentActivity  {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         switch (item.getItemId()) {
             case R.id.action_settings:
                 launchActivity(Setup.class);
@@ -114,6 +122,7 @@ public class Home extends FragmentActivity  {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
 
     }
 
@@ -139,7 +148,7 @@ public class Home extends FragmentActivity  {
         alertDialog.show();
     }
 
-    private void navDrawer(){
+    private void navDrawer() {
         mNavTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -149,18 +158,40 @@ public class Home extends FragmentActivity  {
                 R.layout.drawer_list_item, mNavTitles));
         // Set the list's click listener
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener(){
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id){
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
                 pager.setCurrentItem(position);
                 mDrawerLayout.closeDrawers();
             }
         });
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        );
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
     }
+
 
     public static void setSelectedNav(int position){
         mDrawerList.setItemChecked(position,true);
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
 
 
 

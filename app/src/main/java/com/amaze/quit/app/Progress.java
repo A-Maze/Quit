@@ -1,17 +1,12 @@
 package com.amaze.quit.app;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.viewpagerindicator.LinePageIndicator;
 
 import java.util.Calendar;
 
@@ -84,6 +79,7 @@ public class Progress extends Fragment {
             float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
             level.setText("Level " +   db.getUser(1).getLevel());
+            Log.d("Level", "" + db.getUser(1).getLevel());
         }
         catch(NullPointerException e){
             return;

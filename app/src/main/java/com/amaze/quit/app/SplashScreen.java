@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
-import android.util.Log;
 
 
 public class SplashScreen extends Activity {
@@ -91,8 +90,23 @@ public class SplashScreen extends Activity {
 
         Challenges[] challengesArray = new Challenges[]{c1,c2,c3,c4,c5,c6,c7,c8,c9,c10};
         for (int i = 0; i < aantalChallanges; i++) {
-            Log.d("done","I did it");
+
             db.addChallenge(challengesArray[i]); 
+        }
+
+        //levels
+        Levels l1,l2,l3,l4,l5;
+        l1 = new Levels(1,"ketting roker","", 0);
+        l2 = new Levels(2,"geen inspirate","", 5);
+        l3 = new Levels(3,"geen inspiratie!","", 10);
+        l4 = new Levels(4,"nog Steeds geen inspiratie","", 20);
+        l5 = new Levels(5,"oneinding","",1000000000);
+
+        int aantalLevels = 5;
+
+        Levels[] levelArray = new Levels[]{l1,l2,l3,l4,l5};
+        for (int i = 0; i < aantalLevels; i++) {
+            db.addLevel(levelArray[i]);
         }
 
         db.close();

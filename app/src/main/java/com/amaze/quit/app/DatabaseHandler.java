@@ -211,6 +211,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    public void addLevel(Levels level) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(LEVEL_LID, level.getlID());
+        values.put(LEVEL_TITEL, level.getTitel());
+        values.put(LEVEL_BESCHRIJVING,level.getBeschrijving());
+        values.put(LEVEL_MINDAYS, level.getMinDays());
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_LEVELS, null, values);
+        db.close(); // Closing database connection
+    }
+
 
 
 
@@ -415,6 +429,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public int getChallengesAmount(){
         SQLiteDatabase db = this.getWritableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_CHALLENGES);
+        return numRows;
+    }
+
+    public int getLevelAmount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_LEVELS);
         return numRows;
     }
 

@@ -30,15 +30,71 @@ public class HealthProgress extends Fragment {
 
     Handler handler;
 
+    protected void drawElements(int id) {
+        Activity a = getActivity();
+
+        int progress = getProgress(id);
+        int barId = getResources().getIdentifier("progressBar_gezondheid_" + id, "id", a.getPackageName());
+        ProgressBar gezondheidBar = (ProgressBar) a.findViewById(barId);
+        gezondheidBar.setProgress(progress);
+
+        int tId = getResources().getIdentifier("health_procent" + id, "id", a.getPackageName());
+        TextView t = (TextView) a.findViewById(tId);
+        t.setText(progress+"%");
+
+        long tijd = getRemainingTime(id);
+
+        //draw days, hours, minutes
+        long dagen = tijd / 1440;
+        long uren = (tijd - dagen * 1440) / 60;
+        long minuten = tijd - dagen * 1440 - uren * 60;
+
+        int timerId = getResources().getIdentifier("health_timer" + id, "id", a.getPackageName());
+        TextView timer = (TextView) a.findViewById(timerId);
+
+        String timerText = "";
+        if(dagen > 0) {
+            if(dagen == 1) {
+                timerText += dagen + " dag ";
+            }
+            else {
+                timerText += dagen + " dagen ";
+            }
+        }
+        if(uren > 0) {
+            timerText += uren + " uur ";
+
+        }
+        timerText += minuten + " minuten";
+        timer.setText(timerText);
+
+
+    }
+
+    protected void drawAverage() {
+        //teken de progress van de algemene gezondheid bar (gemiddelde van alle andere)
+        int totalProgress = 0;
+        for(int i = 1; i <= 9; i++) {
+            totalProgress += getProgress(i);
+        }
+        int average = totalProgress / 9;
+        ProgressBar totaalGezondheidBar = (ProgressBar) getActivity().findViewById(R.id.progressBar_algemeenGezondheid);
+        totaalGezondheidBar.setProgress(average);
+
+    }
 
     protected void drawProgress() {
         Activity a = getActivity();
         Date today = new Date();
 
-
-
         //teken de progress van elke individuele bar + procenten
+        for(int i = 1; i <= 9; i++) {
+            drawElements(i);
+        }
 
+        drawAverage();
+
+        /*
         int p1 = getProgress(1);
         ProgressBar gezondheidBar1 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_1);
         gezondheidBar1.setProgress(p1);
@@ -119,11 +175,9 @@ public class HealthProgress extends Fragment {
         long tijd9 = getRemainingTime(9);
         TextView timer9 = (TextView) a.findViewById(R.id.health_timer9);
         timer9.setText(tijd9 + " minuten");
+           */
 
-        //teken de progress van de algemene gezondheid bar (gemiddelde van alle andere)
-        int pa = (p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9) / 9;
-        ProgressBar totaalGezondheidBar = (ProgressBar) a.findViewById(R.id.progressBar_algemeenGezondheid);
-        totaalGezondheidBar.setProgress(pa);
+
 
     }
 
@@ -234,10 +288,11 @@ public class HealthProgress extends Fragment {
 
         Thread updateProcess = new Thread(){
             public void run(){
+
                 //TODO IS ER EEN NETTERE MANIER OM DE TIMER OPNIEUW OP TE STARTEN?
                 while (1==1) {
                     try {
-                        sleep(1000);
+                        sleep(10000);
 
                         Message msg = new Message();
                         msg.what = UpdateProgress;

@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class Challenges {
 
-    //private variables
+    //private variables11
     int cID;
     String titel;
     String beschrijving;

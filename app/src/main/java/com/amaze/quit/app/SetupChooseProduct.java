@@ -80,6 +80,7 @@ public class SetupChooseProduct extends Fragment {
         public void onClick(View v){
 
 
+            // lolol
             ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
             if((lv).getChildCount() > 0)

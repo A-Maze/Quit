@@ -307,6 +307,11 @@ public class HealthProgress extends Fragment {
         };
         updateProcess.start();
 
+        //update on startup
+        Message msg = new Message();
+        msg.what = UpdateProgress;
+        handler.sendMessage(msg);
+
         return v;
 
     }

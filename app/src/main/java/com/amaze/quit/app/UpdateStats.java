@@ -13,6 +13,7 @@ public class UpdateStats {
     public static float extraDagenTeLeven;
     public static long bespaardePakjes;
     public static long gemiddeldNietGerookt;
+    private static int userLevel;
     private static Context theContext;
 
 
@@ -53,6 +54,7 @@ public class UpdateStats {
                continue;
            }
         }
+        userLevel = db.getUser(1).getLevel();
         db.close();
     }
 
@@ -64,6 +66,10 @@ public class UpdateStats {
     public float getSavedMoney(){
         return bespaardeMoneys;
     }
+
+    public float getExtraDagenTeLeven(){return extraDagenTeLeven;}
+
+    public int getUserLevel(){return userLevel;}
 
     public void updateAchievements(){
         updateQuit();

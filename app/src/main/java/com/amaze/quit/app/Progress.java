@@ -67,10 +67,10 @@ public class Progress extends Fragment {
 
             moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
             DatabaseHandler db = new DatabaseHandler(getActivity());
-            float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
+            float extraDagenTeLeven = updatestats.getExtraDagenTeLeven();
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
-            level.setText("Level " +   db.getUser(1).getLevel());
-            int userLevel = db.getUser(1).getLevel();
+            int userLevel = updatestats.getUserLevel();
+            level.setText("Level " +   userLevel);
             String Titel = db.getLevel(userLevel).getTitel();
             levelDesc.setText(Titel);
         }

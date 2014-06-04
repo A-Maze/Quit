@@ -28,5 +28,64 @@
         android:src="@drawable/product_placeholder"
         android:layout_gravity="center_horizontal" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/product_saved_amount"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="20dp"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:id="@+id/tvProductSavedAmount"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/product_product_price"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:id="@+id/tvProductPriceAmount"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="20dp"
+        android:id="@+id/progressBarProduct"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/product_saved_percentage"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="20dp"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:id="@+id/tvProductSavedPercentage"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/product_product_percentage"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="40dp"
+        android:textSize="12dp"
+        android:textAlignment="center"
+        android:id="@+id/tvProductPercentage"/>
+
 
 </LinearLayout>

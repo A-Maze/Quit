@@ -102,6 +102,8 @@ public class UpdateStats {
 
     }
 
+
+
     private void updateChallengeDB(int id){
         Challenges challenge;
         DatabaseHandler db = new DatabaseHandler(theContext);

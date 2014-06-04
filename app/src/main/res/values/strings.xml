@@ -100,5 +100,10 @@
     <string name="level">level</string>
     // Product choose    <string name="product_result">Geen resultaat</string>
     <string name="title_activity_product_detail">ProductDetail</string>
+    //product fragment
+    <string name="product_product_price">€0,00</string>
+    <string name="product_saved_amount">€0,00</string>
+    <string name="product_product_percentage">100%</string>
+    <string name="product_saved_percentage">0%</string>
 
 </resources>

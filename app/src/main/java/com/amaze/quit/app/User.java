@@ -17,6 +17,7 @@ public class User {
     int quitDay;
     int quitMonth;
     int quitYear;
+    int spentAmount;
 
     public int getQuitMinute() {
         return quitMinute;
@@ -58,10 +59,14 @@ public class User {
         this.quitYear = quitYear;
     }
 
+    public int getSpentAmount(){ return spentAmount;}
+
+    public void setSpentAmount(int spentAmount){this.spentAmount = spentAmount;}
+
 
 
     // constructor
-    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute){
+    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute, int spentAmount){
         this.uID = uID;
         this.sID = sID;
         this.perDag = perDag;
@@ -71,6 +76,7 @@ public class User {
         this.quitDay = quitDay;
         this.quitMonth = quitMonth;
         this.quitYear = quitYear;
+        this.spentAmount = spentAmount;
     }
 
 

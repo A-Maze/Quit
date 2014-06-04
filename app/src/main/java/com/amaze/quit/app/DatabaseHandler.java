@@ -1,12 +1,12 @@
 package com.amaze.quit.app;
 
         import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.DatabaseUtils;
-        import android.database.sqlite.SQLiteDatabase;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.util.Log;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Rik on 20-5-2014.
@@ -134,7 +134,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
           /* Levels table */
         String CREATE_LEVELS_TABLE = "CREATE TABLE "
                 + TABLE_LEVELS + "("
-                + LEVEL_LID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + LEVEL_LID + " INTEGER PRIMARY KEY,"
                 + LEVEL_TITEL + " TEXT,"
                 + LEVEL_BESCHRIJVING + " TEXT,"
                 + LEVEL_MINDAYS + " INTEGER"
@@ -430,6 +430,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
         values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+
 
          /* updating row */
         return db.update(TABLE_CHALLENGES, values, CHALLENGES_CID + " = ?",

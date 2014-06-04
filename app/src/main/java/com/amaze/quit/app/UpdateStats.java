@@ -44,6 +44,17 @@ public class UpdateStats {
         bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
         gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
 
+        int currLevel = db.getUser(1).getLevel();
+
+        for (int i = (currLevel + 1); i <= db.getLevelAmount(); i ++) {
+            int nextLevelDays = db.getLevel(i).getMinDays();
+           if (daysQuit >= nextLevelDays) {
+               updateUserLevel(i);
+               continue;
+           }
+        }
+
+
         db.close();
     }
 
@@ -95,6 +106,16 @@ public class UpdateStats {
         db.updateChallenge(challenge);
         db.close();
     }
+
+    private void updateUserLevel(int id){
+        User user;
+        DatabaseHandler db = new DatabaseHandler(theContext);
+        user = db.getUser(1);
+        user.setLevel(id);
+        db.updateUser(user);
+        db.close();
+    }
+
 
 
 }

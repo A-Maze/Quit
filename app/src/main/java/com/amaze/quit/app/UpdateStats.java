@@ -53,8 +53,6 @@ public class UpdateStats {
                continue;
            }
         }
-
-
         db.close();
     }
 

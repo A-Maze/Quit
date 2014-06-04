@@ -2,13 +2,10 @@ package com.amaze.quit.app;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.Calendar;
 
 
 public class Progress extends Fragment {
@@ -58,6 +55,7 @@ public class Progress extends Fragment {
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDayProgress);
         moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvSparedMoney);
         level = (TextView) getActivity().findViewById(R.id.tvLevel);
+        TextView levelDesc = (TextView) getActivity().findViewById(R.id.tvLevelDesc);
         long days = updatestats.getDaysQuit();
         //catches the nullpointerexception
         try {
@@ -72,7 +70,9 @@ public class Progress extends Fragment {
             float extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
             level.setText("Level " +   db.getUser(1).getLevel());
-            Log.d("Level", "" + db.getUser(1).getLevel());
+            int userLevel = db.getUser(1).getLevel();
+            String Titel = db.getLevel(userLevel).getTitel();
+            levelDesc.setText(Titel);
         }
         catch(NullPointerException e){
             return;

@@ -26,6 +26,8 @@
             android:layout_weight="20"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
             android:hint="@string/title_activity_choose_product_product_hint" />
 
         <Button
@@ -38,7 +40,7 @@
     <ListView
         android:id="@+id/lvResult"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
     </ListView>
 

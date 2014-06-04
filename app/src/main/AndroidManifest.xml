@@ -47,6 +47,11 @@
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.amaze.quit.app.ProductDetail"
+            android:parentActivityName="com.amaze.quit.app.SetupChooseProduct"
+            android:label="@string/title_activity_product_detail" >
+        </activity>
     </application>
 
 </manifest>

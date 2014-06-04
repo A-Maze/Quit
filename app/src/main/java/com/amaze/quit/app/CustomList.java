@@ -22,15 +22,17 @@ import java.text.DecimalFormat;
  */
 public class CustomList extends ArrayAdapter<String> {
     private final Activity context;
+    public final String[] id;
     private final String[] title;
     private final Double[] price;
     private final String[] imageURL;
     private Bitmap productImage;
 
     public CustomList(Activity context,
-                      String[] title, Double[] price, String[] imageURL) {
+                      String[] id, String[] title, Double[] price, String[] imageURL) {
         super(context, R.layout.listview_bol, title);
         this.context = context;
+        this.id = id;
         this.title = title;
         this.price = price;
         this.imageURL = imageURL;
@@ -43,7 +45,9 @@ public class CustomList extends ArrayAdapter<String> {
         TextView title = (TextView) rowView.findViewById(R.id.tvProductTitle);
         TextView price = (TextView) rowView.findViewById(R.id.tvProductPrice);
         ImageView productImage = (ImageView) rowView.findViewById(R.id.ivProductImages);
+
         title.setText(this.title[position]);
+        title.setTag(id[position]);
 
         DecimalFormat df = new DecimalFormat("#.00");
         price.setText(df.format(this.price[position]) + "");

@@ -13,6 +13,10 @@ public class UpdateStats {
     public static float extraDagenTeLeven;
     public static long bespaardePakjes;
     public static long gemiddeldNietGerookt;
+    public static int quitDay;
+    public static int quitMonth;
+    public static int quitYear;
+    public static Calendar quitDate;
     private static int userLevel;
     private static Context theContext;
 
@@ -26,7 +30,8 @@ public class UpdateStats {
     public void updateQuit(){
 
         DatabaseHandler db = new DatabaseHandler(theContext);
-        Calendar quitDate = Calendar.getInstance();
+
+        quitDate = Calendar.getInstance();
         quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
 
         Calendar vandaag = Calendar.getInstance();
@@ -58,10 +63,14 @@ public class UpdateStats {
         db.close();
     }
 
+
+
     //gives back the days quit
     public long getDaysQuit(){
         return daysQuit;
     }
+
+    public Calendar getCalendar() { return quitDate; }
 
     public float getSavedMoney(){
         return bespaardeMoneys;
@@ -101,8 +110,6 @@ public class UpdateStats {
         }
 
     }
-
-
 
     private void updateChallengeDB(int id){
         Challenges challenge;

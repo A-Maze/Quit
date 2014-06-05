@@ -51,16 +51,18 @@ public class Progress extends Fragment {
         TextView moneyInTheBank;
         TextView extraDagen;
         TextView level;
-        extraDagen = (TextView) getActivity().findViewById(R.id.tvSparedDays);
-        dayProgress = (TextView) getActivity().findViewById(R.id.tvDayProgress);
-        moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvSparedMoney);
-        level = (TextView) getActivity().findViewById(R.id.tvLevel);
-        TextView levelDesc = (TextView) getActivity().findViewById(R.id.tvLevelDesc);
+        extraDagen = (TextView) getActivity().findViewById(R.id.tvExtraDagen);
+        dayProgress = (TextView) getActivity().findViewById(R.id.tvDagenZonderRoken);
+        moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvBespaardeGeld);
+        TextView nietGerookt = (TextView) getActivity().findViewById(R.id.tvNietGerookteSigaretten);
+       // level = (TextView) getActivity().findViewById(R.id.tvLevel);
+        TextView levelDesc = (TextView) getActivity().findViewById(R.id.tvLevel);
+        TextView stopDatum = (TextView) getActivity().findViewById(R.id.tvStopDatum);
         long days = updatestats.getDaysQuit();
         //catches the nullpointerexception
         try {
             dayProgress.setText(days + " Dagen");
-
+            stopDatum.setText("" + updatestats.getCalendar().getTime());
             float bespaardeMoneys = updatestats.getSavedMoney();
             bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
             bespaardeMoneys = bespaardeMoneys / 100;
@@ -70,9 +72,11 @@ public class Progress extends Fragment {
             float extraDagenTeLeven = updatestats.getExtraDagenTeLeven();
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
             int userLevel = updatestats.getUserLevel();
-            level.setText("Level " +   userLevel);
+            //level.setText("Level " +   userLevel);
             String Titel = db.getLevel(userLevel).getTitel();
             levelDesc.setText(Titel);
+            int nietGerooktSig = (int) days * db.getUser(1).getPerDag();
+            nietGerookt.setText("" +nietGerooktSig);
         }
         catch(NullPointerException e){
             return;

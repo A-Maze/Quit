@@ -1,19 +1,19 @@
 package com.amaze.quit.app;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.viewpagerindicator.LinePageIndicator;
 
 
 public class Product extends Fragment {
@@ -54,28 +54,57 @@ public class Product extends Fragment {
 
     private void updateSavingProgress(){
         DatabaseHandler db = new DatabaseHandler(getActivity());
+        //gets the total saved amount
         float totalSavedAmount = updatestats.getSavedMoney();
+        // what is spent?
         int spentAmount = db.getUser(1).getSpentAmount();
+        //what is left?
         float amountLeft = totalSavedAmount - spentAmount;
+        // price of the product
         float productPrice = 400f;
-        int current = (int) Math.round(amountLeft / productPrice);
+        int current = (int) Math.round((amountLeft / productPrice)*100);
+        // Get the Drawable custom_progressbar and all the textviews
+        Drawable customProgressBar =getResources().getDrawable(R.drawable.progressbar_blue);
         ProgressBar moneyBar = (ProgressBar) getActivity().findViewById(R.id.progressBarProduct);
+        moneyBar.setProgressDrawable(customProgressBar);
         TextView tvSavedAmount = (TextView) getActivity().findViewById(R.id.tvProductSavedAmount);
         TextView tvSavedPercentage = (TextView) getActivity().findViewById(R.id.tvProductSavedPercentage);
         TextView tvProductAmount = (TextView) getActivity().findViewById(R.id.tvProductPriceAmount);
         if(amountLeft < productPrice) {
+            //sets the percentage complete and the amount
             tvSavedAmount.setText("€" + amountLeft);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
         }
         else{
+            //if complete turn the bar green and show a complete text
             tvSavedAmount.setText("€" + productPrice);
             tvSavedPercentage.setText("" + 100 + "%");
             moneyBar.setProgress(100);
+            moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_green));
+            LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.productLayout);
+            TextView tvComplete = new TextView(getActivity());
+            tvComplete.setText("Voltooid!");
+            tvComplete.setTextColor(getResources().getColor(R.color.green));
+            LinearLayout.LayoutParams parameters= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            parameters.setMargins(0,giveDP(-30f),0,0);
+            tvComplete.setGravity(Gravity.CENTER);
+            tvComplete.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
+            linearLayout.addView(tvComplete);
+
         }
+        //always show the product price
         tvProductAmount.setText("€" + productPrice);
+        //close the database
+        db.close();
 
+    }
 
+    private int giveDP(float dp){
+        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
+        float fpixels = metrics.density * dp;
+        int pixels = (int) (fpixels + 0.5f);
+        return pixels;
     }
 
 

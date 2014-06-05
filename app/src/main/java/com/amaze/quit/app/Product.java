@@ -81,11 +81,11 @@ public class Product extends Fragment {
             tvSavedAmount.setText("€" + productPrice);
             tvSavedPercentage.setText("" + 100 + "%");
             moneyBar.setProgress(100);
-            moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_green));
+            moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
             LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.productLayout);
             TextView tvComplete = new TextView(getActivity());
             tvComplete.setText("Voltooid!");
-            tvComplete.setTextColor(getResources().getColor(R.color.green));
+            tvComplete.setTextColor(getResources().getColor(R.color.light_blue));
             LinearLayout.LayoutParams parameters= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             parameters.setMargins(0,giveDP(-30f),0,0);
             tvComplete.setGravity(Gravity.CENTER);

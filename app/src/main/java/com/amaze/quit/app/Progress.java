@@ -57,12 +57,12 @@ public class Progress extends Fragment {
         TextView nietGerookt = (TextView) getActivity().findViewById(R.id.tvNietGerookteSigaretten);
        // level = (TextView) getActivity().findViewById(R.id.tvLevel);
         TextView levelDesc = (TextView) getActivity().findViewById(R.id.tvLevel);
-        TextView stopDatum = (TextView) getActivity().findViewById(R.id.tvStopDatum);
+
         long days = updatestats.getDaysQuit();
         //catches the nullpointerexception
         try {
             dayProgress.setText(days + " Dagen");
-            stopDatum.setText("" + updatestats.getCalendar().getTime());
+
             float bespaardeMoneys = updatestats.getSavedMoney();
             bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
             bespaardeMoneys = bespaardeMoneys / 100;

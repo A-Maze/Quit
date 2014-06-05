@@ -1,14 +1,12 @@
 package com.amaze.quit.app;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class ProductDetail extends ActionBarActivity {
@@ -20,12 +18,23 @@ public class ProductDetail extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        TextView tvTitle = (TextView) findViewById(R.id.tvProductDetailTitle);
+        TextView tvDesc = (TextView) findViewById(R.id.tvDescription);
+        ImageView ivProduct = (ImageView) findViewById(R.id.ivProductDetailImage);
+
+
         Intent fromListView = getIntent();
         String id = fromListView.getStringExtra("id");
-        Log.d(TAG, "pd id:"+id);
+        Bundle extras = getIntent().getExtras();
+        String image = extras.getString("image");
+        String title = extras.getString("title");
+        Double price = extras.getDouble("price");
+        String desc = extras.getString("description");
 
-        TextView tv = (TextView) findViewById(R.id.tvpdtest);
-        tv.setText(id);
+        tvTitle.setText(title);
+        tvDesc.setText(desc);
+       // TextView tv = (TextView) findViewById(R.id.tvpdtest);
+       // tv.setText(id);
     }
 
     @Override

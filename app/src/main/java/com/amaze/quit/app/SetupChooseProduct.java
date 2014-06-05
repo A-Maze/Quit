@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,41 +15,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.DoubleBuffer;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SetupChooseProduct extends Fragment {
 
@@ -58,7 +39,11 @@ public class SetupChooseProduct extends Fragment {
     EditText etSearch;
     public String searchQuery;
     ArrayAdapter<String> adapter;
-
+    ArrayList<String> ids;
+    ArrayList<String> titles;
+    ArrayList<Double> prices;
+    ArrayList<String> imagesURL;
+    ArrayList<String> description;
     CustomList cl;
 
     public static final SetupChooseProduct newInstance() {
@@ -123,10 +108,11 @@ public class SetupChooseProduct extends Fragment {
                     JSONArray products = jsonn.getJSONArray("products");
                     int rows = products.length();
 
-                    ArrayList<String> ids = new ArrayList<String>();
-                    ArrayList<String> titles = new ArrayList<String>();
-                    ArrayList<Double> prices = new ArrayList<Double>();
-                    ArrayList<String> imagesURL = new ArrayList<String>();
+                    ids = new ArrayList<String>();
+                    titles = new ArrayList<String>();
+                    prices = new ArrayList<Double>();
+                    imagesURL = new ArrayList<String>();
+                    description = new ArrayList<String>();
 
                     JSONObject product = new JSONObject();
                     for (int i = 0; i < rows; i++) {
@@ -134,7 +120,7 @@ public class SetupChooseProduct extends Fragment {
 
                         String title = product.getString("title");
                         String id = product.getString("id");
-
+                        String desc = product.getString("shortDescription");
                         JSONObject offerData = (JSONObject) product.get("offerData");
                         JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
                         String priceString = offers.getString("price");
@@ -148,7 +134,7 @@ public class SetupChooseProduct extends Fragment {
                         titles.add(title);
                         prices.add(price);
                         imagesURL.add(image);
-
+                        description.add(desc);
                         //titles.add(title);
 
                         //TextView tvResults = new TextView(getActivity());
@@ -164,7 +150,7 @@ public class SetupChooseProduct extends Fragment {
                     String[] title = titles.toArray(new String[titles.size()]);
                     Double[] price = prices.toArray(new Double[prices.size()]);
                     String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
-
+                    String[] desc = description.toArray(new String[description.size()]);
 
                     CustomList adapter = new
                             CustomList(getActivity(), id, title, price, imageURL);
@@ -182,12 +168,24 @@ public class SetupChooseProduct extends Fragment {
                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view,
                                             int position, long id) {
+                        // extra om mee te geven naar intent
+                        Bundle extras = new Bundle();
                         // When clicked, show a toast with the TextView text
                         Intent productIntent = new Intent(view.getContext(), ProductDetail.class);
 
-                        TextView title = (TextView) view.findViewById(R.id.tvProductTitle);
-                        String idP = title.getTag().toString();
-                        productIntent.putExtra("id", idP);
+
+                        TextView tvTitle = (TextView) view.findViewById(R.id.tvProductTitle);
+                        String idP = tvTitle.getTag().toString();
+                        String image = imagesURL.get(position);
+                        String title = titles.get(position);
+                        Double price = prices.get(position);
+                        String desc = description.get(position);
+                        extras.putString("id", idP);
+                        extras.putString("image", image);
+                        extras.putString("title",title);
+                        extras.putDouble("price",price);
+                        extras.putString("description",desc);
+                        productIntent.putExtras(extras);
                         startActivityForResult(productIntent, 0);
                     }
                 });

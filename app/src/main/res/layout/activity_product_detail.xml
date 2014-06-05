@@ -13,7 +13,7 @@
         android:id="@+id/tvProductDetailTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:layout_gravity="center_horizontal" />
 
     <ImageView

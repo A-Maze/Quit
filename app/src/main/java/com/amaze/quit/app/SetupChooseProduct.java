@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,7 +78,11 @@ public class SetupChooseProduct extends Fragment {
 
     protected View.OnClickListener searchProduct = new View.OnClickListener(){
         public void onClick(View v){
+            InputMethodManager inputManager = (InputMethodManager)
+                    getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
 
 
             searchQuery = etSearch.getText().toString();
@@ -316,9 +321,9 @@ public class SetupChooseProduct extends Fragment {
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
-        }
+            }
 
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // extra om mee te geven naar intent
@@ -342,6 +347,7 @@ public class SetupChooseProduct extends Fragment {
                 startActivityForResult(productIntent, 0);
             }
         });
+        return;
     }
 
 }

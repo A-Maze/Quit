@@ -52,6 +52,7 @@ public class CustomList extends ArrayAdapter<String> {
 
         DecimalFormat df = new DecimalFormat("#.00");
         price.setText(df.format(this.price[position]) + "");
+
         new DownloadImageTask().execute(imageURL[position]);
         return rowView;
     }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_user_settings">
+        <Preference
+            android:title="@string/pref_quit_date"
+            android:summary="@string/pref_quit_date_summary"/>
+        <ListPreference
+            android:title="@string/setupBrand"
+            android:summary="@string/pref_brand_summary"/>
+        <EditTextPreference
+            android:title="@string/setupDayAmount"
+            android:summary="@string/pref_day_amount_summary"/>
+        <EditTextPreference
+            android:title="@string/setupPackAmount"
+            android:summary="@string/pref_pack_amount_summary"/>
+        <Preference />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_app_settings">
+        <ListPreference
+            android:title="@string/prefered_fragment"
+            android:summary="@string/pref_frag_summary"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

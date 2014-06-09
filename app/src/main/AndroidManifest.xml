@@ -53,12 +53,9 @@
             android:parentActivityName=".SetupChooseProduct" >
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
-        </activity>
-        <activity
             android:name=".Settings"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".Home">
         </activity>
     </application>
 

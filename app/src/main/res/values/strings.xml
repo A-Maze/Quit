@@ -4,7 +4,6 @@
     <string name="app_name">1 2 Quit</string>
     <string name="action_settings">Instellingen</string>
     <string name="developer_settings">Ontwikkelaar instellingen</string>
-    <string name="prefered_fragment">Kies uw gewenste start scherm</string>
     <string name="title_activity_setup_brand_amount">Rook gewoontes</string>
     <string name="smokeAmount">Hoeveel rookt u?</string>
     <string name="sigaretten">sigaretten</string>
@@ -118,6 +117,16 @@
     <string name="nietgerooktesigaretten">Niet gerookte sigaretten:</string>
     <string name="bespaardegeld">Bepaard geld:</string>
     <string name="extradagen">Extra dagen te leven:</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_settings">Instellingen</string>
+    <!--user settings string -->
+    <string name="pref_user_settings">Gebruikers instellingen</string>
+    <string name="pref_quit_date">Kies uw stop datum</string>
+    <string name="pref_quit_date_summary">Wanneer bent u gestopt?</string>
+    <string name="pref_brand_summary">Welk merk sigaretten of shag rookt u?</string>
+    <string name="pref_day_amount_summary">Hoeveel sigaretten rookt u per dag?</string>
+    <string name="pref_pack_amount_summary">Hoeveel sigaretten haalt u uit een pakje?</string>
+    <string name="pref_app_settings">Applicatie instellingen</string>
+    <string name="prefered_fragment">Gewenste startscherm</string>
+    <string name="pref_frag_summary">Kies het scherm dat u standaard wil zien als u de app opnieuw opstart.</string>
 
 </resources>

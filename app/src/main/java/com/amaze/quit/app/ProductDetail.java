@@ -90,7 +90,14 @@ public class ProductDetail extends ActionBarActivity {
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
             try {
-                db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+                if(db.getProduct(1).getuId() == 1) {
+                    db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+
+                }else{
+                    db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+
+
+                }
             } catch (Exception e) {
                 db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
                 e.printStackTrace();

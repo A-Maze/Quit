@@ -42,6 +42,7 @@ public class Product extends Fragment {
         return v;
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         updateSavingProgress();
@@ -55,12 +56,11 @@ public class Product extends Fragment {
             //implements the main method what every fragment should do when it's visible
             uservisibilityevent.viewIsVisible(getActivity(),position,"blue","title_activity_product");
 
-
         }
 
     }
 
-    private void updateSavingProgress(){
+    public void updateSavingProgress(){
         DatabaseHandler db = new DatabaseHandler(getActivity());
         //gets the total saved amount
         float totalSavedAmount = updatestats.getSavedMoney();
@@ -114,7 +114,7 @@ public class Product extends Fragment {
         return pixels;
     }
 
-    private void setListeners(){
+    public void setListeners(){
         Button bPay = (Button) getActivity().findViewById(R.id.bPay);
         bPay.setOnClickListener(new OnClickListener() {
             @Override

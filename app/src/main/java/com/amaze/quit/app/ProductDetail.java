@@ -70,7 +70,7 @@ public class ProductDetail extends ActionBarActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                final Bitmap bitmap = loadImageFromNetwork(image);
+                bitmap = loadImageFromNetwork(image);
                 ivProduct.post(new Runnable() {
                     public void run() {
                         ivProduct.setImageBitmap(bitmap);
@@ -78,7 +78,6 @@ public class ProductDetail extends ActionBarActivity {
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
                         layoutParams.gravity= Gravity.CENTER;
                         ivProduct.setLayoutParams(layoutParams);
-
                     }
                 });
             }

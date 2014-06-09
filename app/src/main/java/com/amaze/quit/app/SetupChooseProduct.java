@@ -2,7 +2,6 @@ package com.amaze.quit.app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -43,7 +42,7 @@ public class SetupChooseProduct extends Fragment {
     public String searchQuery;
     ArrayAdapter<String> adapter;
     ArrayList<String> ids;
-    ArrayList<String> titles;
+    ArrayList<String> titels;
     ArrayList<Double> prices;
     ArrayList<String> imagesURL;
     ArrayList<String> description;
@@ -250,7 +249,6 @@ public class SetupChooseProduct extends Fragment {
 
     protected void fillList(String result){
         this.result = result;
-        // lolol
         ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
         if((lv).getChildCount() > 0)
@@ -267,7 +265,7 @@ public class SetupChooseProduct extends Fragment {
             int rows = products.length();
 
             ids = new ArrayList<String>();
-            titles = new ArrayList<String>();
+            titels = new ArrayList<String>();
             prices = new ArrayList<Double>();
             imagesURL = new ArrayList<String>();
             description = new ArrayList<String>();
@@ -276,36 +274,36 @@ public class SetupChooseProduct extends Fragment {
             for (int i = 0; i < rows; i++) {
                 product = (JSONObject) jsonn.getJSONArray("products").get(i);
 
-                String title = product.getString("title");
+                String titel = product.getString("title");
                 String id = product.getString("id");
-                String desc = product.getString("shortDescription");
+                String desc = product.getString("longDescription");
                 JSONObject offerData = (JSONObject) product.get("offerData");
                 JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
                 String priceString = offers.getString("price");
 
                 Double price = Double.parseDouble(priceString);
 
-                JSONObject imagess = (JSONObject) product.getJSONArray("images").get(1);
+                JSONObject imagess = (JSONObject) product.getJSONArray("images").get(2);
                 String image = imagess.getString("url");
 
                 ids.add(id);
-                titles.add(title);
+                titels.add(titel);
                 prices.add(price);
                 imagesURL.add(image);
                 description.add(desc);
-                //titles.add(title);
+                //titels.add(titel);
 
                 //TextView tvResults = new TextView(getActivity());
-                //tvResults.setText(title);
+                //tvResults.setText(titel);
                 //tvResults.setId(i);
 
                 //lv.addView(tvResults);
             }
 
-            //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titles, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
+            //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titels, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
 
             String[] id = ids.toArray(new String[ids.size()]);
-            String[] title = titles.toArray(new String[titles.size()]);
+            String[] title = titels.toArray(new String[titels.size()]);
             Double[] price = prices.toArray(new Double[prices.size()]);
             String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
             String[] desc = description.toArray(new String[description.size()]);
@@ -316,12 +314,9 @@ public class SetupChooseProduct extends Fragment {
             list.setAdapter(adapter);
 
 
-            Log.d(TAG, " " + rows);
-
-
         } catch (JSONException e) {
             throw new RuntimeException(e);
-            }
+        }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -335,13 +330,13 @@ public class SetupChooseProduct extends Fragment {
                 TextView tvTitle = (TextView) view.findViewById(R.id.tvProductTitle);
                 String idP = tvTitle.getTag().toString();
                 String image = imagesURL.get(position);
-                String title = titles.get(position);
+                String title = titels.get(position);
                 Double price = prices.get(position);
                 String desc = description.get(position);
                 extras.putString("id", idP);
                 extras.putString("image", image);
-                extras.putString("title",title);
-                extras.putDouble("price",price);
+                extras.putString("titel",title);
+                extras.putDouble("prijs",price);
                 extras.putString("description",desc);
                 productIntent.putExtras(extras);
                 startActivityForResult(productIntent, 0);

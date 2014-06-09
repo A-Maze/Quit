@@ -14,7 +14,7 @@ import com.viewpagerindicator.LinePageIndicator;
 public class UserVisibilityEvent {
 
     //method that takes care of everything that needs to be done when the fragment becomes visible
-    //takes context(getActivity()), the position of the fragment, the color it's actionbar should be and the link to it's title.
+    //takes context(getActivity()), the position of the fragment, the color it's actionbar should be and the link to it's titel.
     public static void viewIsVisible(Context context, int position,String colorName, String name){
 
                 //gets the recources
@@ -28,7 +28,7 @@ public class UserVisibilityEvent {
                 ActionBar bar = homeActivity.getActionBar();
                 ColorDrawable color = new ColorDrawable(res.getColor(colorResource));
                 bar.setBackgroundDrawable(color);
-                //sets the title
+                //sets the titel
                 int titleResource = res.getIdentifier(name, "string", context.getPackageName());
                 CharSequence title = res.getString(titleResource);
                 homeActivity.setTitle(title);

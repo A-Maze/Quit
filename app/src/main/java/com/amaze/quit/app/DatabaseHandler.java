@@ -1,6 +1,6 @@
 package com.amaze.quit.app;
 
-        import android.content.ContentValues;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -29,6 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_USER_CHALLANGE = "user_challenge";
     private static final String TABLE_LEVELS = "levels";
     private static final String TABLE_GEZONDHEID = "gezondheid";
+    private static final String TABLE_PRODUCT = "product";
 
     // User Table Columns names
     private static final String USER_UID = "uID";
@@ -76,6 +77,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String GEZONDHEID_LANGERTELEVEN = "langer_te_leven";
     private static final String GEZONDHEID_CO2 = "co2";
 
+    // Product Table Columns names
+    private static final String PRODUCT_UID = "UID";
+    private static final String PRODUCT_ID = "ID";
+    private static final String PRODUCT_TITEL = "titel";
+    private static final String PRODUCT_PRIJS = "prijs";
+    private static final String PRODUCT_IMAGE = "image";
 
 
     public DatabaseHandler(Context context) {
@@ -154,8 +161,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_GEZONDHEID_TABLE);
 
+         /* Prodcut info table */
+        String CREATE_PRODUCT_TABLE = "CREATE TABLE "
+                + TABLE_PRODUCT + "("
+                + PRODUCT_UID + " INTEGER PRIMARY KEY,"
+                + PRODUCT_ID + " TEXT,"
+                + PRODUCT_TITEL + " TEXT,"
+                + PRODUCT_PRIJS + " REAL,"
+                + PRODUCT_IMAGE + " TEXT"
+                + ")";
+        db.execSQL(CREATE_PRODUCT_TABLE);
 
     }
+
+
+
+
+
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i2) {
@@ -166,6 +190,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LEVELS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SIGARETTEN);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER_CHALLANGE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRODUCT);
         /* Create tables again*/
         onCreate(db);
     }
@@ -234,8 +259,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    public void addProduct(Artikel artikel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
+        values.put(PRODUCT_UID, artikel.getuId());
+        values.put(PRODUCT_ID, artikel.getId());
+        values.put(PRODUCT_TITEL, artikel.getTitel());
+        values.put(PRODUCT_PRIJS, artikel.getPrijs());
+        values.put(PRODUCT_IMAGE, artikel.getImage());
 
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_PRODUCT, null, values);
+        db.close(); // Closing database connection
+    }
 
 
 
@@ -410,6 +448,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return level;
     }
 
+    /* Getting single Product*/
+    public Artikel getProduct(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_PRODUCT, new String[] {
+                        PRODUCT_UID,
+                        PRODUCT_ID,
+                        PRODUCT_TITEL,
+                        PRODUCT_PRIJS,
+                        PRODUCT_IMAGE}, PRODUCT_UID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Artikel artikel = new Artikel(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                cursor.getString(2),
+                Float.parseFloat(cursor.getString(3)),
+                cursor.getString(4));
+
+        /* return contact */
+        cursor.close();
+        return artikel;
+    }
+
 
 
 
@@ -442,6 +507,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return db.update(TABLE_CHALLENGES, values, CHALLENGES_CID + " = ?",
                 new String[] { String.valueOf(challenge.getcID()) });
     }
+
+    /* Updating prodcuct */
+    public int updateProduct(Artikel artikel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PRODUCT_ID, artikel.getId());
+        values.put(PRODUCT_TITEL, artikel.getTitel());
+        values.put(PRODUCT_PRIJS, artikel.getPrijs());
+        values.put(PRODUCT_IMAGE, artikel.getImage());
+
+        /* updating row */
+        return db.update(TABLE_PRODUCT, values, PRODUCT_UID + " = ?",
+                new String[] { String.valueOf(artikel.getuId()) });
+    }
+
+
+
+
 
     public int getChallengesAmount(){
         SQLiteDatabase db = this.getWritableDatabase();

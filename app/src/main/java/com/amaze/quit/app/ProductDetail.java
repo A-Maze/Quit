@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,8 +24,17 @@ import java.net.URL;
 
 
 public class ProductDetail extends ActionBarActivity {
+
     public final static String TAG = "ProductDetail";
 
+    String id;
+    String titel;
+    Double prijs;
+    String image;
+    String desc;
+
+    String priceS;
+    String priceSd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +42,37 @@ public class ProductDetail extends ActionBarActivity {
         setContentView(R.layout.activity_product_detail);
 
         TextView tvTitle = (TextView) findViewById(R.id.tvProductDetailTitle);
-        TextView tvDesc = (TextView) findViewById(R.id.tvDescription);
+        TextView tvPrice = (TextView) findViewById(R.id.tvProductDetailPrice);
+        TextView tvDesc = (TextView) findViewById(R.id.tvProductDetailDescription);
         final ImageView ivProduct = (ImageView) findViewById(R.id.ivProductDetailImage);
+        Button bSpaar = (Button) findViewById(R.id.bProductDetailSpaar);
 
+        bSpaar.setOnClickListener(spaarProduct);
 
         Intent fromListView = getIntent();
-        String id = fromListView.getStringExtra("id");
+        id = fromListView.getStringExtra("id");
         Bundle extras = getIntent().getExtras();
         final String image = extras.getString("image");
-        String title = extras.getString("title");
-        Double price = extras.getDouble("price");
-        String desc = extras.getString("description");
+        titel = extras.getString("titel");
+        prijs = extras.getDouble("prijs");
+        priceS = Double.toString(prijs);
+        desc = extras.getString("description");
 
-        tvTitle.setText(title);
-        tvDesc.setText(Html.fromHtml(desc).toString());
+        tvTitle.setText(titel);
+        priceSd = Double.toString(prijs);
+        priceSd = priceSd.replace(".", ",");
+        Log.d(TAG, priceSd);
+        tvPrice.setText(priceSd + "");
+        tvDesc.setText(Html.fromHtml(desc).toString() + "");
+
         new Thread(new Runnable() {
             public void run() {
                 final Bitmap bitmap = loadImageFromNetwork(image);
                 ivProduct.post(new Runnable() {
                     public void run() {
                         ivProduct.setImageBitmap(bitmap);
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
+                        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
                         layoutParams.gravity= Gravity.CENTER;
                         ivProduct.setLayoutParams(layoutParams);
 
@@ -63,6 +84,19 @@ public class ProductDetail extends ActionBarActivity {
         // TextView tv = (TextView) findViewById(R.id.tvpdtest);
        // tv.setText(id);
     }
+
+    private View.OnClickListener spaarProduct = new View.OnClickListener(){
+        public void onClick(View v) {
+            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+
+            try {
+                db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+            } catch (Exception e) {
+                db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+                e.printStackTrace();
+            }
+        }
+    };
 
     private int giveDP(float dp){
         DisplayMetrics metrics = getResources().getDisplayMetrics();

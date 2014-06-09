@@ -76,7 +76,7 @@ public class Progress extends Fragment {
             String Titel = db.getLevel(userLevel).getTitel();
             levelDesc.setText(Titel);
             int nietGerooktSig = (int) days * db.getUser(1).getPerDag();
-            nietGerookt.setText("" +nietGerooktSig);
+            nietGerookt.setText("" + nietGerooktSig);
         }
         catch(NullPointerException e){
             return;

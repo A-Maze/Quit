@@ -48,7 +48,7 @@ public class Home extends FragmentActivity  {
         pager = (ViewPager)findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
 
-        //Bind the title indicator to the adapter
+        //Bind the titel indicator to the adapter
         LinePageIndicator lineIndicator = (LinePageIndicator)findViewById(R.id.indicator);
         final float density = getResources().getDisplayMetrics().density;
         lineIndicator.setViewPager(pager);

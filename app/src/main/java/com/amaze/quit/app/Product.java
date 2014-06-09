@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 
 public class Product extends Fragment {
+
+    Artikel artikel;
+
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
@@ -60,11 +63,12 @@ public class Product extends Fragment {
         int spentAmount = db.getUser(1).getSpentAmount();
         //what is left?
         float amountLeft = totalSavedAmount - spentAmount;
-        // price of the product
-        float productPrice = 400f;
-        int current = (int) Math.round((amountLeft / productPrice)*100);
+        // prijs of the product
+        //float productPrice = 400f;
+        float productPrice = db.getProduct(1).getPrijs();
+        int current = (int) Math.round((amountLeft / productPrice) * 100);
         // Get the Drawable custom_progressbar and all the textviews
-        Drawable customProgressBar =getResources().getDrawable(R.drawable.progressbar_blue);
+        Drawable customProgressBar = getResources().getDrawable(R.drawable.progressbar_blue);
         ProgressBar moneyBar = (ProgressBar) getActivity().findViewById(R.id.progressBarProduct);
         moneyBar.setProgressDrawable(customProgressBar);
         TextView tvSavedAmount = (TextView) getActivity().findViewById(R.id.tvProductSavedAmount);
@@ -75,8 +79,7 @@ public class Product extends Fragment {
             tvSavedAmount.setText("€" + amountLeft);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
-        }
-        else{
+        } else {
             //if complete turn the bar green and show a complete text
             tvSavedAmount.setText("€" + productPrice);
             tvSavedPercentage.setText("" + 100 + "%");
@@ -91,9 +94,8 @@ public class Product extends Fragment {
             tvComplete.setGravity(Gravity.CENTER);
             tvComplete.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
             linearLayout.addView(tvComplete);
-
         }
-        //always show the product price
+        //always show the product prijs
         tvProductAmount.setText("€" + productPrice);
         //close the database
         db.close();

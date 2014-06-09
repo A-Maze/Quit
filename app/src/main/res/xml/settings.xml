@@ -24,7 +24,10 @@
             android:title="@string/setupPackAmount"
             android:summary="@string/pref_pack_amount_summary"
             android:key="packAmount"/>
-        <Preference />
+        <Preference
+            android:title="@string/pref_product"
+            android:summary="@string/pref_product_summary"
+            android:key="product"/>/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_app_settings">
         <ListPreference

@@ -1,6 +1,5 @@
 package com.amaze.quit.app;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,13 +16,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -78,7 +70,7 @@ public class ProductDetail extends ActionBarActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                bitmap = loadImageFromNetwork(image);
+                final Bitmap bitmap = loadImageFromNetwork(image);
                 ivProduct.post(new Runnable() {
                     public void run() {
                         ivProduct.setImageBitmap(bitmap);
@@ -103,11 +95,19 @@ public class ProductDetail extends ActionBarActivity {
             byte[] image = getBitmapAsByteArray(bitmap);
 
             try {
-                db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
+                if(db.getProduct(1).getuId() == 1) {
+                    db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
+
+                }else{
+                    db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
+
+
+                }
             } catch (Exception e) {
                 db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 e.printStackTrace();
             }
+            finish();
         }
     };
 

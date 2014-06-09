@@ -167,6 +167,7 @@ public class Home extends FragmentActivity  {
                 //de positie van settings
                 if(position == 4){
                     Intent intent = new Intent(getApplicationContext(),Settings.class);
+                    finish();
                     startActivity(intent);
 
                 }else {

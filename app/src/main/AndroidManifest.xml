@@ -55,7 +55,11 @@
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".Home">
+            android:parentActivityName=".Home" >
+        </activity>
+        <activity
+            android:name=".ChooseProductHost"
+            android:label="@string/title_activity_choose_product_host" >
         </activity>
     </application>
 

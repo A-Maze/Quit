@@ -7,7 +7,11 @@
     android:orientation="vertical"
     >
 
-    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
     //titel + algemeen gezondheid
     <TextView
@@ -29,14 +33,34 @@
         android:textSize="17dp"
         android:textAlignment="center"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/verdrietig"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/blij"
+        android:layout_gravity="right"
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:progressDrawable="@drawable/progressbar_green"
         android:id="@+id/progressBar_algemeenGezondheid"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
 
     //maak de lijst scrollbaar
     <ScrollView

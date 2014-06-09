@@ -486,10 +486,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_PERDAG, user.getPerDag());
         values.put(USER_LEVEL, user.getLevel());
         values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
+        values.put(USER_QUIT_YEAR, user.getQuitYear());
+        values.put(USER_QUIT_MONTH, user.getQuitMonth());
+        values.put(USER_QUIT_DAY, user.getQuitDay());
+        values.put(USER_QUIT_HOUR, user.getQuitHour());
+        values.put(USER_QUIT_MINUTE, user.getQuitMinute());
 
         /* updating row */
         return db.update(TABLE_USER, values, USER_UID + " = ?",
                 new String[] { String.valueOf(user.getuID()) });
+    }
+
+    /* Updating single Siaget */
+    public int updateSigaretten(Sigaretten sigaretten) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SIGARETTEN_AANTAL, sigaretten.getAantal());
+
+        /* updating row */
+        return db.update(TABLE_SIGARETTEN, values, SIGARETTEN_SID + " = ?",
+                new String[] { String.valueOf(sigaretten.getsID()) });
     }
 
     public int updateChallenge (Challenges challenge) {

@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme" >
         <activity
-            android:name="com.amaze.quit.app.SplashScreen"
+            android:name=".SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme" >
@@ -27,30 +27,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.amaze.quit.app.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.amaze.quit.app.Setup"
+            android:name=".Setup"
             android:label="@string/title_activity_setup"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.amaze.quit.app.SetupChooseProduct"
+            android:name=".SetupChooseProduct"
             android:label="@string/title_activity_choose_product"
             android:screenOrientation="portrait"
             android:theme="@style/BlueTheme" >
         </activity>
         <activity
-            android:name="com.amaze.quit.app.Home"
+            android:name=".Home"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.amaze.quit.app.ProductDetail"
-            android:parentActivityName="com.amaze.quit.app.SetupChooseProduct"
-            android:label="@string/title_activity_product_detail" >
+            android:name=".ProductDetail"
+            android:label="@string/title_activity_product_detail"
+            android:parentActivityName=".SetupChooseProduct" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".Home">
         </activity>
     </application>
 

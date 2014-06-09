@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,8 @@ public class Home extends FragmentActivity  {
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private TypedArray navMenuIcons;
+    private ArrayList<NavDrawerItem> navDrawerItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class Home extends FragmentActivity  {
         preferedFragment = settings.getInt("pref_frag", 2);
         pager.setCurrentItem(preferedFragment);
 
+
         //initialises the navigation drawer
         navDrawer();
 
@@ -72,9 +76,7 @@ public class Home extends FragmentActivity  {
 
     };
 
-    public void setPreferedFragment(int i){
-        settings.edit().putInt("pref_frag",i).commit();
-    }
+
 
     //gets the 4 fragments
     private List<Fragment> getFragments(){
@@ -117,8 +119,7 @@ public class Home extends FragmentActivity  {
             case R.id.developer_settings:
                 launchActivity(MainActivity.class);
                 return true;
-            case R.id.setPreferedFragment:
-                setFragment();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -132,37 +133,47 @@ public class Home extends FragmentActivity  {
         startActivity(intent);
     }
 
-    private void setFragment(){
-        Resources resources = getResources();
-        final CharSequence[] items = {resources.getString(R.string.title_fragment_achievements), resources.getString(R.string.title_activity_progress), resources.getString(R.string.title_activity_product), resources.getString(R.string.title_activity_health_progress)};
-        final int[] numbers = {0,1,2,3};
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
-                .setTitle("kies uw gewenste startscherm")
-                .setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        setPreferedFragment(numbers[which]);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
     private void navDrawer() {
         mNavTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+
+        //makes the drawer items
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+        // adding nav drawer items to array
+        //Achievement
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[0], navMenuIcons.getResourceId(0, -1)));
+        //Vooruitgang
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[1], navMenuIcons.getResourceId(1, -1)));
+        //Product
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[2], navMenuIcons.getResourceId(2, -1)));
+        //Gezondheid
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[3], navMenuIcons.getResourceId(3, -1)));
+        //Instellingen
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[4], navMenuIcons.getResourceId(4, -1)));
+
+        navMenuIcons.recycle();
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mNavTitles));
+        mDrawerList.setAdapter(new NavDrawerListAdapter(getApplicationContext(), navDrawerItems));
         // Set the list's click listener
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                pager.setCurrentItem(position);
+                //de positie van settings
+                if(position == 4){
+                    Intent intent = new Intent(getApplicationContext(),Settings.class);
+                    startActivity(intent);
+
+                }else {
+                    pager.setCurrentItem(position);
+                }
                 mDrawerLayout.closeDrawers();
+
             }
         });
 
@@ -179,6 +190,11 @@ public class Home extends FragmentActivity  {
 
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setSelectedNav(pager.getCurrentItem());
+    };
 
 
     public static void setSelectedNav(int position){

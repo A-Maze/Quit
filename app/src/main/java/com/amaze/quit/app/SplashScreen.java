@@ -62,7 +62,7 @@ public class SplashScreen extends Activity {
             checkDB.getUser(1);
             checkDB.getProduct(1);
             checkDB.close();
-        } catch (SQLiteException e) {
+        } catch (Exception e) {
             return false;
         }
     return true;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,10 @@ public class CustomList extends ArrayAdapter<String> {
         DecimalFormat df = new DecimalFormat("#.00");
         price.setText(df.format(this.price[position]) + "");
 
-        new DownloadImageTask().execute(imageURL[position]);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        productImage.setImageBitmap(loadImageFromNetwork(imageURL[position]));
+        //new DownloadImageTask().execute(imageURL[position]);
         return rowView;
     }
 

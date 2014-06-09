@@ -115,7 +115,7 @@ public class Product extends Fragment {
             parameters.setMargins(0,giveDP(-30f),0,0);
             tvComplete.setGravity(Gravity.CENTER);
             tvComplete.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
-            linearLayout.addView(tvComplete);
+            linearLayout.addView(tvComplete,7);
         }
         //always show the product prijs
         tvProductAmount.setText("€" + productPrice);

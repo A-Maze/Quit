@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -34,7 +35,8 @@ public class Home extends FragmentActivity  {
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private TypedArray navMenuIcons;
+    private ArrayList<NavDrawerItem> navDrawerItems;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -152,17 +154,43 @@ public class Home extends FragmentActivity  {
         mNavTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // nav drawer icons from resources
+        navMenuIcons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
+
+        //makes the drawer items
+        navDrawerItems = new ArrayList<NavDrawerItem>();
+        // adding nav drawer items to array
+        //Achievement
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[0], navMenuIcons.getResourceId(0, -1)));
+        //Vooruitgang
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[1], navMenuIcons.getResourceId(1, -1)));
+        //Product
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[2], navMenuIcons.getResourceId(2, -1)));
+        //Gezondheid
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[3], navMenuIcons.getResourceId(3, -1)));
+        //Instellingen
+        navDrawerItems.add(new NavDrawerItem(mNavTitles[4], navMenuIcons.getResourceId(4, -1)));
+
+        navMenuIcons.recycle();
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mNavTitles));
+        mDrawerList.setAdapter(new NavDrawerListAdapter(getApplicationContext(), navDrawerItems));
         // Set the list's click listener
         mDrawerList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                pager.setCurrentItem(position);
+                //de positie van settings
+                if(position == 4){
+                    Intent intent = new Intent(getApplicationContext(),Settings.class);
+                    startActivity(intent);
+
+                }else {
+                    pager.setCurrentItem(position);
+                }
                 mDrawerLayout.closeDrawers();
+
             }
         });
 

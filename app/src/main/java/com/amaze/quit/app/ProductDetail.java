@@ -68,20 +68,20 @@ public class ProductDetail extends ActionBarActivity {
         tvPrice.setText(priceSd + "");
         tvDesc.setText(Html.fromHtml(desc).toString() + "");
 
-        new Thread(new Runnable() {
-            public void run() {
+        //new Thread(new Runnable() {
+           // public void run() {
                 bitmap = loadImageFromNetwork(image);
-                ivProduct.post(new Runnable() {
-                    public void run() {
+                //ivProduct.post(new Runnable() {
+                    //public void run() {
                         ivProduct.setImageBitmap(bitmap);
                         //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
                         layoutParams.gravity= Gravity.CENTER;
                         ivProduct.setLayoutParams(layoutParams);
-                    }
-                });
-            }
-        }).start();
+                    //}
+               // });
+            //}
+        //}).start();
 
         // TextView tv = (TextView) findViewById(R.id.tvpdtest);
        // tv.setText(id);

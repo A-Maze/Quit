@@ -94,14 +94,13 @@ public class ProductDetail extends ActionBarActivity {
             byte[] image = getBitmapAsByteArray(bitmap);
 
             try {
-                if(db.getProduct(1).getuId() == 1) {
-                    db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
 
-                }else{
+
+
                     db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
 
 
-                }
+
             } catch (Exception e) {
                 db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 e.printStackTrace();

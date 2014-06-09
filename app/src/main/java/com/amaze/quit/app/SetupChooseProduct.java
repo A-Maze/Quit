@@ -283,7 +283,7 @@ public class SetupChooseProduct extends Fragment {
 
                 Double price = Double.parseDouble(priceString);
 
-                JSONObject imagess = (JSONObject) product.getJSONArray("images").get(2);
+                JSONObject imagess = (JSONObject) product.getJSONArray("images").get(4);
                 String image = imagess.getString("url");
 
                 ids.add(id);

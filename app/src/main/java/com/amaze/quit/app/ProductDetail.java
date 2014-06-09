@@ -1,5 +1,6 @@
 package com.amaze.quit.app;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -26,6 +35,8 @@ import java.net.URL;
 public class ProductDetail extends ActionBarActivity {
 
     public final static String TAG = "ProductDetail";
+
+    Bitmap bitmap;
 
     String id;
     String titel;
@@ -67,7 +78,7 @@ public class ProductDetail extends ActionBarActivity {
 
         new Thread(new Runnable() {
             public void run() {
-                final Bitmap bitmap = loadImageFromNetwork(image);
+                bitmap = loadImageFromNetwork(image);
                 ivProduct.post(new Runnable() {
                     public void run() {
                         ivProduct.setImageBitmap(bitmap);
@@ -89,14 +100,37 @@ public class ProductDetail extends ActionBarActivity {
         public void onClick(View v) {
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
+            byte[] image = getBitmapAsByteArray(bitmap);
+
             try {
-                db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+                db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
             } catch (Exception e) {
-                db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
+                db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 e.printStackTrace();
             }
         }
     };
+
+    public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
+        return outputStream.toByteArray();
+    }
+
+    /*public void saveImage() throws IOException {
+        DefaultHttpClient mHttpClient = new DefaultHttpClient();
+        HttpGet mHttpGet = new HttpGet(image);
+        HttpResponse mHttpResponse = mHttpClient.execute(mHttpGet);
+        if (mHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            HttpEntity entity = mHttpResponse.getEntity();
+            if ( entity != null) {
+                // insert to database
+                ContentValues values = new ContentValues();
+                values.put(MyBaseColumn.MyTable.ImageField, EntityUtils.toByteArray(entity));
+                getContentResolver().insert(MyBaseColumn.MyTable.CONTENT_URI, values);
+            }
+        }
+    }*/
 
     private int giveDP(float dp){
         DisplayMetrics metrics = getResources().getDisplayMetrics();

@@ -168,7 +168,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + PRODUCT_ID + " TEXT,"
                 + PRODUCT_TITEL + " TEXT,"
                 + PRODUCT_PRIJS + " REAL,"
-                + PRODUCT_IMAGE + " TEXT"
+                + PRODUCT_IMAGE + " BLOB"
                 + ")";
         db.execSQL(CREATE_PRODUCT_TABLE);
 
@@ -468,7 +468,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1),
                 cursor.getString(2),
                 Float.parseFloat(cursor.getString(3)),
-                cursor.getString(4));
+                cursor.getBlob(4));
 
         /* return contact */
         cursor.close();

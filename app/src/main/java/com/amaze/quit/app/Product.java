@@ -1,6 +1,8 @@
 package com.amaze.quit.app;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -14,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+
+import org.w3c.dom.Text;
 
 
 public class Product extends Fragment {
@@ -71,6 +76,17 @@ public class Product extends Fragment {
         // prijs of the product
         //float productPrice = 400f;
         float productPrice = db.getProduct(1).getPrijs();
+
+        // Set titel
+        TextView tvTitel = (TextView) getActivity().findViewById(R.id.tvProgressProductTitle);
+        String titel = db.getProduct(1).getTitel();
+        tvTitel.setText(titel);
+
+        // Set image
+        ImageView ivProduct = (ImageView) getActivity().findViewById(R.id.ivProductImage);
+        Bitmap product = BitmapFactory.decodeByteArray(db.getProduct(1).getImage(), 0, db.getProduct(1).getImage().length);
+        ivProduct.setImageBitmap(product);
+
         int current = (int) Math.round((amountLeft / productPrice) * 100);
         // Get the Drawable custom_progressbar and all the textviews
         Drawable customProgressBar = getResources().getDrawable(R.drawable.progressbar_blue);
@@ -84,6 +100,7 @@ public class Product extends Fragment {
             tvSavedAmount.setText("€" + amountLeft);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
+
         } else {
             //if complete turn the bar green and show a complete text
             tvSavedAmount.setText("€" + productPrice);

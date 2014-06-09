@@ -9,9 +9,9 @@ public class Artikel {
     String id;
     String titel;
     float prijs;
-    String image;
+    byte[] image;
 
-    public Artikel (int uId, String id, String titel, float prijs, String image) {
+    public Artikel (int uId, String id, String titel, float prijs, byte[] image) {
         this.uId = uId;
         this.id = id;
         this.titel = titel;
@@ -35,7 +35,7 @@ public class Artikel {
         return prijs;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 

@@ -1,7 +1,9 @@
 package com.amaze.quit.app;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
@@ -11,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.view.View.OnClickListener;
 
 
 public class Product extends Fragment {
@@ -38,6 +42,7 @@ public class Product extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         updateSavingProgress();
+        setListeners();
     }
 
     @Override
@@ -105,6 +110,26 @@ public class Product extends Fragment {
         float fpixels = metrics.density * dp;
         int pixels = (int) (fpixels + 0.5f);
         return pixels;
+    }
+
+    private void setListeners(){
+        Button bPay = (Button) getActivity().findViewById(R.id.bPay);
+        bPay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseHandler db = new DatabaseHandler(getActivity());
+                String naam = "apple iphone 5s 16gb space grey";
+                naam = naam.replace(" ","-");
+                String id= "9200000021799649";
+                String url = "http://www.bol.com/nl/p/"+naam+"/"+id+"/";
+                Uri uri = Uri.parse(url);
+                db.close();
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+
+            }
+        });
+
     }
 
 

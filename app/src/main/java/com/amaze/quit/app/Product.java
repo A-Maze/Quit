@@ -120,10 +120,10 @@ public class Product extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseHandler db = new DatabaseHandler(getActivity());
-                String naam ="Call Of Duty: Ghosts";
+                String naam = db.getProduct(1).getTitel();
                 naam = naam.replace(" ","-");
                 naam = naam.replaceAll("[^a-zA-Z0-9]","");
-                String id= "9200000013557570";
+                String id= db.getProduct(1).getId();
                 String url = "http://www.bol.com/nl/p/"+naam+"/"+id+"/";
                 Uri uri = Uri.parse(url);
                 db.close();

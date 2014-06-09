@@ -95,6 +95,7 @@ public class ProductDetail extends ActionBarActivity {
                 db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), ""));
                 e.printStackTrace();
             }
+            finish();
         }
     };
 

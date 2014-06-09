@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -49,7 +50,17 @@ public class MainSettingsFragment extends PreferenceFragment {
         EditTextPreference packAmount = (EditTextPreference) findPreference("packAmount");
         packAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         Preference startFrag = findPreference("startFrag");
+        Preference product = findPreference("product");
 
+        //product listener
+        product.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(getActivity(),ChooseProductHost.class);
+                startActivity(intent);
+                return true;
+            }
+        });
         //quitDate listener
         quitDate.setOnPreferenceClickListener(new OnPreferenceClickListener(){
             public boolean onPreferenceClick(Preference preference){

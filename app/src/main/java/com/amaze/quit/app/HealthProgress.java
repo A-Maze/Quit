@@ -80,6 +80,7 @@ public class HealthProgress extends Fragment {
         int average = totalProgress / 9;
         ProgressBar totaalGezondheidBar = (ProgressBar) getActivity().findViewById(R.id.progressBar_algemeenGezondheid);
         totaalGezondheidBar.setProgress(average);
+        //totaalGezondheidBar.getProgressDrawable().
 
     }
 
@@ -181,7 +182,7 @@ public class HealthProgress extends Fragment {
 
     }
 
-    protected int getProgress(int id) {
+    public int getProgress(int id) {
         double progress;
         double max;
         double current;
@@ -327,12 +328,6 @@ public class HealthProgress extends Fragment {
         }
 
     }
-
-
-
-
-
-
 
 
 

@@ -83,7 +83,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_product">Product</string>
     <string name="achievement_first_steps">Eerste stapjes</string>
-    <string name="achievement_first_steps_content">Doorbreng een dag zonder te roken.</string>
+    <string name="achievement_first_steps_content">Breng een dag door zonder te roken.</string>
     <string name="achievement_deep_breath">Even diep ademhalen</string>
     <string name="achievement_deep_breath_content">Verbeter de gezondheid van je longen met 10%.</string>
     <string name="achievement_kaching">Ka-ching!</string>

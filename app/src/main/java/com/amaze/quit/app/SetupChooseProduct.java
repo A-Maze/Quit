@@ -2,54 +2,38 @@ package com.amaze.quit.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.DoubleBuffer;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SetupChooseProduct extends Fragment {
 
@@ -58,8 +42,14 @@ public class SetupChooseProduct extends Fragment {
     EditText etSearch;
     public String searchQuery;
     ArrayAdapter<String> adapter;
-
+    ArrayList<String> ids;
+    ArrayList<String> titles;
+    ArrayList<Double> prices;
+    ArrayList<String> imagesURL;
+    ArrayList<String> description;
+    protected String result;
     CustomList cl;
+
 
     public static final SetupChooseProduct newInstance() {
         SetupChooseProduct f = new SetupChooseProduct();
@@ -81,16 +71,19 @@ public class SetupChooseProduct extends Fragment {
         return v;
     }
 
+    protected void setResult(String result){
+        this.result = result;
+    }
+
 
     protected View.OnClickListener searchProduct = new View.OnClickListener(){
         public void onClick(View v){
+            InputMethodManager inputManager = (InputMethodManager)
+                    getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
+            inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
 
-            // lolol
-            ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
-
-            if((lv).getChildCount() > 0)
-                lv.setAdapter(null);
 
             searchQuery = etSearch.getText().toString();
 
@@ -104,7 +97,7 @@ public class SetupChooseProduct extends Fragment {
                 String url = "https://api.bol.com/catalog/v4/search/?apikey=EDEFFA4EB07D4BB6AEB71C011711381E&format=json&limit=10&q=" + searchQuery;
 
 
-                String result = GET(url);
+                new DownloadTask().execute(url);
 
                 if (!isOnline()) {
                     Log.d(TAG, "no internet");
@@ -113,84 +106,7 @@ public class SetupChooseProduct extends Fragment {
                     Log.d(TAG, "wel inter");
                 }
 
-                try {
-                    JSONObject jsonn = new JSONObject(result);
 
-                    String total = jsonn.toString(1);
-                    //Log.d(TAG, "result: " + total);
-
-
-                    JSONArray products = jsonn.getJSONArray("products");
-                    int rows = products.length();
-
-                    ArrayList<String> ids = new ArrayList<String>();
-                    ArrayList<String> titles = new ArrayList<String>();
-                    ArrayList<Double> prices = new ArrayList<Double>();
-                    ArrayList<String> imagesURL = new ArrayList<String>();
-
-                    JSONObject product = new JSONObject();
-                    for (int i = 0; i < rows; i++) {
-                        product = (JSONObject) jsonn.getJSONArray("products").get(i);
-
-                        String title = product.getString("title");
-                        String id = product.getString("id");
-
-                        JSONObject offerData = (JSONObject) product.get("offerData");
-                        JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
-                        String priceString = offers.getString("price");
-
-                        Double price = Double.parseDouble(priceString);
-
-                        JSONObject imagess = (JSONObject) product.getJSONArray("images").get(1);
-                        String image = imagess.getString("url");
-
-                        ids.add(id);
-                        titles.add(title);
-                        prices.add(price);
-                        imagesURL.add(image);
-
-                        //titles.add(title);
-
-                        //TextView tvResults = new TextView(getActivity());
-                        //tvResults.setText(title);
-                        //tvResults.setId(i);
-
-                        //lv.addView(tvResults);
-                    }
-
-                    //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titles, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
-
-                    String[] id = ids.toArray(new String[ids.size()]);
-                    String[] title = titles.toArray(new String[titles.size()]);
-                    Double[] price = prices.toArray(new Double[prices.size()]);
-                    String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
-
-
-                    CustomList adapter = new
-                            CustomList(getActivity(), id, title, price, imageURL);
-                    ListView list = (ListView) getActivity().findViewById(R.id.lvResult);
-                    list.setAdapter(adapter);
-
-
-                    Log.d(TAG, " " + rows);
-
-
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        // When clicked, show a toast with the TextView text
-                        Intent productIntent = new Intent(view.getContext(), ProductDetail.class);
-
-                        TextView title = (TextView) view.findViewById(R.id.tvProductTitle);
-                        String idP = title.getTag().toString();
-                        productIntent.putExtra("id", idP);
-                        startActivityForResult(productIntent, 0);
-                    }
-                });
             }
 
         }
@@ -208,57 +124,67 @@ public class SetupChooseProduct extends Fragment {
 
 
 
-    public static String GET(String url){
-        InputStream inputStream = null;
-        String result = "";
-        try {
+    public class DownloadTask extends AsyncTask<String,Void,String> {
 
-            // create HttpClient
-            HttpClient httpclient = new DefaultHttpClient();
-            Log.d(TAG, "cleint");
+        protected String doInBackground(String... urls) {
+            InputStream inputStream = null;
+            String result = "";
+            try {
+
+                // create HttpClient
+                HttpClient httpclient = new DefaultHttpClient();
+                Log.d(TAG, "cleint");
 
 
-            // make GET request to the given URL
+                // make GET request to the given URL
 
-            if (android.os.Build.VERSION.SDK_INT > 9) {
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
+                if (android.os.Build.VERSION.SDK_INT > 9) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+                }
+
+                HttpResponse httpResponse = httpclient.execute(new HttpGet(urls[0]));
+
+
+                Log.d(TAG, "res[pon");
+
+                // receive response as inputStream
+                inputStream = httpResponse.getEntity().getContent();
+                Log.d(TAG, "repsoncontent");
+
+                // convert inputstream to string
+                if (inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Did not work!";
+                Log.d(TAG, "convert");
+
+            } catch (Exception e) {
+                Log.d("InputStream", e.getLocalizedMessage());
             }
 
-            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
-
-
-            Log.d(TAG, "res[pon");
-
-            // receive response as inputStream
-            inputStream = httpResponse.getEntity().getContent();
-            Log.d(TAG, "repsoncontent");
-
-            // convert inputstream to string
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
-            Log.d(TAG, "convert");
-
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
+            return result;
         }
 
-        return result;
+        protected void onPostExecute(String result) {
+            fillList(result);
+        }
+
+
+        private String convertInputStreamToString(InputStream inputStream) throws IOException{
+            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+            String line = "";
+            String result = "";
+            while((line = bufferedReader.readLine()) != null)
+                result += line;
+
+            inputStream.close();
+            return result;
+
+        }
     }
 
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
 
-        inputStream.close();
-        return result;
-
-    }
 
 
     /*
@@ -321,5 +247,107 @@ public class SetupChooseProduct extends Fragment {
         return sb.toString();
     }
         */
+
+    protected void fillList(String result){
+        this.result = result;
+        // lolol
+        ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
+
+        if((lv).getChildCount() > 0)
+            lv.setAdapter(null);
+
+        try {
+            JSONObject jsonn = new JSONObject(result);
+
+            String total = jsonn.toString(1);
+            //Log.d(TAG, "result: " + total);
+
+
+            JSONArray products = jsonn.getJSONArray("products");
+            int rows = products.length();
+
+            ids = new ArrayList<String>();
+            titles = new ArrayList<String>();
+            prices = new ArrayList<Double>();
+            imagesURL = new ArrayList<String>();
+            description = new ArrayList<String>();
+
+            JSONObject product = new JSONObject();
+            for (int i = 0; i < rows; i++) {
+                product = (JSONObject) jsonn.getJSONArray("products").get(i);
+
+                String title = product.getString("title");
+                String id = product.getString("id");
+                String desc = product.getString("shortDescription");
+                JSONObject offerData = (JSONObject) product.get("offerData");
+                JSONObject offers = (JSONObject) offerData.getJSONArray("offers").get(0);
+                String priceString = offers.getString("price");
+
+                Double price = Double.parseDouble(priceString);
+
+                JSONObject imagess = (JSONObject) product.getJSONArray("images").get(1);
+                String image = imagess.getString("url");
+
+                ids.add(id);
+                titles.add(title);
+                prices.add(price);
+                imagesURL.add(image);
+                description.add(desc);
+                //titles.add(title);
+
+                //TextView tvResults = new TextView(getActivity());
+                //tvResults.setText(title);
+                //tvResults.setId(i);
+
+                //lv.addView(tvResults);
+            }
+
+            //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titles, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
+
+            String[] id = ids.toArray(new String[ids.size()]);
+            String[] title = titles.toArray(new String[titles.size()]);
+            Double[] price = prices.toArray(new Double[prices.size()]);
+            String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
+            String[] desc = description.toArray(new String[description.size()]);
+
+            CustomList adapter = new
+                    CustomList(getActivity(), id, title, price, imageURL);
+            ListView list = (ListView) getActivity().findViewById(R.id.lvResult);
+            list.setAdapter(adapter);
+
+
+            Log.d(TAG, " " + rows);
+
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+            }
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // extra om mee te geven naar intent
+                Bundle extras = new Bundle();
+                // When clicked, show a toast with the TextView text
+                Intent productIntent = new Intent(view.getContext(), ProductDetail.class);
+
+
+                TextView tvTitle = (TextView) view.findViewById(R.id.tvProductTitle);
+                String idP = tvTitle.getTag().toString();
+                String image = imagesURL.get(position);
+                String title = titles.get(position);
+                Double price = prices.get(position);
+                String desc = description.get(position);
+                extras.putString("id", idP);
+                extras.putString("image", image);
+                extras.putString("title",title);
+                extras.putDouble("price",price);
+                extras.putString("description",desc);
+                productIntent.putExtras(extras);
+                startActivityForResult(productIntent, 0);
+            }
+        });
+        return;
+    }
 
 }

@@ -40,6 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_QUIT_DAY = "quit_day";
     private static final String USER_QUIT_HOUR = "quit_hour";
     private static final String USER_QUIT_MINUTE = "quit_minute";
+    private static final String USER_SPENT_AMOUNT = "spent_amount";
 
     // Sigaretten Table Columns namesss
     private static final String SIGARETTEN_SID = "sID";
@@ -96,7 +97,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + USER_QUIT_MONTH + " INTEGER,"
                 + USER_QUIT_DAY + " INTEGER,"
                 + USER_QUIT_HOUR + " INTEGER,"
-                + USER_QUIT_MINUTE + " INTEGER"
+                + USER_QUIT_MINUTE + " INTEGER,"
+                + USER_SPENT_AMOUNT + " INTEGER"
                 + ")";
         db.execSQL(CREATE_USER_TABLE);
 
@@ -181,6 +183,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_DAY, user.getQuitDay());
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
+        values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
 
         // Inserting Row
         assert db != null;
@@ -256,7 +259,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_QUIT_MONTH,
                         USER_QUIT_DAY,
                         USER_QUIT_HOUR,
-                        USER_QUIT_MINUTE}, USER_UID + "=?",
+                        USER_QUIT_MINUTE,
+                        USER_SPENT_AMOUNT}, USER_UID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -270,7 +274,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(5)),
                 Integer.parseInt(cursor.getString(6)),
                 Integer.parseInt(cursor.getString(7)),
-                Integer.parseInt(cursor.getString(8)) );
+                Integer.parseInt(cursor.getString(8)),
+                Integer.parseInt(cursor.getString(9)));
         /* return contact */
         cursor.close();
         return user;
@@ -415,6 +420,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_SID, user.getsID());
         values.put(USER_PERDAG, user.getPerDag());
         values.put(USER_LEVEL, user.getLevel());
+        values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
 
         /* updating row */
         return db.update(TABLE_USER, values, USER_UID + " = ?",

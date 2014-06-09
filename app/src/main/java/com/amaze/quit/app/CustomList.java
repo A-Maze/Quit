@@ -3,6 +3,7 @@ package com.amaze.quit.app;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class CustomList extends ArrayAdapter<String> {
     private final String[] title;
     private final Double[] price;
     private final String[] imageURL;
-    private Bitmap productImage;
+    private ImageView productImage;
 
     public CustomList(Activity context,
                       String[] id, String[] title, Double[] price, String[] imageURL) {
@@ -44,18 +45,35 @@ public class CustomList extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.listview_bol, null, true);
         TextView title = (TextView) rowView.findViewById(R.id.tvProductTitle);
         TextView price = (TextView) rowView.findViewById(R.id.tvProductPrice);
-        ImageView productImage = (ImageView) rowView.findViewById(R.id.ivProductImages);
+        productImage = (ImageView) rowView.findViewById(R.id.ivProductImages);
 
         title.setText(this.title[position]);
         title.setTag(id[position]);
 
         DecimalFormat df = new DecimalFormat("#.00");
         price.setText(df.format(this.price[position]) + "");
-        productImage.setImageBitmap(getBitmapFromURL(imageURL[position]));
+
+        new DownloadImageTask().execute(imageURL[position]);
         return rowView;
     }
 
-    public static Bitmap getBitmapFromURL(String src) {
+
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        /** The system calls this to perform work in a worker thread and
+         * delivers it the parameters given to AsyncTask.execute() */
+        protected Bitmap doInBackground(String... urls) {
+            return loadImageFromNetwork(urls[0]);
+        }
+
+        /** The system calls this to perform work in the UI thread and delivers
+         * the result from doInBackground() */
+        protected void onPostExecute(Bitmap result) {
+            productImage.setImageBitmap(result);
+        }
+    }
+
+    public static Bitmap loadImageFromNetwork(String src) {
         try {
             //Log.e("src", src);
             URL url = new URL(src);

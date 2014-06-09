@@ -60,14 +60,16 @@ public class Achievements extends Fragment {
     private void updateCompleted(){
         DatabaseHandler db = new DatabaseHandler(getActivity());
         Drawable checkmark = getResources().getDrawable(R.drawable.check_mark_green);
+        String[] imageArray = {"first_steps","take_a_deep_breath","kaching","money_in_the_bank","extra_life","invincible","return_on_investment","worth_it","one_down","not_hard"};
         for(int i = 1; i <= db.getChallengesAmount(); i++){
             int behaald = db.getChallenge(i).getBehaald();
             if(behaald > 0){
                 int titleID = getResources().getIdentifier("tvC" + i,"id",getActivity().getPackageName());
                 int contextID = getResources().getIdentifier("tvCC" + i,"id",getActivity().getPackageName());
                 TextView achievementContext = (TextView) getActivity().findViewById(contextID);
-                Drawable drawables[] = achievementContext.getCompoundDrawables();
-                achievementContext.setCompoundDrawablesWithIntrinsicBounds(drawables[0],null,checkmark,null);
+                int leftImage = getResources().getIdentifier(imageArray[i-1] + "_achievement_complete", "drawable",getActivity().getPackageName());
+                Drawable completedDrawable = getResources().getDrawable(leftImage);
+                achievementContext.setCompoundDrawablesWithIntrinsicBounds(completedDrawable,null,checkmark,null);
                 TextView achievementTitle = (TextView) getActivity().findViewById(titleID);
                 achievementTitle.setTextColor(getResources().getColor(R.color.green));
             }

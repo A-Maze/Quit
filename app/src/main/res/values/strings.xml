@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">1 2 Quit</string>
@@ -100,5 +100,17 @@
     <string name="level">level</string>
     // Product choose    <string name="product_result">Geen resultaat</string>
     <string name="title_activity_product_detail">ProductDetail</string>
+    //product fragment
+    <string name="product_product_price">€0,00</string>
+    <string name="product_saved_amount">€0,00</string>
+    <string name="product_product_percentage">100%</string>
+    <string name="product_saved_percentage">0%</string>
+
+//progress
+    <string name="quitDate">U stopte met roken:</string>
+    <string name="dagenzonderroken">Dagen zonder roken:</string>
+    <string name="nietgerooktesigaretten">Niet gerookte sigaretten:</string>
+    <string name="bespaardegeld">Bepaard geld:</string>
+    <string name="extradagen">Extra dagen te leven:</string>
 
 </resources>

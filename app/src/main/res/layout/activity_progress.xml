@@ -14,57 +14,127 @@
         android:text="@string/title_activity_progress"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="40sp"/>
-
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvSparedMoney"
-        android:text="@string/sparedMoney"
-        android:layout_marginTop="60dp"
-        android:textSize="40sp"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvDayProgress"
-        android:text="@string/dayProgress"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:textSize="40sp"/>
-
-
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:id="@+id/tvLevel"
-    android:text="@string/level"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="60dp"
-    android:textSize="40sp"/>
+        android:id="@+id/tv3"
+        android:text="@string/dagenzonderroken"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15sp"
+        android:layout_gravity="left" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/tvLevelDesc"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/tvDagenZonderRoken"
+        android:layout_marginRight="70dp"
+        android:textSize="20sp"
+        android:layout_gravity="right"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/calendar"/>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvSparedDays"
-        android:text="@string/sparedDays"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:textSize="15sp"/>
+        android:id="@+id/tv4"
+        android:text="@string/nietgerooktesigaretten"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15sp"
+        android:layout_gravity="left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvNietGerookteSigaretten"
+        android:layout_marginRight="70dp"
+        android:textSize="20sp"
+        android:drawablePadding="10dp"
+        android:layout_gravity="right"
+        android:drawableLeft="@drawable/trophy"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tv6"
+        android:text="@string/bespaardegeld"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15sp"
+        android:layout_gravity="left"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvBespaardeGeld"
+        android:layout_marginRight="70dp"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/pig"
+        android:drawablePadding="10dp"
+        android:layout_gravity="right" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tv8"
+        android:text="@string/level"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15sp"
+        android:layout_gravity="left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvLevel"
+        android:layout_marginRight="70dp"
+        android:textSize="20sp"
+        android:layout_gravity="right" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/tvQuitDateTitle"
+        android:text="@string/extradagen"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textSize="15sp"
+        android:layout_gravity="left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvExtraDagen"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/clock"
+        android:layout_marginRight="70dp"
+        android:drawablePadding="10dp"
+        android:layout_gravity="right" />
+
+
+
 </LinearLayout>

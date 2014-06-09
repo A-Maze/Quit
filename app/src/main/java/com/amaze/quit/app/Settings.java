@@ -24,11 +24,4 @@ public class Settings extends PreferenceActivity {
 
 
 
-    /**
-     * This fragment contains a second-level set of preference that you
-     * can get to by tapping an item in the first preferences fragment.
-     */
-
-
-
 }

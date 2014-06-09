@@ -72,6 +72,10 @@ public class SplashScreen extends Activity {
     private void fillDataBase() {
         DatabaseHandler db = new DatabaseHandler(this);
         //Sigaretten
+        db.addSigarette(new Sigaretten(1,2f,"Chesterfield",19,4,5f));
+        db.addSigarette(new Sigaretten(1,2f,"Marlboro",19,4,5f));
+        db.addSigarette(new Sigaretten(1,2f,"Lucky Strike",19,4,5f));
+        db.addSigarette(new Sigaretten(1,2f,"Camel",19,4,5f));
 
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
@@ -96,11 +100,11 @@ public class SplashScreen extends Activity {
 
         //levels
         Levels l1,l2,l3,l4,l5;
-        l1 = new Levels(1,"ketting roker","", 0);
-        l2 = new Levels(2,"geen inspirate","", 5);
-        l3 = new Levels(3,"geen inspiratie!","", 10);
-        l4 = new Levels(4,"nog Steeds geen inspiratie","", 20);
-        l5 = new Levels(5,"oneinding","",1000000000);
+        l1 = new Levels(1,"stoomboot","", 0);
+        l2 = new Levels(2,"kettingroker","", 5);
+        l3 = new Levels(3,"oud omaatje conditie","", 10);
+        l4 = new Levels(4,"normaal mens","", 20);
+        l5 = new Levels(5,"super fit","",1000000000);
 
         int aantalLevels = 5;
 

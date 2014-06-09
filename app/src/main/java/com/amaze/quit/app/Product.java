@@ -118,9 +118,10 @@ public class Product extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseHandler db = new DatabaseHandler(getActivity());
-                String naam = "apple iphone 5s 16gb space grey";
+                String naam ="Call Of Duty: Ghosts";
                 naam = naam.replace(" ","-");
-                String id= "9200000021799649";
+                naam = naam.replaceAll("[^a-zA-Z0-9]","");
+                String id= "9200000013557570";
                 String url = "http://www.bol.com/nl/p/"+naam+"/"+id+"/";
                 Uri uri = Uri.parse(url);
                 db.close();

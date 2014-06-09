@@ -4,22 +4,35 @@
     <PreferenceCategory android:title="@string/pref_user_settings">
         <Preference
             android:title="@string/pref_quit_date"
-            android:summary="@string/pref_quit_date_summary"/>
+            android:summary="@string/pref_quit_date_summary"
+            android:key="quitDate"/>
+        <Preference
+            android:title="@string/pref_quit_time"
+            android:summary="@string/pref_quit_time_summary"
+            android:key="quitTime"/>
         <ListPreference
             android:title="@string/setupBrand"
-            android:summary="@string/pref_brand_summary"/>
+            android:summary="@string/pref_brand_summary"
+            android:key="brand"
+            android:entries="@array/brandArray"
+            android:entryValues="@array/brandArrayValues"/>
         <EditTextPreference
             android:title="@string/setupDayAmount"
-            android:summary="@string/pref_day_amount_summary"/>
+            android:summary="@string/pref_day_amount_summary"
+            android:key="dayAmount"/>
         <EditTextPreference
             android:title="@string/setupPackAmount"
-            android:summary="@string/pref_pack_amount_summary"/>
+            android:summary="@string/pref_pack_amount_summary"
+            android:key="packAmount"/>
         <Preference />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_app_settings">
         <ListPreference
             android:title="@string/prefered_fragment"
-            android:summary="@string/pref_frag_summary"/>
+            android:summary="@string/pref_frag_summary"
+            android:entries="@array/preferedFragment"
+            android:entryValues="@array/preferedFragmentValues"
+            android:key="startFrag"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

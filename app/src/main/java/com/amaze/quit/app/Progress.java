@@ -30,6 +30,8 @@ public class Progress extends Fragment {
         return v;
     }
 
+
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

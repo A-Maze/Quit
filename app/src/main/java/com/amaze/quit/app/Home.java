@@ -37,6 +37,7 @@ public class Home extends FragmentActivity  {
     private ActionBarDrawerToggle mDrawerToggle;
     private TypedArray navMenuIcons;
     private ArrayList<NavDrawerItem> navDrawerItems;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -64,6 +65,7 @@ public class Home extends FragmentActivity  {
         preferedFragment = settings.getInt("pref_frag", 2);
         pager.setCurrentItem(preferedFragment);
 
+
         //initialises the navigation drawer
         navDrawer();
 
@@ -74,9 +76,7 @@ public class Home extends FragmentActivity  {
 
     };
 
-    public void setPreferedFragment(int i){
-        settings.edit().putInt("pref_frag",i).commit();
-    }
+
 
     //gets the 4 fragments
     private List<Fragment> getFragments(){
@@ -119,8 +119,7 @@ public class Home extends FragmentActivity  {
             case R.id.developer_settings:
                 launchActivity(MainActivity.class);
                 return true;
-            case R.id.setPreferedFragment:
-                setFragment();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -132,22 +131,6 @@ public class Home extends FragmentActivity  {
     private void launchActivity(Class activity){
         Intent intent = new Intent(this,activity);
         startActivity(intent);
-    }
-
-    private void setFragment(){
-        Resources resources = getResources();
-        final CharSequence[] items = {resources.getString(R.string.title_fragment_achievements), resources.getString(R.string.title_activity_progress), resources.getString(R.string.title_activity_product), resources.getString(R.string.title_activity_health_progress)};
-        final int[] numbers = {0,1,2,3};
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
-                .setTitle("kies uw gewenste startscherm")
-                .setItems(items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        setPreferedFragment(numbers[which]);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     private void navDrawer() {
@@ -207,6 +190,11 @@ public class Home extends FragmentActivity  {
 
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setSelectedNav(pager.getCurrentItem());
+    };
 
 
     public static void setSelectedNav(int position){

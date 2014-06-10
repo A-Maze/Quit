@@ -1,6 +1,7 @@
 package com.amaze.quit.app;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -40,8 +41,9 @@ public class UpdateStats {
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         daysQuit = days;
-
-        bespaardeMoneys = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getSigaret(db.getUser(1).getsID()).getPrijs()) * db.getUser(1).getPerDag() * days;
+        Log.d("aantal",Integer.toString(db.getSigaret(db.getUser(1).getsID()).getAantal()));
+        Log.d("sID setup",Integer.toString(db.getSigaret(db.getUser(1).getsID()).getsID()));
+        bespaardeMoneys = (days / (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag())) * db.getSigaret(db.getUser(1).getsID()).getPrijs();
         bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
         bespaardeMoneys = bespaardeMoneys / 100;
 

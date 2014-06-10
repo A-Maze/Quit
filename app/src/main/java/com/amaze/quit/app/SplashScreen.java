@@ -74,9 +74,9 @@ public class SplashScreen extends Activity {
         DatabaseHandler db = new DatabaseHandler(this);
         //Sigaretten
         db.addSigarette(new Sigaretten(1,2f,"Chesterfield",19,4,5f));
-        db.addSigarette(new Sigaretten(1,2f,"Marlboro",19,4,5f));
-        db.addSigarette(new Sigaretten(1,2f,"Lucky Strike",19,4,5f));
-        db.addSigarette(new Sigaretten(1,2f,"Camel",19,4,5f));
+        db.addSigarette(new Sigaretten(2,2f,"Marlboro",19,4,5f));
+        db.addSigarette(new Sigaretten(3,2f,"Lucky Strike",19,4,5f));
+        db.addSigarette(new Sigaretten(4,2f,"Camel",19,4,5f));
 
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;

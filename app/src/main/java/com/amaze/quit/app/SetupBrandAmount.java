@@ -71,13 +71,19 @@ public class SetupBrandAmount extends Fragment  {
 
 
         sigarettenList = new String[] {
-                db.getSigaret(1).getMerk()
+                db.getSigaret(1).getMerk(),
+                db.getSigaret(2).getMerk(),
+                db.getSigaret(3).getMerk(),
+                db.getSigaret(4).getMerk()
         };
 
         sigaretten = new Sigaretten[] {
-                db.getSigaret(1)
+                db.getSigaret(1),
+                db.getSigaret(2),
+                db.getSigaret(3),
+                db.getSigaret(4)
         };
-
+        db.close();
     }
 
 

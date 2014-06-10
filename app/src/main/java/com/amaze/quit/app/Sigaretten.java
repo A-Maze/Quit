@@ -54,7 +54,7 @@ public class Sigaretten {
     }
 
     public void setAantal(int aantal) {
-        aantal = aantal;
+        this.aantal = aantal;
     }
 
     public float getTeer() {

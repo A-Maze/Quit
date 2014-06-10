@@ -475,17 +475,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return artikel;
     }
 
-    public boolean isProductThere(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM CAT_BUD_TAB", null);
-        if (cur != null) {
-            cur.moveToFirst();                       // Always one row returned.
-            if (cur.getInt (0) == 0) {               // Zero count means empty table.
-                return false;
-            }
-        }
-        return true;
-    }
+
 
 
 

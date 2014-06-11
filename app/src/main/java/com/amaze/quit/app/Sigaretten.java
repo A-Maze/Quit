@@ -13,10 +13,7 @@ public class Sigaretten {
     float prijs;
 
 
-
-
-
-    public Sigaretten( int sID, float nicotine, String merk, int aantal, float teer, float prijs) {
+    public Sigaretten(int sID, float nicotine, String merk, int aantal, float teer, float prijs) {
         this.nicotine = nicotine;
         this.sID = sID;
         this.merk = merk;

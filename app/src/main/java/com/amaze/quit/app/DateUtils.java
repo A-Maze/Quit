@@ -20,15 +20,15 @@ public final class DateUtils {
         return cal;
     }
 
-    public static long GetMinutesBetween (Calendar minDate, Calendar maxDate) {
-      return (maxDate.getTimeInMillis() - minDate.getTimeInMillis())/(60*1000);
+    public static long GetMinutesBetween(Calendar minDate, Calendar maxDate) {
+        return (maxDate.getTimeInMillis() - minDate.getTimeInMillis()) / (60 * 1000);
     }
 
-    public static long GetMinutesSince (Calendar date) {
-        return (now().getTimeInMillis() - date.getTimeInMillis())/(60*1000);
+    public static long GetMinutesSince(Calendar date) {
+        return (now().getTimeInMillis() - date.getTimeInMillis()) / (60 * 1000);
     }
 
-    public static Calendar now () {
+    public static Calendar now() {
         return GregorianCalendar.getInstance();
     }
 }

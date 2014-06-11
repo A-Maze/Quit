@@ -62,16 +62,19 @@ public class CustomList extends ArrayAdapter<String> {
     }
 
 
-
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        /** The system calls this to perform work in a worker thread and
-         * delivers it the parameters given to AsyncTask.execute() */
+        /**
+         * The system calls this to perform work in a worker thread and
+         * delivers it the parameters given to AsyncTask.execute()
+         */
         protected Bitmap doInBackground(String... urls) {
             return loadImageFromNetwork(urls[0]);
         }
 
-        /** The system calls this to perform work in the UI thread and delivers
-         * the result from doInBackground() */
+        /**
+         * The system calls this to perform work in the UI thread and delivers
+         * the result from doInBackground()
+         */
         protected void onPostExecute(Bitmap result) {
             productImage.setImageBitmap(result);
         }
@@ -90,7 +93,7 @@ public class CustomList extends ArrayAdapter<String> {
             return myBitmap;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("Exception",e.getMessage());
+            Log.e("Exception", e.getMessage());
             return null;
         }
     }

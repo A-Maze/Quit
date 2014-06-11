@@ -11,7 +11,7 @@ public class Artikel {
     float prijs;
     byte[] image;
 
-    public Artikel (int uId, String id, String titel, float prijs, byte[] image) {
+    public Artikel(int uId, String id, String titel, float prijs, byte[] image) {
         this.uId = uId;
         this.id = id;
         this.titel = titel;

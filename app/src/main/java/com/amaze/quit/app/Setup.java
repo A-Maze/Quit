@@ -26,11 +26,11 @@ public class Setup extends FragmentActivity {
 
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
 
-        ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
+        ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
 
         //Bind the titel indicator to the adapter
-        LinePageIndicator lineIndicator = (LinePageIndicator)findViewById(R.id.indicator);
+        LinePageIndicator lineIndicator = (LinePageIndicator) findViewById(R.id.indicator);
         final float density = getResources().getDisplayMetrics().density;
         lineIndicator.setViewPager(pager);
         lineIndicator.setSelectedColor(getResources().getColor(R.color.blue));
@@ -39,12 +39,10 @@ public class Setup extends FragmentActivity {
         lineIndicator.setLineWidth(30 * density);
 
 
-
-
     }
 
 
-    private List<Fragment> getFragments(){
+    private List<Fragment> getFragments() {
         List<Fragment> fList = new ArrayList<Fragment>();
 
         fList.add(SetupQuitDate.newInstance());
@@ -62,6 +60,7 @@ public class Setup extends FragmentActivity {
             super(fm);
             this.fragments = fragments;
         }
+
         @Override
         public Fragment getItem(int position) {
             return this.fragments.get(position);
@@ -72,10 +71,6 @@ public class Setup extends FragmentActivity {
             return this.fragments.size();
         }
     }
-
-
-
-
 
 
 }

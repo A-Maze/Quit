@@ -40,7 +40,7 @@ public class HealthProgress extends Fragment {
 
         int tId = getResources().getIdentifier("health_procent" + id, "id", a.getPackageName());
         TextView t = (TextView) a.findViewById(tId);
-        t.setText(progress+"%");
+        t.setText(progress + "%");
 
         long tijd = getRemainingTime(id);
 
@@ -53,15 +53,14 @@ public class HealthProgress extends Fragment {
         TextView timer = (TextView) a.findViewById(timerId);
 
         String timerText = "";
-        if(dagen > 0) {
-            if(dagen == 1) {
+        if (dagen > 0) {
+            if (dagen == 1) {
                 timerText += dagen + " dag ";
-            }
-            else {
+            } else {
                 timerText += dagen + " dagen ";
             }
         }
-        if(uren > 0) {
+        if (uren > 0) {
             timerText += uren + " uur ";
 
         }
@@ -74,7 +73,7 @@ public class HealthProgress extends Fragment {
     protected void drawAverage() {
         //teken de progress van de algemene gezondheid bar (gemiddelde van alle andere)
         int totalProgress = 0;
-        for(int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             totalProgress += getProgress(i);
         }
         int average = totalProgress / 9;
@@ -89,7 +88,7 @@ public class HealthProgress extends Fragment {
         Date today = new Date();
 
         //teken de progress van elke individuele bar + procenten
-        for(int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             drawElements(i);
         }
 
@@ -179,7 +178,6 @@ public class HealthProgress extends Fragment {
            */
 
 
-
     }
 
     public int getProgress(int id) {
@@ -195,21 +193,51 @@ public class HealthProgress extends Fragment {
         db.close();
 
         switch (id) {
-            case 1: current = stoppedMinutes; max = 1*24*60; break; // max in days
-            case 2: current = stoppedMinutes; max = 365*24*60; break;
-            case 3: current = stoppedMinutes; max = 2*24*60; break;
-            case 4: current = stoppedMinutes; max = 4*24*60; break;
-            case 5: current = stoppedMinutes; max = 2*24*60; break;
-            case 6: current = stoppedMinutes; max = 40*24*60; break;
-            case 7: current = stoppedMinutes; max = 14*24*60; break;
-            case 8: current = stoppedMinutes; max = 3*365*24*60; break;
-            case 9: current = stoppedMinutes; max = 10*365*24*60; break;
+            case 1:
+                current = stoppedMinutes;
+                max = 1 * 24 * 60;
+                break; // max in days
+            case 2:
+                current = stoppedMinutes;
+                max = 365 * 24 * 60;
+                break;
+            case 3:
+                current = stoppedMinutes;
+                max = 2 * 24 * 60;
+                break;
+            case 4:
+                current = stoppedMinutes;
+                max = 4 * 24 * 60;
+                break;
+            case 5:
+                current = stoppedMinutes;
+                max = 2 * 24 * 60;
+                break;
+            case 6:
+                current = stoppedMinutes;
+                max = 40 * 24 * 60;
+                break;
+            case 7:
+                current = stoppedMinutes;
+                max = 14 * 24 * 60;
+                break;
+            case 8:
+                current = stoppedMinutes;
+                max = 3 * 365 * 24 * 60;
+                break;
+            case 9:
+                current = stoppedMinutes;
+                max = 10 * 365 * 24 * 60;
+                break;
 
-            default: current = 100; max = 100; break;
+            default:
+                current = 100;
+                max = 100;
+                break;
 
         }
         progress = (current / max) * 100;
-        if(progress > 100) {
+        if (progress > 100) {
             progress = 100;
         }
         return (int) progress;
@@ -227,28 +255,46 @@ public class HealthProgress extends Fragment {
         db.close();
 
         switch (id) {
-            case 1: maxDate.add(Calendar.DAY_OF_MONTH, 1); break; // STOPDATUM + HOEVEEL DAGEN HET DUURT
-            case 2: maxDate.add(Calendar.YEAR, 1); break;
-            case 3: maxDate.add(Calendar.DAY_OF_MONTH, 2); break;
-            case 4: maxDate.add(Calendar.DAY_OF_MONTH, 4); break;
-            case 5: maxDate.add(Calendar.DAY_OF_MONTH, 2); break;
-            case 6: maxDate.add(Calendar.DAY_OF_MONTH, 40); break;
-            case 7: maxDate.add(Calendar.DAY_OF_MONTH, 14); break;
-            case 8: maxDate.add(Calendar.YEAR, 3); break;
-            case 9: maxDate.add(Calendar.YEAR, 10); break;
+            case 1:
+                maxDate.add(Calendar.DAY_OF_MONTH, 1);
+                break; // STOPDATUM + HOEVEEL DAGEN HET DUURT
+            case 2:
+                maxDate.add(Calendar.YEAR, 1);
+                break;
+            case 3:
+                maxDate.add(Calendar.DAY_OF_MONTH, 2);
+                break;
+            case 4:
+                maxDate.add(Calendar.DAY_OF_MONTH, 4);
+                break;
+            case 5:
+                maxDate.add(Calendar.DAY_OF_MONTH, 2);
+                break;
+            case 6:
+                maxDate.add(Calendar.DAY_OF_MONTH, 40);
+                break;
+            case 7:
+                maxDate.add(Calendar.DAY_OF_MONTH, 14);
+                break;
+            case 8:
+                maxDate.add(Calendar.YEAR, 3);
+                break;
+            case 9:
+                maxDate.add(Calendar.YEAR, 10);
+                break;
 
-            default: ; break;
+            default:
+                break;
 
         }
         tijd = DateUtils.GetMinutesBetween(today, maxDate);
-        if(tijd < 0){
+        if (tijd < 0) {
             tijd = 0;
         }
         return (int) tijd;
     }
 
-    public static final HealthProgress newInstance(int i)
-    {
+    public static final HealthProgress newInstance(int i) {
         HealthProgress f = new HealthProgress();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
@@ -261,24 +307,23 @@ public class HealthProgress extends Fragment {
 
         View v = inflater.inflate(R.layout.activity_health_progress, container, false);
 
-        handler = new Handler(){
+        handler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
 
-                if (msg.what==UpdateProgress) {
+                if (msg.what == UpdateProgress) {
 
                     // TODO make better check to see if this is the right home activity, check if nullpointerexception on closing the app is gone
-                    if(getActivity() != null) {
+                    if (getActivity() != null) {
                         Activity a = getActivity();
 
                         TextView t1 = (TextView) a.findViewById(R.id.health_procent1);
 
-                        if (t1!=null) {
+                        if (t1 != null) {
                             drawProgress();
                         }
                     }
-
 
 
                 }
@@ -287,11 +332,11 @@ public class HealthProgress extends Fragment {
             }
         };
 
-        Thread updateProcess = new Thread(){
-            public void run(){
+        Thread updateProcess = new Thread() {
+            public void run() {
 
                 //TODO IS ER EEN NETTERE MANIER OM DE TIMER OPNIEUW OP TE STARTEN?
-                while (1==1) {
+                while (1 == 1) {
                     try {
                         sleep(10000);
 
@@ -322,13 +367,12 @@ public class HealthProgress extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             //implements the main method what every fragment should do when it's visible
-            uservisibilityevent.viewIsVisible(getActivity(),position,"green","title_activity_health_progress");
+            uservisibilityevent.viewIsVisible(getActivity(), position, "green", "title_activity_health_progress");
 
 
         }
 
     }
-
 
 
 }

@@ -175,12 +175,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-
-
-
-
-
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i2) {
         /*Drop older table if existed*/
@@ -199,7 +193,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-       // values.put(USER_UID, user.getuID()); // user id
+        // values.put(USER_UID, user.getuID()); // user id
         values.put(USER_SID, user.getsID()); // user sigaretten id
         values.put(USER_PERDAG, user.getPerDag()); // hoeveel die smoked per dag
         values.put(USER_LEVEL, user.getLevel()); // level van user. bij nieuwe user gewoon 1.
@@ -219,7 +213,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addSigarette(Sigaretten sigaret) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-       // values.put(SIGARETTEN_SID, sigaret.getsID());
+        // values.put(SIGARETTEN_SID, sigaret.getsID());
         values.put(SIGARETTEN_AANTAL, sigaret.getAantal());
         values.put(SIGARETTEN_MERK, sigaret.getMerk());
         values.put(SIGARETTEN_TEER, sigaret.getTeer());
@@ -237,7 +231,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
-        values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_BEHAALD, challenge.getBehaald());
 
         // Inserting Row
         assert db != null;
@@ -251,7 +245,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         values.put(LEVEL_LID, level.getlID());
         values.put(LEVEL_TITEL, level.getTitel());
-        values.put(LEVEL_BESCHRIJVING,level.getBeschrijving());
+        values.put(LEVEL_BESCHRIJVING, level.getBeschrijving());
         values.put(LEVEL_MINDAYS, level.getMinDays());
         // Inserting Row
         assert db != null;
@@ -276,19 +270,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-
-
-
-
-
-
-
     /* Getting single User*/
     public User getUser(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_USER, new String[] {
+        Cursor cursor = db.query(TABLE_USER, new String[]{
                         USER_UID,
                         USER_SID,
                         USER_PERDAG,
@@ -299,7 +286,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_QUIT_HOUR,
                         USER_QUIT_MINUTE,
                         USER_SPENT_AMOUNT}, USER_UID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -325,14 +313,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_SIGARETTEN, new String[] {
-                        SIGARETTEN_SID ,
+        Cursor cursor = db.query(TABLE_SIGARETTEN, new String[]{
+                        SIGARETTEN_SID,
                         SIGARETTEN_NICOTINE,
                         SIGARETTEN_MERK,
                         SIGARETTEN_AANTAL,
                         SIGARETTEN_TEER,
                         SIGARETTEN_PRIJS}, SIGARETTEN_SID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -349,18 +338,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-
     /* Getting single challenge*/
     public Challenges getChallenge(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_CHALLENGES, new String[] {
+        Cursor cursor = db.query(TABLE_CHALLENGES, new String[]{
                         CHALLENGES_CID,
                         CHALLENGES_TITEL,
                         CHALLENGES_BESCHRIJVING,
                         CHALLENGES_BEHAALD}, CHALLENGES_CID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -379,12 +368,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_USER_CHALLANGE, new String[] {
+        Cursor cursor = db.query(TABLE_USER_CHALLANGE, new String[]{
                         USER_CHALLENGES_UCID,
                         USER_CHALLENGES_UID,
                         USER_CHALLENGES_CID
                 }, USER_CHALLENGES_UCID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -402,13 +392,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_GEZONDHEID, new String[] {
+        Cursor cursor = db.query(TABLE_GEZONDHEID, new String[]{
                         GEZONDHEID_UID,
                         GEZONDHEID_TEER,
                         GEZONDHEID_NICOTINE,
                         GEZONDHEID_CO2,
                         GEZONDHEID_LANGERTELEVEN}, GEZONDHEID_UID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -428,12 +419,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_LEVELS, new String[] {
+        Cursor cursor = db.query(TABLE_LEVELS, new String[]{
                         LEVEL_LID,
                         LEVEL_TITEL,
                         LEVEL_BESCHRIJVING,
                         LEVEL_MINDAYS}, LEVEL_LID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -453,13 +445,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         assert db != null;
-        Cursor cursor = db.query(TABLE_PRODUCT, new String[] {
+        Cursor cursor = db.query(TABLE_PRODUCT, new String[]{
                         PRODUCT_UID,
                         PRODUCT_ID,
                         PRODUCT_TITEL,
                         PRODUCT_PRIJS,
                         PRODUCT_IMAGE}, PRODUCT_UID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null
+        );
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -474,10 +467,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return artikel;
     }
-
-
-
-
 
 
     /* Updating single Userr */
@@ -496,7 +485,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         /* updating row */
         return db.update(TABLE_USER, values, USER_UID + " = ?",
-                new String[] { String.valueOf(user.getuID()) });
+                new String[]{String.valueOf(user.getuID())});
     }
 
     /* Updating single Siaget */
@@ -507,23 +496,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         /* updating row */
         return db.update(TABLE_SIGARETTEN, values, SIGARETTEN_SID + " = ?",
-                new String[] { String.valueOf(sigaretten.getsID()) });
+                new String[]{String.valueOf(sigaretten.getsID())});
     }
 
-    public int updateChallenge (Challenges challenge) {
+    public int updateChallenge(Challenges challenge) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        Log.d("id",String.valueOf(challenge.getcID()));
-        Log.d("id",String.valueOf(challenge.getBeschrijving()));
-        Log.d("id",String.valueOf(challenge.getBehaald()));
+        Log.d("id", String.valueOf(challenge.getcID()));
+        Log.d("id", String.valueOf(challenge.getBeschrijving()));
+        Log.d("id", String.valueOf(challenge.getBehaald()));
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
-        values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_BEHAALD, challenge.getBehaald());
 
 
          /* updating row */
         return db.update(TABLE_CHALLENGES, values, CHALLENGES_CID + " = ?",
-                new String[] { String.valueOf(challenge.getcID()) });
+                new String[]{String.valueOf(challenge.getcID())});
     }
 
     /* Updating prodcuct */
@@ -537,28 +526,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         /* updating row */
         return db.update(TABLE_PRODUCT, values, PRODUCT_UID + " = ?",
-                new String[] { String.valueOf(artikel.getuId()) });
+                new String[]{String.valueOf(artikel.getuId())});
     }
 
 
-
-
-
-    public int getChallengesAmount(){
+    public int getChallengesAmount() {
         SQLiteDatabase db = this.getWritableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_CHALLENGES);
         return numRows;
     }
 
-    public int getLevelAmount(){
+    public int getLevelAmount() {
         SQLiteDatabase db = this.getWritableDatabase();
         int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_LEVELS);
         return numRows;
     }
-
-
-
-
 
 
 }

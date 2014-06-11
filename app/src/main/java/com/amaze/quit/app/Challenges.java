@@ -13,7 +13,7 @@ public class Challenges {
     String beschrijving;
     Integer behaald;
 
-    public Challenges( int cID, String titel, String beschrijving, Integer behaald) {
+    public Challenges(int cID, String titel, String beschrijving, Integer behaald) {
         this.cID = cID;
         this.titel = titel;
         this.beschrijving = beschrijving;
@@ -44,7 +44,11 @@ public class Challenges {
         this.beschrijving = beschrijving;
     }
 
-    public Integer getBehaald(){ return behaald;}
+    public Integer getBehaald() {
+        return behaald;
+    }
 
-    public void setBehaald(Integer behaald){this.behaald = behaald;}
+    public void setBehaald(Integer behaald) {
+        this.behaald = behaald;
+    }
 }

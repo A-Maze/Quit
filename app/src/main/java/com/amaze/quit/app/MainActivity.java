@@ -12,16 +12,14 @@ import android.widget.ListView;
 
 public class MainActivity extends ListActivity {
 
-    String classes[] = {"Home","Setup"};
+    String classes[] = {"Home", "Setup"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_main);
-        setListAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,classes));
+        // setContentView(R.layout.activity_main);
+        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, classes));
     }
-
-
 
 
     public void startAnActivity(Class activiteit) {
@@ -40,7 +38,7 @@ public class MainActivity extends ListActivity {
         Class ourClass;
         try {
             ourClass = Class.forName("com.amaze.quit.app." + classNaam);
-            Intent ourIntent = new Intent(this,ourClass);
+            Intent ourIntent = new Intent(this, ourClass);
             startActivity(ourIntent);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

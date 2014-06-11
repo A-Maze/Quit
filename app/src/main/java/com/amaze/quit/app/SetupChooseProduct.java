@@ -74,10 +74,9 @@ public class SetupChooseProduct extends Fragment {
         Button completeSetup = (Button) v.findViewById(R.id.bSetupComplete);
 
         //if the activity is the chooseProductHost then don't show the completeSetup button since the fragment isn't hosted in the setup.
-        if(getActivity().getClass() == ChooseProductHost.class){
+        if (getActivity().getClass() == ChooseProductHost.class) {
             completeSetup.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             completeSetup.setVisibility(View.VISIBLE);
             //sets the onclicklistener for the completeSetup button
             completeSetup.setOnClickListener(attachButton);
@@ -85,13 +84,13 @@ public class SetupChooseProduct extends Fragment {
         return v;
     }
 
-    protected void setResult(String result){
+    protected void setResult(String result) {
         this.result = result;
     }
 
 
-    protected View.OnClickListener searchProduct = new View.OnClickListener(){
-        public void onClick(View v){
+    protected View.OnClickListener searchProduct = new View.OnClickListener() {
+        public void onClick(View v) {
             InputMethodManager inputManager = (InputMethodManager)
                     getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -130,15 +129,11 @@ public class SetupChooseProduct extends Fragment {
         ConnectivityManager cm =
                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true;
-        }
-        return false;
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
 
-
-    public class DownloadTask extends AsyncTask<String,Void,String> {
+    public class DownloadTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... urls) {
             InputStream inputStream = null;
@@ -185,11 +180,11 @@ public class SetupChooseProduct extends Fragment {
         }
 
 
-        private String convertInputStreamToString(InputStream inputStream) throws IOException{
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             String result = "";
-            while((line = bufferedReader.readLine()) != null)
+            while ((line = bufferedReader.readLine()) != null)
                 result += line;
 
             inputStream.close();
@@ -262,11 +257,11 @@ public class SetupChooseProduct extends Fragment {
     }
         */
 
-    protected void fillList(String result){
+    protected void fillList(String result) {
         this.result = result;
         ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
-        if((lv).getChildCount() > 0)
+        if ((lv).getChildCount() > 0)
             lv.setAdapter(null);
 
         try {
@@ -350,9 +345,9 @@ public class SetupChooseProduct extends Fragment {
                 String desc = description.get(position);
                 extras.putString("id", idP);
                 extras.putString("image", image);
-                extras.putString("titel",title);
-                extras.putDouble("prijs",price);
-                extras.putString("description",desc);
+                extras.putString("titel", title);
+                extras.putDouble("prijs", price);
+                extras.putString("description", desc);
                 productIntent.putExtras(extras);
                 startActivityForResult(productIntent, 0);
             }
@@ -361,14 +356,14 @@ public class SetupChooseProduct extends Fragment {
     }
 
     //The onClickListener for the complete button
-    private View.OnClickListener attachButton = new View.OnClickListener(){
-        public void onClick(View v){
+    private View.OnClickListener attachButton = new View.OnClickListener() {
+        public void onClick(View v) {
             SetupBrandAmount setupBrandAmount = new SetupBrandAmount();
             Intent myIntent = new Intent(getActivity(), Home.class);
             DatabaseHandler db = new DatabaseHandler(getActivity());
             EditText etDayAmount = setupBrandAmount.getEtDayAmount();
 
-            if(etDayAmount.getText().toString().matches("")) {
+            if (etDayAmount.getText().toString().matches("")) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
                 alertDialogBuilder.setTitle("foutje");
                 alertDialogBuilder
@@ -381,16 +376,14 @@ public class SetupChooseProduct extends Fragment {
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
-            }
-
-            else{
+            } else {
 
                 Integer dayAmount = Integer.parseInt(etDayAmount.getText().toString());
                 Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
                 try {
-                    db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0));
+                    db.addUser(new User(1, sigaret.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, 0));
                 } catch (Exception e) {
-                    db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount()));
+                    db.updateUser(new User(1, sigaret.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount()));
                     e.printStackTrace();
                 }
                 //this makes sure the activity resumes rather than creating a new one.

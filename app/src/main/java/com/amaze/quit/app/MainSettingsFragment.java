@@ -28,6 +28,7 @@ import java.util.Calendar;
 public class MainSettingsFragment extends PreferenceFragment {
     public static final String PREFS_NAME = "QuitPrefs";
     SharedPreferences settings = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         bindOnClicks();
     }
 
-    protected void bindOnClicks(){
+    protected void bindOnClicks() {
         Preference quitDate = findPreference("quitDate");
         Preference quitTime = findPreference("quitTime");
         Preference brand = findPreference("brand");
@@ -56,21 +57,21 @@ public class MainSettingsFragment extends PreferenceFragment {
         product.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(getActivity(),ChooseProductHost.class);
+                Intent intent = new Intent(getActivity(), ChooseProductHost.class);
                 startActivity(intent);
                 return true;
             }
         });
         //quitDate listener
-        quitDate.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-            public boolean onPreferenceClick(Preference preference){
-                    showDatePickerDialog(getView());
+        quitDate.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                showDatePickerDialog(getView());
                 return true;
             }
         });
         //quitTime listener
-        quitTime.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-            public boolean onPreferenceClick(Preference preference){
+        quitTime.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
                 showTimePickerDialog(getView());
                 return true;
             }
@@ -115,19 +116,19 @@ public class MainSettingsFragment extends PreferenceFragment {
                 Sigaretten sigaretten = db.getSigaret(sId);
                 sigaretten.setAantal(packAmount);
                 db.updateSigaretten(sigaretten);
-                Log.d("rows affected",Integer.toString(db.updateSigaretten(sigaretten)));
-                Log.d("sID settings",Integer.toString(db.getSigaret(user.getsID()).getsID()));
+                Log.d("rows affected", Integer.toString(db.updateSigaretten(sigaretten)));
+                Log.d("sID settings", Integer.toString(db.getSigaret(user.getsID()).getsID()));
                 db.close();
                 return false;
             }
         });
 
-        startFrag.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
+        startFrag.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue){
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int preferedFragment = Integer.parseInt(newValue.toString());
                 settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-                settings.edit().putInt("pref_frag",preferedFragment).commit();
+                settings.edit().putInt("pref_frag", preferedFragment).commit();
                 return false;
             }
         });
@@ -154,10 +155,10 @@ public class MainSettingsFragment extends PreferenceFragment {
             // Create a new instance of TimePickerDialog and return it
             TimePickerDialog tpd = new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
-            tpd.setButton(TimePickerDialog.BUTTON_POSITIVE,getString(R.string.setup_complete), new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int id){
-                    if(timePicker != null)
-                    onTimeSet(timePicker, timePicker.getCurrentHour(),timePicker.getCurrentMinute());
+            tpd.setButton(TimePickerDialog.BUTTON_POSITIVE, getString(R.string.setup_complete), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    if (timePicker != null)
+                        onTimeSet(timePicker, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
                 }
             });
             return tpd;
@@ -174,7 +175,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         }
 
 
-        public void onTimeChanged(TimePicker view, int hourOfDay, int minute){
+        public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
             timePicker = view;
         }
 
@@ -199,10 +200,10 @@ public class MainSettingsFragment extends PreferenceFragment {
             int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
-            final DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);;
-            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.setup_complete), new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int id){
-                 DatePicker datePicker = dpd.getDatePicker();
+            final DatePickerDialog dpd = new DatePickerDialog(getActivity(), this, year, month, day);
+            dpd.setButton(DatePickerDialog.BUTTON_POSITIVE, getString(R.string.setup_complete), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    DatePicker datePicker = dpd.getDatePicker();
                     onDateSet(datePicker,
                             datePicker.getYear(),
                             datePicker.getMonth(),
@@ -222,9 +223,6 @@ public class MainSettingsFragment extends PreferenceFragment {
             db.updateUser(user);
             db.close();
         }
-
-
-
 
 
     }

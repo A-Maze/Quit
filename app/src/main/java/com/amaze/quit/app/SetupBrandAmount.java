@@ -17,19 +17,17 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 
 
-public class SetupBrandAmount extends Fragment  {
+public class SetupBrandAmount extends Fragment {
 
     private RadioButton rbSigaretten;
     private RadioButton rbShag;
     private static EditText etDayAmount;
 
-    private static Spinner sBrand;
     private static String[] sigarettenList;
     private static Sigaretten[] sigaretten;
     private static int selectedSigaretPos;
 
-    public static final SetupBrandAmount newInstance()
-    {
+    public static final SetupBrandAmount newInstance() {
         SetupBrandAmount f = new SetupBrandAmount();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
@@ -44,16 +42,17 @@ public class SetupBrandAmount extends Fragment  {
         getSigaretten();
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
 
-        sBrand = (Spinner) v.findViewById(R.id.sBrand);
+        Spinner sBrand = (Spinner) v.findViewById(R.id.sBrand);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigarettenList);
         sBrand.setAdapter(adapter);
-       sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
 
-           }
+            }
+
             public void onNothingSelected(AdapterView<?> parent) {
-           }
+            }
         });
 
         return v;
@@ -61,11 +60,11 @@ public class SetupBrandAmount extends Fragment  {
 
     }
 
-    public static  Sigaretten getSigarettenPosition(){
+    public static Sigaretten getSigarettenPosition() {
         return sigaretten[selectedSigaretPos];
     }
 
-    public static EditText getEtDayAmount(){
+    public static EditText getEtDayAmount() {
         return etDayAmount;
     }
 
@@ -73,14 +72,14 @@ public class SetupBrandAmount extends Fragment  {
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
 
-        sigarettenList = new String[] {
+        sigarettenList = new String[]{
                 db.getSigaret(1).getMerk(),
                 db.getSigaret(2).getMerk(),
                 db.getSigaret(3).getMerk(),
                 db.getSigaret(4).getMerk()
         };
 
-        sigaretten = new Sigaretten[] {
+        sigaretten = new Sigaretten[]{
                 db.getSigaret(1),
                 db.getSigaret(2),
                 db.getSigaret(3),
@@ -126,10 +125,6 @@ public class SetupBrandAmount extends Fragment  {
         }
 
     }*/
-
-
-
-
 
 
 }

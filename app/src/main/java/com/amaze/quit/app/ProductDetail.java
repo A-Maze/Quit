@@ -69,25 +69,25 @@ public class ProductDetail extends ActionBarActivity {
         tvDesc.setText(Html.fromHtml(desc).toString() + "");
 
         //new Thread(new Runnable() {
-           // public void run() {
-                bitmap = loadImageFromNetwork(image);
-                //ivProduct.post(new Runnable() {
-                    //public void run() {
-                        ivProduct.setImageBitmap(bitmap);
-                        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
-                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
-                        layoutParams.gravity= Gravity.CENTER;
-                        ivProduct.setLayoutParams(layoutParams);
-                    //}
-               // });
-            //}
+        // public void run() {
+        bitmap = loadImageFromNetwork(image);
+        //ivProduct.post(new Runnable() {
+        //public void run() {
+        ivProduct.setImageBitmap(bitmap);
+        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
+        layoutParams.gravity = Gravity.CENTER;
+        ivProduct.setLayoutParams(layoutParams);
+        //}
+        // });
+        //}
         //}).start();
 
         // TextView tv = (TextView) findViewById(R.id.tvpdtest);
-       // tv.setText(id);
+        // tv.setText(id);
     }
 
-    private View.OnClickListener spaarProduct = new View.OnClickListener(){
+    private View.OnClickListener spaarProduct = new View.OnClickListener() {
         public void onClick(View v) {
             DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
@@ -97,11 +97,9 @@ public class ProductDetail extends ActionBarActivity {
                 int nrows = db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
 
 
-                if(nrows > 0){
+                if (nrows > 0) {
                     db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
-                }
-
-                else {
+                } else {
 
                     db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 }
@@ -136,7 +134,7 @@ public class ProductDetail extends ActionBarActivity {
         }
     }*/
 
-    private int giveDP(float dp){
+    private int giveDP(float dp) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
         int pixels = (int) (fpixels + 0.5f);

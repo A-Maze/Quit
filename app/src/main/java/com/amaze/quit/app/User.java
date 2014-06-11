@@ -59,14 +59,17 @@ public class User {
         this.quitYear = quitYear;
     }
 
-    public int getSpentAmount(){ return spentAmount;}
+    public int getSpentAmount() {
+        return spentAmount;
+    }
 
-    public void setSpentAmount(int spentAmount){this.spentAmount = spentAmount;}
-
+    public void setSpentAmount(int spentAmount) {
+        this.spentAmount = spentAmount;
+    }
 
 
     // constructor
-    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute, int spentAmount){
+    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth, int quitDay, int quitHour, int quitMinute, int spentAmount) {
         this.uID = uID;
         this.sID = sID;
         this.perDag = perDag;
@@ -80,20 +83,21 @@ public class User {
     }
 
 
-
-
     // get userID
     public int getuID() {
         return uID;
     }
+
     //set userID
     public void setuID(int uID) {
         this.uID = uID;
     }
+
     //get sigaretteID
     public int getsID() {
         return sID;
     }
+
     //set sigaretteID
     public void setsID(int sID) {
         this.sID = sID;
@@ -103,19 +107,21 @@ public class User {
     public int getPerDag() {
         return perDag;
     }
+
     //set sigarettes a Dag
     public void setPerDag(int perDag) {
         this.perDag = perDag;
     }
+
     // get users level
     public int getLevel() {
         return level;
     }
+
     // set users level
     public void setLevel(int level) {
         this.level = level;
     }
-
 
 
 }

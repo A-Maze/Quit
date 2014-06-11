@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Robin on 21-5-2014.
  */
 public class MyPageAdapter extends FragmentPagerAdapter {
-    public static final String[] CONTENT = new String[] { "Achievements", "Voortgang", "Gezondheid"};
+    public static final String[] CONTENT = new String[]{"Achievements", "Voortgang", "Gezondheid"};
     private List<Fragment> fragments;
 
 
@@ -23,6 +23,7 @@ public class MyPageAdapter extends FragmentPagerAdapter {
         super(fm);
         this.fragments = fragments;
     }
+
     @Override
     public Fragment getItem(int position) {
         return this.fragments.get(position);
@@ -38,11 +39,6 @@ public class MyPageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return MyPageAdapter.CONTENT[position % CONTENT.length];
     }
-
-
-
-
-
 
 
 }

@@ -38,6 +38,7 @@ public class UserVisibilityEvent {
                 //helps the nav bar realise what is up
                 Home.setSelectedNav(position);
 
+
     }
 
 }

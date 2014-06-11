@@ -51,7 +51,10 @@ public class Product extends Fragment {
     public void onResume(){
         super.onResume();
         updateSavingProgress();
+        setListeners();
     }
+
+
 
 
     @Override

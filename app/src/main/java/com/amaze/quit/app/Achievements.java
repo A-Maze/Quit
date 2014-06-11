@@ -43,6 +43,8 @@ public class Achievements extends Fragment {
         updateCompleted();
   }
 
+
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

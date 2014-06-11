@@ -31,6 +31,11 @@ public class Progress extends Fragment {
     }
 
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateVooruitgang();
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

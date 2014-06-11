@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -69,12 +70,14 @@ public class Home extends FragmentActivity  {
         //initialises the navigation drawer
         navDrawer();
 
+
         //makes sure all the stats are updated
         UpdateStats updater = new UpdateStats(this);
         updater.updateAchievements();
 
 
     };
+
 
 
 
@@ -90,6 +93,8 @@ public class Home extends FragmentActivity  {
 
         return fList;
     }
+
+
 
     // makes a menu
     @Override
@@ -126,6 +131,8 @@ public class Home extends FragmentActivity  {
 
 
     }
+
+
 
     //launches specified activity
     private void launchActivity(Class activity){
@@ -194,6 +201,10 @@ public class Home extends FragmentActivity  {
     protected void onResume(){
         super.onResume();
         setSelectedNav(pager.getCurrentItem());
+        UpdateStats updater = new UpdateStats(this);
+        updater.updateQuit();
+
+
     };
 
 

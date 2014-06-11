@@ -6,7 +6,6 @@ package com.amaze.quit.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 
 
@@ -73,10 +72,36 @@ public class SplashScreen extends Activity {
     private void fillDataBase() {
         DatabaseHandler db = new DatabaseHandler(this);
         //Sigaretten
-        db.addSigarette(new Sigaretten(1,2f,"Chesterfield",19,4,5f));
-        db.addSigarette(new Sigaretten(2,2f,"Marlboro",19,4,5f));
-        db.addSigarette(new Sigaretten(3,2f,"Lucky Strike",19,4,5f));
-        db.addSigarette(new Sigaretten(4,2f,"Camel",19,4,5f));
+        db.addSigarette(new Sigaretten(1,2f,"Camel 19",19,4,5.5f));
+        db.addSigarette(new Sigaretten(2,2f,"Camel 21",21,4,6f));
+        db.addSigarette(new Sigaretten(3,2f,"Camel 22",22,4,6.6f));
+        db.addSigarette(new Sigaretten(4,2f,"Camel 25",25,4,7.6f));
+        db.addSigarette(new Sigaretten(5,2f,"Camel 27",27,4,7.8f));
+
+        db.addSigarette(new Sigaretten(6,2f,"Chesterfield 19",19,4,5.8f));
+        db.addSigarette(new Sigaretten(7,2f,"Chesterfield 22",22,4,6.5f));
+
+        db.addSigarette(new Sigaretten(8,2f,"Kent 19",19,4,6f));
+        db.addSigarette(new Sigaretten(9,2f,"Kent 22",22,4,7f));
+
+        db.addSigarette(new Sigaretten(10,2f,"L&M",19,4,5.4f));
+        db.addSigarette(new Sigaretten(11,2f,"L&M",22,4,5.9f));
+        db.addSigarette(new Sigaretten(12,2f,"L&M",27,4,7.5f));
+
+        db.addSigarette(new Sigaretten(13,2f,"Lucky Strike 19",19,4,5.8f));
+        db.addSigarette(new Sigaretten(14,2f,"Lucky Strike 22",27,4,6.5f));
+
+        db.addSigarette(new Sigaretten(15,2f,"Marlboro 19",19,4,6f));
+        db.addSigarette(new Sigaretten(16,2f,"Marlboro 23",23,4,7f));
+        db.addSigarette(new Sigaretten(17,2f,"Marlboro 27",27,4,8f));
+
+        db.addSigarette(new Sigaretten(18,2f,"Pall Mall 19",19,4,5.4f));
+        db.addSigarette(new Sigaretten(19,2f,"Pall Mall 22",22,4,6.3f));
+        db.addSigarette(new Sigaretten(20,2f,"Pall Mall 27",27,4,7.5f));
+
+        db.addSigarette(new Sigaretten(21,2f,"Winston 19",19,4,5.4f));
+        db.addSigarette(new Sigaretten(22,2f,"Winston 21",21,4,6f));
+        db.addSigarette(new Sigaretten(23,2f,"Winston 26",26,4,7.1f));
 
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;

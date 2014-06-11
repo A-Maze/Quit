@@ -203,6 +203,7 @@ public class Home extends FragmentActivity  {
         setSelectedNav(pager.getCurrentItem());
         UpdateStats updater = new UpdateStats(this);
         updater.updateQuit();
+        updater.updateAchievements();
 
 
     };

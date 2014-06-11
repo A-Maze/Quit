@@ -43,7 +43,11 @@ public class Achievements extends Fragment {
         updateCompleted();
   }
 
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateCompleted();
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -74,6 +78,16 @@ public class Achievements extends Fragment {
                 achievementContext.setCompoundDrawablesWithIntrinsicBounds(completedDrawable,null,checkmark,null);
                 TextView achievementTitle = (TextView) getActivity().findViewById(titleID);
                 achievementTitle.setTextColor(getResources().getColor(R.color.green));
+            }
+            else{
+                int titleID = getResources().getIdentifier("tvC" + i,"id",getActivity().getPackageName());
+                int contextID = getResources().getIdentifier("tvCC" + i,"id",getActivity().getPackageName());
+                TextView achievementContext = (TextView) getActivity().findViewById(contextID);
+                int leftImage = getResources().getIdentifier(imageArray[i-1] + "_achievement", "drawable",getActivity().getPackageName());
+                Drawable notCompletedDrawable = getResources().getDrawable(leftImage);
+                achievementContext.setCompoundDrawablesWithIntrinsicBounds(notCompletedDrawable,null,null,null);
+                TextView achievementTitle = (TextView) getActivity().findViewById(titleID);
+                achievementTitle.setTextColor(getResources().getColor(R.color.black));
             }
         }
        db.close();

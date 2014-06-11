@@ -86,38 +86,56 @@ public class UpdateStats {
         updateQuit();
 
         if(daysQuit >= 1){
-            updateChallengeDB(1);
+            updateChallengeDB(1,1);
+        }else{
+            updateChallengeDB(1,0);
         }
 
         if(bespaardeMoneys >= 100){
-            updateChallengeDB(3);
-            updateChallengeDB(4);
+            updateChallengeDB(3,1);
+            updateChallengeDB(4,1);
         }
         else if(bespaardeMoneys >= 20){
-            updateChallengeDB(3);
+            updateChallengeDB(3,1);
+            updateChallengeDB(4,0);
+        }
+        else{
+            updateChallengeDB(3,0);
+            updateChallengeDB(4,0);
         }
 
         if(extraDagenTeLeven >= 50){
-            updateChallengeDB(5);
-            updateChallengeDB(6);
+            updateChallengeDB(5,1);
+            updateChallengeDB(6,1);
         }
         else if(extraDagenTeLeven >= 10){
-            updateChallengeDB(5);
+            updateChallengeDB(5,1);
+            updateChallengeDB(6,0);
+        }
+        else{
+            updateChallengeDB(5,0);
+            updateChallengeDB(6,0);
         }
         if(bespaardePakjes >= 1){
-            updateChallengeDB(9);
+            updateChallengeDB(9,1);
+        }
+        else{
+            updateChallengeDB(9,0);
         }
         if(gemiddeldNietGerookt >= 10){
-            updateChallengeDB(10);
+            updateChallengeDB(10,1);
+        }
+        else{
+            updateChallengeDB(10,0);
         }
 
     }
 
-    private void updateChallengeDB(int id){
+    private void updateChallengeDB(int id, int achieved){
         Challenges challenge;
         DatabaseHandler db = new DatabaseHandler(theContext);
         challenge = db.getChallenge(id);
-        challenge.setBehaald(1);
+        challenge.setBehaald(achieved);
         db.updateChallenge(challenge);
         db.close();
     }

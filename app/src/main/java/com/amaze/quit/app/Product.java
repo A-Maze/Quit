@@ -47,6 +47,12 @@ public class Product extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateSavingProgress();
+    }
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
@@ -100,6 +106,9 @@ public class Product extends Fragment {
             tvSavedAmount.setText("€" + amountLeft);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
+            TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            tvComplete.setVisibility(View.GONE);
+
 
         } else {
             //if complete turn the bar green and show a complete text
@@ -107,15 +116,8 @@ public class Product extends Fragment {
             tvSavedPercentage.setText("" + 100 + "%");
             moneyBar.setProgress(100);
             moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
-            LinearLayout linearLayout = (LinearLayout) getActivity().findViewById(R.id.productLayout);
-            TextView tvComplete = new TextView(getActivity());
-            tvComplete.setText("Voltooid!");
-            tvComplete.setTextColor(getResources().getColor(R.color.light_blue));
-            LinearLayout.LayoutParams parameters= new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            parameters.setMargins(0,giveDP(-30f),0,0);
-            tvComplete.setGravity(Gravity.CENTER);
-            tvComplete.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
-            linearLayout.addView(tvComplete,7);
+            TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            tvComplete.setVisibility(View.VISIBLE);
         }
         //always show the product prijs
         tvProductAmount.setText("€" + productPrice);

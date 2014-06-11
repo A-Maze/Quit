@@ -1,5 +1,6 @@
 package com.amaze.quit.app;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -21,18 +22,10 @@ public class Settings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        if (keyCode == KeyEvent.KEYCODE_BACK ) {
-            Intent intent = new Intent(this,Home.class);
-            startActivity(intent);
-            return true;
-        }
 
-        return super.onKeyDown(keyCode, event);
-    }
 
 
 

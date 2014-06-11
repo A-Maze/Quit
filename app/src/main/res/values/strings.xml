@@ -113,6 +113,7 @@
     <string name="product_product_percentage">100%</string>
     <string name="product_saved_percentage">0%</string>
     <string name="product_pay">Betaal nu!</string>
+    <string name="product_complete">Voltooid!</string>
 //progress        <string name="quitDate">U stopte met roken:</string>
     <string name="dagenzonderroken">Dagen zonder roken:</string>
     <string name="nietgerooktesigaretten">Niet gerookte sigaretten:</string>

@@ -21,14 +21,12 @@ public class SetupBrandAmount extends Fragment  {
 
     private RadioButton rbSigaretten;
     private RadioButton rbShag;
-    private EditText etDayAmount;
+    private static EditText etDayAmount;
 
-    Spinner sBrand;
-    String[] sigarettenList;
-    Sigaretten[] sigaretten;
-    private Integer dayAmount;
-
-    private int selectedSigaretPos;
+    private static Spinner sBrand;
+    private static String[] sigarettenList;
+    private static Sigaretten[] sigaretten;
+    private static int selectedSigaretPos;
 
     public static final SetupBrandAmount newInstance()
     {
@@ -42,10 +40,7 @@ public class SetupBrandAmount extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
 
-        //The complete button. This button should be moved to the final setup fragment which is this one at the moment.
-        Button complete = (Button) v.findViewById(R.id.bSetupComplete);
-        //sets the onclicklistener for the complete button
-        complete.setOnClickListener(attachButton);
+
         getSigaretten();
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
 
@@ -64,6 +59,14 @@ public class SetupBrandAmount extends Fragment  {
         return v;
 
 
+    }
+
+    public static  Sigaretten getSigarettenPosition(){
+        return sigaretten[selectedSigaretPos];
+    }
+
+    public static EditText getEtDayAmount(){
+        return etDayAmount;
     }
 
     private void getSigaretten() {
@@ -124,44 +127,7 @@ public class SetupBrandAmount extends Fragment  {
 
     }*/
 
-    //The onClickListener for the complete button
-    private OnClickListener attachButton = new OnClickListener(){
-        public void onClick(View v){
-            Intent myIntent = new Intent(getActivity(), Home.class);
-            DatabaseHandler db = new DatabaseHandler(getActivity());
 
-            if(etDayAmount.getText().toString().matches("")) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                alertDialogBuilder.setTitle("foutje");
-                alertDialogBuilder
-                        .setMessage("Vul een waarde in!")
-                        .setCancelable(false)
-                        .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
-
-            else{
-
-                dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-                try {
-                    db.addUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0));
-                } catch (Exception e) {
-                    db.updateUser(new User(1, sigaretten[selectedSigaretPos].getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount()));
-                    e.printStackTrace();
-                }
-                //this makes sure the activity resumes rather than creating a new one.
-                myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(myIntent);
-                getActivity().finish();
-            }
-
-        }
-    };
 
 
 

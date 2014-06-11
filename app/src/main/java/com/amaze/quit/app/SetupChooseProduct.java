@@ -1,6 +1,8 @@
 package com.amaze.quit.app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -67,6 +69,19 @@ public class SetupChooseProduct extends Fragment {
 
         //sets the onclicklistener for the complete button
         complete.setOnClickListener(searchProduct);
+
+        //The completeSetup button. This button should be moved to the final setup fragment which is this one at the moment.
+        Button completeSetup = (Button) v.findViewById(R.id.bSetupComplete);
+
+        //if the activity is the chooseProductHost then don't show the completeSetup button since the fragment isn't hosted in the setup.
+        if(getActivity().getClass() == ChooseProductHost.class){
+            completeSetup.setVisibility(View.GONE);
+        }
+        else {
+            completeSetup.setVisibility(View.VISIBLE);
+            //sets the onclicklistener for the completeSetup button
+            completeSetup.setOnClickListener(attachButton);
+        }
         return v;
     }
 
@@ -344,5 +359,47 @@ public class SetupChooseProduct extends Fragment {
         });
         return;
     }
+
+    //The onClickListener for the complete button
+    private View.OnClickListener attachButton = new View.OnClickListener(){
+        public void onClick(View v){
+            SetupBrandAmount setupBrandAmount = new SetupBrandAmount();
+            Intent myIntent = new Intent(getActivity(), Home.class);
+            DatabaseHandler db = new DatabaseHandler(getActivity());
+            EditText etDayAmount = setupBrandAmount.getEtDayAmount();
+
+            if(etDayAmount.getText().toString().matches("")) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+                alertDialogBuilder.setTitle("foutje");
+                alertDialogBuilder
+                        .setMessage("Vul een waarde in!")
+                        .setCancelable(false)
+                        .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+
+            else{
+
+                Integer dayAmount = Integer.parseInt(etDayAmount.getText().toString());
+                Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
+                try {
+                    db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0));
+                } catch (Exception e) {
+                    db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount()));
+                    e.printStackTrace();
+                }
+                //this makes sure the activity resumes rather than creating a new one.
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(myIntent);
+                getActivity().finish();
+            }
+
+        }
+    };
 
 }

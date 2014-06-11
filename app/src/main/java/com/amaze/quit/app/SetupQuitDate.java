@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import java.util.Calendar;
+
 
 public class SetupQuitDate extends Fragment {
 
@@ -38,7 +40,11 @@ public class SetupQuitDate extends Fragment {
         View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
 
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
-        quitDatePicker.init(4,1,4,new DatePicker.OnDateChangedListener() {
+        final Calendar c = Calendar.getInstance();
+         quitYear = c.get(Calendar.YEAR);
+         quitMonth = c.get(Calendar.MONTH);
+         quitDay = c.get(Calendar.DAY_OF_MONTH);
+        quitDatePicker.init(quitYear,quitMonth,quitDay,new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
                 quitYear = i;

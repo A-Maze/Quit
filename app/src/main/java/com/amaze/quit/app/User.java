@@ -18,6 +18,15 @@ public class User {
     int quitMonth;
     int quitYear;
     int spentAmount;
+    int shagorsig;
+
+    public int getShagorsig() {
+        return shagorsig;
+    }
+
+    public void setShagorsig(int shagorsig) {
+        this.shagorsig = shagorsig;
+    }
 
     public int getQuitMinute() {
         return quitMinute;
@@ -66,7 +75,7 @@ public class User {
 
 
     // constructor
-    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute, int spentAmount){
+    public User(int uID, int sID, int perDag, int level, int quitYear, int quitMonth , int quitDay, int quitHour, int quitMinute, int spentAmount, int shagorsig){
         this.uID = uID;
         this.sID = sID;
         this.perDag = perDag;
@@ -77,6 +86,7 @@ public class User {
         this.quitMonth = quitMonth;
         this.quitYear = quitYear;
         this.spentAmount = spentAmount;
+        this.shagorsig = shagorsig;
     }
 
 

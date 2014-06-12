@@ -103,6 +103,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/product_days_left"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:id="@+id/tvProductDaysLeft"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/product_complete"
                 android:textColor="@color/light_blue"
                 android:layout_marginTop="30dp"

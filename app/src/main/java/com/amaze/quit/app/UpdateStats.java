@@ -9,15 +9,17 @@ import java.util.Calendar;
  * Created by Robin on 30-5-2014.
  */
 public class UpdateStats {
-    public static long daysQuit = 0;
-    public static float bespaardeMoneys;
-    public static float extraDagenTeLeven;
-    public static long bespaardePakjes;
-    public static long gemiddeldNietGerookt;
-    public static int quitDay;
-    public static int quitMonth;
-    public static int quitYear;
-    public static Calendar quitDate;
+    private static long daysQuit = 0;
+    private static float bespaardeMoneys;
+    private static float extraDagenTeLeven;
+    private static long bespaardePakjes;
+    private static long gemiddeldNietGerookt;
+    private static int refreshStockRate;
+    private static float price;
+    private static int quitDay;
+    private static int quitMonth;
+    private static int quitYear;
+    private static Calendar quitDate;
     private static int userLevel;
     private static Context theContext;
 
@@ -36,14 +38,15 @@ public class UpdateStats {
         quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
 
         Calendar vandaag = Calendar.getInstance();
-
-
+        //how many days does it take before the user had to buy a new pack of sigarettes?
+        refreshStockRate = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag());
+        price = db.getSigaret(db.getUser(1).getsID()).getPrijs();
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         daysQuit = days;
         Log.d("aantal", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getAantal()));
         Log.d("sID setup", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getsID()));
-        bespaardeMoneys = (days / (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag())) * db.getSigaret(db.getUser(1).getsID()).getPrijs();
+        bespaardeMoneys = (days / (refreshStockRate) * price);
         bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
         bespaardeMoneys = bespaardeMoneys / 100;
 
@@ -51,6 +54,7 @@ public class UpdateStats {
 
         bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
         gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
+
 
         int currLevel = db.getUser(1).getLevel();
 
@@ -85,6 +89,10 @@ public class UpdateStats {
     public int getUserLevel() {
         return userLevel;
     }
+
+    public int getRefreshStockRate(){return refreshStockRate;}
+
+    public float getPrice(){return price;}
 
     public void updateAchievements() {
         updateQuit();

@@ -84,6 +84,9 @@ public class Product extends Fragment {
         // prijs of the product
         //float productPrice = 400f;
         float productPrice = db.getProduct(1).getPrijs();
+        //what is left of the price?
+        float priceLeft = productPrice - amountLeft;
+        int daysLeft = (int) Math.round((priceLeft/updatestats.getPrice()) *updatestats.getRefreshStockRate());
 
         // Set titel
         TextView tvTitel = (TextView) getActivity().findViewById(R.id.tvProgressProductTitle);
@@ -109,7 +112,10 @@ public class Product extends Fragment {
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            TextView tvDaysLeft = (TextView) getActivity().findViewById(R.id.tvProductDaysLeft);
             tvComplete.setVisibility(View.GONE);
+            tvDaysLeft.setText("Nog maar " + daysLeft + " dagen sparen!");
+            tvDaysLeft.setVisibility(View.VISIBLE);
 
 
         } else {
@@ -119,7 +125,9 @@ public class Product extends Fragment {
             moneyBar.setProgress(100);
             moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            TextView tvDaysLeft = (TextView) getActivity().findViewById(R.id.tvProductDaysLeft);
             tvComplete.setVisibility(View.VISIBLE);
+            tvDaysLeft.setVisibility(View.GONE);
         }
         //always show the product prijs
         tvProductAmount.setText("€" + productPrice);

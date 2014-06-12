@@ -400,7 +400,7 @@ public class SetupChooseProduct extends Fragment {
                 else {
                     Shag sigaret = setupBrandAmount.getShagPos();
 
-                    int perPak = Integer.parseInt(setupBrandAmount.getEtPerPak().getText().toString());
+                    int perPak = setupBrandAmount.getPerPak();
                     db.getShag(sigaret.getsID()).setAantal(perPak);
 
                     try {

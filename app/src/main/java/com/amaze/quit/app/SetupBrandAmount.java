@@ -17,8 +17,8 @@ import android.widget.TextView;
 public class SetupBrandAmount extends Fragment  {
 
 
-    public static EditText etDayAmount, etPerPak;
-    public static TextView tvPerPak;
+    private static EditText etDayAmount, etPerPak, etPrice;
+    private static TextView tvPerPak;
     private static RadioButton rbSigaretten;
     private static RadioButton rbShag;
     private static Spinner sBrand;
@@ -26,11 +26,9 @@ public class SetupBrandAmount extends Fragment  {
     private static Sigaretten[] sigaretten;
     private static String[] shagList;
     private static Shag[] shagie;
+    private static RadioGroup rg;
     private static int selectedSigaretPos;
 
-    public static EditText getEtPerPak() {
-        return etPerPak;
-    }
 
     public static boolean sigaret = true;
     public static boolean shag = false;
@@ -46,55 +44,48 @@ public class SetupBrandAmount extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
+        return v;
 
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState){
         // etPerPak.setVisibility(View.GONE);
-
-        etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
-        rbShag = (RadioButton) v.findViewById(R.id.rbShag);
-        rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
-        RadioGroup rg = (RadioGroup) v.findViewById(R.id.radioGroup);
+        etPerPak = (EditText) getActivity().findViewById(R.id.etPerPak);
+        tvPerPak = (TextView) getActivity().findViewById(R.id.tvPerPak);
+        etPrice = (EditText) getActivity().findViewById(R.id.etPrijs);
+        etDayAmount = (EditText) getActivity().findViewById(R.id.etDayAmount);
+        rbShag = (RadioButton) getActivity().findViewById(R.id.rbShag);
+        rbSigaretten = (RadioButton) getActivity().findViewById(R.id.rbSigaretten);
+        rg = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
+        sBrand = (Spinner) getActivity().findViewById(R.id.sBrand);
         rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 
 
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(rbSigaretten.isChecked()==true){
+                if(i == rbSigaretten.getId()){
                     shag = false;
                     sigaret = true;
                     fillSpinnerSigaret();
-                    //    etPerPak.setVisibility(View.GONE);
-                    //     tvPerPak.setVisibility(View.GONE);
+                    etPerPak.setText("");
+                    etPrice.setText("");
                 }
-                else if(rbShag.isChecked()==true)
+                else if(i == rbShag.getId())
                 {
                     shag = true;
                     sigaret = false;
                     fillSpinnerShag();
-                    //    etPerPak.setVisibility(View.VISIBLE);
-                    //    tvPerPak.setVisibility(View.VISIBLE);
+                    etPerPak.setText("");
+                    etPrice.setText("");
+
                 }
             }
         });
+        rg.check(rbSigaretten.getId());
 
-
-        sBrand = (Spinner) v.findViewById(R.id.sBrand);
-        getSigaretten();
-
-        sBrand.setAdapter(null);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigarettenList);
-        sBrand.setAdapter(adapter);
-        sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                selectedSigaretPos = pos;
-
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        return v;
 
 
     }
@@ -109,7 +100,11 @@ public class SetupBrandAmount extends Fragment  {
         sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
+                DatabaseHandler db = new DatabaseHandler(getActivity());
 
+                etPerPak.setText("" + db.getSigaret(pos+1).getAantal());
+                etPrice.setText(String.format("%.2f",db.getSigaret(pos+1).getPrijs()));
+                db.close();
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -124,7 +119,9 @@ public class SetupBrandAmount extends Fragment  {
         sBrand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
-
+                DatabaseHandler db = new DatabaseHandler(getActivity());
+                etPrice.setText(String.format("%.2f",db.getSigaret(pos+1).getPrijs()));
+                db.close();
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -171,43 +168,23 @@ public class SetupBrandAmount extends Fragment  {
         db.close();
     }
 
+    public int getPerPak(){
+        return Integer.parseInt(etPerPak.getText().toString());
+    }
 
-    /*
-    OUDE CODE MAAR MISCHIEN NOG NODIG
-    public void checkForInput(View view) {
-        // wat te doen als de next button is geklikt.
-
-        // variabelen vastzetten
-        try {
-            dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            dayAmount = null;
-        }
-        try {
-            packAmount = Integer.parseInt(etPackAmount.getText().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            packAmount = null;
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            rg.check(rbSigaretten.getId());
+            shag = false;
+            sigaret = true;
+            fillSpinnerSigaret();
+            etPerPak.setText("");
+            etPrice.setText("");
         }
 
-
-        if (dayAmount == null || packAmount == null) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-            alertDialogBuilder.setTitle("foutje");
-            alertDialogBuilder
-                    .setMessage("Vul een waarde in!")
-                    .setCancelable(false)
-                    .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-
-    }*/
+    }
 
 
 

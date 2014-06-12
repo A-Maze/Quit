@@ -6,6 +6,7 @@ package com.amaze.quit.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 
@@ -102,6 +103,75 @@ public class SplashScreen extends Activity {
         db.addSigarette(new Sigaretten(21,2f,"Winston 19",19,4,5.4f));
         db.addSigarette(new Sigaretten(22,2f,"Winston 21",21,4,6f));
         db.addSigarette(new Sigaretten(23,2f,"Winston 26",26,4,7.1f));
+
+        //Shag
+        new Thread(new Runnable() {
+            public void run() {
+                DatabaseHandler db = new DatabaseHandler(getBaseContext());
+                String[] merk = {
+                        "Amberleaf JTI 50 GR",
+                        "Brandaris Zwaar IMPERIAL 40 GR",
+                        "Camel MYO 110 JTI 110 GR",
+                        "Camel RYO original/zwaar JTI 40 GR",
+                        "Drum blauw/menthol IMPERIAL 40 GR",
+                        "Drum Classic 50 gr IMPERIAL 50 GR",
+                        "Drum Original Flavour IMPERIAL 130 GR",
+                        "Drum Original IMPERIAL 30 GR",
+                        "Drum Select IMPERIAL 40 GR",
+                        "Gauloises vol/zwaar IMPERIAL 40 GR",
+                        "Golden Virginia IMPERIAL 50 GR",
+                        "Gruno Privilege 150 BAT 150 GR",
+                        "Javaanse Jongens BAT 37,5 GR",
+                        "JPS red/silver IMPERIAL 110 GR",
+                        "JPS vol/zwaar IMPERIAL 50 GR",
+                        "L&M Original PM 35 GR",
+                        "L&M original/zwaar 50 PM 50 GR",
+                        "L&M Premium cut 110 PM 110 GR",
+                        "L&M Premium cut 25 PM 25 GR",
+                        "L&M premium cut tin PM 55 GR",
+                        "L&M Volume Tabak 50 PM 50 GR",
+                        "Lucky Strike Additieve Free BAT 35 GR",
+                        "Lucky Strike Original 110 BAT 110 GR",
+                        "Lucky Strike vol/zwaar BAT 37,5 GR",
+                        "Van Nelle Stevige shag IMPERIAL 40 GR",
+                        "Marlboro Red 60 PM 60 GR",
+                        "Marlboro Red PM 25 GR",
+                        "Marlboro Red PM 30 GR",
+                        "Pall Mall 110 gram BAT 110 GR",
+                        "Pall Mall 60 gram BAT 60 GR",
+                        "Pall Mall Full/Heavy BAT 35 GR",
+                        "Pall Mall full/heavy BAT 52,5 GR",
+                        "Samson BAT 40 GR",
+                        "Samson Original Taste BAT 55 GR",
+                        "Van Nelle Black Fire IMPERIAL 40 GR",
+                        "Van Nelle Export IMPERIAL 40 GR",
+                        "Van Nelle Zwaar IMPERIAL 30 GR",
+                        "Van Nelle zwaar- 50 IMPERIAL 50 GR",
+                        "West red/silver IMPERIAL 110 GR",
+                        "West red/silver IMPERIAL 65 GR",
+                        "Winston MYO 100 JTI 100 GR",
+                        "Winston MYO 125 JTI 125 GR",
+                        "Winston MYO 70 JTI 70 GR",
+                        "Zilver 140 IMPERIAL 140 GR",
+                        "Zilver IMPERIAL 40 GR",
+                        "Zilver vol/zwaar IMPERIAL 30 GR",
+                        "Zilver XL Vol/Zwaar IMPERIAL 50 GR"
+
+                };
+                float[] prijs = {
+                        7.4f, 6.95f, 15.5f, 6f, 6.7f, 8.2f, 19.9f,5f, 6.8f, 6.1f, 7.9f, 23f, 6.5f, 16.5f, 7.2f, 5f, 7.2f, 16.3f, 3.7f, 8.3f, 8f, 5.5f, 18f, 6f, 6.8f, 10f, 4f, 5f, 17.5f, 9.4f, 5f, 7.5f, 6.7f, 9.2f, 6.95f, 7.1f, 5.3f, 8.7f, 16.3f, 9.9f, 13.5f, 17f, 10f, 19.3f, 5.9f, 4.4f, 7.2f
+                };
+
+                for(int i = 0; i <= 46; i++){
+
+
+
+                    db.addShag(new Shag(i+1,merk[i],40,prijs[i]));
+                }
+                db.close();
+            }
+        }).start();
+
 
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;

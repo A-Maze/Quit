@@ -71,7 +71,9 @@ public class SplashScreen extends Activity {
     }
 
     private void fillDataBase() {
-        DatabaseHandler db = new DatabaseHandler(this);
+        new Thread(new Runnable() {
+            public void run() {
+                DatabaseHandler db = new DatabaseHandler(getBaseContext());
         //Sigaretten
         db.addSigarette(new Sigaretten(1,2f,"Camel 19",19,4,5.5f));
         db.addSigarette(new Sigaretten(2,2f,"Camel 21",21,4,6f));
@@ -105,9 +107,7 @@ public class SplashScreen extends Activity {
         db.addSigarette(new Sigaretten(23,2f,"Winston 26",26,4,7.1f));
 
         //Shag
-        new Thread(new Runnable() {
-            public void run() {
-                DatabaseHandler db = new DatabaseHandler(getBaseContext());
+
                 String[] merk = {
                         "Amberleaf JTI 50 GR",
                         "Brandaris Zwaar IMPERIAL 40 GR",
@@ -168,9 +168,7 @@ public class SplashScreen extends Activity {
 
                     db.addShag(new Shag(i+1,merk[i],40,prijs[i]));
                 }
-                db.close();
-            }
-        }).start();
+
 
 
         //Achievements.
@@ -209,6 +207,8 @@ public class SplashScreen extends Activity {
             db.addLevel(levelArray[i]);
         }
 
-        db.close();
+                db.close();
+            }
+        }).start();
     }
 }

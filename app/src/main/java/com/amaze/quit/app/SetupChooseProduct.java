@@ -391,6 +391,9 @@ public class SetupChooseProduct extends Fragment {
                 if (setupBrandAmount.sigaret == true ) {
                     Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
                     try {
+                        sigaret.setAantal(setupBrandAmount.getPerPak());
+                        sigaret.setPrijs(setupBrandAmount.getPrijs());
+                        db.updateSigaretten(sigaret);
                         db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
                     } catch (Exception e) {
                         db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));

@@ -172,6 +172,8 @@ public class SetupBrandAmount extends Fragment  {
         return Integer.parseInt(etPerPak.getText().toString());
     }
 
+    public float getPrijs() { return Float.valueOf(etPrice.getText().toString());}
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

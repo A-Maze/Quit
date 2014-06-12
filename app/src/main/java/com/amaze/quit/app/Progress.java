@@ -71,10 +71,9 @@ public class Progress extends Fragment {
             dayProgress.setText(days + " Dagen");
 
             float bespaardeMoneys = updatestats.getSavedMoney();
-            bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
-            bespaardeMoneys = bespaardeMoneys / 100;
+            String bespaardeMoneysString = String.format("%.2f",bespaardeMoneys);
 
-            moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
+            moneyInTheBank.setText("€" + bespaardeMoneysString); // bespaarde geld.
             DatabaseHandler db = new DatabaseHandler(getActivity());
             float extraDagenTeLeven = updatestats.getExtraDagenTeLeven();
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");

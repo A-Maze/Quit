@@ -86,6 +86,7 @@ public class Product extends Fragment {
         float productPrice = db.getProduct(1).getPrijs();
         //what is left of the price?
         float priceLeft = productPrice - amountLeft;
+        String amountLeftString = String.format("%.2f",amountLeft);
         int daysLeft = (int) Math.round((priceLeft/updatestats.getPrice()) *updatestats.getRefreshStockRate());
 
         // Set titel
@@ -108,7 +109,7 @@ public class Product extends Fragment {
         TextView tvProductAmount = (TextView) getActivity().findViewById(R.id.tvProductPriceAmount);
         if (amountLeft < productPrice) {
             //sets the percentage complete and the amount
-            tvSavedAmount.setText("€" + amountLeft);
+            tvSavedAmount.setText("€" + amountLeftString);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);

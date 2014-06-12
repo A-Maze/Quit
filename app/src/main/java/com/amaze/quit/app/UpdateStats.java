@@ -47,8 +47,8 @@ public class UpdateStats {
         Log.d("aantal", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getAantal()));
         Log.d("sID setup", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getsID()));
         bespaardeMoneys = (days / (refreshStockRate) * price);
-        bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
-        bespaardeMoneys = bespaardeMoneys / 100;
+        
+
 
         extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
 

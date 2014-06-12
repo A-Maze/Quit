@@ -15,18 +15,17 @@ public class SetupQuitDate extends Fragment {
 
 
     /* de datepicker op het quitdate scherm */
-        private static DatePicker quitDatePicker;
-        private static TimePicker quitTimePicker;
+    private static DatePicker quitDatePicker;
+    private static TimePicker quitTimePicker;
 
-        // de stopdatum variabelen
-        public static int quitMinute;
-        public static int quitHour;
-        public static int quitDay;
-        public static int quitMonth;
-        public static int quitYear;
+    // de stopdatum variabelen
+    public static int quitMinute;
+    public static int quitHour;
+    public static int quitDay;
+    public static int quitMonth;
+    public static int quitYear;
 
-    public static final SetupQuitDate newInstance()
-    {
+    public static final SetupQuitDate newInstance() {
         SetupQuitDate f = new SetupQuitDate();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
@@ -36,15 +35,15 @@ public class SetupQuitDate extends Fragment {
     }
 
     @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
 
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
         final Calendar c = Calendar.getInstance();
-         quitYear = c.get(Calendar.YEAR);
-         quitMonth = c.get(Calendar.MONTH);
-         quitDay = c.get(Calendar.DAY_OF_MONTH);
-        quitDatePicker.init(quitYear,quitMonth,quitDay,new DatePicker.OnDateChangedListener() {
+        quitYear = c.get(Calendar.YEAR);
+        quitMonth = c.get(Calendar.MONTH);
+        quitDay = c.get(Calendar.DAY_OF_MONTH);
+        quitDatePicker.init(quitYear, quitMonth, quitDay, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
                 quitYear = i;
@@ -65,9 +64,7 @@ public class SetupQuitDate extends Fragment {
         quitTimePicker.setIs24HourView(true);
 
 
-
         return v;
-
 
 
     }
@@ -77,28 +74,29 @@ public class SetupQuitDate extends Fragment {
         quitMinute = quitTimePicker.getCurrentMinute();
         return quitMinute;
     }
+
     public static int getTheHour() {
         quitHour = quitTimePicker.getCurrentHour();
         return quitHour;
     }
+
     public static int getTheDay() {
         quitDay = quitDatePicker.getDayOfMonth();
         return quitDay;
     }
+
     public static int getTheMonth() {
 
         quitMonth = quitDatePicker.getMonth();
         return quitMonth;
 
     }
+
     public static int getTheYear() {
 
         quitYear = quitDatePicker.getYear();
         return quitYear;
     }
-
-
-
 
 
 }

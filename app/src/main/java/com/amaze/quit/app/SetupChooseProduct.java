@@ -383,35 +383,16 @@ public class SetupChooseProduct extends Fragment {
                 alertDialog.show();
             }
 
-
-
             else{
 
                 Integer dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-                if (setupBrandAmount.sigaret == true ) {
-                    Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
-                    try {
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
-                    } catch (Exception e) {
-                        db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
-                        e.printStackTrace();
-                    }
+                Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
+                try {
+                    db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0));
+                } catch (Exception e) {
+                    db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount()));
+                    e.printStackTrace();
                 }
-                else {
-                    Shag sigaret = setupBrandAmount.getShagPos();
-
-                    int perPak = Integer.parseInt(setupBrandAmount.getEtPerPak().getText().toString());
-                    db.getShag(sigaret.getsID()).setAantal(perPak);
-
-                    try {
-
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
-                    } catch (Exception e) {
-                        db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
-                        e.printStackTrace();
-                    }
-                }
-
                 //this makes sure the activity resumes rather than creating a new one.
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(myIntent);

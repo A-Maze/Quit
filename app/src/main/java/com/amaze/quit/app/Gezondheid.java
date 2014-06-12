@@ -12,7 +12,6 @@ public class Gezondheid {
     float langerTeLeven;
 
 
-
     public Gezondheid(int uID, float teer, float nicotine, float co2, float langerTeLeven) {
         this.uID = uID;
         this.teer = teer;

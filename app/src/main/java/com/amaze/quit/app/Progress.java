@@ -12,8 +12,8 @@ public class Progress extends Fragment {
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
-    public static final Progress newInstance(int i)
-    {
+
+    public static final Progress newInstance(int i) {
         Progress f = new Progress();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
@@ -31,20 +31,25 @@ public class Progress extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateVooruitgang();
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             //implements the main method what every fragment should do when it's visible
-            uservisibilityevent.viewIsVisible(getActivity(),position,"red","title_activity_progress");
+            uservisibilityevent.viewIsVisible(getActivity(), position, "red", "title_activity_progress");
             updateVooruitgang();
         }
 
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         updateVooruitgang();
     }
 
@@ -57,7 +62,7 @@ public class Progress extends Fragment {
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDagenZonderRoken);
         moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvBespaardeGeld);
         TextView nietGerookt = (TextView) getActivity().findViewById(R.id.tvNietGerookteSigaretten);
-       // level = (TextView) getActivity().findViewById(R.id.tvLevel);
+        // level = (TextView) getActivity().findViewById(R.id.tvLevel);
         TextView levelDesc = (TextView) getActivity().findViewById(R.id.tvLevel);
 
         long days = updatestats.getDaysQuit();
@@ -66,10 +71,9 @@ public class Progress extends Fragment {
             dayProgress.setText(days + " Dagen");
 
             float bespaardeMoneys = updatestats.getSavedMoney();
-            bespaardeMoneys = Math.round(bespaardeMoneys) * 100;
-            bespaardeMoneys = bespaardeMoneys / 100;
+            String bespaardeMoneysString = String.format("%.2f",bespaardeMoneys);
 
-            moneyInTheBank.setText("€" + bespaardeMoneys); // bespaarde geld.
+            moneyInTheBank.setText("€" + bespaardeMoneysString); // bespaarde geld.
             DatabaseHandler db = new DatabaseHandler(getActivity());
             float extraDagenTeLeven = updatestats.getExtraDagenTeLeven();
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
@@ -79,15 +83,12 @@ public class Progress extends Fragment {
             levelDesc.setText(Titel);
             int nietGerooktSig = (int) days * db.getUser(1).getPerDag();
             nietGerookt.setText("" + nietGerooktSig);
-        }
-        catch(NullPointerException e){
-            return;
+        } catch (NullPointerException e) {
         }
 
 
-
-     }
     }
+}
 
 
 

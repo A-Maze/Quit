@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.amaze.quit.app.Achievements"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <ScrollView
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/productLayout"
             android:orientation="vertical">
@@ -98,6 +99,17 @@
                 android:textSize="12dp"
                 android:textAlignment="center"
                 android:id="@+id/tvProductPercentage"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_days_left"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:id="@+id/tvProductDaysLeft"
+                />
 
             <TextView
                 android:layout_width="match_parent"

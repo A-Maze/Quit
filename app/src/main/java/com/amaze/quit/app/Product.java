@@ -32,6 +32,7 @@ public class Product extends Fragment {
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
+
     public static final Product newInstance(int i) {
         Product f = new Product();
         Bundle bdl = new Bundle(1);
@@ -48,14 +49,15 @@ public class Product extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         updateSavingProgress();
+        setListeners();
     }
 
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         updateSavingProgress();
         setListeners();
     }
@@ -65,13 +67,13 @@ public class Product extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             //implements the main method what every fragment should do when it's visible
-            uservisibilityevent.viewIsVisible(getActivity(),position,"blue","title_activity_product");
+            uservisibilityevent.viewIsVisible(getActivity(), position, "blue", "title_activity_product");
 
         }
 
     }
 
-    public void updateSavingProgress(){
+    public void updateSavingProgress() {
         DatabaseHandler db = new DatabaseHandler(getActivity());
         //gets the total saved amount
         float totalSavedAmount = updatestats.getSavedMoney();
@@ -82,6 +84,10 @@ public class Product extends Fragment {
         // prijs of the product
         //float productPrice = 400f;
         float productPrice = db.getProduct(1).getPrijs();
+        //what is left of the price?
+        float priceLeft = productPrice - amountLeft;
+        String amountLeftString = String.format("%.2f",amountLeft);
+        int daysLeft = (int) Math.round((priceLeft/updatestats.getPrice()) *updatestats.getRefreshStockRate());
 
         // Set titel
         TextView tvTitel = (TextView) getActivity().findViewById(R.id.tvProgressProductTitle);
@@ -101,13 +107,16 @@ public class Product extends Fragment {
         TextView tvSavedAmount = (TextView) getActivity().findViewById(R.id.tvProductSavedAmount);
         TextView tvSavedPercentage = (TextView) getActivity().findViewById(R.id.tvProductSavedPercentage);
         TextView tvProductAmount = (TextView) getActivity().findViewById(R.id.tvProductPriceAmount);
-        if(amountLeft < productPrice) {
+        if (amountLeft < productPrice) {
             //sets the percentage complete and the amount
-            tvSavedAmount.setText("€" + amountLeft);
+            tvSavedAmount.setText("€" + amountLeftString);
             tvSavedPercentage.setText("" + current + "%");
             moneyBar.setProgress(current);
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            TextView tvDaysLeft = (TextView) getActivity().findViewById(R.id.tvProductDaysLeft);
             tvComplete.setVisibility(View.GONE);
+            tvDaysLeft.setText("Nog maar " + daysLeft + " dagen sparen!");
+            tvDaysLeft.setVisibility(View.VISIBLE);
 
 
         } else {
@@ -117,7 +126,9 @@ public class Product extends Fragment {
             moneyBar.setProgress(100);
             moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
+            TextView tvDaysLeft = (TextView) getActivity().findViewById(R.id.tvProductDaysLeft);
             tvComplete.setVisibility(View.VISIBLE);
+            tvDaysLeft.setVisibility(View.GONE);
         }
         //always show the product prijs
         tvProductAmount.setText("€" + productPrice);
@@ -126,24 +137,24 @@ public class Product extends Fragment {
 
     }
 
-    private int giveDP(float dp){
+    private int giveDP(float dp) {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
         int pixels = (int) (fpixels + 0.5f);
         return pixels;
     }
 
-    public void setListeners(){
+    public void setListeners() {
         Button bPay = (Button) getActivity().findViewById(R.id.bPay);
         bPay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseHandler db = new DatabaseHandler(getActivity());
                 String naam = db.getProduct(1).getTitel();
-                naam = naam.replace(" ","-");
-                naam = naam.replaceAll("[^a-zA-Z0-9]","");
-                String id= db.getProduct(1).getId();
-                String url = "http://www.bol.com/nl/p/"+naam+"/"+id+"/";
+                naam = naam.replace(" ", "-");
+                naam = naam.replaceAll("[^a-zA-Z0-9]", "");
+                String id = db.getProduct(1).getId();
+                String url = "http://www.bol.com/nl/p/" + naam + "/" + id + "/";
                 Uri uri = Uri.parse(url);
                 db.close();
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -25,18 +26,15 @@ import com.viewpagerindicator.LinePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends FragmentActivity  {
+public class Home extends FragmentActivity {
     ViewPager pager;
     public static final String PREFS_NAME = "QuitPrefs";
     MyPageAdapter pageAdapter;
     SharedPreferences settings = null;
     int preferedFragment;
-    private String[] mNavTitles;
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    private TypedArray navMenuIcons;
-    private ArrayList<NavDrawerItem> navDrawerItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,11 +46,11 @@ public class Home extends FragmentActivity  {
 
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
         //bind the adapter to the viewpager
-        pager = (ViewPager)findViewById(R.id.viewpager);
+        pager = (ViewPager) findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
 
         //Bind the titel indicator to the adapter
-        LinePageIndicator lineIndicator = (LinePageIndicator)findViewById(R.id.indicator);
+        LinePageIndicator lineIndicator = (LinePageIndicator) findViewById(R.id.indicator);
         final float density = getResources().getDisplayMetrics().density;
         lineIndicator.setViewPager(pager);
         lineIndicator.setSelectedColor(0x88FF0000);
@@ -69,17 +67,17 @@ public class Home extends FragmentActivity  {
         //initialises the navigation drawer
         navDrawer();
 
+
         //makes sure all the stats are updated
         UpdateStats updater = new UpdateStats(this);
         updater.updateAchievements();
 
 
-    };
-
+    }
 
 
     //gets the 4 fragments
-    private List<Fragment> getFragments(){
+    private List<Fragment> getFragments() {
         List<Fragment> fList = new ArrayList<Fragment>();
         fList.add(Achievements.newInstance(0));
         fList.add(Progress.newInstance(1));
@@ -87,9 +85,9 @@ public class Home extends FragmentActivity  {
         fList.add(HealthProgress.newInstance(3));
 
 
-
         return fList;
     }
+
 
     // makes a menu
     @Override
@@ -127,22 +125,23 @@ public class Home extends FragmentActivity  {
 
     }
 
+
     //launches specified activity
-    private void launchActivity(Class activity){
-        Intent intent = new Intent(this,activity);
+    private void launchActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
 
     private void navDrawer() {
-        mNavTitles = getResources().getStringArray(R.array.nav_array);
+        String[] mNavTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         // nav drawer icons from resources
-        navMenuIcons = getResources()
+        TypedArray navMenuIcons = getResources()
                 .obtainTypedArray(R.array.nav_drawer_icons);
 
         //makes the drawer items
-        navDrawerItems = new ArrayList<NavDrawerItem>();
+        ArrayList<NavDrawerItem> navDrawerItems = new ArrayList<NavDrawerItem>();
         // adding nav drawer items to array
         //Achievement
         navDrawerItems.add(new NavDrawerItem(mNavTitles[0], navMenuIcons.getResourceId(0, -1)));
@@ -165,11 +164,11 @@ public class Home extends FragmentActivity  {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 //de positie van settings
-                if(position == 4){
-                    Intent intent = new Intent(getApplicationContext(),Settings.class);
+                if (position == 4) {
+                    Intent intent = new Intent(getApplicationContext(), Settings.class);
                     startActivity(intent);
 
-                }else {
+                } else {
                     pager.setCurrentItem(position);
                 }
                 mDrawerLayout.closeDrawers();
@@ -188,17 +187,22 @@ public class Home extends FragmentActivity  {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         setSelectedNav(pager.getCurrentItem());
-    };
+        UpdateStats updater = new UpdateStats(this);
+        updater.updateQuit();
+        updater.updateAchievements();
 
 
-    public static void setSelectedNav(int position){
-        mDrawerList.setItemChecked(position,true);
+    }
+
+
+    public static void setSelectedNav(int position) {
+        mDrawerList.setItemChecked(position, true);
     }
 
     @Override
@@ -207,10 +211,6 @@ public class Home extends FragmentActivity  {
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
-
-
-
-
 
 
 }

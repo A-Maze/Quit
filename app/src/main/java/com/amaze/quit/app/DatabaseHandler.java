@@ -30,6 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_LEVELS = "levels";
     private static final String TABLE_GEZONDHEID = "gezondheid";
     private static final String TABLE_PRODUCT = "product";
+    private static final String TABLE_SHAG = "shag";
 
     // User Table Columns names
     private static final String USER_UID = "uID";
@@ -42,6 +43,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_QUIT_HOUR = "quit_hour";
     private static final String USER_QUIT_MINUTE = "quit_minute";
     private static final String USER_SPENT_AMOUNT = "spent_amount";
+    private static final String USER_SHAG_OR_SIG = "shag_or_sig";
 
     // Sigaretten Table Columns namesss
     private static final String SIGARETTEN_SID = "sID";
@@ -50,6 +52,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String SIGARETTEN_TEER = "teer";
     private static final String SIGARETTEN_NICOTINE = "nicotine";
     private static final String SIGARETTEN_PRIJS = "prijs";
+
+    // Sigaretten Table Columns namesss
+    private static final String SHAG_SID = "sID";
+    private static final String SHAG_MERK = "merk";
+    private static final String SHAG_AANTAL = "aantal";
+    private static final String SHAG_PRIJS = "prijs";
 
     // Chalenges Table Columns names
     private static final String CHALLENGES_CID = "cID";
@@ -105,7 +113,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + USER_QUIT_DAY + " INTEGER,"
                 + USER_QUIT_HOUR + " INTEGER,"
                 + USER_QUIT_MINUTE + " INTEGER,"
-                + USER_SPENT_AMOUNT + " INTEGER"
+                + USER_SPENT_AMOUNT + " INTEGER,"
+                + USER_SHAG_OR_SIG + " INTEGER"
                 + ")";
         db.execSQL(CREATE_USER_TABLE);
 
@@ -120,6 +129,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + SIGARETTEN_PRIJS + " REAL"
                 + ")";
         db.execSQL(CREATE_SIGARETTEN_TABLE);
+
+        /* shag table */
+        String CREATE_SHAG_TABLE = "CREATE TABLE "
+                + TABLE_SHAG + "("
+                + SHAG_SID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + SHAG_AANTAL + " INTEGER,"
+                + SHAG_MERK + " TEXT,"
+                + SHAG_PRIJS + " REAL"
+                + ")";
+        db.execSQL(CREATE_SHAG_TABLE);
 
           /* Challenges table */
         String CREATE_CHALLANGES_TABLE = "CREATE TABLE "
@@ -209,7 +228,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
         values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
-
+        values.put(USER_SHAG_OR_SIG, user.getShagorsig());
         // Inserting Row
         assert db != null;
         db.insert(TABLE_USER, null, values);
@@ -228,6 +247,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         assert db != null;
         db.insert(TABLE_SIGARETTEN, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public void addShag(Shag shag) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SHAG_AANTAL, shag.getAantal());
+        values.put(SHAG_MERK, shag.getMerk());
+
+
+        values.put(SHAG_PRIJS, shag.getPrijs());
+        // Inserting Row
+        assert db != null;
+        db.insert(TABLE_SHAG, null, values);
         db.close(); // Closing database connection
     }
 
@@ -298,7 +332,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         USER_QUIT_DAY,
                         USER_QUIT_HOUR,
                         USER_QUIT_MINUTE,
-                        USER_SPENT_AMOUNT}, USER_UID + "=?",
+                        USER_SPENT_AMOUNT,
+                        USER_SHAG_OR_SIG}, USER_UID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -313,7 +348,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 Integer.parseInt(cursor.getString(6)),
                 Integer.parseInt(cursor.getString(7)),
                 Integer.parseInt(cursor.getString(8)),
-                Integer.parseInt(cursor.getString(9)));
+                Integer.parseInt(cursor.getString(9)),
+                Integer.parseInt(cursor.getString(10)));
         /* return contact */
         cursor.close();
         return user;
@@ -346,6 +382,33 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         /* return sigaret */
         cursor.close();
         return sigaret;
+    }
+
+    /* Getting single shag*/
+    public Shag getShag(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        assert db != null;
+        Cursor cursor = db.query(TABLE_SHAG, new String[] {
+                        SHAG_SID ,
+
+                        SHAG_MERK,
+                        SHAG_AANTAL,
+
+                        SHAG_PRIJS}, SIGARETTEN_SID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Shag shag = new Shag(
+                Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1),
+                Integer.parseInt(cursor.getString(2)),
+                Float.parseFloat(cursor.getString(3)));
+
+        /* return shag */
+        cursor.close();
+        return shag;
     }
 
 
@@ -556,6 +619,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return numRows;
     }
 
+    public int getSigarettenAmount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_SIGARETTEN);
+        return numRows;
+    }
+
+    public int getShagAmount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_SHAG);
+        return numRows;
+    }
 
 
 

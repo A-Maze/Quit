@@ -12,41 +12,14 @@
         android:layout_width="wrap_content"
         android:textSize="40dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="0dp"
         android:id="@+id/textView"
-        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioGroup">
 
-    </RadioGroup>
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sigaretten"
-        android:id="@+id/rbSigaretten"
-        android:layout_gravity="right"
-        android:layout_marginTop="45dp"
-        android:checked="false"
-        android:layout_marginLeft="28dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
 
-    <RadioButton
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="@string/shag"
-android:id="@+id/rbShag"
-        android:checked="false"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/textView4"
-        android:layout_marginLeft="51dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,67 +27,100 @@ android:id="@+id/rbShag"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/setupBrand"
         android:id="@+id/textView2"
-        android:layout_marginTop="75dp"
-        android:layout_below="@+id/rbSigaretten"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
+        android:layout_alignTop="@+id/sBrand"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sBrand"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView4"
-        android:layout_alignRight="@+id/etDayAmount"
-        android:layout_alignEnd="@+id/etDayAmount" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/setupDayAmount"
-        android:id="@+id/textView3"
-        android:layout_marginTop="49dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/rbSigaretten"
-        android:layout_alignEnd="@+id/rbSigaretten" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/etDayAmount"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/rbShag"
-        android:layout_alignEnd="@+id/rbShag"
-        android:layout_alignLeft="@+id/rbShag"
-        android:layout_alignStart="@+id/rbShag" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/setupPackAmount"
-        android:id="@+id/textView4"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/etPackAmount"
-        android:layout_alignBottom="@+id/textView4"
+        android:layout_marginBottom="53dp"
+        android:layout_above="@+id/etDayAmount"
         android:layout_alignLeft="@+id/etDayAmount"
-        android:layout_alignStart="@+id/etDayAmount"
-        android:layout_alignRight="@+id/etDayAmount"
-        android:layout_alignEnd="@+id/etDayAmount" />
+        android:layout_alignStart="@+id/etDayAmount" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="@string/setupDayAmount"
+    android:id="@+id/textView3"
+    android:layout_alignParentBottom="true"
+    android:layout_alignLeft="@+id/textView2"
+    android:layout_alignStart="@+id/textView2"
+    android:layout_marginBottom="173dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="3"
+        android:id="@+id/etDayAmount"
+
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignRight="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/setupPerPak"
+        android:id="@+id/tvPerPak"
+        android:layout_below="@+id/etDayAmount"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginTop="41dp"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="3"
+        android:id="@+id/etPerPak"
+
+        android:layout_alignBottom="@+id/tvPerPak"
+        android:layout_alignLeft="@+id/etDayAmount"
+        android:layout_alignStart="@+id/etDayAmount" />
 
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal"
+        android:layout_above="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shag"
+            android:id="@+id/rbShag"
+            android:checked="false"
+            android:orientation="horizontal"
+            />
+
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sigaretten"
+        android:id="@+id/rbSigaretten"
+        android:layout_gravity="right"
+        android:checked="true"
+        android:layout_marginTop="44dp"
+
+        android:layout_marginLeft="110dp"
+
+        />
+    </RadioGroup>
 
 
 </RelativeLayout>

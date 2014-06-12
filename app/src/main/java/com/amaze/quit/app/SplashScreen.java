@@ -84,9 +84,9 @@ public class SplashScreen extends Activity {
         db.addSigarette(new Sigaretten(8,2f,"Kent 19",19,4,6f));
         db.addSigarette(new Sigaretten(9,2f,"Kent 22",22,4,7f));
 
-        db.addSigarette(new Sigaretten(10,2f,"L&M",19,4,5.4f));
-        db.addSigarette(new Sigaretten(11,2f,"L&M",22,4,5.9f));
-        db.addSigarette(new Sigaretten(12,2f,"L&M",27,4,7.5f));
+        db.addSigarette(new Sigaretten(10,2f,"L&M 19",19,4,5.4f));
+        db.addSigarette(new Sigaretten(11,2f,"L&M 22 ",22,4,5.9f));
+        db.addSigarette(new Sigaretten(12,2f,"L&M 27",27,4,7.5f));
 
         db.addSigarette(new Sigaretten(13,2f,"Lucky Strike 19",19,4,5.8f));
         db.addSigarette(new Sigaretten(14,2f,"Lucky Strike 22",27,4,6.5f));
@@ -103,6 +103,10 @@ public class SplashScreen extends Activity {
         db.addSigarette(new Sigaretten(22,2f,"Winston 21",21,4,6f));
         db.addSigarette(new Sigaretten(23,2f,"Winston 26",26,4,7.1f));
 
+
+        //shag
+
+        db.addShag(new Shag(1,"test",30,5f));
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
         c1 = new Challenges(1,"Eerste stapje","Doorbreng een dag zonder te roken", 0);

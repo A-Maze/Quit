@@ -135,4 +135,5 @@
     <string name="title_activity_choose_product_host">ChooseProductHost</string>
     <string name="pref_product">Spaar product</string>
     <string name="pref_product_summary">Kies een nieuw product om voor te sparen.</string>
+    <string name="setupPerPak">sigaretten per pak?</string>
 </resources>

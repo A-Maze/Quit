@@ -44,6 +44,8 @@ public class Setup extends FragmentActivity {
     }
 
 
+
+
     private List<Fragment> getFragments(){
         List<Fragment> fList = new ArrayList<Fragment>();
 

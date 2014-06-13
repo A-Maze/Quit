@@ -228,7 +228,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
         values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
-        values.put(USER_SHAG_OR_SIG, user.getShagorsig());
+        values.put(USER_SHAG_OR_SIG, user.getShagorsig());  // shag = 0 sig = 1
         // Inserting Row
         assert db != null;
         db.insert(TABLE_USER, null, values);
@@ -556,6 +556,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_DAY, user.getQuitDay());
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
+        values.put(USER_SHAG_OR_SIG, user.getShagorsig());
 
         /* updating row */
         return db.update(TABLE_USER, values, USER_UID + " = ?",

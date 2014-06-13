@@ -394,23 +394,23 @@ public class SetupChooseProduct extends Fragment {
                         sigaret.setAantal(setupBrandAmount.getPerPak());
                         sigaret.setPrijs(setupBrandAmount.getPrijs());
                         db.updateSigaretten(sigaret);
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
+                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
                     } catch (Exception e) {
                         db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
                         e.printStackTrace();
                     }
                 }
                 else {
-                    Shag sigaret = setupBrandAmount.getShagPos();
+                    Shag shag = setupBrandAmount.getShagPos();
 
                     int perPak = setupBrandAmount.getPerPak();
-                    db.getShag(sigaret.getsID()).setAantal(perPak);
+                    db.getShag(shag.getsID()).setAantal(perPak);
 
                     try {
 
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
+                        db.addUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
                     } catch (Exception e) {
-                        db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
+                        db.updateUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
                         e.printStackTrace();
                     }
                 }

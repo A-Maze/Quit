@@ -22,6 +22,7 @@ public class UpdateStats {
     private static Calendar quitDate;
     private static int userLevel;
     private static Context theContext;
+    private static Rookwaar rookwaar;
 
 
     public UpdateStats(Context context) {
@@ -34,25 +35,31 @@ public class UpdateStats {
 
         DatabaseHandler db = new DatabaseHandler(theContext);
 
+        if(db.getUser(1).getShagorsig() == 0){
+            rookwaar = db.getShag(db.getUser(1).getsID());
+        }
+        else{
+            rookwaar = db.getSigaret(db.getUser(1).getsID());
+        }
         quitDate = Calendar.getInstance();
         quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
 
         Calendar vandaag = Calendar.getInstance();
         //how many days does it take before the user had to buy a new pack of sigarettes?
-        refreshStockRate = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag());
-        price = db.getSigaret(db.getUser(1).getsID()).getPrijs();
+        refreshStockRate = (rookwaar.getAantal() / db.getUser(1).getPerDag());
+        price = rookwaar.getPrijs();
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         daysQuit = days;
-        Log.d("aantal", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getAantal()));
-        Log.d("sID setup", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getsID()));
+        Log.d("aantal", Integer.toString(rookwaar.getAantal()));
+        Log.d("sID setup", Integer.toString(rookwaar.getsID()));
         bespaardeMoneys = (days / (refreshStockRate) * price);
         
 
 
         extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
 
-        bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
+        bespaardePakjes = days / ((rookwaar.getAantal() / db.getUser(1).getPerDag()));
         gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
 
 

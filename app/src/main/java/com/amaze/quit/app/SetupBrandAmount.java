@@ -84,7 +84,7 @@ public class SetupBrandAmount extends Fragment  {
                 }
             }
         });
-        rg.check(rbSigaretten.getId());
+
 
 
 
@@ -174,6 +174,9 @@ public class SetupBrandAmount extends Fragment  {
 
     public float getPrijs() { return Float.valueOf(etPrice.getText().toString());}
 
+
+
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -184,10 +187,11 @@ public class SetupBrandAmount extends Fragment  {
             fillSpinnerSigaret();
             etPerPak.setText("");
             etPrice.setText("");
+
+
         }
 
     }
-
 
 
 

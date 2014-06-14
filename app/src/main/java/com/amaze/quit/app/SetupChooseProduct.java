@@ -405,8 +405,8 @@ public class SetupChooseProduct extends Fragment {
 
                     int perPak = setupBrandAmount.getPerPak();
                     float prijs = setupBrandAmount.getPrijs();
-                    db.getShag(shag.getsID()).setAantal(perPak);
-                    db.getShag(shag.getsID()).setPrijs(prijs);
+                    shag.setAantal(perPak);
+                    shag.setPrijs(prijs);
                     db.updateShag(shag);
 
                     try {

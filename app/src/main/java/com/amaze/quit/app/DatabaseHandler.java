@@ -568,10 +568,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SIGARETTEN_AANTAL, sigaretten.getAantal());
+        values.put(SIGARETTEN_PRIJS, sigaretten.getPrijs());
 
         /* updating row */
         return db.update(TABLE_SIGARETTEN, values, SIGARETTEN_SID + " = ?",
                 new String[] { String.valueOf(sigaretten.getsID()) });
+    }
+
+    /* Updating single Siaget */
+    public int updateShag(Shag shag) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SHAG_AANTAL, shag.getAantal());
+        values.put(SHAG_PRIJS, shag.getPrijs());
+
+        /* updating row */
+        return db.update(TABLE_SHAG, values, SHAG_SID + " = ?",
+                new String[] { String.valueOf(shag.getsID()) });
     }
 
     public int updateChallenge (Challenges challenge) {

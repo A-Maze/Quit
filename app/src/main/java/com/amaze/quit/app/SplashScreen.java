@@ -45,7 +45,7 @@ public class SplashScreen extends Activity {
         if(settings.getBoolean("first_time",true) || !isDatabaseThere()){
             if(!settings.getBoolean("dataFilled",false)) {
                 fillDataBase();
-                settings.edit().putBoolean("dataFilled",true);
+                settings.edit().putBoolean("dataFilled",true).commit();
             }
             startMainActivity = new Intent(getApplicationContext(),Setup.class);
             settings.edit().putBoolean("first_time",false).commit();

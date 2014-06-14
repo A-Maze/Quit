@@ -102,7 +102,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberDecimal"
         android:ems="3"
         android:id="@+id/etPrijs"
         android:layout_marginBottom="68dp"

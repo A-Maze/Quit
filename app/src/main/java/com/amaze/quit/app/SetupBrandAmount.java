@@ -60,6 +60,7 @@ public class SetupBrandAmount extends Fragment  {
         rbSigaretten = (RadioButton) getActivity().findViewById(R.id.rbSigaretten);
         rg = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
         sBrand = (Spinner) getActivity().findViewById(R.id.sBrand);
+        selectedSigaretPos = 0;
         rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 
 
@@ -120,7 +121,7 @@ public class SetupBrandAmount extends Fragment  {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
                 DatabaseHandler db = new DatabaseHandler(getActivity());
-                etPrice.setText(String.format("%.2f",db.getSigaret(pos+1).getPrijs()));
+                etPrice.setText(String.format("%.2f",db.getShag(pos+1).getPrijs()));
                 db.close();
             }
             public void onNothingSelected(AdapterView<?> parent) {

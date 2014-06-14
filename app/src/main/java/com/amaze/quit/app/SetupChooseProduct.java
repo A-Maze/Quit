@@ -404,7 +404,10 @@ public class SetupChooseProduct extends Fragment {
                     Shag shag = setupBrandAmount.getShagPos();
 
                     int perPak = setupBrandAmount.getPerPak();
+                    float prijs = setupBrandAmount.getPrijs();
                     db.getShag(shag.getsID()).setAantal(perPak);
+                    db.getShag(shag.getsID()).setPrijs(prijs);
+                    db.updateShag(shag);
 
                     try {
 
@@ -414,7 +417,7 @@ public class SetupChooseProduct extends Fragment {
                         e.printStackTrace();
                     }
                 }
-
+                db.close();
                 //this makes sure the activity resumes rather than creating a new one.
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(myIntent);

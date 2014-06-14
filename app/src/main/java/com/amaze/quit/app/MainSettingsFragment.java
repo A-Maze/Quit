@@ -113,11 +113,17 @@ public class MainSettingsFragment extends PreferenceFragment {
                 User user;
                 user = db.getUser(1);
                 int sId = user.getsID();
-                Sigaretten sigaretten = db.getSigaret(sId);
-                sigaretten.setAantal(packAmount);
-                db.updateSigaretten(sigaretten);
-                Log.d("rows affected", Integer.toString(db.updateSigaretten(sigaretten)));
-                Log.d("sID settings", Integer.toString(db.getSigaret(user.getsID()).getsID()));
+                if (user.getShagorsig() == 1) {
+                    Sigaretten sigaretten = db.getSigaret(sId);
+                    sigaretten.setAantal(packAmount);
+                    db.updateSigaretten(sigaretten);
+                }
+                else{
+                    Shag shag = db.getShag(sId);
+                    shag.setAantal(packAmount);
+                    db.updateShag(shag);
+                }
+
                 db.close();
                 return false;
             }

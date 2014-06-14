@@ -36,7 +36,7 @@ public class UpdateStats {
         DatabaseHandler db = new DatabaseHandler(theContext);
 
         if(db.getUser(1).getShagorsig() == 0){
-            rookwaar = db.getShag(db.getUser(1).getsID());
+            rookwaar =  db.getShag(db.getUser(1).getsID());
         }
         else{
             rookwaar = db.getSigaret(db.getUser(1).getsID());

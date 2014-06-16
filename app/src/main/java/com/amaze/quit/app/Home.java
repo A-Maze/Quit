@@ -2,6 +2,7 @@ package com.amaze.quit.app;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,7 +31,7 @@ public class Home extends FragmentActivity {
     ViewPager pager;
     public static final String PREFS_NAME = "QuitPrefs";
     MyPageAdapter pageAdapter;
-    SharedPreferences settings = null;
+    private static SharedPreferences settings = null;
     int preferedFragment;
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
@@ -71,6 +72,8 @@ public class Home extends FragmentActivity {
         //makes sure all the stats are updated
         UpdateStats updater = new UpdateStats(this);
         updater.updateAchievements();
+        boughtProduct();
+        saveNewProduct();
 
 
     }
@@ -196,6 +199,9 @@ public class Home extends FragmentActivity {
         UpdateStats updater = new UpdateStats(this);
         updater.updateQuit();
         updater.updateAchievements();
+        boughtProduct();
+        saveNewProduct();
+
 
 
     }
@@ -210,6 +216,70 @@ public class Home extends FragmentActivity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+    }
+
+    private void saveNewProduct(){
+        if(settings.getBoolean("newProduct",false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setMessage(R.string.new_product_dialog)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                           Intent intent = new Intent(getApplicationContext(),ChooseProductHost.class);
+                           startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            settings.edit().putBoolean("newProduct", false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and show it
+            builder.create();
+            AlertDialog newProductDialog = builder.create();
+            newProductDialog.show();
+        }
+
+
+    }
+
+    private void boughtProduct(){
+        if(settings.getBoolean("boughtProduct",false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setMessage(R.string.bought_product)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //adds the saved amount up to the spent amount of the user since the user just bought the product
+                            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                            User user = db.getUser(1);
+                            Product product = new Product();
+                            user.setSpentAmount(user.getSpentAmount() + Math.round(product.getAmountLeft()));
+                            db.updateUser(user);
+
+
+                            db.close();
+
+                            settings.edit().putBoolean("newProduct", true).commit();
+                            settings.edit().putBoolean("boughtProduct", false).commit();
+                            dialog.dismiss();
+                            saveNewProduct();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            settings.edit().putBoolean("newProduct", false).commit();
+                            settings.edit().putBoolean("boughtProduct", false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and show it
+            builder.create();
+            AlertDialog newProductDialog = builder.create();
+            newProductDialog.show();
+        }
+
+
     }
 
 

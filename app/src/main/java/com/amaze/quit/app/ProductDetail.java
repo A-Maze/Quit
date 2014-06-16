@@ -1,6 +1,7 @@
 package com.amaze.quit.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -99,7 +100,10 @@ public class ProductDetail extends ActionBarActivity {
 
                 if (nrows > 0) {
                     db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
+                    SharedPreferences settings = getSharedPreferences("QuitPrefs", 0);
+                    settings.edit().putBoolean("newProduct",false).commit();
                 } else {
+
 
                     db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 }

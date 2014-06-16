@@ -1,6 +1,7 @@
 package com.amaze.quit.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -32,7 +33,7 @@ public class Product extends Fragment {
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
-
+    private static float amountLeft;
     public static final Product newInstance(int i) {
         Product f = new Product();
         Bundle bdl = new Bundle(1);
@@ -53,6 +54,7 @@ public class Product extends Fragment {
         super.onResume();
         updateSavingProgress();
         setListeners();
+
     }
 
 
@@ -80,9 +82,12 @@ public class Product extends Fragment {
         // what is spent?
         int spentAmount = db.getUser(1).getSpentAmount();
         //what is left?
-        float amountLeft = totalSavedAmount - spentAmount;
+        amountLeft = totalSavedAmount - spentAmount;
         // prijs of the product
         //float productPrice = 400f;
+        if(amountLeft < 0){
+            amountLeft = 0f;
+        }
         float productPrice = db.getProduct(1).getPrijs();
         //what is left of the price?
         float priceLeft = productPrice - amountLeft;
@@ -121,7 +126,8 @@ public class Product extends Fragment {
 
         } else {
             //if complete turn the bar green and show a complete text
-            tvSavedAmount.setText("€" + productPrice);
+            amountLeft = productPrice;
+            tvSavedAmount.setText("€" + amountLeftString);
             tvSavedPercentage.setText("" + 100 + "%");
             moneyBar.setProgress(100);
             moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
@@ -144,6 +150,10 @@ public class Product extends Fragment {
         return pixels;
     }
 
+    public float getAmountLeft(){
+        return amountLeft;
+    }
+
     public void setListeners() {
         Button bPay = (Button) getActivity().findViewById(R.id.bPay);
         bPay.setOnClickListener(new OnClickListener() {
@@ -156,8 +166,12 @@ public class Product extends Fragment {
                 String id = db.getProduct(1).getId();
                 String url = "http://www.bol.com/nl/p/" + naam + "/" + id + "/";
                 Uri uri = Uri.parse(url);
+
                 db.close();
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
+                SharedPreferences settings = getActivity().getSharedPreferences("QuitPrefs", 0);
+                settings.edit().putBoolean("boughtProduct",true).commit();
                 startActivity(intent);
 
             }

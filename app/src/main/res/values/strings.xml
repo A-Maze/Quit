@@ -21,7 +21,7 @@
     </string-array>
     <string-array name="nav_array">
         <item>Achievements</item>
-        <item>Vooruitgang</item>
+        <item>Voortgang</item>
         <item>Product</item>
         <item>Gezondheid</item>
         <item>Instellingen</item>
@@ -66,7 +66,7 @@
     <string name="health_timer7">0</string>
     <string name="health_timer8">0</string>
     <string name="health_timer9">0</string>
-    //Vooruitgang scherm                    <string name="title_activity_progress">Vooruitgang</string>
+    //Voortgang scherm                    <string name="title_activity_progress">Voortgang</string>
     <string name="sparedMoney">€0,00</string>
     <string name="dayProgress">0 Dagen</string>
     <string name="sparedDays">0 dagen extra te leven</string>

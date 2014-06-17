@@ -143,4 +143,7 @@
     <string name="bought_product">Heeft u het product waar u voor spaart gekocht?</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
+    <!-- alert dialog reset spent amount -->
+    <string name="alert_reset_spent">Als u uw stopdatum wijzigt zal de hoeveelheid geld dat u heeft uitgegeven aan producten resetten en dus €0 zijn. Weet u zeker dat u uw stopdatum wilt wijzigen?</string>
+    <string name="be_alert">Let op!</string>
 </resources>

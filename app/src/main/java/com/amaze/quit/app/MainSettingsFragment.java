@@ -1,5 +1,6 @@
 package com.amaze.quit.app;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -65,7 +66,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         //quitDate listener
         quitDate.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                showDatePickerDialog(getView());
+                alertAmountResetDialog();
                 return true;
             }
         });
@@ -231,6 +232,37 @@ public class MainSettingsFragment extends PreferenceFragment {
         }
 
 
+    }
+
+    //dialog for the warning if you change your quit date
+    private void alertAmountResetDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.alert_reset_spent)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //adds the saved amount up to the spent amount of the user since the user just bought the product
+                        DatabaseHandler db = new DatabaseHandler(getActivity());
+                        User user = db.getUser(1);
+                        user.setSpentAmount(0);
+                        db.updateUser(user);
+                        db.close();
+                        showDatePickerDialog(getView());
+
+
+
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                })
+                .setTitle(R.string.be_alert);
+
+        // Create the AlertDialog object and show it
+        builder.create();
+        AlertDialog newProductDialog = builder.create();
+        newProductDialog.show();
     }
 
 

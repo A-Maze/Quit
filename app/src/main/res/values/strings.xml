@@ -12,6 +12,7 @@
     <string name="setupDayAmount">Aantal per dag</string>
     <string name="setupPackAmount">Aantal per pakje</string>
     <string name="setupPrice">Prijs van pakje</string>
+    <string name="addSmoke">Staat uw merk er niet tussen? Druk hier om hem zelf toe te voegen!</string>
     <string name="drawer_open">drawer open</string>
     <string name="drawer_close">drawer dicht</string>
 
@@ -34,10 +35,10 @@
         <item>@drawable/nav_health</item>
         <item>@drawable/nav_settings</item>
     </array>
-    //quit date scherm                        <string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm                            <string name="quitDateTitle">Stop Datum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
-    //health progress scherm                <string name="title_activity_health_progress">Gezondheid</string>
+    //health progress scherm                    <string name="title_activity_health_progress">Gezondheid</string>
     <string name="title_activity_health_progress_algemeen">Gezondheid algemeen</string>
     <string name="title_activity_health_progressBar1">Niveaus van CO (koolmonoxide) en O2 (zuurstof)</string>
     <string name="title_activity_health_progressBar2">Minder risico op plotse hartdood</string>
@@ -66,20 +67,20 @@
     <string name="health_timer7">0</string>
     <string name="health_timer8">0</string>
     <string name="health_timer9">0</string>
-    //Voortgang scherm                    <string name="title_activity_progress">Voortgang</string>
+    //Voortgang scherm                        <string name="title_activity_progress">Voortgang</string>
     <string name="sparedMoney">€0,00</string>
     <string name="dayProgress">0 Dagen</string>
     <string name="sparedDays">0 dagen extra te leven</string>
-    //Setup                    <string name="title_activity_setup">Instellingen</string>
+    //Setup                        <string name="title_activity_setup">Instellingen</string>
     <string name="setup_complete">Voltooien</string>
-    // ChooseProduct                        <string name="title_activity_choose_product">ChooseProduct</string>
+    // ChooseProduct                            <string name="title_activity_choose_product">ChooseProduct</string>
     <string name="title_activity_choose_product_title_product">Product</string>
     <string name="title_activity_choose_product_product_bol">Zoek een product uit de bol.com catalogus</string>
     <string name="title_activity_choose_product_product_hint">Product naam...</string>
     <string name="title_activity_choose_product_product_button_search">Zoek</string>
     <string name="title_activity_choose_product_product">Zoek een product</string>
-    //Home                        <string name="title_activity_home">Home</string>
-    //Achievements                <string name="title_fragment_achievements">Achievements</string>
+    //Home                            <string name="title_activity_home">Home</string>
+    //Achievements                    <string name="title_fragment_achievements">Achievements</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -105,18 +106,17 @@
     <string name="achievement_easy">Is dit nou zo moeilijk?</string>
     <string name="achievement_easy_content">Rook 10 sigaretten niet.</string>
     <string name="title_activity_set_prefered_fragment">SetPreferedFragment</string>
-    <string name="hello_world">Hello world!</string>
     <string name="level">level</string>
-    // Product choose            <string name="product_result">Geen resultaat</string>
-    <string name="title_activity_product_detail">ProductDetail</string>
-    //product fragment        <string name="product_product_price">€0,00</string>
+    // Product choose                <string name="product_result">Geen resultaat</string>
+    <string name="title_activity_product_detail">Product Details</string>
+    //product fragment            <string name="product_product_price">€0,00</string>
     <string name="product_saved_amount">€0,00</string>
     <string name="product_product_percentage">100%</string>
     <string name="product_saved_percentage">0%</string>
     <string name="product_pay">Betaal nu!</string>
     <string name="product_complete">Voltooid!</string>
     <string name="product_days_left">Nog 100 dagen sparen!</string>
-//progress        <string name="quitDate">U stopte met roken:</string>
+//progress            <string name="quitDate">U stopte met roken:</string>
     <string name="dagenzonderroken">Dagen zonder roken:</string>
     <string name="nietgerooktesigaretten">Niet gerookte sigaretten:</string>
     <string name="bespaardegeld">Bepaard geld:</string>
@@ -134,7 +134,7 @@
     <string name="pref_app_settings">Applicatie instellingen</string>
     <string name="prefered_fragment">Gewenste startscherm</string>
     <string name="pref_frag_summary">Kies het scherm dat u standaard wil zien als u de app opnieuw opstart.</string>
-    <string name="title_activity_choose_product_host">ChooseProductHost</string>
+    <string name="title_activity_choose_product_host">Kies een product</string>
     <string name="pref_product">Spaar product</string>
     <string name="pref_product_summary">Kies een nieuw product om voor te sparen.</string>
     <string name="setup_per_pak">sigaretten per pak?</string>
@@ -146,4 +146,12 @@
     <!-- alert dialog reset spent amount -->
     <string name="alert_reset_spent">Als u uw stopdatum wijzigt zal de hoeveelheid geld dat u heeft uitgegeven aan producten resetten en dus €0 zijn. Weet u zeker dat u uw stopdatum wilt wijzigen?</string>
     <string name="be_alert">Let op!</string>
+
+    <!-- add smoke activity strings -->
+    <string name="title_activity_add_smoke">Nieuw merk</string>
+    <string name="smoke_details">Vul de gegevens van uw merk in</string>
+    <string name="brand_name">Merknaam</string>
+    <string name="add_brand">Voeg merk toe</string>
+    <string name="gram">Gram per pakje</string>
+
 </resources>

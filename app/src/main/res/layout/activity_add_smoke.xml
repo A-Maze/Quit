@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.amaze.quit.app.AddSmoke">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/smoke_details"
+        android:layout_width="wrap_content"
+        android:textSize="24dp"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/brand_name"
+        android:layout_width="wrap_content"
+        android:textSize="18dp"
+        android:id="@+id/textView2"
+        android:layout_marginTop="69dp"
+        android:layout_marginLeft="26dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etBrandName"
+        android:layout_marginRight="25dp"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/setupPackAmount"
+        android:layout_width="wrap_content"
+        android:textSize="18dp"
+        android:id="@+id/tvBrandAmount"
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etBrandAantal"
+        android:layout_alignBottom="@+id/tvBrandAmount"
+        android:layout_alignLeft="@+id/etBrandName"
+        android:layout_alignStart="@+id/etBrandName"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:text="@string/setupPrice"
+        android:layout_width="wrap_content"
+        android:textSize="18dp"
+        android:id="@+id/tvPrice"
+        android:layout_alignBottom="@+id/etBrandPrice"
+        android:layout_alignLeft="@+id/tvBrandAmount"
+        android:layout_alignStart="@+id/tvBrandAmount" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/etBrandPrice"
+        android:layout_below="@+id/etBrandAantal"
+        android:layout_alignLeft="@+id/etBrandName"
+        android:layout_alignStart="@+id/etBrandName"
+        android:layout_marginTop="54dp"
+        android:inputType="numberDecimal"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:id="@+id/bAddSmoke"
+        android:text="@string/add_brand"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/tvPrice"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

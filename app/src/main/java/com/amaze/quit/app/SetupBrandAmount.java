@@ -1,5 +1,6 @@
 package com.amaze.quit.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,8 +29,9 @@ public class SetupBrandAmount extends Fragment  {
     private static Shag[] shagie;
     private static RadioGroup rg;
     private static int selectedSigaretPos;
-
-
+    private static TextView addSmoke;
+    private boolean updated = false;
+    private static int selectedRadio;
     public static boolean sigaret = true;
     public static boolean shag = false;
 
@@ -60,6 +62,7 @@ public class SetupBrandAmount extends Fragment  {
         rbSigaretten = (RadioButton) getActivity().findViewById(R.id.rbSigaretten);
         rg = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
         sBrand = (Spinner) getActivity().findViewById(R.id.sBrand);
+        addSmoke = (TextView) getActivity().findViewById(R.id.tvSetupAddSmoke);
         selectedSigaretPos = 0;
         rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 
@@ -67,12 +70,14 @@ public class SetupBrandAmount extends Fragment  {
 
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                selectedRadio = i;
                 if(i == rbSigaretten.getId()){
                     shag = false;
                     sigaret = true;
                     fillSpinnerSigaret();
                     etPerPak.setText("");
                     etPrice.setText("");
+                    configAddSmoke("sigaretten");
                 }
                 else if(i == rbShag.getId())
                 {
@@ -81,10 +86,20 @@ public class SetupBrandAmount extends Fragment  {
                     fillSpinnerShag();
                     etPerPak.setText("");
                     etPrice.setText("");
+                    configAddSmoke("shag");
 
                 }
             }
+
+
         });
+        rg.check(rbSigaretten.getId());
+        shag = false;
+        sigaret = true;
+        fillSpinnerSigaret();
+        etPerPak.setText("");
+        etPrice.setText("");
+        configAddSmoke("Sigaretten");
 
 
 
@@ -175,23 +190,53 @@ public class SetupBrandAmount extends Fragment  {
 
     public float getPrijs() { return Float.valueOf(etPrice.getText().toString());}
 
+    private void configAddSmoke(String type){
+        final String finalType = type;
+        addSmoke.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getActivity(),AddSmoke.class);
+                Bundle extras = new Bundle();
+                extras.putString("type",finalType);
+                intent.putExtras(extras);
+                //makes sure that on return the added smoke will be selected
+                updated = true;
+                startActivity(intent);
+            }
+        });
+
+    }
 
 
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            rg.check(rbSigaretten.getId());
-            shag = false;
-            sigaret = true;
-            fillSpinnerSigaret();
-            etPerPak.setText("");
-            etPrice.setText("");
+    public void onResume(){
+        super.onResume();
+        if(updated){
 
 
+            if(selectedRadio == rbSigaretten.getId()){
+                shag = false;
+                sigaret = true;
+                fillSpinnerSigaret();
+                etPerPak.setText("");
+                etPrice.setText("");
+                configAddSmoke("Sigaretten");
+            }
+            else if(selectedRadio == rbShag.getId())
+            {
+                shag = true;
+                sigaret = false;
+                fillSpinnerShag();
+                etPerPak.setText("");
+                etPrice.setText("");
+                configAddSmoke("Shag");
+
+            }
+
+            sBrand.setSelection(sBrand.getCount()-1);
+            updated = false;
         }
-
     }
 
 

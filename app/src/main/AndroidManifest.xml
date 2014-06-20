@@ -22,6 +22,7 @@
             android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,6 +61,11 @@
             android:name=".ChooseProductHost"
             android:label="@string/title_activity_choose_product_host" >
         </activity>
+        <activity
+            android:name=".AddSmoke"
+            android:label="@string/title_activity_add_smoke" >
+        </activity>
+
     </application>
 
 </manifest>

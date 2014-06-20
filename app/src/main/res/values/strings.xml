@@ -39,13 +39,13 @@
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     //health progress scherm                <string name="title_activity_health_progress">Gezondheid</string>
     <string name="title_activity_health_progress_algemeen">Gezondheid algemeen</string>
-    <string name="title_activity_health_progressBar1">Niveaus van CO (koolmonoxide) en O2 (zuurstof)</string>
+    <string name="title_activity_health_progressBar1">Lagere koolmonoxide- en zuursofniveaus</string>
     <string name="title_activity_health_progressBar2">Minder risico op plotse hartdood</string>
     <string name="title_activity_health_progressBar3">Smaak- en geurzin teruggekregen</string>
-    <string name="title_activity_health_progressBar4">Ademhaling</string>
-    <string name="title_activity_health_progressBar5">Fysieke afhankelijkheid van nicotine</string>
+    <string name="title_activity_health_progressBar4">Ademhaling terug naar normaal</string>
+    <string name="title_activity_health_progressBar5">Fysieke onafhankelijkheid van nicotine</string>
     <string name="title_activity_health_progressBar6">Verbeterde bloedsomloop en huidhydratatie en verdwijnen van vroegtijdige rimpels</string>
-    <string name="title_activity_health_progressBar7">Fysieke conditie</string>
+    <string name="title_activity_health_progressBar7">Fysieke conditie verbeterd</string>
     <string name="title_activity_health_progressBar8">Minder risico op dood door hartziekten</string>
     <string name="title_activity_health_progressBar9">Minder risico om longkanker te ontwikkelen</string>
     <string name="health_procent1">0%</string>

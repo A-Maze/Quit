@@ -36,6 +36,7 @@
             android:entries="@array/preferedFragment"
             android:entryValues="@array/preferedFragmentValues"
             android:key="startFrag"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

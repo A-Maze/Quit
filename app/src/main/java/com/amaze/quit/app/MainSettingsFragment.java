@@ -53,6 +53,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         packAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         Preference startFrag = findPreference("startFrag");
         Preference product = findPreference("product");
+        Preference spentAmount = findPreference("spentAmount");
 
         //product listener
         product.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -66,7 +67,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         //quitDate listener
         quitDate.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
-                alertAmountResetDialog();
+                alertAmountResetDialog(true);
                 return true;
             }
         });
@@ -136,6 +137,18 @@ public class MainSettingsFragment extends PreferenceFragment {
                 int preferedFragment = Integer.parseInt(newValue.toString());
                 settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
                 settings.edit().putInt("pref_frag", preferedFragment).commit();
+                return false;
+            }
+        });
+        DatabaseHandler db = new DatabaseHandler(getActivity());
+        String spentCash = " €" + String.valueOf(db.getUser(1).getSpentAmount()) +".";
+        String spentSummary = getResources().getString(R.string.pref_reset_spent_summary);
+        spentAmount.setSummary(spentSummary + spentCash);
+        db.close();
+        spentAmount.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                alertAmountResetDialog(false);
                 return false;
             }
         });
@@ -235,9 +248,14 @@ public class MainSettingsFragment extends PreferenceFragment {
     }
 
     //dialog for the warning if you change your quit date
-    private void alertAmountResetDialog(){
+    private void alertAmountResetDialog(final boolean redirect){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.alert_reset_spent)
+        String message;
+        if(redirect)
+            message = getResources().getString(R.string.alert_reset_spent);
+        else
+            message = getResources().getString(R.string.alert_reset_spent_second);
+        builder.setMessage(message)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //adds the saved amount up to the spent amount of the user since the user just bought the product
@@ -246,6 +264,7 @@ public class MainSettingsFragment extends PreferenceFragment {
                         user.setSpentAmount(0);
                         db.updateUser(user);
                         db.close();
+                        if(redirect)
                         showDatePickerDialog(getView());
 
 
@@ -264,6 +283,8 @@ public class MainSettingsFragment extends PreferenceFragment {
         AlertDialog newProductDialog = builder.create();
         newProductDialog.show();
     }
+
+
 
 
 }

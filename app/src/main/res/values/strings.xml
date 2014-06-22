@@ -139,13 +139,16 @@
     <string name="pref_product">Spaar product</string>
     <string name="pref_product_summary">Kies een nieuw product om voor te sparen.</string>
     <string name="setup_per_pak">sigaretten per pak?</string>
+    <string name="pref_reset_spent">Reset uw uitgegeven bedrag</string>
+    <string name="pref_reset_spent_summary">Reset het bedrag dat u heeft uitgegeven aan producten naar €0.Uw uitgegeven bedrag is op dit moment</string>
     <!-- alert dialog newProduct -->
     <string name="new_product_dialog">Wilt u voor een nieuw product sparen</string>
     <string name="bought_product">Heeft u het product waar u voor spaart gekocht?</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <!-- alert dialog reset spent amount -->
-    <string name="alert_reset_spent">Als u uw stopdatum wijzigt zal de hoeveelheid geld dat u heeft uitgegeven aan producten resetten en dus €0 zijn. Weet u zeker dat u uw stopdatum wilt wijzigen?</string>
+    <string name="alert_reset_spent">Als u uw stopdatum wijzigt zal de hoeveelheid geld dat u heeft uitgegeven aan producten resetten en dus €0 zijn. Weet u zeker dat u uw stopdatum wilt wijzigen? </string>
+    <string name="alert_reset_spent_second">Het resetten van uw uitgegeven bedrag is onomkeerbaar. Weet u zeker dat u toch door wilt gaan?</string>
     <string name="be_alert">Let op!</string>
 
     <!-- add smoke activity strings -->

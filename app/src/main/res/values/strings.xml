@@ -109,6 +109,7 @@
     <string name="level">level</string>
     // Product choose                <string name="product_result">Geen resultaat</string>
     <string name="title_activity_product_detail">Product Details</string>
+    <string name="product_no_results">Er zijn geen producten gevonden voor de gebruikte zoekterm. Probeer uw zoekopdracht aan te passen.</string>
     //product fragment            <string name="product_product_price">€0,00</string>
     <string name="product_saved_amount">€0,00</string>
     <string name="product_product_percentage">100%</string>

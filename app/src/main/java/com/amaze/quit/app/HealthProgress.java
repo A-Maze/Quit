@@ -64,7 +64,13 @@ public class HealthProgress extends Fragment {
             timerText += uren + " uur ";
 
         }
-        timerText += minuten + " minuten";
+        timerText += minuten;
+        if(minuten == 1) {
+            timerText += " minuut";
+        }
+        else {
+            timerText += " minuten";
+        }
         timer.setText(timerText);
 
 

@@ -173,7 +173,7 @@ public class SetupBrandAmount extends Fragment  {
                 }
             }
             catch(Exception e){
-                for (int i = 1; i <= db.getSigarettenAmount(); i++) {
+                for (int i = 1; i < db.getSigarettenAmount(); i++) {
                     sigarettenList[i - 1] = db.getSigaret(i).getMerk();
                     sigaretten[i - 1] = db.getSigaret(i);
 

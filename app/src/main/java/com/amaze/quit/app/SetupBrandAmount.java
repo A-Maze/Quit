@@ -165,14 +165,18 @@ public class SetupBrandAmount extends Fragment  {
 
             sigarettenList = new String[db.getSigarettenAmount()];
             sigaretten = new Sigaretten[db.getSigarettenAmount()];
-            for (int i = 1; i <= db.getSigarettenAmount(); i++) {
-                try {
+            try {
+                for (int i = 1; i <= db.getSigarettenAmount(); i++) {
                     sigarettenList[i - 1] = db.getSigaret(i).getMerk();
                     sigaretten[i - 1] = db.getSigaret(i);
+
                 }
-                catch(Exception e){
+            }
+            catch(Exception e){
+                for (int i = 1; i <= db.getSigarettenAmount(); i++) {
                     sigarettenList[i - 1] = db.getSigaret(i).getMerk();
                     sigaretten[i - 1] = db.getSigaret(i);
+
                 }
             }
         }

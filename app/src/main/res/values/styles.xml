@@ -23,6 +23,10 @@
         <item name="android:actionBarStyle">@style/BlueActionBar</item>
     </style>
 
+    <style name="customTheme" parent="Theme.AppCompat.Light">
+        <item name="actionButtonStyle">@style/ActionButtonStyle</item>
+    </style>
+
     <!-- ActionBar styles -->
     <style name="GreenActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">#7ac142</item>
@@ -47,5 +51,11 @@
     </style>
 
     <style name="ButtonBarButton" />
+
+    <style name="ActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+    </style>
 
 </resources>

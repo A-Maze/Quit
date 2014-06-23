@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -120,7 +121,12 @@ public class Home extends FragmentActivity {
             case R.id.developer_settings:
                 launchActivity(MainActivity.class);
                 return true;
-
+            case R.id.action_facebook:
+                facebook();
+                return true;
+            case R.id.action_twitter:
+                twitter();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -280,6 +286,36 @@ public class Home extends FragmentActivity {
         }
 
 
+    }
+
+    //social media methods
+    private void facebook(){
+        Intent facebook;
+        try {
+            getBaseContext().getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0); //checks if facebook is installed
+            facebook = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://profile/12quit/wall")); //if this is the case open the url in the facebook app
+        } catch (Exception e) {
+            facebook = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://touch.facebook.com/profile.php?id=1458260817748999")); //if this goes wrong just do it in browser
+        }
+        startActivity(facebook);
+    }
+
+    private void twitter(){
+        Intent twitter;
+        try {
+            twitter = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("twitter://user?screen_name=12Quit"));
+
+
+        }catch (Exception e) {
+            twitter = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://twitter.com/12Quit"));
+        }
+        startActivity(twitter);
+        
     }
 
 

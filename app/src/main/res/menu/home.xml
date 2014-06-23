@@ -1,18 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:theapp="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.amaze.quit.app.Home" >
 
+    <item android:id="@+id/action_facebook"
+        android:title="Facebook"
+        android:icon="@drawable/facebook"
+        android:showAsAction="always"/>
+    <item android:id="@+id/action_twitter"
+        android:title="Twitter"
+        android:icon="@drawable/twitter"
+        android:showAsAction="always"/>
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="98"
-        app:showAsAction="never" />
+        theapp:showAsAction="never" />
     <item android:id="@+id/setPreferedFragment"
         android:title="@string/prefered_fragment"
         android:orderInCategory="99"
-        app:showAsAction="never" />
+        theapp:showAsAction="never" />
     <item android:id="@+id/developer_settings"
         android:title="@string/developer_settings"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        theapp:showAsAction="never" />
 </menu>

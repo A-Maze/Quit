@@ -6,7 +6,7 @@ import android.content.Intent;
 /**
  * Created by jorik on 22-6-2014.
  */
-public class NotificationService extends IntentService {
+/*public class NotificationService extends IntentService {
     @Override
     protected void onHandleIntent(Intent workIntent) {
         // Gets data from the incoming Intent
@@ -16,4 +16,4 @@ public class NotificationService extends IntentService {
 
     }
 
-}
+}*/

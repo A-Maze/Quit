@@ -1,6 +1,7 @@
 package com.amaze.quit.app;
 
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -16,12 +17,16 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.viewpagerindicator.LinePageIndicator;
 
@@ -68,6 +73,8 @@ public class Home extends FragmentActivity {
 
         //initialises the navigation drawer
         navDrawer();
+        customActionBar();
+
 
 
         //makes sure all the stats are updated
@@ -117,9 +124,6 @@ public class Home extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 launchActivity(Setup.class);
-                return true;
-            case R.id.developer_settings:
-                launchActivity(MainActivity.class);
                 return true;
             case R.id.action_facebook:
                 facebook();
@@ -193,8 +197,6 @@ public class Home extends FragmentActivity {
                 R.string.drawer_close  /* "close drawer" description */
         );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 
@@ -295,7 +297,7 @@ public class Home extends FragmentActivity {
             getBaseContext().getPackageManager()
                     .getPackageInfo("com.facebook.katana", 0); //checks if facebook is installed
             facebook = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("fb://profile/12quit/wall")); //if this is the case open the url in the facebook app
+                    Uri.parse("fb://profile/1458260817748999")); //if this is the case open the url in the facebook app
         } catch (Exception e) {
             facebook = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://touch.facebook.com/profile.php?id=1458260817748999")); //if this goes wrong just do it in browser
@@ -315,7 +317,34 @@ public class Home extends FragmentActivity {
                     Uri.parse("https://twitter.com/12Quit"));
         }
         startActivity(twitter);
-        
+
+    }
+
+    private void customActionBar(){
+
+        ActionBar mActionBar = getActionBar();
+
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
+        ImageButton twitterButton = (ImageButton) mCustomView.findViewById(R.id.bTwitter);
+        ImageButton facebookButton = (ImageButton) mCustomView.findViewById(R.id.bFacebook);
+        twitterButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                twitter();
+            }
+        });
+        facebookButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                facebook();
+            }
+        });
+        mActionBar.setDisplayShowHomeEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowTitleEnabled(true);
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
     }
 
 

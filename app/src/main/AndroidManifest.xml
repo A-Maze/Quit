@@ -70,6 +70,9 @@
             android:label="@string/title_activity_add_smoke"
             android:screenOrientation="portrait">
         </activity>
+        <service
+            android:name=".NotificationService"
+            android:exported="false"/>
 
     </application>
 

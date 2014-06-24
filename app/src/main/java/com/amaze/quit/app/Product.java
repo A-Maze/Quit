@@ -80,7 +80,7 @@ public class Product extends Fragment {
         //gets the total saved amount
         float totalSavedAmount = updatestats.getSavedMoney();
         // what is spent?
-        int spentAmount = db.getUser(1).getSpentAmount();
+        int spentAmount = updatestats.getSpentAmount();
         //what is left?
         amountLeft = totalSavedAmount - spentAmount;
         // prijs of the product

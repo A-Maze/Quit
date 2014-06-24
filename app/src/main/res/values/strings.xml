@@ -35,7 +35,7 @@
         <item>@drawable/nav_health</item>
         <item>@drawable/nav_settings</item>
     </array>
-    //quit date scherm                            <string name="quitDateTitle">Stop Datum</string>
+    //quit date scherm                            <string name="quitDateTitle">Stopdatum</string>
     <string name="quitDateNext">Volgende</string>
     <string name="title_activity_setup_quit_date">SetupQuitDate</string>
     //health progress scherm                    <string name="title_activity_health_progress">Gezondheid</string>
@@ -125,9 +125,9 @@
     <string name="title_activity_settings">Instellingen</string>
     <!-- user settings string -->
     <string name="pref_user_settings">Gebruikers instellingen</string>
-    <string name="pref_quit_date">Kies uw stop datum</string>
+    <string name="pref_quit_date">Kies uw stopdatum</string>
     <string name="pref_quit_date_summary">Op welke datum bent u gestopt?</string>
-    <string name="pref_quit_time">Kies uw stop tijd</string>
+    <string name="pref_quit_time">Kies uw stoptijd</string>
     <string name="pref_quit_time_summary">Hoelaat bent u gestopt?</string>
     <string name="pref_brand_summary">Welk merk sigaretten of shag rookt u?</string>
     <string name="pref_day_amount_summary">Hoeveel sigaretten rookt u per dag?</string>

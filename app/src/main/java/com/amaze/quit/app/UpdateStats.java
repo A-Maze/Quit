@@ -16,6 +16,7 @@ public class UpdateStats {
     private static long gemiddeldNietGerookt;
     private static int refreshStockRate;
     private static float price;
+    private static int spentAmount;
     private static int quitDay;
     private static int quitMonth;
     private static int quitYear;
@@ -54,7 +55,7 @@ public class UpdateStats {
         Log.d("aantal", Integer.toString(rookwaar.getAantal()));
         Log.d("sID setup", Integer.toString(rookwaar.getsID()));
         bespaardeMoneys = (days / (refreshStockRate) * price);
-        
+        spentAmount = (db.getUser(1).getSpentAmount());
 
 
         extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
@@ -88,6 +89,8 @@ public class UpdateStats {
     public float getSavedMoney() {
         return bespaardeMoneys;
     }
+
+    public int getSpentAmount(){ return spentAmount;}
 
     public float getExtraDagenTeLeven() {
         return extraDagenTeLeven;
@@ -130,6 +133,19 @@ public class UpdateStats {
         } else {
             updateChallengeDB(5, 0);
             updateChallengeDB(6, 0);
+        }
+
+        if(spentAmount >= 200){
+            updateChallengeDB(7,1);
+            updateChallengeDB(8,1);
+        }
+        else if(spentAmount >= 50){
+            updateChallengeDB(7,1);
+            updateChallengeDB(8,0);
+        }
+        else{
+            updateChallengeDB(7,0);
+            updateChallengeDB(8,0);
         }
         if (bespaardePakjes >= 1) {
             updateChallengeDB(9, 1);

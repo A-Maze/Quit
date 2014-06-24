@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -307,12 +308,12 @@ public class Home extends FragmentActivity {
 
     private void twitter(){
         Intent twitter;
-        try {
+        if(isAppInstalled("com.twitter.android")) {
             twitter = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("twitter://user?screen_name=12Quit"));
 
 
-        }catch (Exception e) {
+        }else{
             twitter = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://twitter.com/12Quit"));
         }
@@ -345,6 +346,20 @@ public class Home extends FragmentActivity {
         mActionBar.setDisplayShowTitleEnabled(true);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
+    }
+
+
+
+    private boolean isAppInstalled(String packageName) {
+        PackageManager pm = getPackageManager();
+        boolean installed = false;
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            installed = false;
+        }
+        return installed;
     }
 
 

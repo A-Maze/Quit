@@ -122,14 +122,16 @@
                 android:id="@+id/tvProductComplete"
                 />
 
-            <Button android:layout_width="wrap_content"
+            <ImageButton android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
                 android:text="@string/product_pay"
+                android:src="@drawable/pay"
+                android:background="@null"
                 android:id="@+id/bPay">
 
-            </Button>
+            </ImageButton>
 
         </LinearLayout>
 

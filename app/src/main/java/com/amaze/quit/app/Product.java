@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -155,7 +156,7 @@ public class Product extends Fragment {
     }
 
     public void setListeners() {
-        Button bPay = (Button) getActivity().findViewById(R.id.bPay);
+        ImageButton bPay = (ImageButton) getActivity().findViewById(R.id.bPay);
         bPay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

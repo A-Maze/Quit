@@ -64,6 +64,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CHALLENGES_TITEL = "Titel";
     private static final String CHALLENGES_BESCHRIJVING = "beschrijving";
     private static final String CHALLENGES_BEHAALD = "behaald";
+    private static final String CHALLENGES_NOTIFICATION = "notification_givin";
 
 
     // User_challenges Table Columns names
@@ -146,7 +147,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + CHALLENGES_CID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CHALLENGES_TITEL + " TEXT,"
                 + CHALLENGES_BESCHRIJVING + " TEXT,"
-                + CHALLENGES_BEHAALD + " INTEGER"
+                + CHALLENGES_BEHAALD + " INTEGER,"
+                + CHALLENGES_NOTIFICATION + " INTEGER"
                 + ")";
         db.execSQL(CREATE_CHALLANGES_TABLE);
 
@@ -272,6 +274,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
         values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_NOTIFICATION, challenge.getNotificationGivin());
 
         // Inserting Row
         assert db != null;
@@ -422,7 +425,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         CHALLENGES_CID,
                         CHALLENGES_TITEL,
                         CHALLENGES_BESCHRIJVING,
-                        CHALLENGES_BEHAALD}, CHALLENGES_CID + "=?",
+                        CHALLENGES_BEHAALD,
+                        CHALLENGES_NOTIFICATION}, CHALLENGES_CID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -431,7 +435,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getInt(3));
+                cursor.getInt(3),
+                cursor.getInt(4));
         /* return challenge */
         cursor.close();
         return challenge;
@@ -596,6 +601,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
         values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_NOTIFICATION, challenge.getNotificationGivin());
 
 
          /* updating row */

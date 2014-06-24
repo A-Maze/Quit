@@ -4,10 +4,16 @@ package com.amaze.quit.app;
 
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
+import java.util.Calendar;
 
 
 public class SplashScreen extends Activity {
@@ -47,6 +53,19 @@ public class SplashScreen extends Activity {
                 fillDataBase();
                 settings.edit().putBoolean("dataFilled",true).commit();
             }
+
+            // Alarmmanager first time
+            PendingIntent pendingIntent;
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MINUTE, 5);
+
+            Intent myIntent = new Intent(SplashScreen.this, MyReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(SplashScreen.this, 0, myIntent,0);
+
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+
+            // Start main activity
             startMainActivity = new Intent(getApplicationContext(),Setup.class);
             settings.edit().putBoolean("first_time",false).commit();
         }
@@ -176,16 +195,16 @@ public class SplashScreen extends Activity {
 
         //Achievements.
         Challenges c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
-        c1 = new Challenges(1,"Eerste stapje","Doorbreng een dag zonder te roken", 0);
-        c2 = new Challenges(2,"Even diep ademhalen","Verbeter de gezondheid van je longen met 10%", 0);
-        c3 = new Challenges(3,"Ka-ching!","Bespaar 20 euro door niet te roken.", 0);
-        c4 = new Challenges(4,"Geld op de bank","Bespaar 100 euro door niet te roken.", 0);
-        c5 = new Challenges(5,"Extra leven","Verdien 10 dagen extra te leven.", 0);
-        c6 = new Challenges(6,"Onsterfelijk","Verdien 50 dagen extra te leven.", 0);
-        c7 = new Challenges(7,"Voor wat hoort wat", "Koop een product ter waarde van €50.", 0);
-        c8 = new Challenges(8,"Dat was het waard","Koop een product ter waarde van €200.", 0);
-        c9 = new Challenges(9,"Dat is één","Bespaar 1 pakje sigaretten/shag", 0);
-        c10 = new Challenges(10,"Is dit nou zo moeilijk?","Rook 10 sigaretten niet.", 0);
+        c1 = new Challenges(1,"Eerste stapje","Doorbreng een dag zonder te roken", 0, 0);
+        c2 = new Challenges(2,"Even diep ademhalen","Verbeter de gezondheid van je longen met 10%", 0, 0);
+        c3 = new Challenges(3,"Ka-ching!","Bespaar 20 euro door niet te roken.", 0, 0);
+        c4 = new Challenges(4,"Geld op de bank","Bespaar 100 euro door niet te roken.", 0, 0);
+        c5 = new Challenges(5,"Extra leven","Verdien 10 dagen extra te leven.", 0, 0);
+        c6 = new Challenges(6,"Onsterfelijk","Verdien 50 dagen extra te leven.", 0, 0);
+        c7 = new Challenges(7,"Voor wat hoort wat", "Koop een product ter waarde van €50.", 0, 0);
+        c8 = new Challenges(8,"Dat was het waard","Koop een product ter waarde van €200.", 0, 0);
+        c9 = new Challenges(9,"Dat is één","Bespaar 1 pakje sigaretten/shag", 0, 0);
+        c10 = new Challenges(10,"Is dit nou zo moeilijk?","Rook 10 sigaretten niet.", 0, 0);
 
         int aantalChallanges = 10;
 

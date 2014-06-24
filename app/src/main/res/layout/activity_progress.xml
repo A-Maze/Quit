@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:id="@+id/twitter_share"
-            android:src="@drawable/share_twitter"
+            android:src="@drawable/twitter_share"
             android:background="@null"/>
 
         </LinearLayout>

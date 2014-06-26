@@ -32,9 +32,8 @@ public class AddSmoke extends ActionBarActivity {
         tvAmount = (TextView) findViewById(R.id.tvBrandAmount);
         bAddSmoke = (Button) findViewById(R.id.bAddSmoke);
 
-
+        //if it should add a sigaret or a shag brand
         if(type.equals("sigaretten")){
-            Log.d("test","I'm being called!");
             tvAmount.setText(R.string.setupPackAmount);
         }
         else if(type.equals("shag")){

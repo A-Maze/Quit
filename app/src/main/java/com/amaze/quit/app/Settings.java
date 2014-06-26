@@ -15,7 +15,7 @@ import android.widget.Button;
 
 import java.util.List;
 
-
+//the activity that hosts the MainSettingsFragment
 public class Settings extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

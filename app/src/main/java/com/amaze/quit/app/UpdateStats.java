@@ -106,6 +106,8 @@ public class UpdateStats {
 
     public float getPrice(){return price;}
 
+
+    //updates achievements checking if the user completed them and if so puts them on completed ( 1 )
     public void updateAchievements() {
         updateQuit();
 

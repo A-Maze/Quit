@@ -26,7 +26,7 @@ import android.view.View.OnClickListener;
 
 import org.w3c.dom.Text;
 
-
+//the saving up for project screen
 public class Product extends Fragment {
 
     Artikel artikel;
@@ -65,6 +65,7 @@ public class Product extends Fragment {
         setListeners();
     }
 
+    //checks if the fragment is being show to the user
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -76,6 +77,7 @@ public class Product extends Fragment {
 
     }
 
+    //updates the fragment with information how the progress of saving for the new product is
     public void updateSavingProgress() {
         DatabaseHandler db = new DatabaseHandler(getActivity());
         //gets the total saved amount
@@ -144,6 +146,7 @@ public class Product extends Fragment {
 
     }
 
+    //turns the given parameter in densitypixels
     private int giveDP(float dp) {
         DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
         float fpixels = metrics.density * dp;
@@ -155,6 +158,7 @@ public class Product extends Fragment {
         return amountLeft;
     }
 
+    //sets the listener for the pay button building the link with information of the product the user is saving for
     public void setListeners() {
         ImageButton bPay = (ImageButton) getActivity().findViewById(R.id.bPay);
         bPay.setOnClickListener(new OnClickListener() {

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+//hosts the chooseproduct fragment
 public class ChooseProductHost extends ActionBarActivity {
 
     @Override

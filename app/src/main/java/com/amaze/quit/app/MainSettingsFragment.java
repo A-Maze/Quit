@@ -30,6 +30,8 @@ import java.util.List;
 /**
  * Created by Robin on 9-6-2014.
  */
+
+//the settings fragment where the user can fill in their preferences
 public class MainSettingsFragment extends PreferenceFragment {
     public static final String PREFS_NAME = "QuitPrefs";
     SharedPreferences settings = null;
@@ -48,8 +50,9 @@ public class MainSettingsFragment extends PreferenceFragment {
         setListPreferenceData(brand,getActivity());
 
     }
-
+    //binds everything that has to happen to each invdividual preference
     protected void bindOnClicks() {
+
         Preference quitDate = findPreference("quitDate");
         Preference quitTime = findPreference("quitTime");
         brand = (ListPreference) findPreference("brand");
@@ -218,6 +221,7 @@ public class MainSettingsFragment extends PreferenceFragment {
 
     }
 
+    //fills the screen when the user wants to pick a new brand according to what he smoked.
     protected static void setListPreferenceData(ListPreference lp, Context context) {
         DatabaseHandler db = new DatabaseHandler(context);
         List<CharSequence> entries = new ArrayList<CharSequence>();
@@ -370,6 +374,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         newProductDialog.show();
     }
 
+    //shows the dialog warning the user their input can't be 0
     private void noZero(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String message;

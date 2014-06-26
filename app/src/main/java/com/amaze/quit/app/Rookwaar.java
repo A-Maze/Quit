@@ -9,7 +9,7 @@ public class Rookwaar {
     String merk;
     int aantal;
     float prijs;
-
+    //class being extended by both shag and sigaretten as they both have some common variables and methods
     public Rookwaar(int sID, String merk, int aantal, float prijs) {
         this.sID = sID;
         this.merk = merk;

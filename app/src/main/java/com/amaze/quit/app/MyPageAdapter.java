@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Created by Robin on 21-5-2014.
  */
+//handles the swiping
 public class MyPageAdapter extends FragmentPagerAdapter {
     public static final String[] CONTENT = new String[]{"Achievements", "Voortgang","Product", "Gezondheid"};
     private List<Fragment> fragments;

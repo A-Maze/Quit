@@ -14,7 +14,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import java.util.Calendar;
-
+//the splash screen the user sees when he launches the app
 
 public class SplashScreen extends Activity {
     public static final String PREFS_NAME = "QuitPrefs";
@@ -24,6 +24,7 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        //makes sure the splash screen is shown for 2 seconds and then continues
         Thread timer = new Thread(){
             public void run(){
                 try{
@@ -41,6 +42,7 @@ public class SplashScreen extends Activity {
         timer.start();
     }
 
+    //checks if it's the first time the user launches the app (fresh install)
     protected void firstTime(){
 
         // loads the settings

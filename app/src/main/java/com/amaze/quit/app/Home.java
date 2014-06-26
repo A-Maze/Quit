@@ -43,7 +43,7 @@ public class Home extends FragmentActivity {
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+     //the home activity, which is the main activity of the app
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -227,6 +227,7 @@ public class Home extends FragmentActivity {
         mDrawerToggle.syncState();
     }
 
+    //creates the dialog if the user wants to save up for another product
     private void saveNewProduct(){
         if(settings.getBoolean("newProduct",false)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
@@ -253,6 +254,7 @@ public class Home extends FragmentActivity {
 
     }
 
+    //asks the user if he or she has bought the product, if yes it'll show the new product dialog
     private void boughtProduct(){
         if(settings.getBoolean("boughtProduct",false)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
@@ -321,6 +323,7 @@ public class Home extends FragmentActivity {
 
     }
 
+    //creates a custom action bar with social media icons
     private void customActionBar(){
 
         ActionBar mActionBar = getActionBar();
@@ -349,7 +352,7 @@ public class Home extends FragmentActivity {
     }
 
 
-
+    //to check if twitter is installed
     private boolean isAppInstalled(String packageName) {
         PackageManager pm = getPackageManager();
         boolean installed = false;

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+    //adapter for the nav menu on the left
 public class NavDrawerListAdapter extends BaseAdapter {
 
     private Context context;

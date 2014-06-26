@@ -17,7 +17,7 @@ public class Setup extends FragmentActivity {
 
     MyPageAdapter pageAdapter;
 
-
+    //the activity that hosts the 3 fragments for the initial setup the user sees: SetupBrandAmount, SetupChooseProduct, SetupQuitDate
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

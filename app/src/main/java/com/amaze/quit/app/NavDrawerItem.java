@@ -3,6 +3,7 @@ package com.amaze.quit.app;
 /**
  * Created by Robin on 9-6-2014.
  */
+    //class for the items on the nav menu on the left
 public class NavDrawerItem {
 
     private String title;

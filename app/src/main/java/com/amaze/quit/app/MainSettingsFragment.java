@@ -60,8 +60,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         packAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         EditTextPreference price = (EditTextPreference) findPreference("price");
         //this makes sure you can only enter floats and doubles in the inputfield
-        price.getEditText().setInputType(0x00002002);
-
+        price.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         Preference startFrag = findPreference("startFrag");
         Preference product = findPreference("product");
         Preference spentAmount = findPreference("spentAmount");

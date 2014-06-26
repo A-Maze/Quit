@@ -124,7 +124,7 @@ public class Home extends FragmentActivity {
 
         switch (item.getItemId()) {
             case R.id.action_settings:
-                launchActivity(Setup.class);
+                launchActivity(Settings.class);
                 return true;
             case R.id.action_facebook:
                 facebook();

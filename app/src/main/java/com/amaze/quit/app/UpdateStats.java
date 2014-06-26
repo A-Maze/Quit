@@ -12,9 +12,9 @@ public class UpdateStats {
     private static long daysQuit = 0;
     private static float bespaardeMoneys;
     private static float extraDagenTeLeven;
-    private static long bespaardePakjes;
+    private static float bespaardePakjes;
     private static long gemiddeldNietGerookt;
-    private static int refreshStockRate;
+    private static float refreshStockRate;
     private static float price;
     private static int spentAmount;
     private static int quitDay;
@@ -47,20 +47,22 @@ public class UpdateStats {
 
         Calendar vandaag = Calendar.getInstance();
         //how many days does it take before the user had to buy a new pack of sigarettes?
-        refreshStockRate = (rookwaar.getAantal() / db.getUser(1).getPerDag());
+        refreshStockRate = ((float)rookwaar.getAantal() / (float)db.getUser(1).getPerDag());
+        Log.d("aantal",String.valueOf(rookwaar.getAantal()));
+        Log.d("perDag",String.valueOf(db.getUser(1).getPerDag()));
+
         price = rookwaar.getPrijs();
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         daysQuit = days;
-        Log.d("aantal", Integer.toString(rookwaar.getAantal()));
-        Log.d("sID setup", Integer.toString(rookwaar.getsID()));
-        bespaardeMoneys = (days / (refreshStockRate) * price);
+        bespaardeMoneys = (days / refreshStockRate) * price;
+        Log.d("refreshstockrate",String.valueOf(refreshStockRate));
         spentAmount = (db.getUser(1).getSpentAmount());
 
 
         extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
 
-        bespaardePakjes = days / ((rookwaar.getAantal() / db.getUser(1).getPerDag()));
+        bespaardePakjes = days / refreshStockRate;
         gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
 
 
@@ -100,7 +102,7 @@ public class UpdateStats {
         return userLevel;
     }
 
-    public int getRefreshStockRate(){return refreshStockRate;}
+    public float getRefreshStockRate(){return refreshStockRate;}
 
     public float getPrice(){return price;}
 

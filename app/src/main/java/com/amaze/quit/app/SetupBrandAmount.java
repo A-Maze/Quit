@@ -101,7 +101,8 @@ public class SetupBrandAmount extends Fragment  {
         fillSpinnerSigaret();
         etPerPak.setText("");
         etPrice.setText("");
-        configAddSmoke("Sigaretten");
+        selectedRadio = rbSigaretten.getId();
+        configAddSmoke("sigaretten");
 
 
 
@@ -229,7 +230,7 @@ public class SetupBrandAmount extends Fragment  {
                 fillSpinnerSigaret();
                 etPerPak.setText("");
                 etPrice.setText("");
-                configAddSmoke("Sigaretten");
+                configAddSmoke("sigaretten");
             }
             else if(selectedRadio == rbShag.getId())
             {
@@ -238,7 +239,7 @@ public class SetupBrandAmount extends Fragment  {
                 fillSpinnerShag();
                 etPerPak.setText("");
                 etPrice.setText("");
-                configAddSmoke("Shag");
+                configAddSmoke("shag");
 
             }
 

@@ -34,6 +34,7 @@ public class AddSmoke extends ActionBarActivity {
 
 
         if(type.equals("sigaretten")){
+            Log.d("test","I'm being called!");
             tvAmount.setText(R.string.setupPackAmount);
         }
         else if(type.equals("shag")){

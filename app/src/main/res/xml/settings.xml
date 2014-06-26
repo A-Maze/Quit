@@ -11,6 +11,12 @@
             android:summary="@string/pref_quit_time_summary"
             android:key="quitTime"/>
         <ListPreference
+            android:title="@string/pref_shag_or_sig"
+            android:summary="@string/pref_shag_or_sig_summary"
+            android:key="smokePreference"
+            android:entries="@array/preferenceArray"
+            android:entryValues="@array/preferenceArrayValues"/>
+        <ListPreference
             android:title="@string/setupBrand"
             android:summary="@string/pref_brand_summary"
             android:key="brand"
@@ -24,6 +30,11 @@
             android:title="@string/setupPackAmount"
             android:summary="@string/pref_pack_amount_summary"
             android:key="packAmount"/>
+        <EditTextPreference
+            android:title="@string/pref_price"
+            android:summary="@string/pref_price_summary"
+            android:key="price"
+            />
         <Preference
             android:title="@string/pref_product"
             android:summary="@string/pref_product_summary"

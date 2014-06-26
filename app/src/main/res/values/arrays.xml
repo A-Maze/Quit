@@ -25,4 +25,13 @@
         <item name="3">4</item>
     </string-array>
 
+    <string-array name="preferenceArray">
+        <item name="0">Shag</item>
+        <item name="1">Sigaretten</item>
+    </string-array>
+    <string-array name="preferenceArrayValues">
+        <item name="0">0</item>
+        <item name="1">1</item>
+    </string-array>
+
 </resources>

@@ -53,6 +53,13 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/bProductDetailSpaar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Spaar hiervoor"
+                android:layout_marginBottom="25dp" />
+
             <TextView
                 android:id="@+id/tvProductDetailDescription"
                 android:layout_width="wrap_content"
@@ -62,12 +69,7 @@
                 android:layout_marginBottom="10dp"
                 android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/bProductDetailSpaar"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Spaar hiervoor"
-                android:layout_marginBottom="25dp" />
+
 
         </LinearLayout>
 

@@ -20,10 +20,12 @@ public final class DateUtils {
         return cal;
     }
 
+    //geeft minuten tussen 2 datums
     public static long GetMinutesBetween(Calendar minDate, Calendar maxDate) {
         return (maxDate.getTimeInMillis() - minDate.getTimeInMillis()) / (60 * 1000);
     }
 
+    //geeft minuten sinds een datum
     public static long GetMinutesSince(Calendar date) {
         return (now().getTimeInMillis() - date.getTimeInMillis()) / (60 * 1000);
     }

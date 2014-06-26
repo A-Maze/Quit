@@ -18,7 +18,7 @@ public class SetupQuitDate extends Fragment {
     private static DatePicker quitDatePicker;
     private static TimePicker quitTimePicker;
 
-    // de stopdatum variabelen
+    /* de stopdatum variabelen */
     public static int quitMinute;
     public static int quitHour;
     public static int quitDay;
@@ -30,19 +30,18 @@ public class SetupQuitDate extends Fragment {
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);
         return f;
-
-
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_quit_datee, container, false);
-
         quitDatePicker = (DatePicker) v.findViewById(R.id.dpStopDate);
         final Calendar c = Calendar.getInstance();
         quitYear = c.get(Calendar.YEAR);
         quitMonth = c.get(Calendar.MONTH);
         quitDay = c.get(Calendar.DAY_OF_MONTH);
+        // bij verandering van de calender de variabelen aanpassen.
         quitDatePicker.init(quitYear, quitMonth, quitDay, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
@@ -59,7 +58,6 @@ public class SetupQuitDate extends Fragment {
                 quitHour = i;
                 quitMinute = i2;
             }
-
         });
         quitTimePicker.setIs24HourView(true);
 
@@ -69,6 +67,9 @@ public class SetupQuitDate extends Fragment {
 
     }
 
+
+
+/* spreekt voor zichzelf */
 
     public static int getTheMinute() {
         quitMinute = quitTimePicker.getCurrentMinute();

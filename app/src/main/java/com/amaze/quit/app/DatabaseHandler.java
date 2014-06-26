@@ -15,14 +15,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private Sigaretten sigaret;
 
-    // All Static variables
-    // Database Version
+    /*
+    All Static variables
+    Database Version
+    */
     private static final int DATABASE_VERSION = 1;
 
-    // Database Name
+    /* Database Name */
     private static final String DATABASE_NAME = "QuitSmokeDatabase";
 
-    //  table names
+    /* table names */
     private static final String TABLE_USER = "users";
     private static final String TABLE_SIGARETTEN = "sigaretten";
     private static final String TABLE_CHALLENGES = "challenges";
@@ -32,7 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_PRODUCT = "product";
     private static final String TABLE_SHAG = "shag";
 
-    // User Table Columns names
+    /* User Table Columns names */
     private static final String USER_UID = "uID";
     private static final String USER_SID = "sID";
     private static final String USER_PERDAG = "per_dag";
@@ -45,7 +47,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_SPENT_AMOUNT = "spent_amount";
     private static final String USER_SHAG_OR_SIG = "shag_or_sig";
 
-    // Sigaretten Table Columns namesss
+    /*
+    Sigaretten Table Columns namesss,
+    nicotine en teer voor misschien verdere uitbereiding
+    */
     private static final String SIGARETTEN_SID = "sID";
     private static final String SIGARETTEN_MERK = "merk";
     private static final String SIGARETTEN_AANTAL = "aantal";
@@ -53,39 +58,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String SIGARETTEN_NICOTINE = "nicotine";
     private static final String SIGARETTEN_PRIJS = "prijs";
 
-    // Sigaretten Table Columns namesss
+    /* Shag Table Columns namesss */
     private static final String SHAG_SID = "sID";
     private static final String SHAG_MERK = "merk";
     private static final String SHAG_AANTAL = "aantal";
     private static final String SHAG_PRIJS = "prijs";
 
-    // Chalenges Table Columns names
+
+    /* Chalenges Table Columns names */
     private static final String CHALLENGES_CID = "cID";
     private static final String CHALLENGES_TITEL = "Titel";
     private static final String CHALLENGES_BESCHRIJVING = "beschrijving";
     private static final String CHALLENGES_BEHAALD = "behaald";
 
 
-    // User_challenges Table Columns names
+    /* User_challenges Table Columns names */
     private static final String USER_CHALLENGES_UID = "uID";
     private static final String USER_CHALLENGES_CID = "cID";
     private static final String USER_CHALLENGES_UCID = "ucID";
 
 
-    // Levels Table Columns names
+    /* Levels Table Columns names */
     private static final String LEVEL_LID = "lID";
     private static final String LEVEL_TITEL = "titel";
     private static final String LEVEL_BESCHRIJVING = "beschrijving";
     private static final String LEVEL_MINDAYS = "min_days";
 
-    // Gezondheid Table Columns names
+    /* Gezondheid Table Columns names */
     private static final String GEZONDHEID_UID = "uID";
     private static final String GEZONDHEID_TEER = "sID";
     private static final String GEZONDHEID_NICOTINE = "per_dag";
     private static final String GEZONDHEID_LANGERTELEVEN = "langer_te_leven";
     private static final String GEZONDHEID_CO2 = "co2";
 
-    // Product Table Columns names
+    /* Product Table Columns names */
     private static final String PRODUCT_UID = "UID";
     private static final String PRODUCT_ID = "ID";
     private static final String PRODUCT_TITEL = "titel";
@@ -101,6 +107,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /* creating Tables */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        /* maken van de database */
         /* User table */
         String CREATE_USER_TABLE = "CREATE TABLE "
                 + TABLE_USER + "("
@@ -235,6 +242,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    /* add sigaretten */
     public void addSigarette(Sigaretten sigaret) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -250,6 +258,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    /* add shag */
     public void addShag(Shag shag) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -265,6 +274,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    /* add challange */
     public void addChallenge(Challenges challenge) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -279,6 +289,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    /* add level */
     public void addLevel(Levels level) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -293,6 +304,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    /* add product */
     public void addProduct(Artikel artikel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

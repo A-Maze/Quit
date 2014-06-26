@@ -26,11 +26,10 @@ public class Progress extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_progress, container, false);
-
         return v;
     }
 
-
+    /*update als je op scherm komt*/
     @Override
     public void onResume() {
         super.onResume();
@@ -48,16 +47,17 @@ public class Progress extends Fragment {
 
     }
 
+    /* update van progress als het scherm gemaakt wordt */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         updateVooruitgang();
     }
 
+    /* update functie */
     private void updateVooruitgang() {
         TextView dayProgress;
         TextView moneyInTheBank;
         TextView extraDagen;
-        TextView level;
         extraDagen = (TextView) getActivity().findViewById(R.id.tvExtraDagen);
         dayProgress = (TextView) getActivity().findViewById(R.id.tvDagenZonderRoken);
         moneyInTheBank = (TextView) getActivity().findViewById(R.id.tvBespaardeGeld);
@@ -78,12 +78,12 @@ public class Progress extends Fragment {
             float extraDagenTeLeven = updatestats.getExtraDagenTeLeven();
             extraDagen.setText((int) extraDagenTeLeven + " extra dagen te leven");
             int userLevel = updatestats.getUserLevel();
-            //level.setText("Level " +   userLevel);
             String Titel = db.getLevel(userLevel).getTitel();
             levelDesc.setText(Titel);
             int nietGerooktSig = (int) days * db.getUser(1).getPerDag();
             nietGerookt.setText("" + nietGerooktSig);
         } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
 

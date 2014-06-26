@@ -30,6 +30,7 @@ public class HealthProgress extends Fragment {
 
     Handler handler;
 
+    //teken vooruitgang progressbars met cijfers
     protected void drawElements(int id) {
         Activity a = getActivity();
 
@@ -76,6 +77,7 @@ public class HealthProgress extends Fragment {
 
     }
 
+    //tekent algemene gezonheid
     protected void drawAverage() {
         //teken de progress van de algemene gezondheid bar (gemiddelde van alle andere)
         int totalProgress = 0;
@@ -89,6 +91,7 @@ public class HealthProgress extends Fragment {
 
     }
 
+    //tekent vooruitgang
     protected void drawProgress() {
         Activity a = getActivity();
         Date today = new Date();
@@ -99,93 +102,9 @@ public class HealthProgress extends Fragment {
         }
 
         drawAverage();
-
-        /*
-        int p1 = getProgress(1);
-        ProgressBar gezondheidBar1 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_1);
-        gezondheidBar1.setProgress(p1);
-        TextView t1 = (TextView) a.findViewById(R.id.health_procent1);
-        t1.setText(p1+"%");
-        long tijd1 = getRemainingTime(1);
-        TextView timer1 = (TextView) a.findViewById(R.id.health_timer1);
-        timer1.setText(tijd1 + " minuten");
-
-        int p2 = getProgress(2);
-        ProgressBar gezondheidBar2 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_2);
-        gezondheidBar2.setProgress(p2);
-        TextView t2 = (TextView) a.findViewById(R.id.health_procent2);
-        t2.setText(p2+"%");
-        long tijd2 = getRemainingTime(2);
-        TextView timer2 = (TextView) a.findViewById(R.id.health_timer2);
-        timer2.setText(tijd2 + " minuten");
-
-        int p3 = getProgress(3);
-        ProgressBar gezondheidBar3 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_3);
-        gezondheidBar3.setProgress(p3);
-        TextView t3 = (TextView) a.findViewById(R.id.health_procent3);
-        t3.setText(p3+"%");
-        long tijd3 = getRemainingTime(3);
-        TextView timer3 = (TextView) a.findViewById(R.id.health_timer3);
-        timer3.setText(tijd3 + " minuten");
-
-        int p4 = getProgress(4);
-        ProgressBar gezondheidBar4 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_4);
-        gezondheidBar4.setProgress(p4);
-        TextView t4 = (TextView) a.findViewById(R.id.health_procent4);
-        t4.setText(p4+"%");
-        long tijd4 = getRemainingTime(4);
-        TextView timer4 = (TextView) a.findViewById(R.id.health_timer4);
-        timer4.setText(tijd4 + " minuten");
-
-        int p5 = getProgress(5);
-        ProgressBar gezondheidBar5 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_5);
-        gezondheidBar5.setProgress(p5);
-        TextView t5 = (TextView) a.findViewById(R.id.health_procent5);
-        t5.setText(p5+"%");
-        long tijd5 = getRemainingTime(5);
-        TextView timer5 = (TextView) a.findViewById(R.id.health_timer5);
-        timer5.setText(tijd5 + " minuten");
-
-        int p6 = getProgress(6);
-        ProgressBar gezondheidBar6 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_6);
-        gezondheidBar6.setProgress(p6);
-        TextView t6 = (TextView) a.findViewById(R.id.health_procent6);
-        t6.setText(p6+"%");
-        long tijd6 = getRemainingTime(6);
-        TextView timer6 = (TextView) a.findViewById(R.id.health_timer6);
-        timer6.setText(tijd6 + " minuten");
-
-        int p7 = getProgress(7);
-        ProgressBar gezondheidBar7 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_7);
-        gezondheidBar7.setProgress(p7);
-        TextView t7 = (TextView) a.findViewById(R.id.health_procent7);
-        t7.setText(p7+"%");
-        long tijd7 = getRemainingTime(7);
-        TextView timer7 = (TextView) a.findViewById(R.id.health_timer7);
-        timer7.setText(tijd7 + " minuten");
-
-        int p8 = getProgress(8);
-        ProgressBar gezondheidBar8 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_8);
-        gezondheidBar8.setProgress(p8);
-        TextView t8 = (TextView) a.findViewById(R.id.health_procent8);
-        t8.setText(p8+"%");
-        long tijd8 = getRemainingTime(8);
-        TextView timer8 = (TextView) a.findViewById(R.id.health_timer8);
-        timer8.setText(tijd8 + " minuten");
-
-        int p9 = getProgress(9);
-        ProgressBar gezondheidBar9 = (ProgressBar) a.findViewById(R.id.progressBar_gezondheid_9);
-        gezondheidBar9.setProgress(p9);
-        TextView t9 = (TextView) a.findViewById(R.id.health_procent9);
-        t9.setText(p9+"%");
-        long tijd9 = getRemainingTime(9);
-        TextView timer9 = (TextView) a.findViewById(R.id.health_timer9);
-        timer9.setText(tijd9 + " minuten");
-           */
-
-
     }
 
+    //geeft progress terug
     public int getProgress(int id) {
         double progress;
         double max;
@@ -249,6 +168,7 @@ public class HealthProgress extends Fragment {
         return (int) progress;
     }
 
+    //geeft tijd over terug
     protected int getRemainingTime(int id) {
         long tijd = 0;
         DatabaseHandler db = new DatabaseHandler(getActivity());
@@ -320,7 +240,7 @@ public class HealthProgress extends Fragment {
 
                 if (msg.what == UpdateProgress) {
 
-                    // TODO make better check to see if this is the right home activity, check if nullpointerexception on closing the app is gone
+
                     if (getActivity() != null) {
                         Activity a = getActivity();
 
@@ -338,10 +258,11 @@ public class HealthProgress extends Fragment {
             }
         };
 
+        //timer
         Thread updateProcess = new Thread() {
             public void run() {
 
-                //TODO IS ER EEN NETTERE MANIER OM DE TIMER OPNIEUW OP TE STARTEN?
+
                 while (1 == 1) {
                     try {
                         sleep(10000);

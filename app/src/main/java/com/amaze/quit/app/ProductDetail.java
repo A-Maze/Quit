@@ -1,7 +1,5 @@
 package com.amaze.quit.app;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -25,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Calendar;
-
 
 public class ProductDetail extends ActionBarActivity {
 
@@ -37,9 +33,7 @@ public class ProductDetail extends ActionBarActivity {
     String id;
     String titel;
     Double prijs;
-    String image;
     String desc;
-
     String priceS;
     String priceSd;
 
@@ -48,6 +42,7 @@ public class ProductDetail extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
+        // Set views
         TextView tvTitle = (TextView) findViewById(R.id.tvProductDetailTitle);
         TextView tvPrice = (TextView) findViewById(R.id.tvProductDetailPrice);
         TextView tvDesc = (TextView) findViewById(R.id.tvProductDetailDescription);
@@ -65,6 +60,7 @@ public class ProductDetail extends ActionBarActivity {
         priceS = Double.toString(prijs);
         desc = extras.getString("description");
 
+        // Set info
         tvTitle.setText(titel);
         priceSd = Double.toString(prijs);
         priceSd = priceSd.replace(".", ",");
@@ -72,23 +68,12 @@ public class ProductDetail extends ActionBarActivity {
         tvPrice.setText(priceSd + "");
         tvDesc.setText(Html.fromHtml(desc).toString() + "");
 
-        //new Thread(new Runnable() {
-        // public void run() {
+        // Set image
         bitmap = loadImageFromNetwork(image);
-        //ivProduct.post(new Runnable() {
-        //public void run() {
         ivProduct.setImageBitmap(bitmap);
-        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(250), giveDP(250));
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(giveDP(100), giveDP(100));
         layoutParams.gravity = Gravity.CENTER;
         ivProduct.setLayoutParams(layoutParams);
-        //}
-        // });
-        //}
-        //}).start();
-
-        // TextView tv = (TextView) findViewById(R.id.tvpdtest);
-        //tv.setText(id);
     }
 
     private View.OnClickListener spaarProduct = new View.OnClickListener() {
@@ -100,18 +85,13 @@ public class ProductDetail extends ActionBarActivity {
             try {
                 int nrows = db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
 
-
                 if (nrows > 0) {
                     db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                     SharedPreferences settings = getSharedPreferences("QuitPrefs", 0);
                     settings.edit().putBoolean("newProduct",false).commit();
                 } else {
-
-
                     db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 }
-
-
             } catch (Exception e) {
                 db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 e.printStackTrace();
@@ -120,6 +100,7 @@ public class ProductDetail extends ActionBarActivity {
         }
     };
 
+    // To save image in database
     public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
@@ -154,14 +135,12 @@ public class ProductDetail extends ActionBarActivity {
 
     public static Bitmap loadImageFromNetwork(String src) {
         try {
-            //Log.e("src", src);
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            //Log.e("Bitmap","returned");
             return myBitmap;
         } catch (IOException e) {
             e.printStackTrace();

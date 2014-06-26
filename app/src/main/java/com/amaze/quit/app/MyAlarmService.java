@@ -6,14 +6,19 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
 import java.util.Calendar;
 
+/**
+ * Created by Sander on 23-6-2014.
+ */
 public class MyAlarmService extends Service {
 
     private NotificationManager mManager;
+    public static final String PREFS_NAME = "QuitPrefs";
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -34,16 +39,17 @@ public class MyAlarmService extends Service {
 
         // Check if new challenge achieved
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+
+        // Look for new achieved challanges
         for (int i = 1; i <= db.getChallengesAmount(); i++) {
             int notificationGivin = db.getChallenge(i).getNotificationGivin();
             int behaald = db.getChallenge(i).getBehaald();
             String titel = db.getChallenge(i).getTitel();
 
+            // If behaald and first time shown
             if (notificationGivin == 0 && behaald > 0) {
                 // Give notification
                 mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
-                Intent intentt = new Intent(this.getApplicationContext(),SplashScreen.class);
-                intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
                         .setContentTitle("Achievement behaald!")
@@ -58,43 +64,61 @@ public class MyAlarmService extends Service {
                 PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                 mNotifyBuilder.setContentIntent(resultPendingIntent);
 
-                int numMessages = 0;
-                mNotifyBuilder.setNumber(++numMessages);
-
                 mManager.notify(0, mNotifyBuilder.build());
 
-
-                /*
-                Notification notification = new Notification(R.drawable.ic_launcher,"Achievement behaald!", System.currentTimeMillis());
-                intentt.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                PendingIntent pendingNotificationIntent = PendingIntent.getActivity( this.getApplicationContext(),0, intentt,PendingIntent.FLAG_UPDATE_CURRENT);
-                notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                notification.defaults |= Notification.DEFAULT_SOUND;
-                notification.defaults |= Notification.DEFAULT_VIBRATE;
-                notification.flags |= Notification.FLAG_SHOW_LIGHTS;
-                notification.ledARGB = 0xff00ff00;
-                notification.ledOnMS = 300;
-                notification.ledOffMS = 1000;
-                notification.setLatestEventInfo(this.getApplicationContext(), "Achievement behaald!", titel, pendingNotificationIntent);
-
-                mManager.notify(0, notification);
-                */
-
-                // setNotficationGivin on 1
                 updateChallengeDB(i, 1);
             }
         }
 
-        // Alarmmanager repeating
+        UpdateStats updatestats = new UpdateStats(getApplicationContext());
+
+        //gets the total saved amount
+        float totalSavedAmount = updatestats.getSavedMoney();
+        // what is spent?
+        int spentAmount = updatestats.getSpentAmount();
+        //what is left?
+        float amountLeft = totalSavedAmount - spentAmount;
+
+        // Product price
+        float productPrice = db.getProduct(1).getPrijs();
+
+        // If enough money for product
+        if (amountLeft >= productPrice) {
+
+            SharedPreferences completeNotification = getSharedPreferences(PREFS_NAME, 0);
+
+            // First time
+            if (!completeNotification.getBoolean("alreadyGivin", false)) {
+                completeNotification.edit().putBoolean("alreadyGivin", true).commit();
+                // Give notification
+                mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
+
+                NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("Gefeliciteerd!")
+                        .setContentText("U heeft genoeg geld bespaard voor uw product")
+                        .setAutoCancel(true)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setSmallIcon(R.drawable.ic_launcher);
+
+                // On notification tap
+                Intent resultIntent = new Intent(this, SplashScreen.class);
+                resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                mNotifyBuilder.setContentIntent(resultPendingIntent);
+
+                mManager.notify(0, mNotifyBuilder.build());
+            }
+        }
+
+        // Alarmmanager repeater
         PendingIntent pendingIntent;
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 5);
+        calendar.add(Calendar.HOUR, 1);
 
         Intent myIntent = new Intent(MyAlarmService.this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(MyAlarmService.this, 0, myIntent,0);
+        pendingIntent = PendingIntent.getBroadcast(MyAlarmService.this, 0, myIntent, 0);
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
@@ -104,18 +128,12 @@ public class MyAlarmService extends Service {
         super.onDestroy();
     }
 
+    // update notification row
     private void updateChallengeDB(int id, int notificationGivin) {
         Challenges challenge;
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
         challenge = db.getChallenge(id);
         challenge.setNotificationGivin(notificationGivin);
-        db.updateChallenge(challenge);
-        db.close();
-    }private void fdsa(int id, int achieved) {
-        Challenges challenge;
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        challenge = db.getChallenge(id);
-        challenge.setBehaald(achieved);
         db.updateChallenge(challenge);
         db.close();
     }

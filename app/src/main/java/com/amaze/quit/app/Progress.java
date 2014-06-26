@@ -30,7 +30,7 @@ public class Progress extends Fragment {
         return v;
     }
 
-
+    /*update als je op scherm komt*/
     @Override
     public void onResume() {
         super.onResume();
@@ -48,11 +48,13 @@ public class Progress extends Fragment {
 
     }
 
+    /* update van progress als het scherm gemaakt wordt */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         updateVooruitgang();
     }
 
+    /* update functie */
     private void updateVooruitgang() {
         TextView dayProgress;
         TextView moneyInTheBank;
@@ -89,6 +91,12 @@ public class Progress extends Fragment {
 
     }
 }
+
+
+
+
+
+
 
 
 

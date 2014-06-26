@@ -17,6 +17,8 @@ public class Setup extends FragmentActivity {
 
     MyPageAdapter pageAdapter;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

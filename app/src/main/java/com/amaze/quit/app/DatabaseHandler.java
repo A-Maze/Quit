@@ -248,7 +248,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addSigarette(Sigaretten sigaret) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // values.put(SIGARETTEN_SID, sigaret.getsID());
+        values.put(SIGARETTEN_SID, sigaret.getsID());
         values.put(SIGARETTEN_AANTAL, sigaret.getAantal());
         values.put(SIGARETTEN_MERK, sigaret.getMerk());
         values.put(SIGARETTEN_TEER, sigaret.getTeer());
@@ -264,7 +264,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addShag(Shag shag) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
+        values.put(SHAG_SID,shag.getsID());
         values.put(SHAG_AANTAL, shag.getAantal());
         values.put(SHAG_MERK, shag.getMerk());
 

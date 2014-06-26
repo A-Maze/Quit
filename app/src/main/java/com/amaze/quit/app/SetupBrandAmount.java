@@ -13,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class SetupBrandAmount extends Fragment  {
 
@@ -22,8 +24,8 @@ public class SetupBrandAmount extends Fragment  {
     private static RadioButton rbSigaretten;
     private static RadioButton rbShag;
     private static Spinner sBrand;
-    private static String[] sigarettenList;
-    private static Sigaretten[] sigaretten;
+    private static ArrayList<String> sigarettenList;
+    private static ArrayList<Sigaretten> sigaretten;
     private static String[] shagList;
     private static Shag[] shagie;
     private static int selectedSigaretPos;
@@ -133,7 +135,7 @@ public class SetupBrandAmount extends Fragment  {
     public float getPrijs() { return Float.valueOf(etPrice.getText().toString());}
 
     public static  Sigaretten getSigarettenPosition(){
-        return sigaretten[selectedSigaretPos];
+        return sigaretten.get(selectedSigaretPos);
     }
 
     public static  Shag getShagPos(){
@@ -147,25 +149,30 @@ public class SetupBrandAmount extends Fragment  {
     private void getSigaretten() {
         DatabaseHandler db = new DatabaseHandler(getActivity());
 
+        try {
+            if (sigaret) {
 
-        if (sigaret) {
-
-            sigarettenList = new String[db.getSigarettenAmount()];
-            sigaretten = new Sigaretten[db.getSigarettenAmount()];
-            for (int i = 1; i <= db.getSigarettenAmount(); i++) {
-                sigarettenList[i - 1] = db.getSigaret(i).getMerk();
-                sigaretten[i - 1] = db.getSigaret(i);
+                sigarettenList = new ArrayList<String>();
+                sigaretten = new ArrayList<Sigaretten>();
+                for (int i = 1; i <= db.getSigarettenAmount(); i++) {
+                    sigarettenList.add(db.getSigaret(i).getMerk());
+                    sigaretten.add( db.getSigaret(i));
+                }
             }
-        }
-        else if (shag){
-            shagList = new String[db.getShagAmount()];
-            shagie = new Shag[db.getShagAmount()];
-            for (int i = 1; i <= db.getShagAmount(); i++) {
-                shagList[i - 1] = db.getShag(i).getMerk();
-                shagie[i - 1] = db.getShag(i);
+            else if (shag){
+                shagList = new String[db.getShagAmount()];
+                shagie = new Shag[db.getShagAmount()];
+                for (int i = 1; i <= db.getShagAmount(); i++) {
+                    shagList[i - 1] = db.getShag(i).getMerk();
+                    shagie[i - 1] = db.getShag(i);
+                }
+
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
 
 
         db.close();

@@ -58,6 +58,7 @@ public class Achievements extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //makes sure it handles the completed achievements
         updateCompleted();
     }
 
@@ -76,11 +77,16 @@ public class Achievements extends Fragment {
     }
 
     private void updateCompleted() {
+        //new database handler
         DatabaseHandler db = new DatabaseHandler(getActivity());
+
+        //gets the drawables and the layout
         Drawable checkmark = getResources().getDrawable(R.drawable.check_mark_green);
         Drawable checkmarkGrey = getResources().getDrawable(R.drawable.check_mark_grey);
         String[] imageArray = {"first_steps", "take_a_deep_breath", "kaching", "money_in_the_bank", "extra_life", "invincible", "return_on_investment", "worth_it", "one_down", "not_hard"};
         LinearLayout theLayout = (LinearLayout) getActivity().findViewById(R.id.llAchievements);
+
+        //loops through the achievements to see if they're completed
         for (int i = 1; i <= db.getChallengesAmount(); i++) {
             int behaald = db.getChallenge(i).getBehaald();
             int titleID = getResources().getIdentifier("tvC" + i, "id", getActivity().getPackageName());
@@ -89,6 +95,8 @@ public class Achievements extends Fragment {
             TextView achievementTitle = (TextView) getActivity().findViewById(titleID);
             String achievementTitleString = "" + achievementTitle.getText();
             String achievementContextString = "" + achievementContext.getText();
+
+            //if they're completed it'll handle them properly
             if (behaald > 0) {
 
 
@@ -96,8 +104,8 @@ public class Achievements extends Fragment {
                 Drawable completedDrawable = getResources().getDrawable(leftImage);
                 achievementContext.setCompoundDrawablesWithIntrinsicBounds(completedDrawable, null, checkmark, null);
                 achievementTitle.setTextColor(getResources().getColor(R.color.green));
-                //context and title for the share button
 
+                //if the view has no share button but is completed -> add one
                 if (getActivity().findViewById(i) == null) {
                     //gives every completed achievement a share button
                     int index = ((ViewGroup) achievementContext.getParent()).indexOfChild(achievementContext);
@@ -106,16 +114,18 @@ public class Achievements extends Fragment {
 
 
             } else {
-
+                //handles the achievements that aren't completed. this is necesarry if they were completed earlier but the user changed their quit date.
                 int leftImage = getResources().getIdentifier(imageArray[i - 1] + "_achievement", "drawable", getActivity().getPackageName());
                 Drawable notCompletedDrawable = getResources().getDrawable(leftImage);
                 achievementContext.setCompoundDrawablesWithIntrinsicBounds(notCompletedDrawable, null, checkmarkGrey, null);
                 achievementTitle.setTextColor(getResources().getColor(R.color.black));
             }
         }
+        //closes the database
         db.close();
     }
 
+    //makes the twitter button
     private ImageButton shareTwitter(int i, String title, String context) {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.RIGHT;
@@ -129,7 +139,7 @@ public class Achievements extends Fragment {
         return shareButton;
     }
 
-
+    //adds the onclick listener to the image button. link is given in the parameters
     public class onShare implements View.OnClickListener {
 
         String title;

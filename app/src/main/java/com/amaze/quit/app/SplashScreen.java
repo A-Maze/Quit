@@ -57,7 +57,7 @@ public class SplashScreen extends Activity {
             // Alarmmanager first time
             PendingIntent pendingIntent;
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MINUTE, 5);
+            calendar.add(Calendar.HOUR, 1);
 
             Intent myIntent = new Intent(SplashScreen.this, MyReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(SplashScreen.this, 0, myIntent,0);

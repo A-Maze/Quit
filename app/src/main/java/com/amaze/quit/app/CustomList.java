@@ -30,6 +30,7 @@ public class CustomList extends ArrayAdapter<String> {
     private final String[] imageURL;
     private ImageView productImage;
 
+    // Constructor
     public CustomList(Activity context,
                       String[] id, String[] title, Double[] price, String[] imageURL) {
         super(context, R.layout.listview_bol, title);
@@ -44,10 +45,13 @@ public class CustomList extends ArrayAdapter<String> {
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.listview_bol, null, true);
+
+        // Getting views
         TextView title = (TextView) rowView.findViewById(R.id.tvProductTitle);
         TextView price = (TextView) rowView.findViewById(R.id.tvProductPrice);
         productImage = (ImageView) rowView.findViewById(R.id.ivProductImages);
 
+        // Give info as text price and image
         title.setText(this.title[position]);
         title.setTag(id[position]);
 
@@ -57,7 +61,6 @@ public class CustomList extends ArrayAdapter<String> {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         productImage.setImageBitmap(loadImageFromNetwork(imageURL[position]));
-        //new DownloadImageTask().execute(imageURL[position]);
         return rowView;
     }
 
@@ -80,16 +83,15 @@ public class CustomList extends ArrayAdapter<String> {
         }
     }
 
+    // Image loader
     public static Bitmap loadImageFromNetwork(String src) {
         try {
-            //Log.e("src", src);
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            //Log.e("Bitmap","returned");
             return myBitmap;
         } catch (IOException e) {
             e.printStackTrace();

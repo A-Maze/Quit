@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 public class ChooseProductHost extends ActionBarActivity {
 
     @Override
@@ -13,7 +12,6 @@ public class ChooseProductHost extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_product_host);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

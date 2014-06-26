@@ -4,6 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * Created by Sander on 23-6-2014.
+ */
 public class MyReceiver extends BroadcastReceiver {
 
     @Override

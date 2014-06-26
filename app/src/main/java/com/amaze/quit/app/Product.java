@@ -4,37 +4,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-import org.w3c.dom.Text;
-
-
 public class Product extends Fragment {
-
-    Artikel artikel;
 
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
     private static float amountLeft;
+
     public static final Product newInstance(int i) {
         Product f = new Product();
         Bundle bdl = new Bundle(1);
@@ -45,7 +35,6 @@ public class Product extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_product, container, false);
         return v;
     }
@@ -55,7 +44,6 @@ public class Product extends Fragment {
         super.onResume();
         updateSavingProgress();
         setListeners();
-
     }
 
 
@@ -71,7 +59,6 @@ public class Product extends Fragment {
         if (isVisibleToUser) {
             //implements the main method what every fragment should do when it's visible
             uservisibilityevent.viewIsVisible(getActivity(), position, "blue", "title_activity_product");
-
         }
 
     }
@@ -86,14 +73,14 @@ public class Product extends Fragment {
         amountLeft = totalSavedAmount - spentAmount;
         // prijs of the product
         //float productPrice = 400f;
-        if(amountLeft < 0){
+        if (amountLeft < 0) {
             amountLeft = 0f;
         }
         float productPrice = db.getProduct(1).getPrijs();
         //what is left of the price?
         float priceLeft = productPrice - amountLeft;
-        String amountLeftString = String.format("%.2f",amountLeft);
-        int daysLeft = (int) Math.round((priceLeft/updatestats.getPrice()) *updatestats.getRefreshStockRate());
+        String amountLeftString = String.format("%.2f", amountLeft);
+        int daysLeft = (int) Math.round((priceLeft / updatestats.getPrice()) * updatestats.getRefreshStockRate());
 
         // Set titel
         TextView tvTitel = (TextView) getActivity().findViewById(R.id.tvProgressProductTitle);
@@ -123,8 +110,6 @@ public class Product extends Fragment {
             tvComplete.setVisibility(View.GONE);
             tvDaysLeft.setText("Nog maar " + daysLeft + " dagen sparen!");
             tvDaysLeft.setVisibility(View.VISIBLE);
-
-
         } else {
             //if complete turn the bar green and show a complete text
             amountLeft = productPrice;
@@ -151,7 +136,7 @@ public class Product extends Fragment {
         return pixels;
     }
 
-    public float getAmountLeft(){
+    public float getAmountLeft() {
         return amountLeft;
     }
 
@@ -172,13 +157,10 @@ public class Product extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
                 SharedPreferences settings = getActivity().getSharedPreferences("QuitPrefs", 0);
-                settings.edit().putBoolean("boughtProduct",true).commit();
+                settings.edit().putBoolean("boughtProduct", true).commit();
                 startActivity(intent);
 
             }
         });
-
     }
-
-
 }

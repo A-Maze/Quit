@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import java.util.Calendar;
 
@@ -41,11 +40,13 @@ public class MyAlarmService extends Service {
         // Check if new challenge achieved
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
+        // Look for new achieved challanges
         for (int i = 1; i <= db.getChallengesAmount(); i++) {
             int notificationGivin = db.getChallenge(i).getNotificationGivin();
             int behaald = db.getChallenge(i).getBehaald();
             String titel = db.getChallenge(i).getTitel();
 
+            // If behaald and first time shown
             if (notificationGivin == 0 && behaald > 0) {
                 // Give notification
                 mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
@@ -81,15 +82,14 @@ public class MyAlarmService extends Service {
         // Product price
         float productPrice = db.getProduct(1).getPrijs();
 
-        Log.d("PRd prijss", " "+productPrice);
-        Log.d("nu over", " "+amountLeft);
-
+        // If enough money for product
         if (amountLeft >= productPrice) {
 
             SharedPreferences completeNotification = getSharedPreferences(PREFS_NAME, 0);
 
+            // First time
             if (!completeNotification.getBoolean("alreadyGivin", false)) {
-                completeNotification.edit().putBoolean("alreadyGivin",true).commit();
+                completeNotification.edit().putBoolean("alreadyGivin", true).commit();
                 // Give notification
                 mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
 
@@ -110,15 +110,15 @@ public class MyAlarmService extends Service {
             }
         }
 
-        // Alarmmanager repeating
+        // Alarmmanager repeater
         PendingIntent pendingIntent;
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR, 1);
 
         Intent myIntent = new Intent(MyAlarmService.this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(MyAlarmService.this, 0, myIntent,0);
+        pendingIntent = PendingIntent.getBroadcast(MyAlarmService.this, 0, myIntent, 0);
 
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
@@ -128,18 +128,12 @@ public class MyAlarmService extends Service {
         super.onDestroy();
     }
 
+    // update notification row
     private void updateChallengeDB(int id, int notificationGivin) {
         Challenges challenge;
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
         challenge = db.getChallenge(id);
         challenge.setNotificationGivin(notificationGivin);
-        db.updateChallenge(challenge);
-        db.close();
-    }private void fdsa(int id, int achieved) {
-        Challenges challenge;
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        challenge = db.getChallenge(id);
-        challenge.setBehaald(achieved);
         db.updateChallenge(challenge);
         db.close();
     }

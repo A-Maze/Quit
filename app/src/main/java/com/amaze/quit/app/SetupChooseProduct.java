@@ -1,6 +1,5 @@
 package com.amaze.quit.app;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -45,7 +43,6 @@ public class SetupChooseProduct extends Fragment {
 
     EditText etSearch;
     public String searchQuery;
-    ArrayAdapter<String> adapter;
     ArrayList<String> ids;
     ArrayList<String> titels;
     ArrayList<Double> prices;
@@ -53,8 +50,6 @@ public class SetupChooseProduct extends Fragment {
     ArrayList<String> description;
     protected String result;
     View searching;
-    CustomList cl;
-
 
     public static final SetupChooseProduct newInstance() {
         SetupChooseProduct f = new SetupChooseProduct();
@@ -77,10 +72,9 @@ public class SetupChooseProduct extends Fragment {
         Button completeSetup = (Button) v.findViewById(R.id.bSetupComplete);
 
         //if the activity is the chooseProductHost then don't show the completeSetup button since the fragment isn't hosted in the setup.
-        if(getActivity().getClass() == ChooseProductHost.class){
+        if (getActivity().getClass() == ChooseProductHost.class) {
             completeSetup.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             completeSetup.setVisibility(View.VISIBLE);
             //sets the onclicklistener for the completeSetup button
             completeSetup.setOnClickListener(attachButton);
@@ -88,17 +82,12 @@ public class SetupChooseProduct extends Fragment {
         return v;
     }
 
-    protected void setResult(String result){
-        this.result = result;
-    }
-
-
-    protected View.OnClickListener searchProduct = new View.OnClickListener(){
-        public void onClick(View v){
+    protected View.OnClickListener searchProduct = new View.OnClickListener() {
+        public void onClick(View v) {
             searching.setVisibility(View.VISIBLE);
             View noResults = getActivity().findViewById(1337);
-            if(noResults != null)
-            noResults.setVisibility(View.GONE);
+            if (noResults != null)
+                noResults.setVisibility(View.GONE);
 
             InputMethodManager inputManager = (InputMethodManager)
                     getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -106,31 +95,15 @@ public class SetupChooseProduct extends Fragment {
             inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
 
-
             searchQuery = etSearch.getText().toString();
 
             if (searchQuery.equals(null) || searchQuery.trim().length() <= 0) {
                 return;
             } else {
-                Log.d(TAG, ":" + searchQuery + ":");
-
                 searchQuery = java.net.URLEncoder.encode(searchQuery);
-
                 String url = "https://api.bol.com/catalog/v4/search/?apikey=EDEFFA4EB07D4BB6AEB71C011711381E&format=json&limit=10&q=" + searchQuery;
-
-
                 new DownloadTask().execute(url);
-
-                if (!isOnline()) {
-                    Log.d(TAG, "no internet");
-                    return;
-                } else {
-                    Log.d(TAG, "wel inter");
-                }
-
-
             }
-
         }
     };
 
@@ -145,21 +118,15 @@ public class SetupChooseProduct extends Fragment {
     }
 
 
-
-    public class DownloadTask extends AsyncTask<String,Void,String> {
-
+    public class DownloadTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
             InputStream inputStream = null;
             String result = "";
             try {
-
                 // create HttpClient
                 HttpClient httpclient = new DefaultHttpClient();
-                Log.d(TAG, "cleint");
-
 
                 // make GET request to the given URL
-
                 if (android.os.Build.VERSION.SDK_INT > 9) {
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                     StrictMode.setThreadPolicy(policy);
@@ -167,24 +134,17 @@ public class SetupChooseProduct extends Fragment {
 
                 HttpResponse httpResponse = httpclient.execute(new HttpGet(urls[0]));
 
-
-                Log.d(TAG, "res[pon");
-
                 // receive response as inputStream
                 inputStream = httpResponse.getEntity().getContent();
-                Log.d(TAG, "repsoncontent");
 
                 // convert inputstream to string
                 if (inputStream != null)
                     result = convertInputStreamToString(inputStream);
                 else
                     result = "Did not work!";
-                Log.d(TAG, "convert");
-
             } catch (Exception e) {
                 Log.d("InputStream", e.getLocalizedMessage());
             }
-
             return result;
         }
 
@@ -192,97 +152,29 @@ public class SetupChooseProduct extends Fragment {
             fillList(result);
         }
 
-
-        private String convertInputStreamToString(InputStream inputStream) throws IOException{
-            BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             String result = "";
-            while((line = bufferedReader.readLine()) != null)
+            while ((line = bufferedReader.readLine()) != null)
                 result += line;
-
             inputStream.close();
             return result;
-
         }
     }
 
-
-
-
-    /*
-    public static InputStream sendHttpGet(String url) {
-
-        InputStream content = null;
-        try {
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpResponse response = httpclient.execute(new HttpGet(url));
-            content = response.getEntity().getContent();
-        } catch (Exception e) {
-            Log.d("[GET REQUEST]", "Network exception", e);
-        }
-        return content;
-
-
-
-
-        HttpClient http = new DefaultHttpClient();
-        StringBuilder buffer = null;
-
-        try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            output = EntityUtils.toString(httpEntity);
-        }
-        catch(Exception e) {
-            Log.d(TAG, "gay");
-            return null;
-        } finally {
-            TextView result = (TextView) getActivity().findViewById(R.id.tvBolResultAmount);
-            result.setText(httpEntity);
-        }
-
-        Log.d(TAG, "okay. " + buffer + "/n url output: " );
-        return buffer;
-    }
-
-    private String convertStreamToString(InputStream is) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return sb.toString();
-    }
-        */
-
-    protected void fillList(String result){
+    protected void fillList(String result) {
         this.result = result;
         ListView lv = (ListView) getActivity().findViewById(R.id.lvResult);
 
-        if((lv).getChildCount() > 0)
+        if ((lv).getChildCount() > 0)
             lv.setAdapter(null);
 
         try {
+            // Make result to arrays
             JSONObject jsonn = new JSONObject(result);
 
             String total = jsonn.toString(1);
-            //Log.d(TAG, "result: " + total);
-
 
             JSONArray products = jsonn.getJSONArray("products");
             int rows = products.length();
@@ -298,6 +190,7 @@ public class SetupChooseProduct extends Fragment {
             for (int i = 0; i < rows; i++) {
                 product = (JSONObject) jsonn.getJSONArray("products").get(i);
 
+                // Get info of json
                 String titel = product.getString("title");
                 String id = product.getString("id");
                 String desc = product.getString("longDescription");
@@ -310,37 +203,26 @@ public class SetupChooseProduct extends Fragment {
                 JSONObject imagess = (JSONObject) product.getJSONArray("images").get(4);
                 String image = imagess.getString("url");
 
+                // add to array
                 ids.add(id);
                 titels.add(titel);
                 prices.add(price);
                 imagesURL.add(image);
                 description.add(desc);
-                //titels.add(titel);
-
-                //TextView tvResults = new TextView(getActivity());
-                //tvResults.setText(titel);
-                //tvResults.setId(i);
-
-                //lv.addView(tvResults);
             }
-
-            //adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_bol, titels, new int[] {R.id.tvProductTitle, R.id.tvProductPrice});
 
             String[] id = ids.toArray(new String[ids.size()]);
             String[] title = titels.toArray(new String[titels.size()]);
             Double[] price = prices.toArray(new Double[prices.size()]);
             String[] imageURL = imagesURL.toArray(new String[imagesURL.size()]);
-            String[] desc = description.toArray(new String[description.size()]);
 
             CustomList adapter = new
                     CustomList(getActivity(), id, title, price, imageURL);
             ListView list = (ListView) getActivity().findViewById(R.id.lvResult);
             list.setAdapter(adapter);
 
-
         } catch (JSONException e) {
             //makes the progressbar disappear
-
             searching.setVisibility(View.GONE);
             //shows the no results string if there is no result for the searchterm.
             View linearLayout = getActivity().findViewById(R.id.llChooseProduct);
@@ -348,10 +230,8 @@ public class SetupChooseProduct extends Fragment {
             noResults.setText(R.string.product_no_results);
             noResults.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             noResults.setId(1337);
-            noResults.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
-            ((LinearLayout) linearLayout).addView(noResults,2);
-
-
+            noResults.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            ((LinearLayout) linearLayout).addView(noResults, 2);
         }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -362,7 +242,6 @@ public class SetupChooseProduct extends Fragment {
                 // When clicked, show a toast with the TextView text
                 Intent productIntent = new Intent(view.getContext(), ProductDetail.class);
 
-
                 TextView tvTitle = (TextView) view.findViewById(R.id.tvProductTitle);
                 String idP = tvTitle.getTag().toString();
                 String image = imagesURL.get(position);
@@ -371,9 +250,9 @@ public class SetupChooseProduct extends Fragment {
                 String desc = description.get(position);
                 extras.putString("id", idP);
                 extras.putString("image", image);
-                extras.putString("titel",title);
-                extras.putDouble("prijs",price);
-                extras.putString("description",desc);
+                extras.putString("titel", title);
+                extras.putDouble("prijs", price);
+                extras.putString("description", desc);
                 productIntent.putExtras(extras);
                 startActivityForResult(productIntent, 0);
             }
@@ -382,8 +261,8 @@ public class SetupChooseProduct extends Fragment {
     }
 
     //The onClickListener for the complete button
-    private View.OnClickListener attachButton = new View.OnClickListener(){
-        public void onClick(View v){
+    private View.OnClickListener attachButton = new View.OnClickListener() {
+        public void onClick(View v) {
             SetupBrandAmount setupBrandAmount = new SetupBrandAmount();
             Intent myIntent = new Intent(getActivity(), Home.class);
             DatabaseHandler db = new DatabaseHandler(getActivity());
@@ -397,34 +276,26 @@ public class SetupChooseProduct extends Fragment {
                 forgotDialog("Kies alstublief een product om voor te sparen.");
                 return;
             }
-            if(etDayAmount.getText().toString().matches("") || String.valueOf(perPak).matches("") || String.valueOf(prijs).matches("")) {
+            if (etDayAmount.getText().toString().matches("") || String.valueOf(perPak).matches("") || String.valueOf(prijs).matches("")) {
                 forgotDialog("Controleer alstublieft of u alles heeft ingevuld op het vorige scherm.");
-            }
-            else if((Integer.parseInt(etDayAmount.getText().toString()) == 0 || perPak == 0 || prijs == 0)){
+            } else if ((Integer.parseInt(etDayAmount.getText().toString()) == 0 || perPak == 0 || prijs == 0)) {
                 forgotDialog("Controleer alstublieft of u nergen 0 heeft ingevoerd op het vorige scherm, dit is namelijk niet toegestaan.");
-            }
-
-
-
-
-            else{
+            } else {
 
                 Integer dayAmount = Integer.parseInt(etDayAmount.getText().toString());
-                if (setupBrandAmount.sigaret == true ) {
+                if (setupBrandAmount.sigaret == true) {
                     Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
                     try {
                         sigaret.setAantal(perPak);
                         sigaret.setPrijs(prijs);
                         db.updateSigaretten(sigaret);
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
+                        db.addUser(new User(1, sigaret.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, 0, 1));
                     } catch (Exception e) {
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
+                        db.addUser(new User(1, sigaret.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, 0, 1));
                         //e.printStackTrace();
                     }
-                }
-                else {
+                } else {
                     Shag shag = setupBrandAmount.getShagPos();
-
 
                     shag.setAantal(perPak);
                     shag.setPrijs(prijs);
@@ -432,9 +303,9 @@ public class SetupChooseProduct extends Fragment {
 
                     try {
 
-                        db.addUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
+                        db.addUser(new User(1, shag.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, 0, 0));
                     } catch (Exception e) {
-                        db.updateUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
+                        db.updateUser(new User(1, shag.getsID(), dayAmount, 1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay, SetupQuitDate.quitHour, SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(), db.getUser(1).getShagorsig()));
                         e.printStackTrace();
                     }
                 }
@@ -448,7 +319,7 @@ public class SetupChooseProduct extends Fragment {
         }
     };
 
-    private void forgotDialog(String message){
+    private void forgotDialog(String message) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle("foutje");
         alertDialogBuilder
@@ -459,9 +330,7 @@ public class SetupChooseProduct extends Fragment {
                         dialog.cancel();
                     }
                 });
-
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
 }

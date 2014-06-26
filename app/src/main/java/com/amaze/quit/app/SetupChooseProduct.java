@@ -1,5 +1,6 @@
 package com.amaze.quit.app;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -49,6 +52,7 @@ public class SetupChooseProduct extends Fragment {
     ArrayList<String> imagesURL;
     ArrayList<String> description;
     protected String result;
+    View searching;
     CustomList cl;
 
 
@@ -66,10 +70,9 @@ public class SetupChooseProduct extends Fragment {
         Button complete = (Button) v.findViewById(R.id.bSearchProduct);
 
         etSearch = (EditText) v.findViewById(R.id.etProduct);
-
+        searching = v.findViewById(R.id.searching);
         //sets the onclicklistener for the complete button
         complete.setOnClickListener(searchProduct);
-
         //The completeSetup button. This button should be moved to the final setup fragment which is this one at the moment.
         Button completeSetup = (Button) v.findViewById(R.id.bSetupComplete);
 
@@ -92,6 +95,11 @@ public class SetupChooseProduct extends Fragment {
 
     protected View.OnClickListener searchProduct = new View.OnClickListener(){
         public void onClick(View v){
+            searching.setVisibility(View.VISIBLE);
+            View noResults = getActivity().findViewById(1337);
+            if(noResults != null)
+            noResults.setVisibility(View.GONE);
+
             InputMethodManager inputManager = (InputMethodManager)
                     getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -286,6 +294,7 @@ public class SetupChooseProduct extends Fragment {
             description = new ArrayList<String>();
 
             JSONObject product = new JSONObject();
+            searching.setVisibility(View.GONE);
             for (int i = 0; i < rows; i++) {
                 product = (JSONObject) jsonn.getJSONArray("products").get(i);
 
@@ -330,7 +339,19 @@ public class SetupChooseProduct extends Fragment {
 
 
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            //makes the progressbar disappear
+
+            searching.setVisibility(View.GONE);
+            //shows the no results string if there is no result for the searchterm.
+            View linearLayout = getActivity().findViewById(R.id.llChooseProduct);
+            TextView noResults = new TextView(getActivity());
+            noResults.setText(R.string.product_no_results);
+            noResults.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
+            noResults.setId(1337);
+            noResults.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+            ((LinearLayout) linearLayout).addView(noResults,2);
+
+
         }
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -368,20 +389,16 @@ public class SetupChooseProduct extends Fragment {
             DatabaseHandler db = new DatabaseHandler(getActivity());
             EditText etDayAmount = setupBrandAmount.getEtDayAmount();
 
-            if(etDayAmount.getText().toString().matches("")) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-                alertDialogBuilder.setTitle("foutje");
-                alertDialogBuilder
-                        .setMessage("Vul een waarde in!")
-                        .setCancelable(false)
-                        .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+            try {
+                db.getProduct(1);
+            } catch (Exception e) {
+                forgotDialog("Kies alstublief een product om voor te sparen.");
+                return;
             }
+            if(etDayAmount.getText().toString().matches("")) {
+                forgotDialog("Vul alstublieft het aantal sigaretten dat u rookt op het vorige scherm in");
+            }
+
 
 
 
@@ -391,27 +408,33 @@ public class SetupChooseProduct extends Fragment {
                 if (setupBrandAmount.sigaret == true ) {
                     Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
                     try {
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
+                        sigaret.setAantal(setupBrandAmount.getPerPak());
+                        sigaret.setPrijs(setupBrandAmount.getPrijs());
+                        db.updateSigaretten(sigaret);
+                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
                     } catch (Exception e) {
-                        db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
-                        e.printStackTrace();
+                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
+                        //e.printStackTrace();
                     }
                 }
                 else {
-                    Shag sigaret = setupBrandAmount.getShagPos();
+                    Shag shag = setupBrandAmount.getShagPos();
 
-                    int perPak = Integer.parseInt(setupBrandAmount.getEtPerPak().getText().toString());
-                    db.getShag(sigaret.getsID()).setAantal(perPak);
+                    int perPak = setupBrandAmount.getPerPak();
+                    float prijs = setupBrandAmount.getPrijs();
+                    shag.setAantal(perPak);
+                    shag.setPrijs(prijs);
+                    db.updateShag(shag);
 
                     try {
 
-                        db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
+                        db.addUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,0));
                     } catch (Exception e) {
-                        db.updateUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
+                        db.updateUser(new User(1, shag.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, db.getUser(1).getSpentAmount(),db.getUser(1).getShagorsig()));
                         e.printStackTrace();
                     }
                 }
-
+                db.close();
                 //this makes sure the activity resumes rather than creating a new one.
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(myIntent);
@@ -420,5 +443,21 @@ public class SetupChooseProduct extends Fragment {
 
         }
     };
+
+    private void forgotDialog(String message){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setTitle("foutje");
+        alertDialogBuilder
+                .setCancelable(false)
+                .setMessage(message)
+                .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
 }

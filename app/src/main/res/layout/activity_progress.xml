@@ -135,6 +135,23 @@
         android:drawablePadding="10dp"
         android:layout_gravity="right" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        >
+        <ImageButton
+            android:contentDescription="test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:id="@+id/twitter_share"
+            android:src="@drawable/twitter_share"
+            android:background="@null"/>
+
+        </LinearLayout>
+
 
 
 </LinearLayout>

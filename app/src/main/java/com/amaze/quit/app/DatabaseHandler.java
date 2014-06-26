@@ -70,6 +70,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CHALLENGES_TITEL = "Titel";
     private static final String CHALLENGES_BESCHRIJVING = "beschrijving";
     private static final String CHALLENGES_BEHAALD = "behaald";
+    private static final String CHALLENGES_NOTIFICATION = "notification_givin";
 
 
     /* User_challenges Table Columns names */
@@ -153,7 +154,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + CHALLENGES_CID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + CHALLENGES_TITEL + " TEXT,"
                 + CHALLENGES_BESCHRIJVING + " TEXT,"
-                + CHALLENGES_BEHAALD + " INTEGER"
+                + CHALLENGES_BEHAALD + " INTEGER,"
+                + CHALLENGES_NOTIFICATION + " INTEGER"
                 + ")";
         db.execSQL(CREATE_CHALLANGES_TABLE);
 
@@ -235,7 +237,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
         values.put(USER_SPENT_AMOUNT, user.getSpentAmount());
-        values.put(USER_SHAG_OR_SIG, user.getShagorsig());
+        values.put(USER_SHAG_OR_SIG, user.getShagorsig());  // shag = 0 sig = 1
         // Inserting Row
         assert db != null;
         db.insert(TABLE_USER, null, values);
@@ -282,6 +284,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
         values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_NOTIFICATION, challenge.getNotificationGivin());
 
         // Inserting Row
         assert db != null;
@@ -434,7 +437,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         CHALLENGES_CID,
                         CHALLENGES_TITEL,
                         CHALLENGES_BESCHRIJVING,
-                        CHALLENGES_BEHAALD}, CHALLENGES_CID + "=?",
+                        CHALLENGES_BEHAALD,
+                        CHALLENGES_NOTIFICATION}, CHALLENGES_CID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -443,7 +447,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getInt(3));
+                cursor.getInt(3),
+                cursor.getInt(4));
         /* return challenge */
         cursor.close();
         return challenge;
@@ -568,6 +573,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(USER_QUIT_DAY, user.getQuitDay());
         values.put(USER_QUIT_HOUR, user.getQuitHour());
         values.put(USER_QUIT_MINUTE, user.getQuitMinute());
+        values.put(USER_SHAG_OR_SIG, user.getShagorsig());
 
         /* updating row */
         return db.update(TABLE_USER, values, USER_UID + " = ?",
@@ -579,10 +585,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SIGARETTEN_AANTAL, sigaretten.getAantal());
+        values.put(SIGARETTEN_PRIJS, sigaretten.getPrijs());
 
         /* updating row */
         return db.update(TABLE_SIGARETTEN, values, SIGARETTEN_SID + " = ?",
                 new String[] { String.valueOf(sigaretten.getsID()) });
+    }
+
+    /* Updating single Siaget */
+    public int updateShag(Shag shag) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SHAG_AANTAL, shag.getAantal());
+        values.put(SHAG_PRIJS, shag.getPrijs());
+
+        /* updating row */
+        return db.update(TABLE_SHAG, values, SHAG_SID + " = ?",
+                new String[] { String.valueOf(shag.getsID()) });
     }
 
     public int updateChallenge (Challenges challenge) {
@@ -594,6 +613,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CHALLENGES_TITEL, challenge.getTitel());
         values.put(CHALLENGES_BESCHRIJVING, challenge.getBeschrijving());
         values.put(CHALLENGES_BEHAALD,challenge.getBehaald());
+        values.put(CHALLENGES_NOTIFICATION, challenge.getNotificationGivin());
 
 
          /* updating row */

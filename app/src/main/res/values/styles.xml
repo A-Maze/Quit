@@ -11,6 +11,7 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="actionButtonStyle">@style/ActionButtonStyle</item>
     </style>
 
     <style name="AppTheme" />
@@ -21,6 +22,10 @@
 
     <style name="BlueTheme" parent="Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/BlueActionBar</item>
+    </style>
+
+    <style name="customTheme" parent="Theme.AppCompat.Light">
+        <item name="actionButtonStyle">@style/ActionButtonStyle</item>
     </style>
 
     <!-- ActionBar styles -->
@@ -47,5 +52,11 @@
     </style>
 
     <style name="ButtonBarButton" />
+
+    <style name="ActionButtonStyle" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+    </style>
 
 </resources>

@@ -35,10 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sBrand"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="52dp"
         android:layout_above="@+id/etDayAmount"
-        android:layout_alignLeft="@+id/etDayAmount"
-        android:layout_alignStart="@+id/etDayAmount" />
+        android:layout_alignRight="@+id/radioGroup"
+        android:layout_alignEnd="@+id/radioGroup"
+        android:layout_toRightOf="@+id/textView3" />
 
     <TextView
     android:layout_width="wrap_content"
@@ -46,10 +47,10 @@
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:text="@string/setupDayAmount"
     android:id="@+id/textView3"
-    android:layout_alignParentBottom="true"
-    android:layout_alignLeft="@+id/textView2"
-    android:layout_alignStart="@+id/textView2"
-    android:layout_marginBottom="173dp" />
+        android:layout_marginBottom="122dp"
+        android:layout_above="@+id/tvPrijs"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/setupPerPak"
+        android:text="@string/setup_per_pak"
         android:id="@+id/tvPerPak"
         android:layout_below="@+id/etDayAmount"
         android:layout_alignLeft="@+id/textView3"
@@ -85,6 +86,29 @@
         android:layout_alignBottom="@+id/tvPerPak"
         android:layout_alignLeft="@+id/etDayAmount"
         android:layout_alignStart="@+id/etDayAmount" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/setupPrice"
+        android:id="@+id/tvPrijs"
+        android:layout_alignBottom="@+id/etPrijs"
+        android:layout_alignLeft="@+id/tvPerPak"
+        android:layout_alignStart="@+id/tvPerPak"
+        android:layout_alignRight="@+id/tvPerPak"
+        android:layout_alignEnd="@+id/tvPerPak" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="3"
+        android:id="@+id/etPrijs"
+        android:layout_marginBottom="68dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/etPerPak"
+        android:layout_alignStart="@+id/etPerPak" />
 
 
     <RadioGroup
@@ -121,6 +145,16 @@
 
         />
     </RadioGroup>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/addSmoke"
+        android:id="@+id/tvSetupAddSmoke"
+        android:textColor="@color/light_blue"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

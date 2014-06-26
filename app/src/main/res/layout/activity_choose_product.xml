@@ -9,7 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:layout_margin="1dp"
-    tools:context="com.amaze.quit.app.SetupChooseProduct">
+    tools:context="com.amaze.quit.app.SetupChooseProduct"
+    android:id="@+id/llChooseProduct">
 
 
     <TextView
@@ -18,11 +19,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="40dp" />
+        android:textSize="40dp"
+        />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <EditText
             android:id="@+id/etProduct"
             android:layout_weight="20"
@@ -38,6 +41,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searching"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/lvResult"

@@ -16,12 +16,14 @@ public class UpdateStats {
     private static long gemiddeldNietGerookt;
     private static int refreshStockRate;
     private static float price;
+    private static int spentAmount;
     private static int quitDay;
     private static int quitMonth;
     private static int quitYear;
     private static Calendar quitDate;
     private static int userLevel;
     private static Context theContext;
+    private static Rookwaar rookwaar;
 
 
     public UpdateStats(Context context) {
@@ -34,25 +36,31 @@ public class UpdateStats {
 
         DatabaseHandler db = new DatabaseHandler(theContext);
 
+        if(db.getUser(1).getShagorsig() == 0){
+            rookwaar =  db.getShag(db.getUser(1).getsID());
+        }
+        else{
+            rookwaar = db.getSigaret(db.getUser(1).getsID());
+        }
         quitDate = Calendar.getInstance();
         quitDate.set(db.getUser(1).getQuitYear(), db.getUser(1).getQuitMonth(), db.getUser(1).getQuitDay());
 
         Calendar vandaag = Calendar.getInstance();
         //how many days does it take before the user had to buy a new pack of sigarettes?
-        refreshStockRate = (db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag());
-        price = db.getSigaret(db.getUser(1).getsID()).getPrijs();
+        refreshStockRate = (rookwaar.getAantal() / db.getUser(1).getPerDag());
+        price = rookwaar.getPrijs();
         long diff = vandaag.getTimeInMillis() - quitDate.getTimeInMillis(); //result in millis
         long days = diff / (24 * 60 * 60 * 1000);
         daysQuit = days;
-        Log.d("aantal", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getAantal()));
-        Log.d("sID setup", Integer.toString(db.getSigaret(db.getUser(1).getsID()).getsID()));
+        Log.d("aantal", Integer.toString(rookwaar.getAantal()));
+        Log.d("sID setup", Integer.toString(rookwaar.getsID()));
         bespaardeMoneys = (days / (refreshStockRate) * price);
-        
+        spentAmount = (db.getUser(1).getSpentAmount());
 
 
         extraDagenTeLeven = db.getUser(1).getPerDag() * days * 28 / 1440;
 
-        bespaardePakjes = days / ((db.getSigaret(db.getUser(1).getsID()).getAantal() / db.getUser(1).getPerDag()));
+        bespaardePakjes = days / ((rookwaar.getAantal() / db.getUser(1).getPerDag()));
         gemiddeldNietGerookt = days * db.getUser(1).getPerDag();
 
 
@@ -81,6 +89,8 @@ public class UpdateStats {
     public float getSavedMoney() {
         return bespaardeMoneys;
     }
+
+    public int getSpentAmount(){ return spentAmount;}
 
     public float getExtraDagenTeLeven() {
         return extraDagenTeLeven;
@@ -123,6 +133,19 @@ public class UpdateStats {
         } else {
             updateChallengeDB(5, 0);
             updateChallengeDB(6, 0);
+        }
+
+        if(spentAmount >= 200){
+            updateChallengeDB(7,1);
+            updateChallengeDB(8,1);
+        }
+        else if(spentAmount >= 50){
+            updateChallengeDB(7,1);
+            updateChallengeDB(8,0);
+        }
+        else{
+            updateChallengeDB(7,0);
+            updateChallengeDB(8,0);
         }
         if (bespaardePakjes >= 1) {
             updateChallengeDB(9, 1);

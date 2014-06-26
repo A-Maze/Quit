@@ -36,6 +36,10 @@
             android:entries="@array/preferedFragment"
             android:entryValues="@array/preferedFragmentValues"
             android:key="startFrag"/>
+        <Preference
+            android:title="@string/pref_reset_spent"
+            android:summary="@string/pref_reset_spent_summary"
+            android:key="spentAmount"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -12,12 +12,14 @@ public class Challenges {
     String titel;
     String beschrijving;
     Integer behaald;
+    Integer notificationGivin;
 
-    public Challenges(int cID, String titel, String beschrijving, Integer behaald) {
+    public Challenges(int cID, String titel, String beschrijving, Integer behaald, Integer notificationGivin) {
         this.cID = cID;
         this.titel = titel;
         this.beschrijving = beschrijving;
         this.behaald = behaald;
+        this.notificationGivin = notificationGivin;
     }
 
     public int getcID() {
@@ -50,5 +52,13 @@ public class Challenges {
 
     public void setBehaald(Integer behaald) {
         this.behaald = behaald;
+    }
+
+    public Integer getNotificationGivin() {
+        return notificationGivin;
+    }
+
+    public void setNotificationGivin(Integer notificationGivin) {
+        this.notificationGivin = notificationGivin;
     }
 }

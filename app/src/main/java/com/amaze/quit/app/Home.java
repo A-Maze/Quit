@@ -1,12 +1,16 @@
 package com.amaze.quit.app;
 
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -14,12 +18,16 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.viewpagerindicator.LinePageIndicator;
 
@@ -30,7 +38,7 @@ public class Home extends FragmentActivity {
     ViewPager pager;
     public static final String PREFS_NAME = "QuitPrefs";
     MyPageAdapter pageAdapter;
-    SharedPreferences settings = null;
+    private static SharedPreferences settings = null;
     int preferedFragment;
     private DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
@@ -66,11 +74,15 @@ public class Home extends FragmentActivity {
 
         //initialises the navigation drawer
         navDrawer();
+        customActionBar();
+
 
 
         //makes sure all the stats are updated
         UpdateStats updater = new UpdateStats(this);
         updater.updateAchievements();
+        boughtProduct();
+        saveNewProduct();
 
 
     }
@@ -114,10 +126,12 @@ public class Home extends FragmentActivity {
             case R.id.action_settings:
                 launchActivity(Setup.class);
                 return true;
-            case R.id.developer_settings:
-                launchActivity(MainActivity.class);
+            case R.id.action_facebook:
+                facebook();
                 return true;
-
+            case R.id.action_twitter:
+                twitter();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -184,8 +198,6 @@ public class Home extends FragmentActivity {
                 R.string.drawer_close  /* "close drawer" description */
         );
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
 
     }
 
@@ -196,6 +208,9 @@ public class Home extends FragmentActivity {
         UpdateStats updater = new UpdateStats(this);
         updater.updateQuit();
         updater.updateAchievements();
+        boughtProduct();
+        saveNewProduct();
+
 
 
     }
@@ -210,6 +225,141 @@ public class Home extends FragmentActivity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+    }
+
+    private void saveNewProduct(){
+        if(settings.getBoolean("newProduct",false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setMessage(R.string.new_product_dialog)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                           Intent intent = new Intent(getApplicationContext(),ChooseProductHost.class);
+                           startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            settings.edit().putBoolean("newProduct", false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and show it
+            builder.create();
+            AlertDialog newProductDialog = builder.create();
+            newProductDialog.show();
+        }
+
+
+    }
+
+    private void boughtProduct(){
+        if(settings.getBoolean("boughtProduct",false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setMessage(R.string.bought_product)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //adds the saved amount up to the spent amount of the user since the user just bought the product
+                            DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                            User user = db.getUser(1);
+                            Product product = new Product();
+                            user.setSpentAmount(user.getSpentAmount() + Math.round(product.getAmountLeft()));
+                            db.updateUser(user);
+
+
+                            db.close();
+
+                            settings.edit().putBoolean("newProduct", true).commit();
+                            settings.edit().putBoolean("boughtProduct", false).commit();
+                            dialog.dismiss();
+                            saveNewProduct();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            settings.edit().putBoolean("newProduct", false).commit();
+                            settings.edit().putBoolean("boughtProduct", false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and show it
+            builder.create();
+            AlertDialog newProductDialog = builder.create();
+            newProductDialog.show();
+        }
+
+
+    }
+
+    //social media methods
+    private void facebook(){
+        Intent facebook;
+        try {
+            getBaseContext().getPackageManager()
+                    .getPackageInfo("com.facebook.katana", 0); //checks if facebook is installed
+            facebook = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("fb://profile/1458260817748999")); //if this is the case open the url in the facebook app
+        } catch (Exception e) {
+            facebook = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://touch.facebook.com/profile.php?id=1458260817748999")); //if this goes wrong just do it in browser
+        }
+        startActivity(facebook);
+    }
+
+    private void twitter(){
+        Intent twitter;
+        if(isAppInstalled("com.twitter.android")) {
+            twitter = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("twitter://user?screen_name=12Quit"));
+
+
+        }else{
+            twitter = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://twitter.com/12Quit"));
+        }
+        startActivity(twitter);
+
+    }
+
+    private void customActionBar(){
+
+        ActionBar mActionBar = getActionBar();
+
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
+        ImageButton twitterButton = (ImageButton) mCustomView.findViewById(R.id.bTwitter);
+        ImageButton facebookButton = (ImageButton) mCustomView.findViewById(R.id.bFacebook);
+        twitterButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                twitter();
+            }
+        });
+        facebookButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                facebook();
+            }
+        });
+        mActionBar.setDisplayShowHomeEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowTitleEnabled(true);
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+    }
+
+
+
+    private boolean isAppInstalled(String packageName) {
+        PackageManager pm = getPackageManager();
+        boolean installed = false;
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            installed = false;
+        }
+        return installed;
     }
 
 

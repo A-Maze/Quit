@@ -42,10 +42,14 @@ public class SetupBrandAmount extends Fragment  {
         f.setArguments(bdl);
         return f;
     }
-    /*het vullen van de spinner met sigaretten / shag */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
+
+
+        // etPerPak.setVisibility(View.GONE);
+
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
         rbShag = (RadioButton) v.findViewById(R.id.rbShag);
         rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
@@ -53,19 +57,23 @@ public class SetupBrandAmount extends Fragment  {
         rg.setOnCheckedChangeListener(new android.widget.RadioGroup.OnCheckedChangeListener() {
 
 
-            /* als de radiobutton van sigaretten naar shag veranderd of andersom de spinner opnieuw vullen*/
+
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(rbSigaretten.isChecked()){
+                if(rbSigaretten.isChecked()==true){
                     shag = false;
                     sigaret = true;
                     fillSpinnerSigaret();
+                    //    etPerPak.setVisibility(View.GONE);
+                    //     tvPerPak.setVisibility(View.GONE);
                 }
-                else if(rbShag.isChecked())
+                else if(rbShag.isChecked()==true)
                 {
                     shag = true;
                     sigaret = false;
                     fillSpinnerShag();
+                    //    etPerPak.setVisibility(View.VISIBLE);
+                    //    tvPerPak.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -73,6 +81,7 @@ public class SetupBrandAmount extends Fragment  {
 
         sBrand = (Spinner) v.findViewById(R.id.sBrand);
         getSigaretten();
+
         sBrand.setAdapter(null);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigarettenList);
         sBrand.setAdapter(adapter);
@@ -90,9 +99,10 @@ public class SetupBrandAmount extends Fragment  {
 
     }
 
-    /* het vullen van de spinner  met sigaretten uit database*/
     private void fillSpinnerSigaret() {
+
         getSigaretten();
+
         sBrand.setAdapter(null);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, sigarettenList);
         sBrand.setAdapter(adapter);
@@ -106,7 +116,6 @@ public class SetupBrandAmount extends Fragment  {
         });
     }
 
-    /* het vullen van de spinner met shag uit de database */
     private void fillSpinnerShag() {
         getSigaretten();
         sBrand.setAdapter(null);
@@ -161,4 +170,48 @@ public class SetupBrandAmount extends Fragment  {
 
         db.close();
     }
+
+
+    /*
+    OUDE CODE MAAR MISCHIEN NOG NODIG
+    public void checkForInput(View view) {
+        // wat te doen als de next button is geklikt.
+
+        // variabelen vastzetten
+        try {
+            dayAmount = Integer.parseInt(etDayAmount.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            dayAmount = null;
+        }
+        try {
+            packAmount = Integer.parseInt(etPackAmount.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            packAmount = null;
+        }
+
+
+        if (dayAmount == null || packAmount == null) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setTitle("foutje");
+            alertDialogBuilder
+                    .setMessage("Vul een waarde in!")
+                    .setCancelable(false)
+                    .setPositiveButton("Okee", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+
+    }*/
+
+
+
+
+
+
 }

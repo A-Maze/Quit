@@ -1,6 +1,9 @@
 package com.amaze.quit.app;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 
 
 public class ProductDetail extends ActionBarActivity {
@@ -84,7 +88,7 @@ public class ProductDetail extends ActionBarActivity {
         //}).start();
 
         // TextView tv = (TextView) findViewById(R.id.tvpdtest);
-        // tv.setText(id);
+        //tv.setText(id);
     }
 
     private View.OnClickListener spaarProduct = new View.OnClickListener() {
@@ -99,7 +103,10 @@ public class ProductDetail extends ActionBarActivity {
 
                 if (nrows > 0) {
                     db.updateProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
+                    SharedPreferences settings = getSharedPreferences("QuitPrefs", 0);
+                    settings.edit().putBoolean("newProduct",false).commit();
                 } else {
+
 
                     db.addProduct(new Artikel(1, id, titel, Float.parseFloat(priceS), image));
                 }
@@ -118,21 +125,6 @@ public class ProductDetail extends ActionBarActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream);
         return outputStream.toByteArray();
     }
-
-    /*public void saveImage() throws IOException {
-        DefaultHttpClient mHttpClient = new DefaultHttpClient();
-        HttpGet mHttpGet = new HttpGet(image);
-        HttpResponse mHttpResponse = mHttpClient.execute(mHttpGet);
-        if (mHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            HttpEntity entity = mHttpResponse.getEntity();
-            if ( entity != null) {
-                // insert to database
-                ContentValues values = new ContentValues();
-                values.put(MyBaseColumn.MyTable.ImageField, EntityUtils.toByteArray(entity));
-                getContentResolver().insert(MyBaseColumn.MyTable.CONTENT_URI, values);
-            }
-        }
-    }*/
 
     private int giveDP(float dp) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();

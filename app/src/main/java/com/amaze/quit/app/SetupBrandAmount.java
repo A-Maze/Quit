@@ -168,7 +168,6 @@ public class SetupBrandAmount extends Fragment  {
 
                 sigarettenList = new ArrayList<String>();
                 sigaretten = new ArrayList<Sigaretten>();
-
                     for (int i = 1; i <= db.getSigarettenAmount(); i++) {
                         sigarettenList.add(db.getSigaret(i).getMerk());
                         sigaretten.add( db.getSigaret(i));

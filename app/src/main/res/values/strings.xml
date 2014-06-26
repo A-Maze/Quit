@@ -141,6 +141,11 @@
     <string name="setup_per_pak">sigaretten per pak?</string>
     <string name="pref_reset_spent">Reset uw uitgegeven bedrag</string>
     <string name="pref_reset_spent_summary">Reset het bedrag dat u heeft uitgegeven aan producten naar €0.Uw uitgegeven bedrag is op dit moment</string>
+    <string name="no_zero">Het ingevulde getal mag geen 0 zijn, vul alstublief een ander getal in.</string>
+    <string name="error">Foutje</string>
+    <string name="try_again">Probeer opnieuw</string>
+    <string name="pref_shag_or_sig">Shag of sigaretten?</string>
+    <string name="pref_shag_or_sig_summary">Rookte u shag of sigaretten?</string>
     <!-- alert dialog newProduct -->
     <string name="new_product_dialog">Wilt u voor een nieuw product sparen</string>
     <string name="bought_product">Heeft u het product waar u voor spaart gekocht?</string>

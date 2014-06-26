@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.ContactsContract;
@@ -21,7 +23,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Robin on 9-6-2014.
@@ -29,7 +33,7 @@ import java.util.Calendar;
 public class MainSettingsFragment extends PreferenceFragment {
     public static final String PREFS_NAME = "QuitPrefs";
     SharedPreferences settings = null;
-
+    ListPreference brand;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +45,15 @@ public class MainSettingsFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.settings);
 
         bindOnClicks();
+        setListPreferenceData(brand,getActivity());
+
     }
 
     protected void bindOnClicks() {
         Preference quitDate = findPreference("quitDate");
         Preference quitTime = findPreference("quitTime");
-        Preference brand = findPreference("brand");
+        brand = (ListPreference) findPreference("brand");
+        ListPreference smokePreference = (ListPreference) findPreference("smokePreference");
         EditTextPreference dayAmount = (EditTextPreference) findPreference("dayAmount");
         dayAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         EditTextPreference packAmount = (EditTextPreference) findPreference("packAmount");
@@ -78,6 +85,20 @@ public class MainSettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
+        //smokePreference listener
+        smokePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                int smokeType = Integer.parseInt(newValue.toString());
+                DatabaseHandler db = new DatabaseHandler(getActivity());
+                User user = db.getUser(1);
+                user.setShagorsig(smokeType);
+                db.updateUser(user);
+                db.close();
+                return true;
+            }
+        });
+
         //brand listener
         brand.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -93,10 +114,16 @@ public class MainSettingsFragment extends PreferenceFragment {
             }
         });
 
+
+
         dayAmount.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int dayAmount = Integer.parseInt(newValue.toString());
+                if(dayAmount == 0){
+                    noZero();
+                    return false;
+                }
                 DatabaseHandler db = new DatabaseHandler(getActivity());
                 User user;
                 user = db.getUser(1);
@@ -111,6 +138,10 @@ public class MainSettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int packAmount = Integer.parseInt(newValue.toString());
+                if(packAmount == 0){
+                    noZero();
+                    return false;
+                }
                 DatabaseHandler db = new DatabaseHandler(getActivity());
                 User user;
                 user = db.getUser(1);
@@ -153,6 +184,29 @@ public class MainSettingsFragment extends PreferenceFragment {
             }
         });
 
+    }
+
+    protected static void setListPreferenceData(ListPreference lp, Context context) {
+        DatabaseHandler db = new DatabaseHandler(context);
+        List<CharSequence> entries = new ArrayList<CharSequence>();
+        List<CharSequence> entryValues = new ArrayList<CharSequence>();
+        if(db.getUser(1).getShagorsig() == 0){
+            for (int i = 1; i <= db.getSigarettenAmount(); i++) {
+                entries.add(db.getSigaret(i).getMerk());
+                entryValues.add( String.valueOf(db.getSigaret(i).getsID()));
+            }
+        }else{
+            for (int i = 1; i <= db.getShagAmount(); i++) {
+                entries.add(db.getShag(i).getMerk());
+                entryValues.add( String.valueOf(db.getShag(i).getsID()));
+            }
+        }
+        CharSequence[] entriesArray = entries.toArray(new CharSequence[entries.size()]);
+        CharSequence[] entriesValuesArray = entryValues.toArray(new CharSequence[entryValues.size()]);
+        entryValues.toArray();
+        lp.setEntries(entriesArray);
+        lp.setDefaultValue("1");
+        lp.setEntryValues(entriesValuesArray);
     }
 
     public void showTimePickerDialog(View v) {
@@ -277,6 +331,25 @@ public class MainSettingsFragment extends PreferenceFragment {
                     }
                 })
                 .setTitle(R.string.be_alert);
+
+        // Create the AlertDialog object and show it
+        builder.create();
+        AlertDialog newProductDialog = builder.create();
+        newProductDialog.show();
+    }
+
+    private void noZero(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        String message;
+        message = getResources().getString(R.string.no_zero);
+        builder.setMessage(message)
+                .setPositiveButton(R.string.try_again, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .setTitle(R.string.error);
 
         // Create the AlertDialog object and show it
         builder.create();

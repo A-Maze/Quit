@@ -388,6 +388,8 @@ public class SetupChooseProduct extends Fragment {
             Intent myIntent = new Intent(getActivity(), Home.class);
             DatabaseHandler db = new DatabaseHandler(getActivity());
             EditText etDayAmount = setupBrandAmount.getEtDayAmount();
+            int perPak = setupBrandAmount.getPerPak();
+            float prijs = setupBrandAmount.getPrijs();
 
             try {
                 db.getProduct(1);
@@ -395,8 +397,11 @@ public class SetupChooseProduct extends Fragment {
                 forgotDialog("Kies alstublief een product om voor te sparen.");
                 return;
             }
-            if(etDayAmount.getText().toString().matches("")) {
-                forgotDialog("Vul alstublieft het aantal sigaretten dat u rookt op het vorige scherm in");
+            if(etDayAmount.getText().toString().matches("") || String.valueOf(perPak).matches("") || String.valueOf(prijs).matches("")) {
+                forgotDialog("Controleer alstublieft of u alles heeft ingevuld op het vorige scherm.");
+            }
+            else if((Integer.parseInt(etDayAmount.getText().toString()) == 0 || perPak == 0 || prijs == 0)){
+                forgotDialog("Controleer alstublieft of u nergen 0 heeft ingevoerd op het vorige scherm, dit is namelijk niet toegestaan.");
             }
 
 
@@ -408,8 +413,8 @@ public class SetupChooseProduct extends Fragment {
                 if (setupBrandAmount.sigaret == true ) {
                     Sigaretten sigaret = setupBrandAmount.getSigarettenPosition();
                     try {
-                        sigaret.setAantal(setupBrandAmount.getPerPak());
-                        sigaret.setPrijs(setupBrandAmount.getPrijs());
+                        sigaret.setAantal(perPak);
+                        sigaret.setPrijs(prijs);
                         db.updateSigaretten(sigaret);
                         db.addUser(new User(1, sigaret.getsID(), dayAmount,1, SetupQuitDate.quitYear, SetupQuitDate.quitMonth, SetupQuitDate.quitDay,SetupQuitDate.quitHour,SetupQuitDate.quitMinute, 0,1));
                     } catch (Exception e) {
@@ -420,8 +425,7 @@ public class SetupChooseProduct extends Fragment {
                 else {
                     Shag shag = setupBrandAmount.getShagPos();
 
-                    int perPak = setupBrandAmount.getPerPak();
-                    float prijs = setupBrandAmount.getPrijs();
+
                     shag.setAantal(perPak);
                     shag.setPrijs(prijs);
                     db.updateShag(shag);

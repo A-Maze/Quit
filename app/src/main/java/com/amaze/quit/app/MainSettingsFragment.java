@@ -58,9 +58,14 @@ public class MainSettingsFragment extends PreferenceFragment {
         dayAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
         EditTextPreference packAmount = (EditTextPreference) findPreference("packAmount");
         packAmount.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        EditTextPreference price = (EditTextPreference) findPreference("price");
+        //this makes sure you can only enter floats and doubles in the inputfield
+        price.getEditText().setInputType(0x00002002);
+
         Preference startFrag = findPreference("startFrag");
         Preference product = findPreference("product");
         Preference spentAmount = findPreference("spentAmount");
+
 
         //product listener
         product.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -154,6 +159,34 @@ public class MainSettingsFragment extends PreferenceFragment {
                 else{
                     Shag shag = db.getShag(sId);
                     shag.setAantal(packAmount);
+                    db.updateShag(shag);
+                }
+
+                db.close();
+                return false;
+            }
+        });
+
+        price.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                float price = Float.parseFloat(newValue.toString());
+                if(price == 0){
+                    noZero();
+                    return false;
+                }
+                DatabaseHandler db = new DatabaseHandler(getActivity());
+                User user;
+                user = db.getUser(1);
+                int sId = user.getsID();
+                if (user.getShagorsig() == 1) {
+                    Sigaretten sigaretten = db.getSigaret(sId);
+                    sigaretten.setPrijs(price);
+                    db.updateSigaretten(sigaretten);
+                }
+                else{
+                    Shag shag = db.getShag(sId);
+                    shag.setPrijs(price);
                     db.updateShag(shag);
                 }
 

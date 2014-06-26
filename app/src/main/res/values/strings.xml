@@ -146,6 +146,8 @@
     <string name="try_again">Probeer opnieuw</string>
     <string name="pref_shag_or_sig">Shag of sigaretten?</string>
     <string name="pref_shag_or_sig_summary">Rookte u shag of sigaretten?</string>
+    <string name="pref_price">Prijs per pakje</string>
+    <string name="pref_price_summary">Wat is de prijs van uw pakje shag of sigaretten?</string>
     <!-- alert dialog newProduct -->
     <string name="new_product_dialog">Wilt u voor een nieuw product sparen</string>
     <string name="bought_product">Heeft u het product waar u voor spaart gekocht?</string>

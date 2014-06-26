@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+
 import java.util.Calendar;
 
 public class MyAlarmService extends Service {
@@ -41,7 +43,28 @@ public class MyAlarmService extends Service {
                 // Give notification
                 mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
                 Intent intentt = new Intent(this.getApplicationContext(),SplashScreen.class);
+                intentt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+                NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("Achievement behaald!")
+                        .setContentText(titel)
+                        .setAutoCancel(true)
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setSmallIcon(R.drawable.ic_launcher);
+
+                // On notification tap
+                Intent resultIntent = new Intent(this, SplashScreen.class);
+                resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                mNotifyBuilder.setContentIntent(resultPendingIntent);
+
+                int numMessages = 0;
+                mNotifyBuilder.setNumber(++numMessages);
+
+                mManager.notify(0, mNotifyBuilder.build());
+
+
+                /*
                 Notification notification = new Notification(R.drawable.ic_launcher,"Achievement behaald!", System.currentTimeMillis());
                 intentt.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -56,6 +79,7 @@ public class MyAlarmService extends Service {
                 notification.setLatestEventInfo(this.getApplicationContext(), "Achievement behaald!", titel, pendingNotificationIntent);
 
                 mManager.notify(0, notification);
+                */
 
                 // setNotficationGivin on 1
                 updateChallengeDB(i, 1);

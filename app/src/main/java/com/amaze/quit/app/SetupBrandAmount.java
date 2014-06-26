@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class SetupBrandAmount extends Fragment  {
 
 
-    public static EditText etDayAmount, etPerPak;
+    public static EditText etDayAmount, etPerPak, etPrice;
     public static TextView tvPerPak;
     private static RadioButton rbSigaretten;
     private static RadioButton rbShag;
@@ -47,6 +47,7 @@ public class SetupBrandAmount extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_setup_brand_amount, container, false);
         etDayAmount = (EditText) v.findViewById(R.id.etDayAmount);
+        etPrice = (EditText) v.findViewById(R.id.etPrijs);
         rbShag = (RadioButton) v.findViewById(R.id.rbShag);
         rbSigaretten = (RadioButton) v.findViewById(R.id.rbSigaretten);
         RadioGroup rg = (RadioGroup) v.findViewById(R.id.radioGroup);
@@ -125,6 +126,11 @@ public class SetupBrandAmount extends Fragment  {
         });
     }
 
+    public int getPerPak(){
+        return Integer.parseInt(etPerPak.getText().toString());
+    }
+
+    public float getPrijs() { return Float.valueOf(etPrice.getText().toString());}
 
     public static  Sigaretten getSigarettenPosition(){
         return sigaretten[selectedSigaretPos];

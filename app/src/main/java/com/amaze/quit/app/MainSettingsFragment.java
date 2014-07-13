@@ -226,7 +226,7 @@ public class MainSettingsFragment extends PreferenceFragment {
         DatabaseHandler db = new DatabaseHandler(context);
         List<CharSequence> entries = new ArrayList<CharSequence>();
         List<CharSequence> entryValues = new ArrayList<CharSequence>();
-        if(db.getUser(1).getShagorsig() == 0){
+        if(db.getUser(1).getShagorsig() == 1){
             for (int i = 1; i <= db.getSigarettenAmount(); i++) {
                 entries.add(db.getSigaret(i).getMerk());
                 entryValues.add( String.valueOf(db.getSigaret(i).getsID()));

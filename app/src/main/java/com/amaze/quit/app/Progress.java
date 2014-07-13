@@ -1,10 +1,13 @@
 package com.amaze.quit.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -12,6 +15,7 @@ public class Progress extends Fragment {
     static int position;
     private UserVisibilityEvent uservisibilityevent;
     private UpdateStats updatestats = new UpdateStats(getActivity());
+    String message;
 
     public static final Progress newInstance(int i) {
         Progress f = new Progress();
@@ -85,9 +89,28 @@ public class Progress extends Fragment {
             levelDesc.setText(Titel);
             int nietGerooktSig = (int) days * db.getUser(1).getPerDag();
             nietGerookt.setText("" + nietGerooktSig);
+            socialMedia(days, bespaardeMoneysString,nietGerooktSig);
         } catch (NullPointerException e) {
         }
 
+
+
+
+
+
+    }
+
+    private void socialMedia(long days, String bespaardeMoney, int nietGerooktSig){
+        message = "Ik heb al " +  days + " dagen niet gerookt. Dit zijn " + nietGerooktSig + " niet gerookte sigaretten en heeft me €" + bespaardeMoney + " bespaard!  &hashtags=12Quit";
+        ImageButton tweet = (ImageButton) getActivity().findViewById(R.id.twitter_share);
+        tweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tweetUrl = "https://twitter.com/intent/tweet?text=" + message;
+                Uri uri = Uri.parse(tweetUrl);
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
 
     }
 }

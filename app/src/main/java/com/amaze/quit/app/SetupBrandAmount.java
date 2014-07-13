@@ -122,8 +122,8 @@ public class SetupBrandAmount extends Fragment  {
                 DatabaseHandler db = new DatabaseHandler(getActivity());
 
                 etPerPak.setText("" + db.getSigaret(pos+1).getAantal());
-                etPrice.setText(String.format("%.2f",db.getSigaret(pos+1).getPrijs()));
-                db.close();
+                String price = String.format("%.2f",db.getSigaret(pos+1).getPrijs());
+                etPrice.setText(price.replace(",","."));
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -139,7 +139,8 @@ public class SetupBrandAmount extends Fragment  {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 selectedSigaretPos = pos;
                 DatabaseHandler db = new DatabaseHandler(getActivity());
-                etPrice.setText(String.format("%.2f",db.getShag(pos+1).getPrijs()));
+                String price = String.format("%.2f",db.getShag(pos+1).getPrijs());
+                etPrice.setText(price.replace(",","."));
                 db.close();
             }
             public void onNothingSelected(AdapterView<?> parent) {

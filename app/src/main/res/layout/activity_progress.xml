@@ -142,7 +142,7 @@
         android:layout_marginTop="40dp"
         >
         <ImageButton
-            android:contentDescription="test"
+            android:contentDescription="tweet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"

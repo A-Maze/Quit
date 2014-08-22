@@ -25,9 +25,11 @@
                 android:id="@+id/tvProgressProductTitle"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
-                android:textSize="30dp"
+                android:textSize="20dp"
                 android:layout_marginTop="31dp"
                 android:layout_gravity="center_horizontal" />
+
+
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -36,6 +38,8 @@
                 android:id="@+id/ivProductImage"
                 android:src="@drawable/product_placeholder"
                 android:layout_gravity="center_horizontal" />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,6 +91,7 @@
                 android:textAlignment="center"
                 android:id="@+id/tvProductSavedPercentage"/>
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,9 +110,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/product_days_left"
                 android:textColor="@color/black"
-                android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:textSize="25dp"
+                android:textSize="15dp"
                 android:id="@+id/tvProductDaysLeft"
                 />
 
@@ -116,7 +120,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/product_complete"
                 android:textColor="@color/light_blue"
-                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:textSize="30dp"
                 android:id="@+id/tvProductComplete"
@@ -132,6 +135,12 @@
                 android:id="@+id/bPay">
 
             </ImageButton>
+
+
+
+
+
+
 
         </LinearLayout>
 

@@ -238,6 +238,7 @@ public class MainSettingsFragment extends PreferenceFragment {
                 entryValues.add( String.valueOf(db.getShag(i).getsID()));
             }
         }
+        db.close();
         CharSequence[] entriesArray = entries.toArray(new CharSequence[entries.size()]);
         CharSequence[] entriesValuesArray = entryValues.toArray(new CharSequence[entryValues.size()]);
         entryValues.toArray();

@@ -1,7 +1,7 @@
 package com.amaze.quit.app;
 
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,7 +35,7 @@ import com.viewpagerindicator.LinePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends FragmentActivity {
+public class Home extends ActionBarActivity {
     ViewPager pager;
     public static final String PREFS_NAME = "QuitPrefs";
     MyPageAdapter pageAdapter;
@@ -326,7 +327,7 @@ public class Home extends FragmentActivity {
     //creates a custom action bar with social media icons
     private void customActionBar(){
 
-        ActionBar mActionBar = getActionBar();
+        ActionBar mActionBar = getSupportActionBar();
 
         LayoutInflater mInflater = LayoutInflater.from(this);
         View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);

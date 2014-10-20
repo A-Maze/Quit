@@ -36,6 +36,7 @@ public class Achievements extends Fragment {
     private UserVisibilityEvent uservisibilityevent;
 
     public static final Achievements newInstance(int i) {
+
         Achievements f = new Achievements();
         Bundle bdl = new Bundle(1);
         f.setArguments(bdl);

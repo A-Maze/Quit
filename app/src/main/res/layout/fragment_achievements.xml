@@ -19,11 +19,7 @@
         android:textSize="40dp"
         android:layout_marginTop="31dp"
         android:layout_gravity="center_horizontal" />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="20dp">
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -240,6 +236,5 @@
                 android:drawableRight="@drawable/check_mark_grey"
                 android:drawableLeft="@drawable/not_hard_achievement"
                 android:drawablePadding="10dp"/>
-        </LinearLayout>
-    </ScrollView>
+        </android.support.v7.widget.RecyclerView>
 </LinearLayout>

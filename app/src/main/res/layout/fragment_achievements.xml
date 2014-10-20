@@ -29,6 +29,7 @@
             android:orientation="vertical"
             android:id="@+id/llAchievements">
 
+
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                 android:id="@+id/tvC1"
                 android:layout_marginTop="34dp"
                 android:paddingLeft="40dp"
+
                 />
             <TextView
                 android:layout_height="wrap_content"

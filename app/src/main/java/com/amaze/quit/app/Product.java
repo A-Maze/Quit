@@ -109,9 +109,7 @@ public class Product extends Fragment {
 
         int current = (int) Math.round((amountLeft / productPrice) * 100);
         // Get the Drawable custom_progressbar and all the textviews
-        Drawable customProgressBar = getResources().getDrawable(R.drawable.progressbar_blue);
         ProgressBar moneyBar = (ProgressBar) getActivity().findViewById(R.id.progressBarProduct);
-        moneyBar.setProgressDrawable(customProgressBar);
         TextView tvSavedAmount = (TextView) getActivity().findViewById(R.id.tvProductSavedAmount);
         TextView tvSavedPercentage = (TextView) getActivity().findViewById(R.id.tvProductSavedPercentage);
         TextView tvProductAmount = (TextView) getActivity().findViewById(R.id.tvProductPriceAmount);
@@ -133,7 +131,6 @@ public class Product extends Fragment {
             tvSavedAmount.setText("€" + amountLeftString);
             tvSavedPercentage.setText("" + 100 + "%");
             moneyBar.setProgress(100);
-            moneyBar.setProgressDrawable(getResources().getDrawable(R.drawable.progressbar_blue_light));
             TextView tvComplete = (TextView) getActivity().findViewById(R.id.tvProductComplete);
             TextView tvDaysLeft = (TextView) getActivity().findViewById(R.id.tvProductDaysLeft);
             tvComplete.setVisibility(View.VISIBLE);

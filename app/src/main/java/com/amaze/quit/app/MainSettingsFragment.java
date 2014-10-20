@@ -102,6 +102,7 @@ public class MainSettingsFragment extends PreferenceFragment {
                 user.setShagorsig(smokeType);
                 db.updateUser(user);
                 db.close();
+                setListPreferenceData(brand, getActivity());
                 return true;
             }
         });

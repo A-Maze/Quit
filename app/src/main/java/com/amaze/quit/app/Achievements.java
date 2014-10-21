@@ -12,6 +12,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -46,8 +48,8 @@ public class Achievements extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_achievements, container, false);
+
         return v;
     }
 
